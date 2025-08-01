@@ -1,5 +1,6 @@
 import { useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { Badge, BriefcaseBusiness, ChartLine, GraduationCap, Lightbulb, ListTodo, MedalIcon, MessageCircle, UsersRound} from "lucide-react";
+
 function Card(props){
    const navigate = useNavigate();
    const cat = props.cat || "default";
@@ -14,6 +15,32 @@ function Card(props){
    const price = props.price || null;
    const bestchoice = props.bestchoice || false;
    const tailwindshit = props.tailwindshit||null;
+
+   function getIcon(iconName) {
+  switch (iconName) {
+    case "bulb":
+      return <Lightbulb size = {40} className="text-[#ce7d63]" />;
+    case "chart":
+      return <ChartLine size = {40} className="text-[#ce7d63]" />;
+    case "community":
+      return <UsersRound size = {40} className="text-[#ce7d63]" />;
+    case "chat":
+        return <MessageCircle size = {40} className="text-[#ce7d63]"/>
+    case "features":
+        return <ListTodo size = {40} className="text-[#ce7d63]"/>
+    case "badge":
+        return <Badge size = {40} className="text-[#ce7d63]"/>
+    case "medal":
+        return <MedalIcon size = {40} className="text-[#ce7d63]"/> 
+    case "graduate":
+        return <GraduationCap size = {40} className="text-[#ce7d63]"/>    
+    case "bag":
+        return <BriefcaseBusiness size = {40} className="text-[#ce7d63]"/>
+    default:
+      return null;
+  }
+}
+
    switch(cat){
 
     case "home":
@@ -26,6 +53,7 @@ function Card(props){
                     <div className="font-[500] max-xxs:font-light max-xs:text-sm">
                         <h2>{title}</h2>
                         <h4>{comment}</h4>
+                       
                     </div>
                         <div className="my-auto mr-1">
 
@@ -44,7 +72,7 @@ function Card(props){
                         <h4 className="max-w-[80%] mx-auto text-white mt-3 mb-5">{comment}</h4>
                         <button className="flex justify-center items-center text-[#ce7d63] bg-white rounded-lg w-max mx-auto px-4 py-2 font-semibold" onClick={() => navigate(`/${page}`)}><svg className = "fill-[#ce7d63] w-[25px] mr-2 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"/></svg>
                         {btnContent}</button>
-                        <ul className="flex gap-5 mx-auto my-5 min-xs:flex-col">
+                        <ul className="flex gap-5 mx-auto my-5 max-md:flex-col">
                             {features != null ?  features.map((x  , i) => <li key={i} className="min-w-max flex gap-1 text-white">
                                                                             <svg className="checkedCircle"
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -82,10 +110,10 @@ function Card(props){
             case "what-is-questify" :
                 return(
                     <>
-                    <div className="Card-about-what-is-questify">
-                        <h2>{title}</h2>
-                        <h4>{comment}</h4>
-                        <button>{btnContent}</button>
+                    <div className="rounded-md   bg-[linear-gradient(135deg,_rgba(206,_125,_99,_0.1),_rgba(206,_125,_99,_0.05))] flex flex-col text-center text-white max-w-[80%] mx-auto my-10">
+                        <h2 className="text-6xl font-bold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent max-w-[70%] mx-auto my-10">{title}</h2>
+                        <h4 className="text-xl max-w-[70%] mx-auto mb-10 text-[#b3b3b2]">{comment}</h4>
+                        <button className="bg-[#ce7d63] border-none rounded-sm font-semibold text-md w-[15%] min-w-max mx-auto px-3 py-3 mb-10">{btnContent}</button>
                     </div>
                     </>
                 );
@@ -93,10 +121,10 @@ function Card(props){
             case "mission":
                 return(
                     <>
-                    <div className="Card-about-mission">
-                        <img src={pic}/>
-                        <h2>{title}</h2>
-                        <h4>{comment}</h4>
+                    <div className="flex flex-col text-white text-center bg-[#1f1f1f] max-w-[30%] rounded-md pb-8">
+                        <div className="w-[25px] h-[25px]  mx-auto my-6 bg-[rgba(_206,_125,_99,_0.1)] min-w-max min-h-max px-6 py-6 rounded-full">{getIcon(pic)}</div>
+                        <h2 className="text-2xl font-semibold ">{title}</h2>
+                        <h4 className="max-w-[70%] mx-auto my-5 text-md text-[#b3b3b2] font-semibold">{comment}</h4>
                     </div>
                     </>
                 );
@@ -104,10 +132,10 @@ function Card(props){
             case "team":
                 return(
                     <>
-                    <div className="Card-about-team">
-                        <img src={pic} className="team-main-pic"/>
-                        <h2>{title}</h2>
-                        <div className="Card-about-contact-img">
+                    <div className="bg-[#222222] flex flex-col justify-center items-center w-[18%] gap-2.5 rounded-md">
+                        <img src={pic} className="w-full h-full object-cover rounded-tr-md rounded-tl-md"/>
+                        <h2 className="text-white text-2xl font-semibold">{title}</h2>
+                        <div className="flex pb-2.5">
                         {pics != null ? pics.map((p , i) => <img  src = {p} key={i}/>) : <h2>none</h2>}
                         </div>
                     </div>
@@ -117,14 +145,16 @@ function Card(props){
             case "why-questify":
                 return(
                     <>
-                    <div className="Card-about-why-questify">
+                    <div className="flex ">
                       
-
-                        <img src={pic}/>
+                        <div className="mr-5 bg-[rgba(_206,_125,_99,_0.1)] min-w-max min-h-max px-3 py-3 rounded-lg my-0 max-h-fit">
+                        {getIcon(pic)}
+                        </div>
                         
-
-                        <h2>{title}</h2>
-                        <h4>{comment}</h4>
+                        <div className="flex flex-col text-white">
+                        <h2 className="text-xl font-semibold">{title}</h2>
+                        <h4 className="text-[#b3b3b2] text-md font-semibold w-[80%]">{comment}</h4>
+                        </div>
                     </div>
                     </>
                 );
@@ -132,9 +162,9 @@ function Card(props){
             case "impact":
                 return(
                     <>
-                    <div className="Card-about-impact">
-                        <h2>{title}</h2>
-                        <h4>{comment}</h4>
+                    <div className="w-[23%] bg-[#1f1f1f] flex flex-col text-center rounded-md gap-5 py-5">
+                        <h2 className="text-[#ce7d63] text-5xl font-semibold">{title}</h2>
+                        <h4 className="text-[#b3b3b2] text-lg">{comment}</h4>
                     </div>
                     </>
                 );

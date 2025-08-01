@@ -32,3 +32,12 @@ button{
 ul li{
   list-style: none;
 }
+.About-headers{
+  @apply flex justify-center items-center m-auto flex-col mb-20 mt-10 w-[50%];
+}
+.About-headers h2{
+  @apply text-white text-3xl max-xs:text-xl text-center mt-5 mb-5 font-semibold;
+}
+.About-headers h4{
+  @apply max-w-[75%] text-[#b3b3b2] text-xl max-xs:text-lg text-center;
+}

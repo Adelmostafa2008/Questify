@@ -11,7 +11,7 @@ function Header(){
             <h1 className="text-gray-300 w-1/3 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl max:xs:w-1/2 lg:text-4xl"><a onClick={() => navigate('/Home')}>Quest<span className="text-[#ce7d63]">ify</span></a></h1>
             
             
-            <div className="flex items-center justify-center gap-2 max-xs:hidden w-1/3 min-w-max">
+            <div className="flex items-center justify-center gap-4 max-xs:hidden w-1/3 min-w-max">
                 <NavLink to="/Home" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>Home</NavLink>
                 <NavLink to="/About" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>About</NavLink>
                 <NavLink to="/Pricing" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>Pricing</NavLink>
