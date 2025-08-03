@@ -1,5 +1,6 @@
 import { useNavigate} from "react-router-dom";
-import { Badge, BriefcaseBusiness, ChartLine, GraduationCap, Lightbulb, ListTodo, MedalIcon, MessageCircle, UsersRound} from "lucide-react";
+import { useState } from "react";
+import { ArrowBigDown, ArrowBigRight, Badge, BriefcaseBusiness, Brush, ChartLine, Code2, GraduationCap, Headset, Lightbulb, ListTodo, LucideListChecks, MedalIcon, Megaphone, MessageCircle, Minus, PhoneCall, Plus, Store, UsersRound} from "lucide-react";
 
 function Card(props){
    const navigate = useNavigate();
@@ -13,8 +14,8 @@ function Card(props){
    const pics = props.pics || null;
    const page  = props.page || null;
    const price = props.price || null;
-   const bestchoice = props.bestchoice || false;
    const tailwindshit = props.tailwindshit||null;
+   const [isOpen, setIsOpen] = useState(false);
 
    function getIcon(iconName) {
   switch (iconName) {
@@ -36,6 +37,18 @@ function Card(props){
         return <GraduationCap size = {40} className="text-[#ce7d63]"/>    
     case "bag":
         return <BriefcaseBusiness size = {40} className="text-[#ce7d63]"/>
+    case "callcenter":
+        return <Headset size = {50} className="text-[#ce7d63]"/>    
+    case "marketing":
+        return <Megaphone size = {50} className="text-[#ce7d63]"/>    
+    case "data":
+        return <ChartLine size = {50} className="text-[#ce7d63]"/>    
+    case "projectmanagement":
+        return <LucideListChecks size = {50} className="text-[#ce7d63]"/>
+    case "code":
+        return <Code2 size = {50} className="text-[#ce7d63]"/>
+    case "design":
+        return<Brush size = {50} className="text-[#ce7d63]"/>
     default:
       return null;
   }
@@ -92,7 +105,7 @@ function Card(props){
                 return(
                     <>
                     <div className="bg-[#1f1f1fe6] flex flex-col w-[100%] px-5 py-10 rounded-lg">
-                        <img className="max-w-5 self-end mt-2 mr-2 max-xxs:self-center" src={pic}/>
+                        <div className="max-w-5 self-end m-0 mr-7 max-xxs:self-center"> {getIcon(pic)}</div>
                         <h2 className="text-white text-start mt-2 mb-1 font-semibold">{title}</h2>
                         <h4 className="text-[#b3b3b2] mb-4">{comment}</h4>
                         <button className="mt-auto text-white bg-[#2b2b2b] px-5 py-1 w-1/3 min-w-max rounded-sm min-xs:min-w-fit ">{btnContent}</button>
@@ -181,18 +194,20 @@ function Card(props){
     case "pricing":
         return (
             <>
-            <div className={bestchoice ? "Card-pricing-best": "Card-pricing"}>
-                <h2>{title}</h2>
-                <h1><span className="pricing-dollar-sign">$</span>{price}</h1>
-                <h4>{comment}</h4>
-                <button>{btnContent}</button>
-                <div class="line-with-text">
-                    <span>Features</span>
-                </div>
+            <div className="bg-[#1f1f1f] flex flex-col text-center min-w-max text-white gap-y-4 px-5 py-2.5 rounded-md w-[23%]">
+                <h2 className="text-white text-3xl font-semibold">{title}</h2>
+                <h1 className="text-6xl font-bold"><span className="text-xl">$</span>{price}</h1>
+                <h4 className="text-lg font-semibold">{comment}</h4>
+                <button className="bg-[#ce7d63] border-none rounded-sm font-semibold text-md w-[15%] text-md min-w-max mx-auto px-5 py-1">{btnContent}</button>
+                <div className="flex items-center justify-center mt-6 mb-3">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <span className="px-4 text-lg font-semibold text-white">Features</span>
+                    <div className="flex-grow border-t border-gray-300"></div>
+                </div >
 
-                   <ul>
-                            {features != null ?  features.map((x  , i) => <li key={i}>
-                                                                            <svg className="checkedCircle"
+                   <ul className="flex flex-col mx-auto my-auto">
+                            {features != null ?  features.map((x  , i) => <li key={i} className="flex">
+                                                                            <svg className="mt-1 mr-1 mb-2"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             width="17"
                                                                             height="17"
@@ -210,10 +225,29 @@ function Card(props){
         return(
             <>
 
-                <div className="piano">
-                    <h2>{title}</h2>
-                    <p>{comment}</p>
+        <div className="w-full mx-auto rounded-2xl shadow-md border border-gray-300 my-3">
+            <button
+                className="w-full flex items-center justify-between p-4 bg-[#1f1f1f] text-white text-left rounded-t-2xl hover:bg-[#292929] transition"
+                onClick={() => setIsOpen(!isOpen)}>
+
+                <span className="text-lg font-semibold">{title}</span>
+                {isOpen ? (
+                <Minus size={30} />
+                ) : (
+                <Plus size={30} />
+                )}
+            </button>
+            <div
+                className={`px-4 py-3 text-gray-700 font-semibold overflow-hidden transition-all duration-300 ease-in-out ${
+                isOpen ? "max-h-96" : "max-h-0"
+                }`}>
+
+                <div className={`${isOpen ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}>
+                {comment}
                 </div>
+            </div>
+            </div>
+
             </>
         );
     break;

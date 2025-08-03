@@ -28,7 +28,7 @@ function Home(){
       "Good for your health",
       "Unlimited submitions",
       "Better tasks"
-    ]}
+    ]} 
     btnContent = "Subscribe Now"
     page = "Pricing"
     />
@@ -41,39 +41,39 @@ function Home(){
        cat = "home"
        type = "task"
        btnContent = " Explore Tasks"
-    />
+       mypicture = "callcenter"/>
 
       <Card title = "Marketing" comment = " Campaign creation, market analysis, and strategy tasks "
    cat = "home"
        type = "task"
     btnContent = " Explore Tasks"
-    />
+      mypicture = "marketing"/>
 
       <Card title = "Data Analysis" comment = " Data interpretation, visualization, and insights tasks "
   cat = "home"
        type = "task"
     btnContent = " Explore Tasks"
-    />
+    mypicture = "data"/>
 
       <Card title = "Project Management" comment = " Planning, execution, and resource allocation challenges "
  cat = "home"
        type = "task"
     btnContent = " Explore Tasks"
-   
+   mypicture = "projectmanagement"
     />
 
       <Card title = "Software Development" comment = " Coding challenges, debugging, and algorithm tasks "
     cat = "home"
        type = "task"
     btnContent = " Explore Tasks"
-
+mypicture = "code"
     />
 
       <Card title = "Design" comment = " UI/UX design challenges and creative problem solving "
    cat = "home"
        type = "task"
     btnContent = " Explore Tasks"
-   
+   mypicture = "design"
     />
 
 

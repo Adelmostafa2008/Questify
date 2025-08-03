@@ -9,7 +9,7 @@ function Pricing(props){
             <h2>Select a plan</h2>
             <h4>Whatever it is , it is just 3 dollars a month you poor motherfucker</h4>
         </div>
-        <div className='pricing'>
+        <div className='flex w-[80%] mx-auto justify-center gap-4 items-center'>
             <Card 
             cat = "pricing" 
             title = "Basic" 
@@ -23,8 +23,8 @@ function Pricing(props){
                 "Priority feedback",
 
             ]}/>
-            <div className='best-price'>
-            <h2>Best choice</h2>
+            <div className='bg-[#ce7456] px-4 py-2.5 rounded-md text-center text-white'>
+            <h2 className='text-2xl my-auto mb-2 font-semibold'>Best choice</h2>
             <Card
             cat = "pricing" 
             title = "Pro" 
@@ -58,11 +58,11 @@ function Pricing(props){
         </div>
 
         <div>
-            <div className='About-headers' style={{marginTop : "10rem"}}>
-                <h2>Common asked questions</h2>
+            <div className='About-headers' style={{marginTop : "5rem"}}>
+                <h2>Frequently Asked Questions (FAQs)</h2>
                 <h4>Read carfully so you don't ask them stubid questions again</h4>
             </div>
-            <div>
+            <div className='w-[50%] mx-auto '>
                 <Card
                 cat = "piano-shii"
                 title = "Am i gonna get a refund if i didnot like the service ?"
