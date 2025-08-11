@@ -15,7 +15,7 @@ function Header(){
                 <NavLink to="/Home" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>Home</NavLink>
                 <NavLink to="/About" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>About</NavLink>
                 <NavLink to="/Pricing" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>Pricing</NavLink>
-                <NavLink to="/MyTasks" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>My Tasks</NavLink>
+                <NavLink to="/Addtask" className={({ isActive }) => `font-semibold transition-all duration-200 ease-in-out ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'}`}>Add Tasks</NavLink>
             </div>
 
             <div className=" p-0 flex gap-2 items-stretch justify-end  w-1/3 max-xs:w-1/2">

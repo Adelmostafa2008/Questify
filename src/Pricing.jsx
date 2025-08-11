@@ -62,7 +62,7 @@ function Pricing(props){
                 <h2>Frequently Asked Questions (FAQs)</h2>
                 <h4>Read carfully so you don't ask them stubid questions again</h4>
             </div>
-            <div className='w-[50%] mx-auto '>
+            <div className='w-[70%] mx-auto '>
                 <Card
                 cat = "piano-shii"
                 title = "Am i gonna get a refund if i didnot like the service ?"

@@ -11,7 +11,7 @@ function Footer() {
     <footer className="bg-[#131313] text-white py-10 mt-10 rounded-t-md">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         
-        {/* Logo */}
+        
         <div>
           <h1
             onClick={() => navigate('/Home')}
@@ -21,10 +21,10 @@ function Footer() {
           </h1>
         </div>
 
-        {/* Navigation */}
+     
         <div className="flex flex-col gap-2">
           <label className="text-lg">Pages:</label>
-          {["Home", "About", "Pricing", "MyTasks"].map((page) => (
+          {["Home", "About", "Pricing", "Addtask"].map((page) => (
             <NavLink
               key={page}
               to={`/${page}`}
@@ -39,7 +39,7 @@ function Footer() {
           ))}
         </div>
 
-        {/* Social + Language */}
+     
         <div className="flex flex-col gap-5">
           <div>
             <label className="text-lg">Follow us:</label>
@@ -61,7 +61,7 @@ function Footer() {
           </div>
         </div>
 
-        {/* Report Bug */}
+      
         <div className="flex flex-col gap-3">
           <label className="text-lg">Report issues or bugs:</label>
           <div className="flex gap-2">
@@ -77,7 +77,7 @@ function Footer() {
         </div>
       </div>
 
-      {/* Footer Bottom */}
+    
       <div className="text-center mt-10 text-sm text-gray-400">
         &copy; {new Date().getFullYear()} Questify. All rights reserved.
       </div>

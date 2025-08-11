@@ -9,7 +9,10 @@ import hadeel from './assets/team members/hadeel.png';
 import Facebook from './assets/socialMediaIcons/facebook.png'
 import Linkedin from './assets/socialMediaIcons/linkedin.png'
 import GitHub from './assets/socialMediaIcons/github.png'
-import {AlarmClock, Lightbulb, Mail, Mailbox, MapPin, Phone, Send} from "lucide-react";
+import { FaPhone , FaLocationDot } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { IoIosAlarm , IoIosSend  } from "react-icons/io";
+
 function About(){
     return (<>
     <Header/>
@@ -104,22 +107,22 @@ function About(){
     
     <div className="bg-[#1f1f1f] px-5 py-5 rounded-md">
 
-      <h2 className="text-3xl font-bold text-white mb-6 flex gap-x-3 justify-center"><Phone size = {30} className="text-[#ce7d63]"/> Contact Information</h2>
+      <h2 className="text-3xl font-bold text-white mb-6 flex gap-x-3 justify-center"><FaPhone size = {30} className="text-[#ce7d63]"/> Contact Information</h2>
       <div className="space-y-6 text-white">
         <div>
-          <h3 className="text-xl font-semibold flex gap-x-2"><MapPin size = {20} className="text-[#ce7d63]"/> Address</h3>
+          <h3 className="text-xl font-semibold flex gap-x-2"><FaLocationDot size = {20} className="text-[#ce7d63]"/> Address</h3>
           <p>123 Innovation Drive, Tech City, CA 94103, United States</p>
         </div>
         <div>
-          <h3 className="text-xl font-semibold flex gap-x-2"><Mail size = {20} className="text-[#ce7d63]"/> Email</h3>
+          <h3 className="text-xl font-semibold flex gap-x-2"><MdEmail size = {20} className="text-[#ce7d63]"/> Email</h3>
           <p>info@questify.com</p>
         </div>
         <div>
-          <h3 className="text-xl font-semibold flex gap-x-2"><Phone size = {20} className="text-[#ce7d63]"/> Phone</h3>
+          <h3 className="text-xl font-semibold flex gap-x-2"><FaPhone size = {20} className="text-[#ce7d63]"/> Phone</h3>
           <p>+1 (555) 123-4567</p>
         </div>
         <div>
-          <h3 className="text-xl font-semibold flex gap-x-2"><AlarmClock size = {20} className="text-[#ce7d63]"/> Hours</h3>
+          <h3 className="text-xl font-semibold flex gap-x-2"><IoIosAlarm size = {20} className="text-[#ce7d63]"/> Hours</h3>
           <p>
             Monday - Friday: 9am - 6pm<br />
             Saturday: 10am - 4pm
@@ -130,7 +133,7 @@ function About(){
 
 
     <div className="bg-[#1f1f1f] shadow-lg rounded-md p-8 ">
-      <h2 className="text-3xl font-bold text-white mb-6 flex gap-x-3 justify-center"><Send size = {30} className="text-[#ce7d63]"/> Send Us a Message</h2>
+      <h2 className="text-3xl font-bold text-white mb-6 flex gap-x-3 justify-center"><IoIosSend  size = {30} className="text-[#ce7d63]"/> Send Us a Message</h2>
       <form className="space-y-5">
         <div>
           <label className="block text-white font-semibold mb-1">Your Name</label>
