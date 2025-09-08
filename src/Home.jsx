@@ -2,7 +2,9 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import Card from './Card.jsx';
 import Crown from './assets/crown.png';
+import { useNavigate } from "react-router-dom";
 function Home(){
+  const navigate = useNavigate();
     return(<>
     <Header/>
     
@@ -14,10 +16,12 @@ function Home(){
     />
 
 
-    <div className="flex justify-center items-center m-auto flex-col mb-20 mt-10">
-      <h2 className="text-white text-3xl max-xs:text-xl text-center mt-5 mb-5 font-semibold">Choose a Category</h2>
-      <h4 className="max-w-[75%] text-[#b3b3b2] text-xl max-xs:text-lg text-center">Select a category to explore tasks and challenges designed to test and improve your skills</h4>
-    </div>
+                <div className="text-center text-white my-20">
+                <h2 className="text-[42px] font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Choose a Category</h2>
+                <h4 className="text-xl text-[#b3b3b2] max-w-[60%] mx-auto mt-2">
+                   Select a category to explore tasks and challenges designed to test and improve your skills.
+                </h4>
+            </div>
 
 
     <Card title = "Unlock Premium Features" comment = "Get unlimited access to all 300+ professional tasks, feedback, and advanced analytics with our Pro subscription"
@@ -30,7 +34,7 @@ function Home(){
       "Better tasks"
     ]} 
     btnContent = "Subscribe Now"
-    page = "Pricing"
+    page = "Pricing" 
     />
 
 
@@ -39,12 +43,14 @@ function Home(){
 
       <Card title = "Call Center" comment = " Customer service scenarios and problem-solving tasks "
        cat = "home"
+       GoTo = {() => navigate("/Tasks" , {state :{Tcategory : "call-center"}})}
        type = "task"
        btnContent = " Explore Tasks"
        mypicture = "callcenter"/>
 
       <Card title = "Marketing" comment = " Campaign creation, market analysis, and strategy tasks "
    cat = "home"
+   GoTo = {() => navigate("/Tasks", {state :{Tcategory : "marketing"}})}
        type = "task"
     btnContent = " Explore Tasks"
       mypicture = "marketing"/>
@@ -52,6 +58,7 @@ function Home(){
       <Card title = "Data Analysis" comment = " Data interpretation, visualization, and insights tasks "
   cat = "home"
        type = "task"
+       GoTo = {() => navigate("/Tasks", {state :{Tcategory : "data-analysis"}})}
     btnContent = " Explore Tasks"
     mypicture = "data"/>
 
@@ -60,6 +67,7 @@ function Home(){
        type = "task"
     btnContent = " Explore Tasks"
    mypicture = "projectmanagement"
+   GoTo = {() => navigate("/Tasks" , {state :{Tcategory : "project-management"}})}
     />
 
       <Card title = "Software Development" comment = " Coding challenges, debugging, and algorithm tasks "
@@ -67,13 +75,15 @@ function Home(){
        type = "task"
     btnContent = " Explore Tasks"
 mypicture = "code"
+GoTo = {() => navigate("/Tasks" , {state :{Tcategory : "software-development"}})}
     />
 
       <Card title = "Design" comment = " UI/UX design challenges and creative problem solving "
    cat = "home"
        type = "task"
-    btnContent = " Explore Tasks"
+    btnContent = "Explore Tasks"
    mypicture = "design"
+   GoTo = {() => navigate("/Tasks" , {state :{Tcategory : "design"}})}
     />
 
 

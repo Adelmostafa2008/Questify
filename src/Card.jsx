@@ -27,7 +27,7 @@ function Card(props) {
   const newD = props.newD || (() => {});
   const taskPreviewTitle = props.TPT || "";
   const taskPreviewDescription = props.TPD || "";
-
+ 
   function getIcon(iconName) {
     switch (iconName) {
       case "bulb":
@@ -66,177 +66,287 @@ function Card(props) {
   }
 
   switch (cat) {
-    case "home":
-      switch (type) {
-        case "welcomeback":
-          return (
-            <>
-              <div className={`bg-[#1f1f1f] mt-5 w-[80%] mx-auto text-white px-3 py-4 flex justify-between rounded-lg sm:px-5 sm:py-6 max-xxs:px-2 max-xxs:py-2 min-md:py-8 min-md:text-xl min-md:font-semibold`}>
-                <div className="font-[500] max-xxs:font-light max-xs:text-sm">
-                  <h2>{title}</h2>
-                  <h4>{comment}</h4>
-                </div>
-                <div className="my-auto mr-1">
-                  <button className="bg-[#ce7d63] text-lg px-3 py-1.5 font-[500] rounded-md max-xxs:px-1.5 max-xxs:py-1.5 max-xxs:font-medium min-w-max max-xxs:text-sm ">{btnContent}</button>
-                </div>
-              </div>
-            </>
-          );
-        case "primeSub":
-          return (
-            <>
-              <div className="bg-[#e68d70] flex flex-col text-center max-w-[80%] mx-auto rounded-lg px-5 py-5">
-                <h2 className="text-white text-2xl font-semibold mt-2">{title}</h2>
-                <h4 className="max-w-[80%] mx-auto text-white mt-3 mb-5">{comment}</h4>
-                <button className="flex justify-center items-center text-[#ce7d63] bg-white rounded-lg w-max mx-auto px-4 py-2 font-semibold" onClick={() => navigate(`/${page}`)}>
-                  <svg className="fill-[#ce7d63] w-[25px] mr-2 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z" /></svg>
-                  {btnContent}
-                </button>
-                <ul className="flex gap-5 mx-auto my-5 max-md:flex-col">
-                  {features != null ? features.map((x, i) => <li key={i} className="min-w-max flex gap-1 text-white">
-                    <svg className="checkedCircle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
-                    </svg> {x}</li>) : <li>none</li>}
-                </ul>
-              </div>
-            </>
-          );
-        case "task":
-          return (
-            <>
-              <div className="bg-[#1f1f1fe6] flex flex-col w-[100%] px-5 py-10 rounded-lg">
-                <div className="max-w-5 self-end m-0 mr-7 max-xxs:self-center"> {getIcon(pic)}</div>
-                <h2 className="text-white text-start mt-2 mb-1 font-semibold">{title}</h2>
-                <h4 className="text-[#b3b3b2] mb-4">{comment}</h4>
-                <button className="mt-auto text-white bg-[#2b2b2b] px-5 py-1 w-1/3 min-w-max rounded-sm min-xs:min-w-fit ">{btnContent}</button>
-              </div>
-            </>
-          );
-        case "default":
-          return (<h2>no type entered</h2>);
-      }
-      break;
-    case "about":
-      switch (type) {
-        case "what-is-questify":
-          return (
-            <>
-              <div className="rounded-md   bg-[linear-gradient(135deg,_rgba(206,_125,_99,_0.1),_rgba(206,_125,_99,_0.05))] flex flex-col text-center text-white max-w-[80%] mx-auto my-10">
-                <h2 className="text-6xl font-bold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent max-w-[70%] mx-auto my-10">{title}</h2>
-                <h4 className="text-xl max-w-[70%] mx-auto mb-10 text-[#b3b3b2]">{comment}</h4>
-                <button onClick={() => navigate('/Registration', { state: { regtype: "login" } })} className="bg-[#ce7d63] border-none rounded-sm font-semibold text-md w-[15%] min-w-max mx-auto px-3 py-3 mb-10">{btnContent}</button>
-              </div>
-            </>
-          );
-        case "mission":
-          return (
-            <>
-              <div className="flex flex-col text-white text-center bg-[#1f1f1f] max-w-[30%] rounded-md pb-8">
-                <div className="w-[25px] h-[25px]  mx-auto my-6 bg-[rgba(_206,_125,_99,_0.1)] min-w-max min-h-max px-6 py-6 rounded-full">{getIcon(pic)}</div>
-                <h2 className="text-2xl font-semibold ">{title}</h2>
-                <h4 className="max-w-[70%] mx-auto my-5 text-md text-[#b3b3b2] font-semibold">{comment}</h4>
-              </div>
-            </>
-          );
-        case "team":
-          return (
-            <>
-              <div className="bg-[#222222] flex flex-col justify-center items-center w-[18%] gap-2.5 rounded-md">
-                <img src={pic} className="w-full h-full object-cover rounded-tr-md rounded-tl-md" />
-                <h2 className="text-white text-2xl font-semibold">{title}</h2>
-                <div className="flex pb-2.5">
-                  {pics != null ? pics.map((p, i) => <img src={p} key={i} />) : <h2>none</h2>}
-                </div>
-              </div>
-            </>
-          );
-        case "why-questify":
-          return (
-            <>
-              <div className="flex ">
-                <div className="mr-5 bg-[rgba(_206,_125,_99,_0.1)] min-w-max min-h-max px-3 py-3 rounded-lg my-0 max-h-fit">
-                  {getIcon(pic)}
-                </div>
-
-                <div className="flex flex-col text-white">
-                  <h2 className="text-xl font-semibold">{title}</h2>
-                  <h4 className="text-[#b3b3b2] text-md font-semibold w-[80%]">{comment}</h4>
-                </div>
-              </div>
-            </>
-          );
-        case "impact":
-          return (
-            <>
-              <div className="w-[23%] bg-[#1f1f1f] flex flex-col text-center rounded-md gap-5 py-5">
-                <h2 className="text-[#ce7d63] text-5xl font-semibold">{title}</h2>
-                <h4 className="text-[#b3b3b2] text-lg">{comment}</h4>
-              </div>
-            </>
-          );
-        case "default":
-          return (<h2>no type entered</h2>);
-      }
-      break;
-    case "pricing":
+   case "home":
+  switch (type) {
+    case "welcomeback":
       return (
-        <>
-          <div className="bg-[#1f1f1f] flex flex-col text-center min-w-max text-white gap-y-4 px-5 py-2.5 rounded-md w-[23%]">
-            <h2 className="text-white text-3xl font-semibold">{title}</h2>
-            <h1 className="text-6xl font-bold"><span className="text-xl">$</span>{price}</h1>
-            <h4 className="text-lg font-semibold">{comment}</h4>
-            <button className="bg-[#ce7d63] border-none rounded-sm font-semibold text-md w-[15%] text-md min-w-max mx-auto px-5 py-1">{btnContent}</button>
-            <div className="flex items-center justify-center mt-6 mb-3">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="px-4 text-lg font-semibold text-white">Features</span>
-              <div className="flex-grow border-t border-gray-300"></div>
-            </div >
+        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.2)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
 
-            <ul className="flex flex-col mx-auto my-auto">
-              {features != null ? features.map((x, i) => <li key={i} className="flex">
-                <svg className="mt-1 mr-1 mb-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="17"
-                  height="17"
-                  viewBox="0 0 24 24"
-                  fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
-                </svg> {x}</li>) : <li>none</li>}
-            </ul>
-          </div>
-        </>
-      );
-    case "piano-shii":
-      return (
-        <>
-
-          <div className="w-full mx-auto rounded-2xl shadow-md border-2 my-3 hover:border-[#ce7d63]">
-            <button
-              className="w-full flex items-center justify-between p-4 bg-[#1f1f1f] text-white text-left rounded-t-2xl "
-              onClick={() => setIsOpen(!isOpen)}>
-
-              <span className="text-lg font-semibold">{title}</span>
-              {isOpen ? (
-                <FaMinus size={30} />
-              ) : (
-                <FaPlus size={30} />
-              )}
-            </button>
-            <div
-              className={`px-4 py-3 text-white font-semibold overflow-hidden transition-all duration-300 ease-in-out ${
-                isOpen ? "max-h-96" : "max-h-0"
-              }`}>
-
-              <div className={`${isOpen ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}>
-                {comment}
-              </div>
+          <div className="flex justify-between items-center relative z-10">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-white">{title}</h2>
+              <h4 className="text-gray-400 mt-1">{comment}</h4>
             </div>
+            <button className="bg-[#ce7d63] hover:bg-[#d98b6e] transition px-4 py-2 rounded-lg text-white font-medium shadow-lg">
+              {btnContent}
+            </button>
+          </div>
+        </div>
+      );
+
+    case "primeSub":
+      return (
+        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[#e68d70] shadow-[0_0_40px_rgba(206,125,99,0.35)] overflow-hidden text-center">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/20 via-transparent to-black/30 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/30 blur-3xl"></div>
+
+          <h2 className="text-3xl font-extrabold text-white tracking-wide relative z-10">{title}</h2>
+          <h4 className="max-w-[80%] mx-auto text-white/80 mt-3 mb-6 relative z-10">{comment}</h4>
+
+          <button
+            className="relative z-10 flex justify-center items-center mx-auto text-[#ce7d63] bg-white rounded-lg px-5 py-2 font-semibold shadow-lg hover:shadow-[#ce7d63]/30 transition"
+            onClick={() => navigate(`/${page}`)}
+          >
+            <svg className="fill-[#ce7d63] w-[25px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+              <path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z" />
+            </svg>
+            {btnContent}
+          </button>
+
+          <ul className="flex gap-6 mx-auto my-5 flex-wrap justify-center relative z-10">
+            {features != null ? features.map((x, i) => (
+              <li key={i} className="flex items-center gap-2 text-white text-lg">
+                <svg className="checkedCircle" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white">
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+                </svg>
+                {x}
+              </li>
+            )) : <li>none</li>}
+          </ul>
+        </div>
+      );
+
+    case "task":
+      return (
+        <div className="relative bg-[#1f1f1fe6] p-8 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] flex flex-col h-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+
+          <div className="relative z-10">
+            <div className="self-end mb-3">{getIcon(pic)}</div>
+            <h2 className="text-white text-xl font-semibold">{title}</h2>
+            <h4 className="text-gray-400 mt-1 mb-4">{comment}</h4>
           </div>
 
-        </>
+          <button
+            className="relative z-10 mt-auto text-white bg-[#2b2b2b] hover:bg-[#3c3c3c] transition px-5 py-2 rounded-lg shadow-md"
+            onClick={props.GoTo}
+          >
+            {btnContent}
+          </button>
+        </div>
       );
+
+    case "default":
+      return <h2>no type entered</h2>;
+  }
+
+      break;
+   case "about":
+  switch (type) {
+    case "what-is-questify":
+      return (
+        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+          <div className="relative z-10 text-center">
+            <h2 className="text-6xl font-extrabold bg-gradient-to-r from-[#ce7d63] to-[#ffb38a] bg-clip-text text-transparent tracking-wide leading-tight">
+              {title}
+            </h2>
+            <h4 className="text-xl max-w-[70%] mx-auto mt-6 text-[#c5c5c5] font-medium">
+              {comment}
+            </h4>
+            <button
+              onClick={() =>
+                navigate("/Registration", { state: { regtype: "login" } })
+              }
+              className="mt-10 bg-[#ce7d63] text-white hover:bg-[#b86c55] transition-all duration-300 rounded-lg font-semibold text-lg px-6 py-3 shadow-[0_2px_12px_rgba(206,125,99,0.4)] hover:shadow-[0_4px_20px_rgba(206,125,99,0.6)]"
+            >
+              {btnContent}
+            </button>
+          </div>
+        </div>
+      );
+
+    case "mission":
+      return (
+        <div className="relative flex flex-col items-center text-center bg-[#1f1f1f] p-8 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/30 pointer-events-none"></div>
+          <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/15 blur-3xl"></div>
+          <div className="relative z-10">
+            <div className="w-[60px] h-[60px] mx-auto my-4 bg-[rgba(206,125,99,0.15)] rounded-full flex items-center justify-center">
+              {getIcon(pic)}
+            </div>
+            <h2 className="text-2xl font-bold text-white">{title}</h2>
+            <h4 className="max-w-[80%] mx-auto my-5 text-md text-[#b3b3b2] font-medium">
+              {comment}
+            </h4>
+          </div>
+        </div>
+      );
+
+    case "team":
+      return (
+        <div className="relative bg-[#1f1f1f] flex flex-col items-center w-[18%] gap-3 rounded-2xl border-2 border-[#333333] overflow-hidden shadow-[0_0_30px_rgba(206,125,99,0.15)] hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] transition-all duration-300">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#ce7d63]/5 via-transparent to-black/30 pointer-events-none"></div>
+          <img src={pic} className="w-full h-full object-cover" />
+          <h2 className="text-white text-xl font-bold z-10">{title}</h2>
+          <div className="flex gap-2 pb-4 relative z-10">
+            {pics && pics.length > 0
+              ? pics.map((p, i) => (
+                  <img
+                    src={p}
+                    key={i}
+                    className="w-8 h-8 opacity-80 hover:opacity-100 transition"
+                  />
+                ))
+              : <h2 className="text-gray-400">none</h2>}
+          </div>
+        </div>
+      );
+
+    case "why-questify":
+      return (
+        <div className="relative flex items-start gap-4 p-5 rounded-xl bg-[#1f1f1f] border border-[#333333] hover:border-[#ce7d63]/40 transition-colors duration-300 shadow-[0_0_20px_rgba(206,125,99,0.1)] hover:shadow-[0_0_30px_rgba(206,125,99,0.2)]">
+          <div className="bg-[rgba(206,125,99,0.15)] p-3 rounded-lg flex items-center justify-center">
+            {getIcon(pic)}
+          </div>
+          <div className="flex flex-col text-white">
+            <h2 className="text-lg font-bold">{title}</h2>
+            <h4 className="text-[#b3b3b2] text-md font-medium mt-1 w-[80%]">
+              {comment}
+            </h4>
+          </div>
+        </div>
+      );
+
+    case "impact":
+      return (
+        <div className="relative w-[23%] bg-[#1f1f1f] flex flex-col text-center p-6 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] transition-all duration-300 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/30 pointer-events-none"></div>
+          <h2 className="text-[#ce7d63] text-5xl font-extrabold relative z-10">{title}</h2>
+          <h4 className="text-[#c5c5c5] text-lg font-medium relative z-10">{comment}</h4>
+        </div>
+      );
+
+    case "default":
+      return <h2 className="text-red-500">no type entered</h2>;
+  }
+
+  break;
+
+   case "pricing":
+  switch (type) {
+  case "pricing-best":
+    return (
+      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl px-6 py-8 overflow-hidden transition-all duration-300
+        border-2 border-[#ce7d63] bg-[#1f1f1f] shadow-[0_0_50px_rgba(206,125,99,0.45)] scale-105">
+        <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[#ce7d63] flex text-white font-bold text-xs px-12 py-1 shadow-[0_0_15px_rgba(206,125,99,0.5)]">
+          <h2>BEST CHOICE</h2>   
+        </div>
+        <h2 className="text-3xl font-extrabold text-white tracking-wider mb-2">{title}</h2>
+        <h1 className="text-6xl font-black text-white mb-2">
+          <span className="text-xl align-top">$</span>{price}
+        </h1>
+        <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
+        <button onClick={props.GoTo} className="bg-[#ce7d63] text-white hover:bg-[#ce7456] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_10px_rgba(206,125,99,0.4)]">
+          {btnContent}
+        </button>
+        <div className="flex items-center justify-center w-full my-4">
+          <div className="flex-grow border-t border-gray-700"></div>
+          <span className="px-3 text-sm font-semibold text-gray-400 uppercase">Features</span>
+          <div className="flex-grow border-t border-gray-700"></div>
+        </div>
+        <ul className="flex flex-col gap-2 text-left text-gray-300">
+          {features?.length > 0 ? features.map((x, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <svg
+                className="mt-1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+              </svg>
+              {x}
+            </li>
+          )) : <li className="text-gray-500">No features listed</li>}
+        </ul>
+      </div>
+    );
+
+  case "pricing-normal":
+    return (
+      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl border-2 border-[#333333] bg-[#1f1f1f]
+        shadow-[0_0_30px_rgba(206,125,99,0.2)] px-6 py-8 overflow-hidden
+        hover:border-[#ce7d63] hover:shadow-[0_0_40px_rgba(206,125,99,0.35)]
+        transition-all duration-300">
+        <h2 className="text-3xl font-extrabold text-white tracking-wider mb-2">{title}</h2>
+        <h1 className="text-6xl font-black text-white mb-2">
+          <span className="text-xl align-top">$</span>{price}
+        </h1>
+        <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
+        <button onClick={props.GoTo} className="bg-[#ce7d63] text-white hover:bg-[#ce7456] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_10px_rgba(206,125,99,0.4)]">
+          {btnContent}
+        </button>
+        <div className="flex items-center justify-center w-full my-4">
+          <div className="flex-grow border-t border-gray-700"></div>
+          <span className="px-3 text-sm font-semibold text-gray-400 uppercase">Features</span>
+          <div className="flex-grow border-t border-gray-700"></div>
+        </div>
+        <ul className="flex flex-col gap-2 text-left text-gray-300">
+          {features?.length > 0 ? features.map((x, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <svg
+                className="mt-1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+              </svg>
+              {x}
+            </li>
+          )) : <li className="text-gray-500">No features listed</li>}
+        </ul>
+      </div>
+    );
+
+  default:
+    return null;
+}
+
+
+
+   case "piano-shii":
+  return (
+    <div className="relative w-full mx-auto my-3 rounded-2xl border-2 border-[#333333] shadow-[0_0_20px_rgba(206,125,99,0.15)] hover:shadow-[0_0_30px_rgba(206,125,99,0.25)] overflow-hidden transition-all duration-300">
+      <button
+        className="w-full flex items-center justify-between p-4 bg-[#1f1f1f] text-white text-left rounded-t-2xl"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-lg font-semibold">{title}</span>
+        {isOpen ? <FaMinus size={28} /> : <FaPlus size={28} />}
+      </button>
+      <div
+        className={`px-5 py-4 text-white font-medium overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {comment}
+      </div>
+    </div>
+  );
+
     case "createTask":
       return (
         <>
@@ -269,9 +379,49 @@ function Card(props) {
           </div>
         </>
       );
+ 
+    case "taskCard":
+  return (
+    <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
+
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+      <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+
+      <div className="text-center relative z-10 flex flex-col gap-y-2">
+        <h2 className="text-5xl font-extrabold text-[#ce7d63] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]"
+            style={{ fontFamily: "'Pricedown', sans-serif" }}>
+            "Sharpen your skills. Complete tasks. Build your legacy."
+        </h2>
+        <p className="mt-4 text-gray-400 text-xl italic">
+          {comment}
+        </p>
+      </div>
+    </div>
+  );  
     case "default":
       return (<h2>empty card</h2>);
   }
 }
 
 export default Card;
+
+
+// case "taskCard":
+//   return (
+//     <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
+
+//       <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+//       <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+
+//       <div className="text-center relative z-10">
+//         <h2 className="text-5xl font-extrabold text-[#ce7d63] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]"
+//             style={{ fontFamily: "'Pricedown', sans-serif" }}>
+//           {comment}
+//         </h2>
+//         <p className="mt-4 text-gray-400 text-xl italic">
+//           "Sell dreams, not products — even lies need good packaging"
+//         </p>
+//       </div>
+//     </div>
+//   ); 
+ 
