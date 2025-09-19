@@ -66,6 +66,11 @@ export default function SelectedPlan() {
                             placeholder="Transaction ID"
                             className="bg-[#1f1f1f] border border-[#444] rounded-lg p-3 w-full text-white mt-4 focus:ring-2 focus:ring-[#ce7d63]/50 outline-none"
                         />
+                        <button
+                            className="bg-[#ce7d63] hover:bg-[#b96b53] w-[100%] my-3 text-white font-bold py-3 rounded-lg shadow-[0_0_10px_rgba(206,125,99,0.5)] transition-all duration-300"
+                        >
+                            Send Now
+                        </button>
                     </div>
                 );
 
@@ -106,100 +111,81 @@ export default function SelectedPlan() {
         <>
             <Header />
 
-            <div className="text-white w-[85%] mx-auto my-16 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_50px_rgba(206,125,99,0.25)] relative overflow-hidden flex justify-between gap-10">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
-                <div className="absolute -top-20 -left-20 w-[300px] h-[300px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+            <div className="text-white w-[85%] mx-auto my-16 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.18)] relative overflow-hidden flex justify-between gap-10">
+  <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/40 pointer-events-none"></div>
+  <div className="absolute -top-20 -left-20 w-[300px] h-[300px] rounded-full bg-[#ce7d63]/15 blur-3xl"></div>
 
-                <div className="w-[40%] relative z-10 p-8 rounded-2xl bg-gradient-to-b from-[#2b2b2b] to-[#1f1f1f] border border-[#333333] shadow-[0_0_25px_rgba(206,125,99,0.2)] flex flex-col items-center text-center">
-                    <h2
-                        className="text-6xl font-extrabold text-[#ce7d63] drop-shadow-[0_0_10px_rgba(206,125,99,0.8)] tracking-wider uppercase"
-                        style={{ fontFamily: "'Pricedown', sans-serif" }}
-                    >
-                        {Pname} Plan
-                    </h2>
-                    <h3 className="mt-4 font-bold text-3xl text-white">
-                        ${Pprice}.00 / Month
-                    </h3>
-                    <div className="flex items-center justify-center w-full my-6">
-                        <div className="flex-grow border-t border-gray-700"></div>
-                        <span className="px-3 text-sm font-semibold text-gray-400 uppercase">
-                            Features
-                        </span>
-                        <div className="flex-grow border-t border-gray-700"></div>
-                    </div>
-                    <ul className="flex flex-col gap-3 mx-auto pb-5 text-gray-300 text-lg">
-                        {Pfeatures?.length > 0 ? (
-                            Pfeatures.map((x, i) => (
-                                <li key={i} className="flex items-start gap-2">
-                                    <svg
-                                        className="mt-1 text-[#ce7d63]"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                    >
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
-                                    </svg>
-                                    {x}
-                                </li>
-                            ))
-                        ) : (
-                            <li className="text-gray-500">No features listed</li>
-                        )}
-                    </ul>
-                </div>
+  {/* Plan Preview */}
+  <div className="w-[40%] relative z-10 p-8 rounded-2xl bg-gradient-to-b from-[#2b2b2b] to-[#1f1f1f] border border-[#333333] shadow-[0_0_20px_rgba(206,125,99,0.15)] flex flex-col items-center text-center">
+    <h2
+      className="text-6xl font-extrabold text-[#ce7d63] drop-shadow-[0_0_8px_rgba(206,125,99,0.7)] tracking-wider uppercase"
+      style={{ fontFamily: "'Pricedown', sans-serif" }}
+    >
+      {Pname} Plan
+    </h2>
+    <h3 className="mt-4 font-bold text-3xl text-white">
+      ${Pprice}.00 / Month
+    </h3>
+    <div className="flex items-center justify-center w-full my-6">
+      <div className="flex-grow border-t border-gray-700"></div>
+      <span className="px-3 text-sm font-semibold text-gray-400 uppercase">
+        Features
+      </span>
+      <div className="flex-grow border-t border-gray-700"></div>
+    </div>
+    <ul className="flex flex-col gap-3 mx-auto pb-5 text-gray-300 text-lg">
+      {Pfeatures?.length > 0 ? (
+        Pfeatures.map((x, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <svg
+              className="mt-1 text-[#ce7d63]/90"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+            </svg>
+            {x}
+          </li>
+        ))
+      ) : (
+        <li className="text-gray-500">No features listed</li>
+      )}
+    </ul>
+  </div>
 
-                <div className="flex flex-col w-[40%] relative z-10">
-                    <h2 className="mx-auto mb-6 text-2xl font-bold tracking-wide">
-                        Select a Payment Method
-                    </h2>
-                    <div className="flex gap-x-5 items-stretch mb-6">
-                        <button
-                            onClick={() => SetPaymentMethod("Visa")}
-                            className={`border rounded-lg w-1/4 px-6 py-3 flex justify-center items-center transition-all duration-300 ${
-                                paymentMethod === "Visa"
-                                    ? "bg-[#ce7d631a] border-[#ce7d63] shadow-[0_0_10px_#ce7d63]"
-                                    : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"
-                            }`}
-                        >
-                            <RiVisaLine size={50} />
-                        </button>
-                        <button
-                            onClick={() => SetPaymentMethod("ApplePay")}
-                            className={`border rounded-lg px-6 w-1/4 py-3 flex justify-center items-center transition-all duration-300 ${
-                                paymentMethod === "ApplePay"
-                                    ? "bg-[#ce7d631a] border-[#ce7d63] shadow-[0_0_10px_#ce7d63]"
-                                    : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"
-                            }`}
-                        >
-                            <FaApplePay size={50} />
-                        </button>
-                        <button
-                            onClick={() => SetPaymentMethod("PayPal")}
-                            className={`border rounded-lg px-6 w-1/4 py-3 flex justify-center items-center transition-all duration-300 ${
-                                paymentMethod === "PayPal"
-                                    ? "bg-[#ce7d631a] border-[#ce7d63] shadow-[0_0_10px_#ce7d63]"
-                                    : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"
-                            }`}
-                        >
-                            <FaPaypal size={40} />
-                        </button>
-                        <button
-                            onClick={() => SetPaymentMethod("VodafoneCash")}
-                            className={`border rounded-lg px-6 w-1/4 flex justify-center items-center py-3 transition-all duration-300 ${
-                                paymentMethod === "VodafoneCash"
-                                    ? "bg-[#ce7d631a] border-[#ce7d63] shadow-[0_0_10px_#ce7d63]"
-                                    : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"
-                            }`}
-                        >
-                            <SiVodafone size={40} />
-                        </button>
-                    </div>
-                    {PaymentUI()}
-                </div>
-            </div>
+  {/* Payment Section */}
+  <div className="flex flex-col w-[40%] relative z-10">
+    <h2 className="mx-auto mb-6 text-2xl font-bold tracking-wide">
+      Select a Payment Method
+    </h2>
+    <div className="flex gap-x-5 items-stretch mb-6">
+      {["Visa","ApplePay","PayPal","VodafoneCash"].map(method => (
+        <button
+          key={method}
+          onClick={() => SetPaymentMethod(method)}
+          className={`border rounded-lg px-6 w-1/4 py-3 flex justify-center items-center transition-all duration-300 ${
+            paymentMethod === method
+              ? "bg-[#ce7d6315] border-[#ce7d63] shadow-[0_0_8px_#ce7d63]"
+              : "border-[#333333] hover:bg-[#ce7d630d] hover:border-[#ce7d63]"
+          }`}
+        >
+          {method === "Visa" && <RiVisaLine size={50} />}
+          {method === "ApplePay" && <FaApplePay size={50} />}
+          {method === "PayPal" && <FaPaypal size={40} />}
+          {method === "VodafoneCash" && <SiVodafone size={40} />}
+        </button>
+      ))}
+    </div>
+
+   
+        {PaymentUI()}
+        
+    </div>
+    </div>
 
             <Footer />
         </>

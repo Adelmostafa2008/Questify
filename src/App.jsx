@@ -6,6 +6,10 @@ import Payment from './Pricing.jsx';
 import Addtask from './Addtask.jsx';
 import Tasks from "./Tasks.jsx";
 import SelectedPlan from './SelectedPlan.jsx';
+import SelectedTask from './SelectedTask.jsx';
+import Profile from "./Profile.jsx";
+import EditProfile from './EditProfile.jsx';
+import SolvedTasks from "./SolvedTasks.jsx"
 
 function App() {
   return(
@@ -20,7 +24,11 @@ function App() {
       <Route path = '/Pricing' element = {<Payment/>}/>
       <Route path = '/Addtask' element = {<Addtask/>}/>
       <Route path = "/Tasks" element = {<Tasks/>}/>
+      <Route path = "/Profile" element = {<Profile/>}/>
       <Route path='/SelectedPlan' element = {<SelectedPlan/>}/>
+      <Route path='/Tasks/:taskid/:taskName' element = {<SelectedTask/>}/>
+      <Route path = "/Profile/Edit" element = {<EditProfile/>}/>
+      <Route path = "/Profile/Solvedtasks"  element = {<SolvedTasks/>}/>
     </Routes>
 
     </Router>

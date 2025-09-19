@@ -70,16 +70,16 @@ function Card(props) {
   switch (type) {
     case "welcomeback":
       return (
-        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.2)] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[#1f1f1f] border-2 border-[#2b2b2b] shadow-[0_0_30px_rgba(194,122,96,0.12)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/6 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#c27a60]/12 blur-3xl"></div>
 
           <div className="flex justify-between items-center relative z-10">
             <div>
-              <h2 className="text-xl sm:text-2xl font-semibold text-white">{title}</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">{title}</h2>
               <h4 className="text-gray-400 mt-1">{comment}</h4>
             </div>
-            <button className="bg-[#ce7d63] hover:bg-[#d98b6e] transition px-4 py-2 rounded-lg text-white font-medium shadow-lg">
+            <button className="bg-[#c27a60] hover:bg-[#b46c56] transition px-4 py-2 rounded-lg text-white font-medium shadow-md">
               {btnContent}
             </button>
           </div>
@@ -88,18 +88,18 @@ function Card(props) {
 
     case "primeSub":
       return (
-        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[#e68d70] shadow-[0_0_40px_rgba(206,125,99,0.35)] overflow-hidden text-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/20 via-transparent to-black/30 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/30 blur-3xl"></div>
+        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[#d28268] shadow-[0_0_35px_rgba(194,122,96,0.2)] overflow-hidden text-center">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/10 via-transparent to-black/30 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[250px] h-[250px] rounded-full bg-[#c27a60]/15 blur-3xl"></div>
 
-          <h2 className="text-3xl font-extrabold text-white tracking-wide relative z-10">{title}</h2>
-          <h4 className="max-w-[80%] mx-auto text-white/80 mt-3 mb-6 relative z-10">{comment}</h4>
+          <h2 className="text-3xl font-extrabold text-gray-100 tracking-wide relative z-10">{title}</h2>
+          <h4 className="max-w-[80%] mx-auto text-gray-200 mt-3 mb-6 relative z-10">{comment}</h4>
 
           <button
-            className="relative z-10 flex justify-center items-center mx-auto text-[#ce7d63] bg-white rounded-lg px-5 py-2 font-semibold shadow-lg hover:shadow-[#ce7d63]/30 transition"
+            className="relative z-10 flex justify-center items-center mx-auto text-[#c27a60] bg-white rounded-lg px-5 py-2 font-semibold shadow-md hover:shadow-[#c27a60]/20 transition"
             onClick={() => navigate(`/${page}`)}
           >
-            <svg className="fill-[#ce7d63] w-[25px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            <svg className="fill-[#c27a60] w-[25px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
               <path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z" />
             </svg>
             {btnContent}
@@ -107,7 +107,7 @@ function Card(props) {
 
           <ul className="flex gap-6 mx-auto my-5 flex-wrap justify-center relative z-10">
             {features != null ? features.map((x, i) => (
-              <li key={i} className="flex items-center gap-2 text-white text-lg">
+              <li key={i} className="flex items-center gap-2 text-gray-100 text-lg">
                 <svg className="checkedCircle" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white">
                   <path d="M0 0h24v24H0z" fill="none" />
                   <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
@@ -121,18 +121,18 @@ function Card(props) {
 
     case "task":
       return (
-        <div className="relative bg-[#1f1f1fe6] p-8 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] flex flex-col h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+        <div className="relative bg-[#1f1f1fe6] p-8 rounded-2xl border-2 border-[#2b2b2b] shadow-[0_0_25px_rgba(194,122,96,0.12)] flex flex-col h-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/6 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[#c27a60]/12 blur-3xl"></div>
 
           <div className="relative z-10">
             <div className="self-end mb-3">{getIcon(pic)}</div>
-            <h2 className="text-white text-xl font-semibold">{title}</h2>
+            <h2 className="text-gray-100 text-xl font-semibold">{title}</h2>
             <h4 className="text-gray-400 mt-1 mb-4">{comment}</h4>
           </div>
 
           <button
-            className="relative z-10 mt-auto text-white bg-[#2b2b2b] hover:bg-[#3c3c3c] transition px-5 py-2 rounded-lg shadow-md"
+            className="relative z-10 mt-auto text-gray-100 bg-[#2b2b2b] hover:bg-[#3a3a3a] transition px-5 py-2 rounded-lg shadow-md"
             onClick={props.GoTo}
           >
             {btnContent}
@@ -143,6 +143,7 @@ function Card(props) {
     case "default":
       return <h2>no type entered</h2>;
   }
+
 
       break;
    case "about":
@@ -160,9 +161,7 @@ function Card(props) {
               {comment}
             </h4>
             <button
-              onClick={() =>
-                navigate("/Registration", { state: { regtype: "login" } })
-              }
+              onClick={props.GoTo}
               className="mt-10 bg-[#ce7d63] text-white hover:bg-[#b86c55] transition-all duration-300 rounded-lg font-semibold text-lg px-6 py-3 shadow-[0_2px_12px_rgba(206,125,99,0.4)] hover:shadow-[0_4px_20px_rgba(206,125,99,0.6)]"
             >
               {btnContent}
@@ -243,8 +242,8 @@ function Card(props) {
   case "pricing-best":
     return (
       <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl px-6 py-8 overflow-hidden transition-all duration-300
-        border-2 border-[#ce7d63] bg-[#1f1f1f] shadow-[0_0_50px_rgba(206,125,99,0.45)] scale-105">
-        <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[#ce7d63] flex text-white font-bold text-xs px-12 py-1 shadow-[0_0_15px_rgba(206,125,99,0.5)]">
+        border-2 border-[#ce7d63] bg-[#1f1f1f] shadow-[0_0_45px_rgba(206,125,99,0.35)] scale-105">
+        <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[#c27a60] flex text-white font-bold text-xs px-12 py-1 shadow-[0_0_12px_rgba(194,122,96,0.4)]">
           <h2>BEST CHOICE</h2>   
         </div>
         <h2 className="text-3xl font-extrabold text-white tracking-wider mb-2">{title}</h2>
@@ -252,7 +251,7 @@ function Card(props) {
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[#ce7d63] text-white hover:bg-[#ce7456] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_10px_rgba(206,125,99,0.4)]">
+        <button onClick={props.GoTo} className="bg-[#c27a60] text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">
@@ -284,15 +283,15 @@ function Card(props) {
   case "pricing-normal":
     return (
       <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl border-2 border-[#333333] bg-[#1f1f1f]
-        shadow-[0_0_30px_rgba(206,125,99,0.2)] px-6 py-8 overflow-hidden
-        hover:border-[#ce7d63] hover:shadow-[0_0_40px_rgba(206,125,99,0.35)]
+        shadow-[0_0_25px_rgba(206,125,99,0.15)] px-6 py-8 overflow-hidden
+        hover:border-[#c27a60] hover:shadow-[0_0_35px_rgba(194,122,96,0.25)]
         transition-all duration-300">
         <h2 className="text-3xl font-extrabold text-white tracking-wider mb-2">{title}</h2>
         <h1 className="text-6xl font-black text-white mb-2">
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[#ce7d63] text-white hover:bg-[#ce7456] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_10px_rgba(206,125,99,0.4)]">
+        <button onClick={props.GoTo} className="bg-[#c27a60] text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">

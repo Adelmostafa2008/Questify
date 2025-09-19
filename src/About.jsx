@@ -12,8 +12,12 @@ import GitHub from './assets/socialMediaIcons/github.png'
 import { FaPhone , FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoIosAlarm , IoIosSend  } from "react-icons/io";
+import { useAuth } from "./AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function About(){
+  const navigate = useNavigate();
+  const {user} = useAuth();
     return (
         <>
             <Header/>
@@ -21,9 +25,10 @@ function About(){
             <Card 
                 title="Transforming Learning Through Challenges"
                 comment="Questify is a revolutionary platform that helps professionals develop their skills through real-world scenarios and practical challenges."
-                btnContent="Join Questify Today"
+                btnContent={`${user ? "Start Making Your Legacy" : "Join Questify Today"}`}
                 cat="about"
                 type="what-is-questify"
+                GoTo = {user ? () => navigate("/Home") : () => navigate("/Registration", { state: { regtype: "login" } })}
             />
 
             <div className="text-center text-white my-20">
@@ -167,7 +172,7 @@ function About(){
           <textarea
             rows="4"
             placeholder="Enter your message..."
-            className="w-full px-4 py-2 border text-white border-[#333333] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
+            className="w-full px-4 py-2 border resize-none text-white border-[#333333] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
           ></textarea>
         </div>
         <button

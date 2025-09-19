@@ -47,15 +47,7 @@ function Footer() {
               <li><img src={GitHub} alt="GitHub" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
             </ul>
           </div>
-          <div className="flex items-center">
-            <label className="mr-2 text-sm">Language:</label>
-            <select className="bg-[#1f1f1f] p-1 rounded border border-gray-600 focus:border-[#ce7d63] focus:outline-none">
-              <option>English</option>
-              <option>Arabic</option>
-              <option>German</option>
-              <option>Russian</option>
-            </select>
-          </div>
+          
         </div>
 
         <div className="flex flex-col gap-3">

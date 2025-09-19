@@ -3,17 +3,20 @@ import Footer from "./Footer.jsx";
 import Card from './Card.jsx';
 import Crown from './assets/crown.png';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 function Home(){
   const navigate = useNavigate();
+  const { user } = useAuth();
     return(<>
     <Header/>
-    
-    <Card title = "Welcome back , Adel"
-    comment = "Ready to take on new challenges?"
-    btnContent = "View Progress" 
-    cat = "home"
-    type = "welcomeback"
-    />
+        {user ? 
+        <Card title = {`Welcome back , ${user.username}`}
+        comment = "Ready to take on new challenges?"
+        btnContent = "View Progress" 
+        cat = "home"
+        type = "welcomeback"
+        />
+      :null}
 
 
                 <div className="text-center text-white my-20">
@@ -22,7 +25,7 @@ function Home(){
                    Select a category to explore tasks and challenges designed to test and improve your skills.
                 </h4>
             </div>
-
+ 
 
     <Card title = "Unlock Premium Features" comment = "Get unlimited access to all 300+ professional tasks, feedback, and advanced analytics with our Pro subscription"
     cat = "home"
@@ -38,7 +41,7 @@ function Home(){
     />
 
 
-    <div className='max-w-[80%] grid grid-cols-3 gap-5 mt-10 mx-auto items-stretch max-xs:grid-cols-1'>
+    <div className='max-w-[80%] grid grid-cols-3 gap-5 mt-10 mb-50 mx-auto items-stretch max-xs:grid-cols-1'>
 
 
       <Card title = "Call Center" comment = " Customer service scenarios and problem-solving tasks "

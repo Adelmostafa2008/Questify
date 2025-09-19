@@ -7,11 +7,14 @@ import { FaCircleInfo, FaLightbulb, FaEye, FaClock, FaStar } from "react-icons/f
 import { TbCirclePlusFilled } from "react-icons/tb"
 import { IoMdSettings } from "react-icons/io";
 import Card from "./Card.jsx"
-import axios from "axios"
+import api from "./AxiosHelper.jsx";
 
 export default function Addtask(props){
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
+    const [loading, setLoading] = useState(false);
+const [success, setSuccess] = useState(false);
+
     const [task , SetTask] = useState({
         taskname : "",
         taskcategory : "",
@@ -73,8 +76,8 @@ export default function Addtask(props){
 
     const CreateTask = async () => {
         try{
-            await axios.post("http://localhost:5226/tasks" , task);
-            navigate('/Home');
+            await api.post("/tasks" , task);
+
         }catch(err){
             console.log(err);
         }
@@ -185,9 +188,59 @@ export default function Addtask(props){
 
                 {/*Buttons*/}
                 <div className="flex justify-end pb-10 gap-3">
-                    <button className="text-white border border-[#333333] px-4 py-2 text-sm rounded-md hover:shadow-[0_0_4px_#ce7d63aa]" onClick={() => navigate('/Home')}>Cancel</button>
-                    <button className="text-white border border-[#ce7d63] bg-[#ce7d63] px-4 py-2 text-sm rounded-md shadow-[0_0_4px_#ce7d63aa]" onClick={async () => CreateTask()}>Create task</button>
-                </div>
+    <button
+        className="text-white border border-[#333333] px-4 py-2 text-sm rounded-md hover:shadow-[0_0_4px_#ce7d63aa]"
+        onClick={() => navigate('/Home')}
+    >
+        Cancel
+    </button>
+
+    <button
+        onClick={async () => {
+            if (loading || success) return; 
+            setLoading(true);
+            try {
+                await CreateTask(); 
+                setSuccess(true);
+                setTimeout(() => navigate('/Home'), 1000); // Redirect after 1.5s
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        }}
+        disabled={loading || success}
+        className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
+        ${success
+            ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
+            : "bg-[#ce7d63] border border-[#ce7d63] text-white shadow-[0_0_4px_#ce7d63aa]"
+        }`}
+    >
+        {loading ? (
+            <>
+                <svg
+                    className="animate-spin h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                    />
+                </svg>
+                Creating...
+            </>
+        ) : success ? (
+            "Done!"
+        ) : (
+            "Create task"
+        )}
+    </button>
+</div>
+
             </div>
         </div>
 
@@ -235,7 +288,7 @@ export default function Addtask(props){
                                     TPD={description}
                                 />
                             )}
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
