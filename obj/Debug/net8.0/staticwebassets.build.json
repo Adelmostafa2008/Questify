@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "uTqhypikuoJtfZqP1LVf4NanAYiP8Kn0yQuLQPd4xjc=",
+  "Source": "Backend",
+  "BasePath": "_content/Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Backend\\wwwroot",
+      "Source": "Backend",
+      "ContentRoot": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\wwwroot\\images\\5a86e542-4637-44e4-a8ad-10ad4da6790a.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "images/5a86e542-4637-44e4-a8ad-10ad4da6790a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\5a86e542-4637-44e4-a8ad-10ad4da6790a.jpg"
+    }
+  ]
+}
