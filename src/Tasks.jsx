@@ -35,7 +35,7 @@ export default function Tasks() {
          const res = await api.get("/tasks" , {params : query});
          SetArr(res.data);
          SetIsTask(res.data.length > 0);
-      } catch (error) {
+      } catch (error) { 
          console.log(error);
       }
    };

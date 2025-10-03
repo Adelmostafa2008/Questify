@@ -70,7 +70,7 @@ const [success, setSuccess] = useState(false);
             scene: updatedCards.map(card => ({
                 scenariotitle: card.title,
                 scenariodescription: card.description
-            }))
+            })) 
         }));
     }
 
@@ -189,7 +189,9 @@ const [success, setSuccess] = useState(false);
                 {/*Buttons*/}
                 <div className="flex justify-end pb-10 gap-3">
     <button
-        className="text-white border border-[#333333] px-4 py-2 text-sm rounded-md hover:shadow-[0_0_4px_#ce7d63aa]"
+        className="text-white border border-[#333333] px-4 py-2 text-sm rounded-md hover:border-gray-400 hover:text-gray-200 
+                        hover:shadow-md hover:shadow-gray-400/40 
+                        transition duration-200"
         onClick={() => navigate('/Home')}
     >
         Cancel

@@ -8,13 +8,19 @@ import { useEffect, useState } from "react";
 import { FaLightbulb, FaClock, FaStar, FaPaperPlane } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
+import { GoHeart , GoHeartFill } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 export default function SelectedTask() {
     const { taskid } = useParams();
     const [loading, setLoading] = useState(false);
+    const [deleteState, setDeleteState] = useState("idle");
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
     const {user} = useAuth();
+    const [isHeartFill , setIsHeartFill] = useState(false);
     const [Task , setTask] = useState({});
     const [submit , setSubmit] = useState({
         Userid : "",
@@ -67,9 +73,24 @@ export default function SelectedTask() {
     
     const handleSubmit = async () => {
         try {
+            
             const res = await api.post("/submission",  submit);
         } catch (error) {
             console.log(error);
+            throw error;
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            setDeleteState("loading");
+            const Tcategorry = Task.taskcategory;
+            const res = await api.delete(`/tasks/${taskid}`);
+            setDeleteState("done");
+            setTimeout(() => navigate("/Tasks" , {state : {Tcategory : Tcategorry}}) , 500)
+        } catch (error) {
+            console.log(error);
+            setDeleteState("idle");
             throw error;
         }
     };
@@ -87,6 +108,14 @@ export default function SelectedTask() {
         };
         
    
+        function slugify(text) {
+            if (!text) return "";
+  return text
+    .toLowerCase()                 
+    .trim()                        
+    .replace(/\s+/g, '-')          
+    .replace(/[^\w\-]+/g, '');     
+   }
 
     return (
         <>
@@ -97,9 +126,60 @@ export default function SelectedTask() {
                 <div className="w-[40%] rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
                     <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+                    <div className="flex justify-end mt-10 gap-x-4">
+
+
+
+
+
+
+                    {/* Delete */}
+                     <button
+                     onClick={handleDelete}
+                    disabled={deleteState === "loading"}
+                    className="p-2 rounded-md flex items-center gap-2 border border-gray-700 
+                            shadow-sm hover:bg-red-600 hover:border-red-600 
+                            transition duration-200 disabled:opacity-50"
+                >
+                    {(deleteState !== "loading" && deleteState !== "done") && (
+                    <FaTrashCan size={20} className="text-white" />
+                    ) }
+                    {deleteState === "loading" && (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    )}
+                    {deleteState === "done" && <span className="text-white">Done</span>}
+                </button>
+
+                    {/* Edit */}
+                    <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
+                    <button
+                        className="p-2 rounded-md flex items-center border border-gray-700 
+                        shadow-sm
+                        hover:border-gray-400 hover:text-gray-200 
+                        hover:shadow-md hover:shadow-gray-400/40 
+                        transition duration-200"
+                        >
+                        <FaEdit size={20} className="text-white" />
+                    </button>
+                                    </Link>
+
+                    {/* Like */}
+                    <button
+                        onClick={() => setIsHeartFill(!isHeartFill)}
+                        className="p-2 rounded-md flex items-center border border-gray-700 
+                                 shadow-sm
+                                hover:bg-red-500/20  hover:border-red-600 transition duration-200"
+                    >
+                        {isHeartFill ? (
+                        <GoHeartFill size={23} className="text-red-500"/>
+                        ) : (
+                        <GoHeart size={23} className="text-white"/>
+                        )}
+                    </button>
+                    </div>
 
                     <div className="relative z-10">
-                        <div className="bg-[#1a1a1a] py-3 px-7 mb-10 mt-20 rounded-md">
+                        <div className="bg-[#1a1a1a] py-3 px-7 mb-10 mt-5 rounded-md">
                             <div className="flex flex-col">
                                 <div className="w-[95%] break-words mx-auto my-3">
                                     <h2 className="text-white text-2xl font-bold text-center">
@@ -176,11 +256,11 @@ export default function SelectedTask() {
                             alert("answer field can't be empty");
                             return;
                             }
-                            setLoading(true);
+                            setLoading(true); 
                             try {
                                 await handleSubmit(); 
                                 setSuccess(true);
-                                setTimeout(() => navigate('/Home'), 500); // Redirect after 1.5s
+                                setTimeout(() => navigate('/Tasks' , {state : {Tcategory : Task.taskcategory}}), 500); // Redirect after 1.5s
                             } catch (err) {
                                 console.error(err);
                             } finally {

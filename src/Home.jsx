@@ -14,7 +14,8 @@ function Home(){
         comment = "Ready to take on new challenges?"
         btnContent = "View Progress" 
         cat = "home"
-        type = "welcomeback"
+        type = "welcomeback" 
+        GoTo = {() => navigate("/Profile/Solvedtasks")}
         />
       :null}
 

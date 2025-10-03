@@ -9,6 +9,7 @@ import SelectedPlan from './SelectedPlan.jsx';
 import SelectedTask from './SelectedTask.jsx';
 import Profile from "./Profile.jsx";
 import EditProfile from './EditProfile.jsx';
+import TaskEdit from "./TaskEdit.jsx";
 import SolvedTasks from "./SolvedTasks.jsx"
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path = "/Profile" element = {<Profile/>}/>
       <Route path='/SelectedPlan' element = {<SelectedPlan/>}/>
       <Route path='/Tasks/:taskid/:taskName' element = {<SelectedTask/>}/>
+      <Route path='/Tasks/:taskid/:taskName/Edit' element = {<TaskEdit/>}/>
       <Route path = "/Profile/Edit" element = {<EditProfile/>}/>
       <Route path = "/Profile/Solvedtasks"  element = {<SolvedTasks/>}/>
     </Routes>

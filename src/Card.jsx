@@ -79,7 +79,7 @@ function Card(props) {
               <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">{title}</h2>
               <h4 className="text-gray-400 mt-1">{comment}</h4>
             </div>
-            <button className="bg-[#c27a60] hover:bg-[#b46c56] transition px-4 py-2 rounded-lg text-white font-medium shadow-md">
+            <button className="bg-[#c27a60] hover:bg-[#b46c56] transition px-4 py-2 rounded-lg text-white font-medium shadow-md" onClick={props.GoTo}>
               {btnContent}
             </button>
           </div>
