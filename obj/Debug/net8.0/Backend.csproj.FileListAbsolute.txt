@@ -111,3 +111,4 @@ C:\Users\TEDO\Desktop\pro project\Backend\bin\Debug\net8.0\Microsoft.IdentityMod
 C:\Users\TEDO\Desktop\pro project\Backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\TEDO\Desktop\pro project\Backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\TEDO\Desktop\pro project\Backend\bin\Debug\net8.0\Backend.staticwebassets.runtime.json
+C:\Users\TEDO\Desktop\pro project\Backend\obj\Debug\net8.0\Backend.sourcelink.json
