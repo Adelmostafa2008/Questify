@@ -11,6 +11,7 @@ import Profile from "./Profile.jsx";
 import EditProfile from './EditProfile.jsx';
 import TaskEdit from "./TaskEdit.jsx";
 import SolvedTasks from "./SolvedTasks.jsx"
+import SryBro from './StillUnderConstruction.jsx';
 
 function App() {
   return(
@@ -31,6 +32,9 @@ function App() {
       <Route path='/Tasks/:taskid/:taskName/Edit' element = {<TaskEdit/>}/>
       <Route path = "/Profile/Edit" element = {<EditProfile/>}/>
       <Route path = "/Profile/Solvedtasks"  element = {<SolvedTasks/>}/>
+
+
+      <Route path = "*"  element = {<SryBro/>}/>
     </Routes>
 
     </Router>

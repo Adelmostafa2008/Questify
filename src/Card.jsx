@@ -23,7 +23,7 @@ function Card(props) {
   const price = props.price || null;
   const onRemove = props.onRemove || null;
   const snNum = props.snNum || null;
-  const newT = props.newT || (() => {});
+  const newT = props.newT || (() => {}); 
   const newD = props.newD || (() => {});
   const taskPreviewTitle = props.TPT || "";
   const taskPreviewDescription = props.TPD || "";
@@ -355,14 +355,14 @@ function Card(props) {
               <button onClick={onRemove}><FaTrashCan size={16} color="#b3b3b2" /></button>
             </div>
             <div className=" w-[100%] flex flex-col  pb-10">
-
+ 
 
               <h2 className="text-[#b3b3b2] text-sm mb-2 mt-2">Task Title</h2>
-              <input type="text" placeholder="Enter task title..." onChange={(e) => newT(e, snNum)} className="text-white placeholder:text-[#888888] bg-[#1a1a1a] w-[100%] px-4.5 py-2 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[#ce7d63]" />
+              <input type="text" placeholder="Enter task title..." defaultValue={props.TTE} onChange={(e) => newT(e, snNum)} className="text-white placeholder:text-[#888888] bg-[#1a1a1a] w-[100%] px-4.5 py-2 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[#ce7d63]" />
 
 
               <h2 className="text-[#b3b3b2] text-sm mb-2 mt-2">Task Description</h2>
-              <textarea placeholder="Enter detailed task description..." onChange={(e) => newD(e, snNum)} className="text-white bg-[#1a1a1a] px-4.5 py-2.5 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[#ce7d63] max-h-30 min-h-30" />
+              <textarea placeholder="Enter detailed task description..." defaultValue={props.TDE} onChange={(e) => newD(e, snNum)} className="text-white bg-[#1a1a1a] px-4.5 py-2.5 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[#ce7d63] max-h-30 min-h-30" />
             </div>
           </div>
         </>

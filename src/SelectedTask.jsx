@@ -211,8 +211,8 @@ export default function SelectedTask() {
                                     </h2>
                                 </div>
                                 <div>
-                                    {Task.scenarios?.length > 0 ? (
-                                        Task.scenarios.map((scenario) => (
+                                    {Task.scene?.length > 0 ? (
+                                        Task.scene.map((scenario) => (
                                             <Card
                                                 cat="taskPreview"
                                                 key={scenario.id}

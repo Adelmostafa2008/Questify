@@ -12,8 +12,9 @@ import api from "./AxiosHelper.jsx";
 export default function Addtask(props){
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
+    const [idCounter, setIdCounter] = useState(0);
     const [loading, setLoading] = useState(false);
-const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const [task , SetTask] = useState({
         taskname : "",
@@ -29,49 +30,44 @@ const [success, setSuccess] = useState(false);
     });
 
     function addsncard() {
-        const newCards = [...cards, { id: cards.length + 1, title: "", description: "" }];
-        setCards(newCards);
+    const newCard = { id: idCounter, title: "", description: "" };
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: newCards.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            }))
-        }));
+    setCards(prev => [...prev, newCard]);
+    setIdCounter(prev => prev + 1);
+
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: [...prevTask.scene, { scenariotitle: "", scenariodescription: "" }]
+    }));
     }
 
     function removeCard(idToRemove) {
-        let filtered = cards.filter(card => card.id !== idToRemove);
-        const reIndexed = filtered.map((card, index) => ({
-            ...card,
-            id: index + 1,
-        }));
-        setCards(reIndexed);
+    const filtered = cards.filter(card => card.id !== idToRemove);
+    setCards(filtered);
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: reIndexed.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            }))
-        }));
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: filtered.map(card => ({
+        scenariotitle: card.title,
+        scenariodescription: card.description
+        }))
+    }));
     }
 
     function updateCard(id, field, value) {
-        const updatedCards = cards.map(card =>
-            card.id === id ? { ...card, [field]: value } : card
-        );
+    const updatedCards = cards.map(card =>
+        card.id === id ? { ...card, [field]: value } : card
+    );
 
-        setCards(updatedCards);
+    setCards(updatedCards);
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: updatedCards.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            })) 
-        }));
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: updatedCards.map(card => ({
+        scenariotitle: card.title,
+        scenariodescription: card.description
+        }))
+    }));
     }
 
     const CreateTask = async () => {
@@ -148,10 +144,10 @@ const [success, setSuccess] = useState(false);
                     </div>
                     <h2 className="text-[#b3b3b2] mb-2 mt-1">Add realistic scenarios for users to solve. Each scenario should present a unique challenge.</h2>
 
-                    {cards.length > 0 ? cards.map(({id, title, description}) => (
+                    {cards.length > 0 ? cards.map(({id, title, description} , index) => (
                         <Card
                             key={id}
-                            snNum={id}
+                            snNum={index + 1}
                             cat="createTask"
                             onRemove={() => removeCard(id)}
                             newT={(e) => updateCard(id, "title", e.target.value)}

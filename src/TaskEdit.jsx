@@ -17,75 +17,89 @@ export default function TaskEdit(){
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [idCounter, setIdCounter] = useState(0);
 
-   const getTask = async () => {
-        try {
-            const res = await api.get(`/tasks/${taskid}`);
-            SetTask(res.data);
-            setCards(res.data.scenarios);
-            console.log(cards);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
-    };
+   const getTask = async () => { 
+    try {
+        const res = await api.get(`tasks/${taskid}`);
+        SetTask(res.data);
+
+        // normalize scenarios with unique ids
+        const scenariosWithId = res.data.scene.map((scene, index) => ({
+            id: index + Date.now(), // guaranteed unique
+            TTE: scene.scenariotitle,
+            TDE: scene.scenariodescription
+        }));
+
+        setCards(scenariosWithId);
+
+        // update idCounter so future cards don't clash
+        setIdCounter(scenariosWithId.length);
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
 
     useEffect(() => {
         getTask();
     }, []);
 
-    useEffect(() => {
-        if(cards) console.log(cards);
-    } , [cards])
+    
 
     function addsncard() {
-        const newCards = [...cards, { id: cards.length + 1, title: "", description: "" }];
-        setCards(newCards);
+    const newCard = { id: idCounter, TTE: "", TDE: "" };
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: newCards.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            }))
-        }));
+    setCards(prev => [...prev, newCard]);
+    setIdCounter(prev => prev + 1);
+
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: [...prevTask.scene, { scenariotitle: "", scenariodescription: "" }]
+    }));
     }
 
     function removeCard(idToRemove) {
-        let filtered = cards.filter(card => card.id !== idToRemove);
-        const reIndexed = filtered.map((card, index) => ({
-            ...card,
-            id: index + 1,
-        }));
-        setCards(reIndexed);
+    const filtered = cards.filter(card => card.id !== idToRemove);
+    setCards(filtered);
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: reIndexed.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            }))
-        }));
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: filtered.map(card => ({
+        scenariotitle: card.TTE,
+        scenariodescription: card.TDE
+        }))
+    }));
     }
 
     function updateCard(id, field, value) {
-        const updatedCards = cards.map(card =>
-            card.id === id ? { ...card, [field]: value } : card
-        );
+    const updatedCards = cards.map(card =>
+        card.id === id ? { ...card, [field]: value } : card
+    );
 
-        setCards(updatedCards);
+    setCards(updatedCards);
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: updatedCards.map(card => ({
-                scenariotitle: card.title,
-                scenariodescription: card.description
-            })) 
-        }));
+    SetTask(prevTask => ({
+        ...prevTask,
+        scene: updatedCards.map(card => ({
+        scenariotitle: card.TTE,
+        scenariodescription: card.TDE
+        }))
+    }));
     }
 
-    
+    const UpdateTask = async () => {
+        try {
+            
+           var res = await api.put(`/tasks/${taskid}` , task);
+           console.log(res);
+        } 
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
+        
+    }
 
     return (
         <>
@@ -160,10 +174,10 @@ export default function TaskEdit(){
                                     snNum={ID + 1}
                                     cat="createTask"
                                     onRemove={() => removeCard(scene.id)}
-                                    newT={(e) => updateCard(scene.id, "title", e.target.value)}
-                                    newD={(e) => updateCard(scene.id, "description", e.target.value)}
-                                    title={scene.scenariotitle}
-                                    description={scene.scenariodescription}
+                                    newT={(e) => updateCard(scene.id, "TTE", e.target.value)}
+                                    newD={(e) => updateCard(scene.id, "TDE", e.target.value)}
+                                    TTE={scene.TTE}
+                                    TDE={scene.TDE}
                                     />
                                 )) : 
                             <div className={`flex gap-x-1 mt-1 py-10 w-full border border-dashed text-[#ce7d63] border-[#ce7d63] bg-transparent justify-center rounded-md text-sm cursor-pointer`} onClick={() => {cards.length < 5 ? addsncard() : null}}>
@@ -206,14 +220,14 @@ export default function TaskEdit(){
                 Cancel
             </button>
         
-            <button
+             <button
                 onClick={async () => {
                     if (loading || success) return; 
                     setLoading(true);
                     try {
-                        await CreateTask(); 
+                        await UpdateTask(); 
                         setSuccess(true);
-                        //setTimeout(() => navigate('/Home'), 1000); // Redirect after 1.5s
+                        setTimeout(() => navigate('/Home'), 1000); // Redirect after 1.5s
                     } catch (err) {
                         console.error(err);
                     } finally {
@@ -249,7 +263,9 @@ export default function TaskEdit(){
                 ) : (
                     "Apply Changes"
                 )}
-                </button>
+                </button> 
+
+                
                 
                 </div> 
         
@@ -292,12 +308,12 @@ export default function TaskEdit(){
                                     {task.taskdescription === "" ? "Ex. Task Description goes here." : task.taskdescription}
                                 </div>
                                  <div>
-                                    {cards.length > 0 && cards.map(({id, scenariotitle, scenariodescription}) =>
+                                    {cards.length > 0 && cards.map(({id, TTE, TDE}) =>
                                     <Card
                                         cat="taskPreview"
                                         key={id}
-                                        TPT={scenariotitle}
-                                        TPD={scenariodescription}
+                                        TPT={TTE}
+                                        TPD={TDE}
                                     />
                                     )}
                                 </div> 

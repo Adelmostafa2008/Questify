@@ -19,7 +19,9 @@ function Reg(props){
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
-
+    const [loadingSign, setLoadingSign] = useState(false);
+    const [successSign, setSuccessSign] = useState(false);
+    
     const handleLogin = async () => {
     try {
         const res = await api.post("/regesteration/login", {
@@ -381,34 +383,34 @@ function Reg(props){
 
                       <button
                         onClick={isChecked ? async () => {
-                            if (loading || success) return; 
+                            if (loadingSign || successSign) return; 
                             if (!newUser.username.trim() || !newUser.email.trim() || !newUser.password.trim() || !isChecked) {
                                 alert("Please fill all fields and accept Terms of Service.");
                                 return;
                             }
-                            setLoading(true);
+                            setLoadingSign(true);
                             try {
                                 await handleSignup(); 
-                                setSuccess(true);
+                                setSuccessSign(true);
                                 setTimeout(() => navigate('/Registration', { state: { regtype: "login" } }), 500); // Redirect after 1.5s
                             } catch (err) {
                                 console.error(err);
                             } finally {
-                                setLoading(false);
+                                setLoadingSign(false);
                             }
                         } : null}
-                        disabled={loading || success}
+                        disabled={loadingSign || successSign}
                         className={` ${
                         isChecked
                             ? "bg-[#ce7d63] text-white hover:shadow-[0_0_6px_#ce7d63aa]"
                             : "bg-gray-700 text-gray-500 invalidCursor"
                         } flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
-                        ${success
+                        ${successSign
                             ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
                             : ""
                         }`}
                     >
-                        {loading ? (
+                        {loadingSign ? (
                             <>
                                 <svg
                                     className="animate-spin h-4 w-4 text-white"
@@ -425,7 +427,7 @@ function Reg(props){
                                 </svg>
                                 Signing-up...
                             </>
-                        ) : success ? (
+                        ) : successSign ? (
                             "Done!"
                         ) : (
                             "Sign-up"

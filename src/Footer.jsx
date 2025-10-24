@@ -41,10 +41,10 @@ function Footer() {
           <div>
             <label className="text-lg font-semibold">Stay in touch:</label>
             <ul className="flex gap-4 mt-3">
-              <li><img src={Facebook} alt="Facebook" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li><img src={X} alt="X" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li><img src={Linkedin} alt="LinkedIn" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li><img src={GitHub} alt="GitHub" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/Facebook")}><img src={Facebook} alt="Facebook" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/X")}><img src={X} alt="X" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/LinkedIn")}><img src={Linkedin} alt="LinkedIn" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/GitHub")}><img src={GitHub} alt="GitHub" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
             </ul>
           </div>
           
@@ -58,7 +58,7 @@ function Footer() {
               placeholder="Tell us what's broken..."
               className="flex-grow px-3 py-1 rounded bg-[#1f1f1f] text-white border border-gray-600 rounded-r-none focus:border-[#ce7d63] focus:outline-none"
             />
-            <button className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
+            <button onClick={() => navigate("/SendBugReport")} className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
               Send
             </button>
           </div>

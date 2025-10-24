@@ -23,6 +23,7 @@ export default function Tasks() {
    const SStask = async () => {
       try {
          const res = await api.get("/tasks" , {params : query});
+         console.log(res.data);
          SetArr(res.data);
       } catch (error) {
          console.log(error);

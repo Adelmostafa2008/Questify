@@ -118,7 +118,7 @@ function Header() {
                       <CgProfile size={20} className="text-[#ce7d63]" /> Profile
                     </li>
                    
-                    <li className="px-4 py-2 hover:bg-[#2b2b2b] cursor-pointer flex gap-x-2 items-center transition-colors duration-200">
+                    <li className="px-4 py-2 hover:bg-[#2b2b2b] cursor-pointer flex gap-x-2 items-center transition-colors duration-200" onClick={() => navigate("/Sittings")}>
                       <FaGear size={20} className="text-[#ce7d63]" /> Settings
                     </li>
                     <li
