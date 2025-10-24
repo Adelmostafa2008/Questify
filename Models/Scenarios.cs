@@ -10,7 +10,7 @@ namespace Backend.Models
         public int Id { get; set; }
         public string scenariotitle { get; set; } = string.Empty;
         public string scenariodescription { get; set; } = string.Empty;
-        public int TaskId { get; set; }
-        public Tasks Task { get; set; }
+        public int? TaskId { get; set; }
+        public Quests ?Task { get; set; }
     }
 }

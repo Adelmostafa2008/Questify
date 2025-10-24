@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Backend.Interfaces;
 using Backend.Models;
 using Backend.Repos;
-using Backend.ModelOfModels;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Sorters;
 using Backend.Searchers;
-
+using Backend.DTOs;
+ 
 namespace Backend.Controllers
 {
     [Route("submission")]
@@ -35,10 +35,11 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSubmission([FromBody] SubmissionRequest request)
+        public async Task<IActionResult> CreateSubmission([FromBody] SubmissionRequestDTO request)
         {
-            var newSub = await _sub.addSubmissions(request.Userid, request.Taskid, request.SubmittedData);
-            return Ok(newSub);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            await _sub.addSubmissions(request.Userid, request.Taskid, request.SubmittedData);
+            return Ok("Done!");
         }
 
         [HttpGet]
@@ -55,7 +56,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("existing")]
-        public async Task<IActionResult> getSubmission([FromQuery] ExistingSubmission sub)
+        public async Task<IActionResult> getSubmission([FromQuery] ExistingSubmissionDTO sub)
         {
             var submission = await _sub.getSubmission(sub.userid, sub.taskid);
             return Ok(submission);

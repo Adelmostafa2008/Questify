@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Backend.DTOs;
 using Backend.Interfaces;
-using Backend.ModelOfModels;
 using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ namespace Backend.Controllers
     public class RegController : ControllerBase
     {
         private readonly UserManager<Users> _user;
-        private readonly ITokenGenerator _token;
+        private readonly ITokenGenerator _token; 
         private readonly IUTsubmissionsRepo _sub;
         private readonly SignInManager<Users> _signInManager;
         public RegController(UserManager<Users> user, ITokenGenerator token, SignInManager<Users> sign , IUTsubmissionsRepo sup)
@@ -28,7 +28,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNew([FromBody] UserModel user)
+        public async Task<IActionResult> CreateNew([FromBody] UserDTO user)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Backend.Controllers
                     if (Role.Succeeded)
                     {
                         return Ok(
-                            new RegModel
+                            new ReadUserDTO
                             {
                                 UserName = newUser.UserName,
                                 Email = newUser.Email,
@@ -82,7 +82,7 @@ namespace Backend.Controllers
             }
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginModel login)
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO login)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid login data.");
@@ -111,7 +111,7 @@ namespace Backend.Controllers
         }
         
        [HttpPut("{id}")]
-        public async Task<IActionResult> EditUser([FromRoute] string id, [FromForm] UserEditModel model)
+        public async Task<IActionResult> EditUser([FromRoute] string id, [FromForm] EditUserDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid data.");

@@ -19,31 +19,7 @@ namespace Backend.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Backend.Models.Scenarios", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("scenariodescription")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("scenariotitle")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("Scenarios");
-                });
-
-            modelBuilder.Entity("Backend.Models.Tasks", b =>
+            modelBuilder.Entity("Backend.Models.Quests", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,6 +55,30 @@ namespace Backend.Migrations
                     b.ToTable("Tasks");
                 });
 
+            modelBuilder.Entity("Backend.Models.Scenarios", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("scenariodescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("scenariotitle")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("Scenarios");
+                });
+
             modelBuilder.Entity("Backend.Models.UTsubmission", b =>
                 {
                     b.Property<string>("UserId")
@@ -95,6 +95,8 @@ namespace Backend.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("UserId", "TaskId");
+
+                    b.HasIndex("TaskId");
 
                     b.ToTable("Submissions");
                 });
@@ -197,13 +199,13 @@ namespace Backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d89c5c81-a4fe-49dd-aa27-7282b15c3cbb",
+                            Id = "20c919d2-9515-4312-b89b-42f2fc6508d7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "fbc653e6-cd1b-4145-b564-8bddd3460ff8",
+                            Id = "fb5ca2d0-2dfd-4535-9f96-f275665673be",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -313,13 +315,31 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Scenarios", b =>
                 {
-                    b.HasOne("Backend.Models.Tasks", "Task")
+                    b.HasOne("Backend.Models.Quests", "Task")
                         .WithMany("scenarios")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("Backend.Models.UTsubmission", b =>
+                {
+                    b.HasOne("Backend.Models.Quests", "task")
+                        .WithMany("users")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Task");
+                    b.HasOne("Backend.Models.Users", "user")
+                        .WithMany("tasks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("task");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -373,9 +393,16 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Models.Tasks", b =>
+            modelBuilder.Entity("Backend.Models.Quests", b =>
                 {
                     b.Navigation("scenarios");
+
+                    b.Navigation("users");
+                });
+
+            modelBuilder.Entity("Backend.Models.Users", b =>
+                {
+                    b.Navigation("tasks");
                 });
 #pragma warning restore 612, 618
         }

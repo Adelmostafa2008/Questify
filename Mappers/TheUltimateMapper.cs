@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backend.ModelOfModels;
+using Backend.DTOs;
+using Backend.DTOs;
 using Backend.Models;
 
 namespace Backend.Mappers
@@ -10,9 +11,9 @@ namespace Backend.Mappers
     public static class TheUltimateMapper
     {
     
-        public static Tasks TaskModelMapper(this TaskModel task )
+        public static Quests TaskModelMapper(this ReadTaskDTO task )
         {
-            return new Tasks
+            return new Quests
             {
                 taskname = task.taskname,
                 taskdescription = task.taskdescription,
@@ -22,7 +23,7 @@ namespace Backend.Mappers
                 tasktime = task.tasktime,
             };
         }
-       public static Scenarios ScenarioModelMapper(this ScenarioModel scene)
+       public static Scenarios ScenarioModelMapper(this ReadScenarioDTO scene)
         {
             return new Scenarios
             {
@@ -35,12 +36,12 @@ namespace Backend.Mappers
                
         } 
 
-        public static List<TaskViewModel> TasksModelMapper(this IQueryable<Tasks> tasks){
-            var taskveiw = new List<TaskViewModel>();
+        public static List<ReadTaskDetailsDTO> TasksModelMapper(this IQueryable<Quests> tasks){
+            var taskveiw = new List<ReadTaskDetailsDTO>();
 
             foreach (var i in tasks)
             {
-                taskveiw.Add(new TaskViewModel
+                taskveiw.Add(new ReadTaskDetailsDTO
                 {
                     taskname = i.taskname,
                     taskdefficulty = i.taskdefficulty,

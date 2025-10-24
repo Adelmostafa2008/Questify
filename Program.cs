@@ -2,6 +2,7 @@ using Backend.db;
 using Backend.Interfaces;
 using Backend.Models;
 using Backend.Repos;
+using Backend.Repos.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ builder.Services.AddScoped<ITaskRepo, TaskRepo>();
 builder.Services.AddScoped<IScenarioRepo, ScenarioRepo>();
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IUTsubmissionsRepo, UTsubmissionsRepo>();
+builder.Services.AddScoped(typeof(IGenericRepo<>) , typeof(GenericRepo<>));
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

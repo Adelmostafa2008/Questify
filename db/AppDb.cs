@@ -38,9 +38,15 @@ namespace Backend.db
             builder.Entity<UTsubmission>()
             .HasKey(s => new { s.UserId, s.TaskId });
 
+            builder.Entity<Quests>().HasKey(x => x.Id);
+
+            builder.Entity<Quests>().HasMany(x => x.users).WithOne(x => x.task).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Users>().HasMany(x => x.tasks).WithOne(x => x.user).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Quests>().HasMany(x => x.scenarios).WithOne(x => x.Task).HasForeignKey(x => x.TaskId).OnDelete(DeleteBehavior.Cascade);
+
         }
 
-        public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Quests> Tasks { get; set; }
         public DbSet<Scenarios> Scenarios { get; set; }
         public DbSet<UTsubmission> Submissions { get; set; }
     }

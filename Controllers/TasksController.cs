@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Backend.DTOs;
 using Backend.Interfaces;
 using Backend.Mappers;
-using Backend.ModelOfModels;
+using Backend.Models;
 using Backend.Searchers;
 using Backend.Sorters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Backend.Controllers
 {
     [Route("tasks")]
     [ApiController]
-    [Authorize] 
+    [Authorize]  
     public class TasksController : ControllerBase
     {
         private readonly ITaskRepo _it;
@@ -31,8 +27,26 @@ namespace Backend.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var allTasks = await _it.getTasks(search, sort);
-            return Ok(allTasks);
+            var allTasks = await _it.GetTasks(search, sort);
+
+            var Vres = allTasks.Select(x => new ReadTaskDTO
+            {
+                Id = x.Id,
+                taskname = x.taskname,
+                taskdescription = x.taskdescription,
+                taskcategory = x.taskcategory,
+                taskdefficulty = x.taskdefficulty,
+                taskpoints = x.taskpoints,
+                tasktime = x.tasktime,
+                scene = x.scenarios.Any() ? x.scenarios.Select(x => new ReadScenarioDTO
+                {
+                    scenariotitle = x.scenariotitle,
+                    scenariodescription = x.scenariodescription,
+                }).ToList() : null,
+
+            }).ToList();
+
+            return Ok(Vres);
         } 
 
         [HttpGet]
@@ -43,49 +57,114 @@ namespace Backend.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var Task = await _it.getTask(id);
-            return Ok(Task);
+            var x = await _it.GetTaskById(id);
+
+            if (x == null) return NotFound("Invalid Id");
+
+            var Vres = new ReadTaskDTO
+            {
+                taskname = x.taskname,
+                taskdescription = x.taskdescription,
+                taskcategory = x.taskcategory,
+                taskdefficulty = x.taskdefficulty,
+                taskpoints = x.taskpoints,
+                tasktime = x.tasktime,
+                scene = x.scenarios.Any() ? x.scenarios.Select(x => new ReadScenarioDTO
+                {
+                    scenariotitle = x.scenariotitle,
+                    scenariodescription = x.scenariodescription,
+                }).ToList() : null,
+            };
+            return Ok(Vres);
         }
 
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<IActionResult> deleteTask([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (await _it.deleteTask(id))
-            {
-                return Ok("deleted successfully");
-            }
-            return NotFound(); 
+           
+            var res = await _it.GetById(id);
+
+            if (res == null) return NotFound("Invalid Id");
+
+            await _it.Delete(res);
+
+            return Ok("Done!");
+             
         }
 
         [HttpPost]
-        public async Task<IActionResult> createTask([FromBody] TaskModel task)
+        public async Task<IActionResult> createTask([FromBody] ReadTaskDTO task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _it.createTask(task); 
+
+            var newTask = new Quests
+            {
+                taskcategory = task.taskcategory,
+                taskdefficulty = task.taskdefficulty,
+                taskdescription = task.taskdescription,
+                taskname = task.taskname,
+                taskpoints = task.taskpoints,
+                tasktime = task.tasktime,
+            };
+
+            var sceneList = new List<Scenarios>();
+
+            foreach(var i in task.scene)
+            {
+                var sc = new Scenarios
+                {
+                    scenariotitle = i.scenariotitle,
+                    scenariodescription = i.scenariodescription,
+                };
+
+                sceneList.Add(sc);
+            }
+
+            await _it.CreateTask(newTask, sceneList);
             return Ok("Done!");
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> updateTask([FromRoute] int id, [FromBody] TaskModel task)
+        public async Task<IActionResult> updateTask([FromRoute] int id, [FromBody] ReadTaskDTO task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (await _it.updateTask(id, task))
+
+            var sceneList = new List<Scenarios>();
+
+            foreach (var i in task.scene)
             {
-                return Ok(task.TaskModelMapper());
+                var sc = new Scenarios
+                {
+                    scenariotitle = i.scenariotitle,
+                    scenariodescription = i.scenariodescription,
+                };
+
+                sceneList.Add(sc);
             }
-            return NotFound();
+
+            var tasks = new Quests
+            {
+                taskcategory = task.taskcategory,
+                taskdefficulty = task.taskdefficulty,
+                taskdescription = task.taskdescription,
+                taskname = task.taskname,
+                taskpoints = task.taskpoints,
+                tasktime = task.tasktime,
+            };
+
+            var res = await _it.UpdateTask(id, sceneList,tasks);
+            
+            if(!res) return NotFound("Invalid Id");
+
+            return Ok();
         }
     }
 }

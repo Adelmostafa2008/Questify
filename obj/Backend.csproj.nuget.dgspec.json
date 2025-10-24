@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\Backend.csproj": {}
+    "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\Backend.csproj": {
+    "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\Backend.csproj",
+        "projectUniqueName": "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\TEDO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TEDO\\Desktop\\pro project\\Backend\\obj\\",
+        "projectPath": "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\KimoStore\\.nuget\\packages\\",
+        "outputPath": "E:\\Adel\\WebApi\\Pro project\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\TEDO\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\KimoStore\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -95,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -22,7 +22,7 @@ namespace Backend.Repos
             _db = db;
             _user = user;
         }
-        public async Task<UTsubmission> addSubmissions(string userid, int taskid , string submitteddata)
+        public async Task addSubmissions(string userid, int taskid , string submitteddata)
         {
             var checkSub = await _db.Submissions.FirstOrDefaultAsync(s => s.UserId == userid && s.TaskId == taskid);
 
@@ -31,7 +31,7 @@ namespace Backend.Repos
                 checkSub.SubmittedData = submitteddata;
                 checkSub.SubmissionDate = DateTime.UtcNow;
                 await _db.SaveChangesAsync();
-                return checkSub;
+                //return checkSub;
             }
 
             var newSubmission = new UTsubmission
@@ -43,7 +43,7 @@ namespace Backend.Repos
 
             await _db.Submissions.AddAsync(newSubmission);
             await _db.SaveChangesAsync();
-            return newSubmission;
+           // return newSubmission;
         }
 
         public async Task<bool> deleteSubmission(List<UTsubmission> subs)
@@ -59,7 +59,7 @@ namespace Backend.Repos
             return submissions;
         }
 
-        public async Task<List<Tasks>> getLatest(string userid, TaskSort sort, TaskSearch search)
+        public async Task<List<Quests>> getLatest(string userid, TaskSort sort, TaskSearch search)
         {
             var submissions = await _db.Submissions
                 .Where(s => s.UserId == userid)
@@ -67,7 +67,7 @@ namespace Backend.Repos
                 .ToListAsync();
 
             if (!submissions.Any())
-                return new List<Tasks>();
+                return new List<Quests>();
 
             var taskIds = submissions.Select(s => s.TaskId).ToList();
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Backend.db;
 using Backend.Interfaces;
 using Backend.Mappers;
-using Backend.ModelOfModels;
 using Backend.Models;
 using Backend.Searchers;
 using Backend.Sorters;
@@ -13,49 +12,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repos
 {
-    public class TaskRepo : ITaskRepo
+    public class TaskRepo : GenericRepo<Quests>, ITaskRepo
     {
 
-        private readonly AppDb _db;
         private readonly IScenarioRepo _sr;
-        public TaskRepo(AppDb context, IScenarioRepo sr)
+        public TaskRepo(AppDb _db, IScenarioRepo sr) : base(_db)
         {
-            _db = context;
-            _sr = sr;
+            _sr = sr; 
         }
-        public async Task<Tasks> createTask(TaskModel task)
+
+        public async Task CreateTask(Quests task , IList<Scenarios> scenes)
         {
-            var neuTask = task.TaskModelMapper();
-            await _db.Tasks.AddAsync(neuTask);
-            await _db.SaveChangesAsync();
-            foreach (var singleScene in task.scene)
+            await Create(task);
+            foreach (var singleScene in scenes)
             {
-                await _sr.createScenario(singleScene, neuTask.Id);
+                await _sr.CreateScenario(singleScene, task.Id);
             }
-            return neuTask;
-        }
- 
-        public async Task<bool> deleteTask(int id)
-        { 
-            var Task = await getTask(id);
-            if (Task != null)
-            {
-                _db.Tasks.Remove(Task);
-                await _db.SaveChangesAsync();
-                return true;
-            } 
-            return false;
         }
 
-        public async Task<Tasks> getTask(int id)
+        public async Task<Quests> GetTaskById(int id)
         {
-            var task = await _db.Tasks.Include(t => t.scenarios).FirstOrDefaultAsync(t => t.Id == id);
-            return task;
+            return await _db.Tasks.Include(x => x.scenarios).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<Tasks>> getTasks(TaskSearch search, TaskSort sort)
+        public async Task<List<Quests>> GetTasks(TaskSearch search, TaskSort sort)
         {
-            var task = _db.Tasks.Where(t => t.taskcategory == sort.SortByCategory).AsQueryable();
+            var task = _db.Tasks.Include(x => x.scenarios).Where(t => t.taskcategory == sort.SortByCategory).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search.TaskName))
             {
@@ -72,31 +54,34 @@ namespace Backend.Repos
                     task = task.OrderBy(t => t.solveRate);
                 }
                 else if (sort.SortBySolveRate == "highFirst")
-                { 
+                {
                     task = task.OrderByDescending(t => t.solveRate);
-                } 
-            } 
-           
+                }
+            }
+
             return await task.ToListAsync();
         }
 
-        public async Task<bool> updateTask(int id, TaskModel task)
+        public async Task<bool> UpdateTask(int id, List<Scenarios> scenes , Quests tasks)
         {
-            var Task = await getTask(id);
-            if (Task != null)
-            {
-                Task.taskname = task.taskname;
-                Task.taskdescription = task.taskdescription;
-                Task.taskcategory = task.taskcategory;
-                Task.taskdefficulty = task.taskdefficulty;
-                Task.taskpoints = task.taskpoints;
-                Task.tasktime = task.tasktime;
+            var Quest = await _db.Tasks.Include(x => x.scenarios).FirstOrDefaultAsync(x => x.Id == id);
 
-                await _db.SaveChangesAsync();
-                return true;
-            }
+            if(Quest == null) return false;
 
-            return false;
+            Quest.taskdescription = tasks.taskdescription;
+            Quest.taskpoints = tasks.taskpoints;
+            Quest.taskname = tasks.taskname;
+            Quest.taskdefficulty = tasks.taskdefficulty;
+            Quest.tasktime = tasks.tasktime;
+            Quest.taskcategory = tasks.taskcategory;
+
+            _db.Scenarios.RemoveRange(Quest.scenarios);
+
+            Quest.scenarios = scenes;
+
+            await _db.SaveChangesAsync();
+
+            return true;
         }
     }
 }

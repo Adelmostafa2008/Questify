@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.DTOs;
 using Backend.Interfaces;
-using Backend.ModelOfModels;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [Route("scene")]
-    [ApiController]
+    [ApiController] 
     public class SceneController : ControllerBase
     {
         private readonly IScenarioRepo _sr;
@@ -18,14 +19,22 @@ namespace Backend.Controllers
             _sr = sr;
         }
 
-        [HttpGet]
+        [HttpGet] 
         public async Task<IActionResult> getAllScene()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(await _sr.getScenarios());
+
+            var res = await _sr.GetAll();
+
+            var Vres = res.Select(x => new ReadScenarioDTO
+            {
+                scenariotitle = x.scenariotitle,
+                scenariodescription = x.scenariodescription,
+            });
+            return Ok(Vres);
         }
 
         [HttpGet]
@@ -36,29 +45,56 @@ namespace Backend.Controllers
             {
                 return BadRequest(ModelState);
             }
-            return Ok(await _sr.getScenario(id));
+
+            var res = await _sr.GetById(id);
+
+            var Vres = new ReadScenarioDTO
+            {
+                scenariotitle = res.scenariotitle,
+                scenariodescription = res.scenariodescription,
+            };
+
+            return Ok(Vres);
         }
 
         [HttpPost]
         [Route("{id:int}")]
-        public async Task<IActionResult> createScene([FromBody] ScenarioModel scene, [FromRoute] int id)
+        public async Task<IActionResult> createScene([FromBody] ReadScenarioDTO scene, [FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(await _sr.createScenario(scene, id));
+
+            var scenario = new Scenarios
+            {
+                scenariotitle = scene.scenariotitle,
+                scenariodescription = scene.scenariodescription,
+            };
+
+            await _sr.CreateScenario(scenario, id);
+
+            return Ok("Done!");
         }
 
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> updateScene([FromRoute] int id, [FromBody] ScenarioModel scene)
+        public async Task<IActionResult> updateScene([FromRoute] int id, [FromBody] ReadScenarioDTO scene)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            await _sr.updateScenario(id, scene);
+            var res = await _sr.GetById(id);
+
+            if (res == null) return NotFound("Invalid Id");
+
+            res.Id = id;
+            res.scenariotitle = scene.scenariotitle;
+            res.scenariodescription = scene.scenariodescription;
+
+            await _sr.Update(res);
+
             return Ok("Done!");
         }
 
@@ -70,7 +106,13 @@ namespace Backend.Controllers
             {
                 return BadRequest(ModelState);
             }
-            await _sr.deleteScenatio(id);
+
+            var scene = await _sr.GetById(id);
+
+            if (scene == null) return NotFound("Invalid Id");
+
+            await _sr.Delete(scene);
+
             return Ok("deleted successfully");
         }   
     }
