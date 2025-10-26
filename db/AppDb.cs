@@ -40,8 +40,8 @@ namespace Backend.db
 
             builder.Entity<Quests>().HasKey(x => x.Id);
 
-            builder.Entity<Quests>().HasMany(x => x.users).WithOne(x => x.task).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<Users>().HasMany(x => x.tasks).WithOne(x => x.user).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Quests>().HasMany(x => x.users).WithOne(x => x.task).HasForeignKey(x =>x.TaskId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Users>().HasMany(x => x.tasks).WithOne(x => x.user).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Quests>().HasMany(x => x.scenarios).WithOne(x => x.Task).HasForeignKey(x => x.TaskId).OnDelete(DeleteBehavior.Cascade);
 
         }

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repos
-{
+{ 
     public class UTsubmissionsRepo : IUTsubmissionsRepo
     {
         private readonly AppDb _db;
@@ -31,7 +31,7 @@ namespace Backend.Repos
                 checkSub.SubmittedData = submitteddata;
                 checkSub.SubmissionDate = DateTime.UtcNow;
                 await _db.SaveChangesAsync();
-                //return checkSub;
+                return;
             }
 
             var newSubmission = new UTsubmission
