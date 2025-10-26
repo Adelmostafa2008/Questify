@@ -9,6 +9,7 @@ import { FaLightbulb, FaClock, FaStar, FaPaperPlane } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
+import { BiSolidLike } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 import { GoHeart , GoHeartFill } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -73,7 +74,6 @@ export default function SelectedTask() {
     
     const handleSubmit = async () => {
         try {
-            
             const res = await api.post("/submission",  submit);
         } catch (error) {
             console.log(error);
@@ -96,7 +96,7 @@ export default function SelectedTask() {
     };
 
     
-    console.log(submit);
+    //console.log(submit);
         const getsub = async (find) => {
             try {
                 const res = await api.get("/submission/existing" , {params: find});
@@ -147,7 +147,7 @@ export default function SelectedTask() {
                     {deleteState === "loading" && (
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     )}
-                    {deleteState === "done" && <span className="text-white">Done</span>}
+                    {deleteState === "done" && <span className="text-white"><BiSolidLike color="white" size = {20}/></span>}
                 </button>
 
                     {/* Edit */}
