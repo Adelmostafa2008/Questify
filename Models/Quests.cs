@@ -18,7 +18,8 @@ namespace Backend.Models
         public int taskpoints { get; set; }
         public IList<Scenarios> ?scenarios { get; set; }
         public decimal solveRate { get; set; }
-        public IList<UTsubmission> ? users { get; set; }
+        public IList<UTsubmission>? users { get; set; }
+        public IList<UTfavourites> ? favouredByUsers { get; set; }
        
     }
 }  

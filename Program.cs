@@ -24,7 +24,8 @@ builder.Services.AddScoped<ITaskRepo, TaskRepo>();
 builder.Services.AddScoped<IScenarioRepo, ScenarioRepo>();
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IUTsubmissionsRepo, UTsubmissionsRepo>();
-builder.Services.AddScoped(typeof(IGenericRepo<>) , typeof(GenericRepo<>));
+builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+builder.Services.AddScoped<IUTfavouritesRepo , UTfavouritesRepo>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

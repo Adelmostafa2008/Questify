@@ -10,7 +10,8 @@ namespace Backend.Models
     {
         public string? ProfilePic { get; set; }
         public string? Description { get; set; }
-        public IList<UTsubmission> ?tasks { get; set; }
+        public IList<UTsubmission>? tasks { get; set; }
+        public IList<UTfavourites> ?favouriteTasks { get; set; }
         
     }
 } 
