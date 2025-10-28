@@ -176,7 +176,7 @@ function Card(props) {
           <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/30 pointer-events-none"></div>
           <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/15 blur-3xl"></div>
           <div className="relative z-10">
-            <div className="w-[60px] h-[60px] mx-auto my-4 bg-[rgba(206,125,99,0.15)] rounded-full flex items-center justify-center">
+            <div className="w-[65px] h-[65px] mx-auto my-4 bg-[rgba(206,125,99,0.15)] rounded-full flex items-center justify-center">
               {getIcon(pic)}
             </div>
             <h2 className="text-2xl font-bold text-white">{title}</h2>
@@ -224,7 +224,7 @@ function Card(props) {
 
     case "impact":
       return (
-        <div className="relative w-[23%] bg-[#1f1f1f] flex flex-col text-center p-6 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] transition-all duration-300 overflow-hidden">
+        <div className="relative w-[21%] bg-[#1f1f1f] flex flex-col text-center p-6 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/30 pointer-events-none"></div>
           <h2 className="text-[#ce7d63] text-5xl font-extrabold relative z-10">{title}</h2>
           <h4 className="text-[#c5c5c5] text-lg font-medium relative z-10">{comment}</h4>

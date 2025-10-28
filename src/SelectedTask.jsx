@@ -47,13 +47,32 @@ export default function SelectedTask() {
         }
     };
 
+    const CheckFav = async () => {
+        try {
+            const checkFav = await api.get("/favourites/CheckExistance" , {params : {taskid : Number(taskid) , userid : String(user.id)}});
+            console.log(checkFav.data);
+            if(checkFav.data){
+                setIsHeartFill(true);
+            }else{
+                setIsHeartFill(false);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
+    useEffect(() => {
+        if(user?.id) CheckFav();
+    }, [user]);
+    useEffect(() => {
+        if(user?.id) setsubmits();
+    }, [user]);
+
+
     useEffect(() => {
         getTask();
     }, []);
 
-    useEffect(() => {
-        if(user?.id) setsubmits();
-    }, [user]);
 
     const setsubmits = () => {
          const newFind = {
@@ -106,7 +125,27 @@ export default function SelectedTask() {
                 console.log(err);
             }
         };
+
+        const HandelFavRequest = async () => {
+            try {
+                setIsHeartFill(true);
+                await api.post("/favourites/AddToFavourites" , find);
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        }
         
+
+        const HandelFavRemoveRequest = async () => {
+            try {
+                setIsHeartFill(false);
+                await api.delete("/favourites/DeleteFav" , {params : {taskid : Number(taskid) , userid : String(user.id)}});
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        }
    
         function slugify(text) {
             if (!text) return "";
@@ -165,7 +204,7 @@ export default function SelectedTask() {
 
                     {/* Like */}
                     <button
-                        onClick={() => setIsHeartFill(!isHeartFill)}
+                        onClick={() => isHeartFill ? HandelFavRemoveRequest() : HandelFavRequest() }
                         className="p-2 rounded-md flex items-center border border-gray-700 
                                  shadow-sm
                                 hover:bg-red-500/20  hover:border-red-600 transition duration-200"
