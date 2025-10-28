@@ -1,12 +1,47 @@
-# React + Vite
+# 🧠 Questify — .NET & React Full-Stack Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Questify** is a full-stack web application that helps people sharpen their skills across various professional categories such as **call center**, **design**, **project management**, **software development**, and more.  
+Think of it as **LeetCode**, but not just for coding — it’s a learning and practice platform for multiple fields.
 
-Currently, two official plugins are available:
+This project was fully developed by **Adel Mostafa Saber Mohamed**, using **.NET Web API** for the backend and **React.js** for the frontend.  
+It follows **SOLID** and **DRY** principles, with clean architecture and maintainable code structure.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
+- **Frontend:** React.js (with Tailwind CSS)
+- **Backend:** ASP.NET Core Web API (.NET 7 or 8)
+- **Database:** MySQL / SQL Server
+- **State Management:** Redux
+- **Architecture Patterns:** Dependency Injection, Repository Pattern
+- **UI/UX:** Tailwind CSS + React Components
+- **API Communication:** Axios + REST API
+- **Documentation & Testing:** Swagger, Postman
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+✅ User registration and authentication  
+✅ Browse and select skill categories (e.g., Software, Design, Project Management)  
+✅ Take structured quizzes or challenges to improve skills  
+✅ Backend handles questions, categories, and results efficiently  
+✅ Fully decoupled architecture — React frontend + .NET API backend  
+✅ Built with clean, reusable components and a responsive UI  
+
+---
+
+## 🧩 Design Highlights
+- **Full-Stack Architecture:** React (frontend) + .NET Web API (backend)  
+- **SOLID** and **DRY** principles for maintainability  
+- **DTOs** for safe client-server communication  
+- **Dependency Injection (DI)** for testable services  
+- **Entity Framework Core (Fluent API)** for precise relationship mapping  
+
+
+---
+
+## 🧑‍💻 Author
+**Adel Mostafa Saber Mohamed**  
+📧 Email: adel.0523035@gmail.com  
+🌍 Egypt  
+
