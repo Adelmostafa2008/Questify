@@ -11,13 +11,13 @@ namespace Backend.DTOs
     {
         public int? Id { get; set; } = 0;
         [Required]
-        public string taskname { get; set; } = string.Empty;
+        public string taskname { get; set; } 
         [Required]
-        public string taskdescription { get; set; } = string.Empty;
+        public string taskdescription { get; set; } 
         [Required]
-        public string taskcategory { get; set; } = string.Empty;
+        public string taskcategory { get; set; } 
         [Required]
-        public string taskdefficulty { get; set; } = string.Empty;
+        public string taskdefficulty { get; set; } 
         [Required] 
         public int tasktime { get; set; }
         [Required]

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Backend.DTOs;
 using Backend.Models;
 using Backend.Repos.Interfaces;
+using Backend.Searchers;
+using Backend.Sorters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -36,11 +38,11 @@ namespace Backend.Controllers
         {
             var res = await _fr.GetFavById(userid, taskid);
 
-            if (res == null) return NotFound("Invalid Id");
+            if (res == null) return NotFound();
 
             await _fr.Delete(res);
 
-            return Ok("Done!");
+            return Ok("Task Removed From Your Favourites List Successfully");
         }
 
         [HttpPost("AddToFavourites")]
@@ -56,7 +58,29 @@ namespace Backend.Controllers
 
             await _fr.Create(favreq);
 
-            return Ok("Done!");
+            return Ok("Task Added To Your Favourites List Successfully");
+        }
+
+        [HttpGet("GetAllFav/{userid}")]
+        public async Task<IActionResult> GetAllFav([FromRoute] string userid, [FromQuery] TaskSort task, [FromQuery] TaskSearch search)
+        {
+            var res = await _fr.GetAllFav(userid, task, search);
+
+            if (!res.Any()) return NotFound();
+
+            var vres = res.Select(x => new
+            {
+                id = x.Id,
+                taskname = x.taskname,
+                taskdescription = x.taskdescription,
+                taskcategory = x.taskcategory,
+                taskdefficulty = x.taskdefficulty,
+                taskpoints = x.taskpoints,
+                tasktime = x.tasktime,
+
+            });
+
+            return Ok(vres);
         }
     }
 }

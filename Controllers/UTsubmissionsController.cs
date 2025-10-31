@@ -32,14 +32,14 @@ namespace Backend.Controllers
                 return Ok(submissions);
             }
             return NotFound();
-        }
+        } 
 
         [HttpPost]
         public async Task<IActionResult> CreateSubmission([FromBody] SubmissionRequestDTO request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             await _sub.addSubmissions(request.Userid, request.Taskid, request.SubmittedData);
-            return Ok("Done!");
+            return Ok("Task Submitted Successfully");
         }
 
         [HttpGet]
@@ -49,7 +49,7 @@ namespace Backend.Controllers
             var latestsubmissions = await _sub.getLatest(userid , task , search);
             if (!latestsubmissions.Any())
             {
-                return NotFound("there is a problem ");
+                return NotFound("Something Went Wrong");
             }
             return Ok(latestsubmissions);
         }
@@ -68,7 +68,7 @@ namespace Backend.Controllers
         {
             var subs = await _sub.getAll(userid);
             await _sub.deleteSubmission(subs);
-            return Ok("Done!");
+            return Ok("Record Deleted Successfully");
         }
     }
 }

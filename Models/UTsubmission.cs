@@ -14,4 +14,4 @@ namespace Backend.Models
         public string SubmittedData { get; set; }
         public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
     }
-}
+} 

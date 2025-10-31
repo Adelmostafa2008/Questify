@@ -29,6 +29,8 @@ namespace Backend.Controllers
             }
             var allTasks = await _it.GetTasks(search, sort);
 
+            if (!allTasks.Any() || allTasks.Count == 0) return NotFound("No Tasks Found");
+
             var Vres = allTasks.Select(x => new ReadTaskDTO
             {
                 Id = x.Id,
@@ -59,7 +61,7 @@ namespace Backend.Controllers
             }
             var x = await _it.GetTaskById(id);
 
-            if (x == null) return NotFound("Invalid Id");
+            if (x == null) return NotFound("Task Not Found");
 
             var Vres = new ReadTaskDTO
             {
@@ -85,11 +87,11 @@ namespace Backend.Controllers
            
             var res = await _it.GetById(id);
 
-            if (res == null) return NotFound("Invalid Id");
+            if (res == null) return NotFound("Task Not Found");
 
             await _it.Delete(res);
 
-            return Ok("Done!");
+            return Ok("Task Removed Successfully");
              
         }
 
@@ -125,7 +127,7 @@ namespace Backend.Controllers
             }
 
             await _it.CreateTask(newTask, sceneList);
-            return Ok("Done!");
+            return Ok("Task Created Successfully");
         }
 
         [HttpPut]
@@ -162,7 +164,7 @@ namespace Backend.Controllers
 
             var res = await _it.UpdateTask(id, sceneList,tasks);
             
-            if(!res) return NotFound("Invalid Id");
+            if(!res) return NotFound("Task Not Found");
 
             return Ok();
         }

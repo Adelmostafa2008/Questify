@@ -33,16 +33,16 @@ namespace Backend.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest("Some Validations in your model didnot got specified");
+                    return BadRequest("One or more validations didnot get specified");
                 var userUsername = await _user.FindByNameAsync(user.username);
                 var userEmail = await _user.FindByEmailAsync(user.email);
                 if (userUsername != null)
                 {
-                    return BadRequest("Username already exists");
+                    return BadRequest("Username Already Exists");
                 }
                 if (userEmail != null)
                 {
-                    return BadRequest("Email address already exists");
+                    return BadRequest("Email Address Already Exists");
                 }
                 var newUser = new Users
                 {
@@ -72,7 +72,7 @@ namespace Backend.Controllers
                 }
                 else
                 {
-                    return BadRequest(createdUser.Errors);
+                    return BadRequest("Password validation(s) didnot get specified");
                 }
             }
             catch (Exception e)
@@ -85,17 +85,17 @@ namespace Backend.Controllers
         public async Task<IActionResult> Login([FromBody] LoginUserDTO login)
         {
             if (!ModelState.IsValid)
-                return BadRequest("Invalid login data.");
+                return BadRequest(ModelState);
 
 
             var user = await _user.FindByNameAsync(login.UserName);
             if (user == null)
-                return Unauthorized("Invalid username or password.");
+                return Unauthorized("Invalid Username or Password.");
 
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
             if (!result.Succeeded)
-                return Unauthorized("Invalid username or password.");
+                return Unauthorized("Invalid Username or Password.");
 
 
             var token = _token.CreateToken(user);
@@ -106,7 +106,8 @@ namespace Backend.Controllers
                 Username = user.UserName,
                 Email = user.Email,
                 Token = token,
-                ProfilePic = user.ProfilePic
+                ProfilePic = user.ProfilePic,
+                message = "Logged in Successfully",
             });
         }
         
@@ -114,18 +115,18 @@ namespace Backend.Controllers
         public async Task<IActionResult> EditUser([FromRoute] string id, [FromForm] EditUserDTO model)
         {
             if (!ModelState.IsValid)
-                return BadRequest("Invalid data.");
+                return BadRequest(ModelState);
 
             var user = await _user.FindByIdAsync(id);
             if (user == null)
-                return NotFound("User not found.");
+                return NotFound("User Not Found.");
 
             // Update username
             if (!string.IsNullOrEmpty(model.UserName) && model.UserName != user.UserName)
             {
                 var existingUsername = await _user.FindByNameAsync(model.UserName);
                 if (existingUsername != null && existingUsername.Id != id)
-                    return BadRequest("Username already exists.");
+                    return BadRequest("Username Already Exists.");
                 user.UserName = model.UserName;
             }
 
@@ -134,7 +135,7 @@ namespace Backend.Controllers
             {
                 var existingEmail = await _user.FindByEmailAsync(model.Email);
                 if (existingEmail != null && existingEmail.Id != id)
-                    return BadRequest("Email already exists.");
+                    return BadRequest("Email Already Exists.");
                 user.Email = model.Email;
             }
 
@@ -175,7 +176,7 @@ namespace Backend.Controllers
                 Email = user.Email,
                 ProfilePic = user.ProfilePic,
                 Describtion = user.Description,
-                Message = "Profile updated successfully"
+                message = "Profile Updated Successfully"
             });
         }
 
@@ -187,7 +188,7 @@ namespace Backend.Controllers
             var user = await _user.FindByIdAsync(id);
             if (user == null)
             {
-                return NotFound("User not found");
+                return NotFound("User Not Found");
             }
             else
             {
@@ -215,10 +216,10 @@ namespace Backend.Controllers
             var result = await _user.DeleteAsync(user);
             if (!result.Succeeded)
             {   
-                return BadRequest(new { message = "Failed to delete user", errors = result.Errors });
+                return BadRequest(new { message = "Failed To Delete User", errors = result.Errors });
             }
 
-            return Ok(new { message = "User deleted successfully" });
+            return Ok(new { message = "User Deleted Successfully" });
 
         }
 
