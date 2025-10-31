@@ -8,8 +8,11 @@ import { TbCirclePlusFilled } from "react-icons/tb"
 import { IoMdSettings } from "react-icons/io";
 import Card from "./Card.jsx"
 import api from "./AxiosHelper.jsx";
+import { useSnack } from "./SnackBarContext.jsx"
+import SnackBar from "./SnackBar.jsx"
 
 export default function Addtask(props){
+    const {ShowSnackBar} = useSnack();
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
     const [idCounter, setIdCounter] = useState(0);
@@ -75,7 +78,9 @@ export default function Addtask(props){
             await api.post("/tasks" , task);
 
         }catch(err){
+            ShowSnackBar("One or more validation errors occurred" , "error");
             console.log(err);
+            throw err;
         }
     }
 
@@ -196,6 +201,15 @@ export default function Addtask(props){
     <button
         onClick={async () => {
             if (loading || success) return; 
+            if(!task.taskcategory.trim() || !task.taskdefficulty.trim() || !task.taskdescription.trim() || !task.taskname.trim() || isNaN(task.taskpoints) || isNaN(task.tasktime) ){
+                ShowSnackBar("All fields should be filled" , "warn");
+                console.log(task.taskpoints);
+                return;
+            }
+            if(cards.length == 0){
+                ShowSnackBar("You must atleast add one scenario" , "warn");
+                return;
+            }
             setLoading(true);
             try {
                 await CreateTask(); 

@@ -3,9 +3,11 @@ import X from './assets/socialMediaIcons/X.png'
 import Linkedin from './assets/socialMediaIcons/linkedin.png'
 import GitHub from './assets/socialMediaIcons/github.png'
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSnack } from './SnackBarContext.jsx';
 
 function Footer() {
   const navigate = useNavigate();
+  const {ShowSnackBar} = useSnack()
 
   return (
     <footer className="bg-[#131313] text-white py-10 mt-10 rounded-t-md">
@@ -58,7 +60,7 @@ function Footer() {
               placeholder="Tell us what's broken..."
               className="flex-grow px-3 py-1 rounded bg-[#1f1f1f] text-white border border-gray-600 rounded-r-none focus:border-[#ce7d63] focus:outline-none"
             />
-            <button onClick={() => navigate("/SendBugReport")} className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
+            <button onClick={() => ShowSnackBar("This service is still under construction" , "info")} className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
               Send
             </button>
           </div>

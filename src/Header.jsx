@@ -4,8 +4,11 @@ import { useState , useEffect , useRef } from "react";
 import {  CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
+import { useSnack } from './SnackBarContext.jsx';
+
 
 function Header() {
+  const {ShowSnackBar} = useSnack()
     const navigate = useNavigate();
     const {user , logout} = useAuth();
     const [open, setOpen] = useState(false);
@@ -118,7 +121,7 @@ function Header() {
                       <CgProfile size={20} className="text-[#ce7d63]" /> Profile
                     </li>
                    
-                    <li className="px-4 py-2 hover:bg-[#2b2b2b] cursor-pointer flex gap-x-2 items-center transition-colors duration-200" onClick={() => navigate("/Sittings")}>
+                    <li className="px-4 py-2 hover:bg-[#2b2b2b] cursor-pointer flex gap-x-2 items-center transition-colors duration-200" onClick={() => ShowSnackBar("This service is still under construction" , "info")}>
                       <FaGear size={20} className="text-[#ce7d63]" /> Settings
                     </li>
                     <li

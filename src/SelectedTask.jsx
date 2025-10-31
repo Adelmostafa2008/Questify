@@ -11,7 +11,8 @@ import { FaInfoCircle } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
-import { GoHeart , GoHeartFill } from "react-icons/go";
+import SnackBar from "./SnackBar.jsx";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 export default function SelectedTask() {
@@ -19,23 +20,24 @@ export default function SelectedTask() {
     const [loading, setLoading] = useState(false);
     const [deleteState, setDeleteState] = useState("idle");
     const [success, setSuccess] = useState(false);
+    const [snackbar, setSnackbar] = useState({ message: "", type: "info" });
     const navigate = useNavigate();
-    const {user} = useAuth();
-    const [isHeartFill , setIsHeartFill] = useState(false);
-    const [Task , setTask] = useState({});
-    const [submit , setSubmit] = useState({
-        Userid : "",
-        Taskid : "",
-        SubmittedData : ""
+    const { user } = useAuth();
+    const [isHeartFill, setIsHeartFill] = useState(false);
+    const [Task, setTask] = useState({});
+    const [submit, setSubmit] = useState({
+        Userid: "",
+        Taskid: "",
+        SubmittedData: ""
     });
-    const [find , setFind] = useState({
-        userid : "",
-        taskid : ""
+    const [find, setFind] = useState({
+        userid: "",
+        taskid: ""
     });
-    const [existingsub , setExistingsub] = useState({
-        userId : "",
-        taskId : "",
-        submittedData : ""
+    const [existingsub, setExistingsub] = useState({
+        userId: "",
+        taskId: "",
+        submittedData: ""
     });
 
     const getTask = async () => {
@@ -49,23 +51,23 @@ export default function SelectedTask() {
 
     const CheckFav = async () => {
         try {
-            const checkFav = await api.get("/favourites/CheckExistance" , {params : {taskid : Number(taskid) , userid : String(user.id)}});
+            const checkFav = await api.get("/favourites/CheckExistance", { params: { taskid: Number(taskid), userid: String(user.id) } });
             console.log(checkFav.data);
-            if(checkFav.data){
+            if (checkFav.data) {
                 setIsHeartFill(true);
-            }else{
+            } else {
                 setIsHeartFill(false);
             }
         } catch (err) {
             console.log(err);
         }
     }
-    
+
     useEffect(() => {
-        if(user?.id) CheckFav();
+        if (user?.id) CheckFav();
     }, [user]);
     useEffect(() => {
-        if(user?.id) setsubmits();
+        if (user?.id) setsubmits();
     }, [user]);
 
 
@@ -75,25 +77,25 @@ export default function SelectedTask() {
 
 
     const setsubmits = () => {
-         const newFind = {
-        userid: user.id,
-        taskid: Number(taskid),
+        const newFind = {
+            userid: user.id,
+            taskid: Number(taskid),
         };
 
         setSubmit(prev => ({
             ...prev,
-            Userid : user.id,
-            Taskid : Number(taskid),
+            Userid: user.id,
+            Taskid: Number(taskid),
         }));
 
         setFind(newFind);
         getsub(newFind);
     }
 
-    
+
     const handleSubmit = async () => {
         try {
-            const res = await api.post("/submission",  submit);
+            const res = await api.post("/submission", submit);
         } catch (error) {
             console.log(error);
             throw error;
@@ -106,7 +108,7 @@ export default function SelectedTask() {
             const Tcategorry = Task.taskcategory;
             const res = await api.delete(`/tasks/${taskid}`);
             setDeleteState("done");
-            setTimeout(() => navigate("/Tasks" , {state : {Tcategory : Tcategorry}}) , 500)
+            setTimeout(() => navigate("/Tasks", { state: { Tcategory: Tcategorry } }), 500)
         } catch (error) {
             console.log(error);
             setDeleteState("idle");
@@ -114,47 +116,47 @@ export default function SelectedTask() {
         }
     };
 
-    
+
     //console.log(submit);
-        const getsub = async (find) => {
-            try {
-                const res = await api.get("/submission/existing" , {params: find});
-                setExistingsub(res.data);
-                setSubmit(prev => ({...prev , SubmittedData : res.data.submittedData}));
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        const HandelFavRequest = async () => {
-            try {
-                setIsHeartFill(true);
-                await api.post("/favourites/AddToFavourites" , find);
-            } catch (error) {
-                console.log(error);
-                throw error;
-            }
+    const getsub = async (find) => {
+        try {
+            const res = await api.get("/submission/existing", { params: find });
+            setExistingsub(res.data);
+            setSubmit(prev => ({ ...prev, SubmittedData: res.data.submittedData }));
+        } catch (err) {
+            console.log(err);
         }
-        
+    };
 
-        const HandelFavRemoveRequest = async () => {
-            try {
-                setIsHeartFill(false);
-                await api.delete("/favourites/DeleteFav" , {params : {taskid : Number(taskid) , userid : String(user.id)}});
-            } catch (error) {
-                console.log(error);
-                throw error;
-            }
+    const HandelFavRequest = async () => {
+        try {
+            setIsHeartFill(true);
+            await api.post("/favourites/AddToFavourites", find);
+        } catch (error) {
+            console.log(error);
+            throw error;
         }
-   
-        function slugify(text) {
-            if (!text) return "";
-  return text
-    .toLowerCase()                 
-    .trim()                        
-    .replace(/\s+/g, '-')          
-    .replace(/[^\w\-]+/g, '');     
-   }
+    }
+
+
+    const HandelFavRemoveRequest = async () => {
+        try {
+            setIsHeartFill(false);
+            await api.delete("/favourites/DeleteFav", { params: { taskid: Number(taskid), userid: String(user.id) } });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    function slugify(text) {
+        if (!text) return "";
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '');
+    }
 
     return (
         <>
@@ -172,49 +174,49 @@ export default function SelectedTask() {
 
 
 
-                    {/* Delete */}
-                     <button
-                     onClick={handleDelete}
-                    disabled={deleteState === "loading"}
-                    className="p-2 rounded-md flex items-center gap-2 border border-gray-700 
+                        {/* Delete */}
+                        <button
+                            onClick={handleDelete}
+                            disabled={deleteState === "loading"}
+                            className="p-2 rounded-md flex items-center gap-2 border border-gray-700 
                             shadow-sm hover:bg-red-600 hover:border-red-600 
                             transition duration-200 disabled:opacity-50"
-                >
-                    {(deleteState !== "loading" && deleteState !== "done") && (
-                    <FaTrashCan size={20} className="text-white" />
-                    ) }
-                    {deleteState === "loading" && (
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    )}
-                    {deleteState === "done" && <span className="text-white"><BiSolidLike color="white" size = {20}/></span>}
-                </button>
+                        >
+                            {(deleteState !== "loading" && deleteState !== "done") && (
+                                <FaTrashCan size={20} className="text-white" />
+                            )}
+                            {deleteState === "loading" && (
+                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            )}
+                            {deleteState === "done" && <span className="text-white"><BiSolidLike color="white" size={20} /></span>}
+                        </button>
 
-                    {/* Edit */}
-                    <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
-                    <button
-                        className="p-2 rounded-md flex items-center border border-gray-700 
+                        {/* Edit */}
+                        <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
+                            <button
+                                className="p-2 rounded-md flex items-center border border-gray-700 
                         shadow-sm
                         hover:border-gray-400 hover:text-gray-200 
                         hover:shadow-md hover:shadow-gray-400/40 
                         transition duration-200"
-                        >
-                        <FaEdit size={20} className="text-white" />
-                    </button>
-                                    </Link>
+                            >
+                                <FaEdit size={20} className="text-white" />
+                            </button>
+                        </Link>
 
-                    {/* Like */}
-                    <button
-                        onClick={() => isHeartFill ? HandelFavRemoveRequest() : HandelFavRequest() }
-                        className="p-2 rounded-md flex items-center border border-gray-700 
+                        {/* Like */}
+                        <button
+                            onClick={() => isHeartFill ? HandelFavRemoveRequest() : HandelFavRequest()}
+                            className="p-2 rounded-md flex items-center border border-gray-700 
                                  shadow-sm
                                 hover:bg-red-500/20  hover:border-red-600 transition duration-200"
-                    >
-                        {isHeartFill ? (
-                        <GoHeartFill size={23} className="text-red-500"/>
-                        ) : (
-                        <GoHeart size={23} className="text-white"/>
-                        )}
-                    </button>
+                        >
+                            {isHeartFill ? (
+                                <GoHeartFill size={23} className="text-red-500" />
+                            ) : (
+                                <GoHeart size={23} className="text-white" />
+                            )}
+                        </button>
                     </div>
 
                     <div className="relative z-10">
@@ -277,68 +279,68 @@ export default function SelectedTask() {
                         <h2 className="text-white text-2xl font-bold text-center mb-6">
                             Submit Your Answer
                         </h2>
-                        {existingsub.submittedData ?  (existingsub.submittedData !== "" ?
-                        <div className="p-3 w-full rounded-xl border bg-[#fabb181a] mb-3 border-[#fabb18] text-[#fabb18] flex gap-x-2 ">
-                             <FaInfoCircle className="mt-1"/> You 've submitted this task already , submitting it again will overwrite your old submission
-                        </div> : null)
-                        : null }
+                        {existingsub.submittedData ? (existingsub.submittedData !== "" ?
+                            <div className="p-3 w-full rounded-xl border bg-[#fabb181a] mb-3 border-[#fabb18] text-[#fabb18] flex gap-x-2 ">
+                                <FaInfoCircle className="mt-1" /> You 've submitted this task already , submitting it again will overwrite your old submission
+                            </div> : null)
+                            : null}
                         <textarea
                             className="w-full h-[80%] bg-[#141414] border border-[#333] rounded-xl text-white p-4 focus:outline-none focus:border-[#ce7d63] resize-none"
                             placeholder="Type your solution here..."
                             defaultValue={submit.SubmittedData}
-                            onChange={(e) => setSubmit(prev => ({...prev , SubmittedData : e.target.value}))}
+                            onChange={(e) => setSubmit(prev => ({ ...prev, SubmittedData: e.target.value }))}
                         />
-                           <button
-                        onClick={async () => {
-                            if (loading || success) return; 
-                            if (!submit.SubmittedData.trim()) {
-                            alert("answer field can't be empty");
-                            return;
-                            }
-                            setLoading(true); 
-                            try {
-                                await handleSubmit(); 
-                                setSuccess(true);
-                                setTimeout(() => navigate('/Tasks' , {state : {Tcategory : Task.taskcategory}}), 500); // Redirect after 1.5s
-                            } catch (err) {
-                                console.error(err);
-                            } finally {
-                                setLoading(false);
-                            }
-                        }}
-                        disabled={loading || success}
-                        className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
+                        <button
+                            onClick={async () => {
+                                if (loading || success) return;
+                                if (!submit.SubmittedData.trim()) {
+                                    alert("answer field can't be empty");
+                                    return;
+                                }
+                                setLoading(true);
+                                try {
+                                    await handleSubmit();
+                                    setSuccess(true);
+                                    setTimeout(() => navigate('/Tasks', { state: { Tcategory: Task.taskcategory } }), 500); // Redirect after 1.5s
+                                } catch (err) {
+                                    console.error(err);
+                                } finally {
+                                    setLoading(false);
+                                }
+                            }}
+                            disabled={loading || success}
+                            className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
                         ${success
-                            ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                            : "bg-[#ce7d63] border border-[#ce7d63] text-white shadow-[0_0_4px_#ce7d63aa]"
-                        }`}
-                    >
-                        {loading ? (
-                            <>
-                                <svg
-                                    className="animate-spin h-4 w-4 text-white"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                    <path
-                                        className="opacity-75"
-                                        fill="currentColor"
-                                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
-                                    />
-                                </svg>
-                                {existingsub.submittedData ? existingsub.submittedData === "" ? (<>Submitting...</>) : (<>Resubmitting...</>) : (<>Submitting...</>)}
-                                
-                            </>
-                        ) : success ? (
-                            "Done!"
-                        ) : (
-                            <>
-                            {existingsub.submittedData ? existingsub.submittedData === "" ? (<><FaPaperPlane /> Submit Answer</>) : (<><FaPaperPlane /> Resubmit Answer</>) : (<><FaPaperPlane /> Submit Answer</>)}
-                            </>
-                        )}
-                    </button>
+                                    ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
+                                    : "bg-[#ce7d63] border border-[#ce7d63] text-white shadow-[0_0_4px_#ce7d63aa]"
+                                }`}
+                        >
+                            {loading ? (
+                                <>
+                                    <svg
+                                        className="animate-spin h-4 w-4 text-white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                        <path
+                                            className="opacity-75"
+                                            fill="currentColor"
+                                            d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                                        />
+                                    </svg>
+                                    {existingsub.submittedData ? existingsub.submittedData === "" ? (<>Submitting...</>) : (<>Resubmitting...</>) : (<>Submitting...</>)}
+
+                                </>
+                            ) : success ? (
+                                "Done!"
+                            ) : (
+                                <>
+                                    {existingsub.submittedData ? existingsub.submittedData === "" ? (<><FaPaperPlane /> Submit Answer</>) : (<><FaPaperPlane /> Resubmit Answer</>) : (<><FaPaperPlane /> Submit Answer</>)}
+                                </>
+                            )}
+                        </button>
                     </div>
                 </div>
             </div>

@@ -12,14 +12,21 @@ import { IoMdPerson } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
+import {useSnack} from "./SnackBarContext.jsx";
+import { useState } from "react";
 
 function About() {
+  const {ShowSnackBar} = useSnack();
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  const HandelMessageSend = () => {
+    ShowSnackBar("This service is still under construction" , "info");
+  }
   return (
     <>
       <Header />
-
+      
       <Card
         title="Transforming Learning Through Challenges"
         comment="Questify is a revolutionary platform that helps professionals develop their skills through real-world scenarios and practical challenges."
@@ -186,7 +193,7 @@ function About() {
                 ></textarea>
               </div>
               <button
-                onClick={() => navigate("/contact_us")}
+                onClick={() => HandelMessageSend()}
                 className="w-full bg-[#ce7d63] text-white font-semibold py-2 rounded-lg hover:bg-[#b86c55] transition duration-300 shadow-[0_4px_20px_rgba(206,125,99,0.4)]"
               >
                 Send Message
