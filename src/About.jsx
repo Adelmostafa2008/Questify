@@ -37,9 +37,9 @@ function About() {
       />
 
       <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Our Mission</h2>
+        <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">The Mission</h2>
         <h4 className="text-xl text-[#b3b3b2] max-w-[60%] mx-auto mt-5">
-          We're on a mission to transform how professionals learn and develop their skills through practical, real-world challenges.
+          The mission is to transform how professionals learn and develop their skills through practical, real-world challenges.
         </h4>
       </div>
 

@@ -29,7 +29,7 @@ export default function Profile() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDeleteModal2, setShowDeleteModal2] = useState(false);
   const [deleteInput, setDeleteInput] = useState("");
-  const requiredPhrase = "I Am Gay";
+  const requiredPhrase = "Delete Account Permentlly";
   const visibleSubs = submissions.slice(0, visibleCount);
 
   const fetchUser = async () => {
