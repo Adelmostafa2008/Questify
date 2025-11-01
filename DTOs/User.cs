@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Backend.DTOs
 {
@@ -24,15 +25,14 @@ namespace Backend.DTOs
         [Required]
         public string Password { get; set; }
     }
-
     public class EditUserDTO
     {
         public string? UserName { get; set; }
         public string? Email { get; set; }
         public string? CurrentPassword { get; set; }
         public string? NewPassword { get; set; }
-        public IFormFile? ProfilePicFile { get; set; }
-        public string? Description { get; set; }
+        public IFormFile? ProfilePicFile { get; set; }        
+        public string ?Description { get; set; } = " ";
     }
 
     public class ReadUserDTO

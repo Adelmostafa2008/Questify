@@ -16,10 +16,10 @@ namespace Backend.Controllers
     public class RegController : ControllerBase
     {
         private readonly UserManager<Users> _user;
-        private readonly ITokenGenerator _token; 
+        private readonly ITokenGenerator _token;
         private readonly IUTsubmissionsRepo _sub;
         private readonly SignInManager<Users> _signInManager;
-        public RegController(UserManager<Users> user, ITokenGenerator token, SignInManager<Users> sign , IUTsubmissionsRepo sup)
+        public RegController(UserManager<Users> user, ITokenGenerator token, SignInManager<Users> sign, IUTsubmissionsRepo sup)
         {
             _token = token;
             _user = user;
@@ -110,8 +110,8 @@ namespace Backend.Controllers
                 message = "Logged in Successfully",
             });
         }
-        
-       [HttpPut("{id}")]
+
+        [HttpPut("{id}")]
         public async Task<IActionResult> EditUser([FromRoute] string id, [FromForm] EditUserDTO model)
         {
             if (!ModelState.IsValid)
@@ -141,7 +141,7 @@ namespace Backend.Controllers
 
             //update description
 
-            if (!string.IsNullOrEmpty(model.Description) && model.Description != user.Description)
+            if (model.Description != user.Description)
             {
                 user.Description = model.Description;
             }
@@ -193,7 +193,7 @@ namespace Backend.Controllers
             else
             {
                 return Ok(new
-                { 
+                {
                     user.Id,
                     user.UserName,
                     user.Email,
@@ -215,7 +215,7 @@ namespace Backend.Controllers
             }
             var result = await _user.DeleteAsync(user);
             if (!result.Succeeded)
-            {   
+            {
                 return BadRequest(new { message = "Failed To Delete User", errors = result.Errors });
             }
 
