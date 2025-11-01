@@ -79,7 +79,7 @@ function Card(props) {
               <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">{title}</h2>
               <h4 className="text-gray-400 mt-1">{comment}</h4>
             </div>
-            <button className="bg-[#c27a60] hover:bg-[#b46c56] transition px-4 py-2 rounded-lg text-white font-medium shadow-md" onClick={props.GoTo}>
+            <button className="bg-[#c27a60] hover:bg-[#b46c56] transition px-4 py-2 rounded-lg text-white font-medium shadow-md hover:cursor-pointer" onClick={props.GoTo}>
               {btnContent}
             </button>
           </div>
@@ -96,7 +96,7 @@ function Card(props) {
           <h4 className="max-w-[80%] mx-auto text-gray-200 mt-3 mb-6 relative z-10">{comment}</h4>
 
           <button
-            className="relative z-10 flex justify-center items-center mx-auto text-[#c27a60] bg-white rounded-lg px-5 py-2 font-semibold shadow-md hover:shadow-[#c27a60]/20 transition"
+            className="relative z-10 flex hover:cursor-pointer justify-center items-center mx-auto text-[#c27a60] bg-white rounded-lg px-5 py-2 font-semibold shadow-md hover:shadow-[#c27a60]/20 transition"
             onClick={() => navigate(`/${page}`)}
           >
             <svg className="fill-[#c27a60] w-[25px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -132,7 +132,7 @@ function Card(props) {
           </div>
 
           <button
-            className="relative z-10 mt-auto text-gray-100 bg-[#2b2b2b] hover:bg-[#3a3a3a] transition px-5 py-2 rounded-lg shadow-md"
+            className="relative z-10 mt-auto hover:cursor-pointer text-gray-100 bg-[#2b2b2b] hover:bg-[#3a3a3a] transition px-5 py-2 rounded-lg shadow-md"
             onClick={props.GoTo}
           >
             {btnContent}
@@ -162,7 +162,7 @@ function Card(props) {
             </h4>
             <button
               onClick={props.GoTo}
-              className="mt-10 bg-[#ce7d63] text-white hover:bg-[#b86c55] transition-all duration-300 rounded-lg font-semibold text-lg px-6 py-3 shadow-[0_2px_12px_rgba(206,125,99,0.4)] hover:shadow-[0_4px_20px_rgba(206,125,99,0.6)]"
+              className="mt-10 bg-[#ce7d63] hover:cursor-pointer text-white hover:bg-[#b86c55] transition-all duration-300 rounded-lg font-semibold text-lg px-6 py-3 shadow-[0_2px_12px_rgba(206,125,99,0.4)] hover:shadow-[0_4px_20px_rgba(206,125,99,0.6)]"
             >
               {btnContent}
             </button>
@@ -251,7 +251,7 @@ function Card(props) {
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[#c27a60] text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
+        <button onClick={props.GoTo} className="bg-[#c27a60] hover:cursor-pointer text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">
@@ -291,7 +291,7 @@ function Card(props) {
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-gray-300 mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[#c27a60] text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
+        <button onClick={props.GoTo} className="bg-[#c27a60] hover:cursor-pointer text-white hover:bg-[#b46c56] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">
@@ -330,7 +330,7 @@ function Card(props) {
   return (
     <div className="relative w-full mx-auto my-3 rounded-2xl border-2 border-[#333333] shadow-[0_0_20px_rgba(206,125,99,0.15)] hover:shadow-[0_0_30px_rgba(206,125,99,0.25)] overflow-hidden transition-all duration-300">
       <button
-        className="w-full flex items-center justify-between p-4 bg-[#1f1f1f] text-white text-left rounded-t-2xl"
+        className="w-full flex items-center hover:cursor-pointer justify-between  p-4 bg-[#1f1f1f] text-white text-left rounded-t-2xl"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-lg font-semibold">{title}</span>
@@ -352,7 +352,7 @@ function Card(props) {
           <div className="bg-[#232329] pr-5 pl-4 py-2 rounded-md border-l-[3px] border-[#ce7d63] my-2">
             <div className="flex justify-between items-center">
               <h2 className="flex text-white font-semibold gap-x-2 py-3 w-[100%]"><FaMessage fill="white" size={20} color="white" className="mt-[1.5px]" />Scenario {snNum}</h2>
-              <button onClick={onRemove}><FaTrashCan size={16} color="#b3b3b2" /></button>
+              <button onClick={onRemove} className="hover:cursor-pointer"><FaTrashCan size={16} color="#b3b3b2" /></button>
             </div>
             <div className=" w-[100%] flex flex-col  pb-10">
  

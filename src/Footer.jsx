@@ -1,13 +1,19 @@
-import Facebook from './assets/socialMediaIcons/facebook.png'
-import X from './assets/socialMediaIcons/X.png'
-import Linkedin from './assets/socialMediaIcons/linkedin.png'
-import GitHub from './assets/socialMediaIcons/github.png'
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSnack } from './SnackBarContext.jsx';
+import { useState } from 'react';
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaSquareXTwitter, FaSquareFacebook } from "react-icons/fa6";
 
 function Footer() {
   const navigate = useNavigate();
-  const {ShowSnackBar} = useSnack()
+  const { ShowSnackBar } = useSnack()
+  const [cool, setCool] = useState(false);
+
+  const handelSnack = () => {
+    setCool(true);
+    ShowSnackBar("This service is still under construction", "info");
+    setTimeout(() => { setCool(false); }, 5000);
+  };
 
   return (
     <footer className="bg-[#131313] text-white py-10 mt-10 rounded-t-md">
@@ -29,8 +35,7 @@ function Footer() {
               key={page}
               to={`/${page}`}
               className={({ isActive }) =>
-                `transition-all duration-200 font-medium tracking-wide ${
-                  isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'
+                `transition-all duration-200 font-medium tracking-wide ${isActive ? 'text-[#ce7d63]' : 'text-white hover:text-[#ce7d63]'
                 }`
               }
             >
@@ -43,13 +48,13 @@ function Footer() {
           <div>
             <label className="text-lg font-semibold">Stay in touch:</label>
             <ul className="flex gap-4 mt-3">
-              <li onClick={() => navigate("/Facebook")}><img src={Facebook} alt="Facebook" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li onClick={() => navigate("/X")}><img src={X} alt="X" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li onClick={() => navigate("/LinkedIn")}><img src={Linkedin} alt="LinkedIn" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li onClick={() => navigate("/GitHub")}><img src={GitHub} alt="GitHub" className="w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/Facebook")}><FaSquareFacebook className="text-[#ce7d63] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/X")}><FaSquareXTwitter className="text-[#ce7d63] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/LinkedIn")}><FaLinkedin className="text-[#ce7d63] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/GitHub")}><FaGithub className="text-[#ce7d63] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
             </ul>
           </div>
-          
+
         </div>
 
         <div className="flex flex-col gap-3">
@@ -60,7 +65,7 @@ function Footer() {
               placeholder="Tell us what's broken..."
               className="flex-grow px-3 py-1 rounded bg-[#1f1f1f] text-white border border-gray-600 rounded-r-none focus:border-[#ce7d63] focus:outline-none"
             />
-            <button onClick={() => ShowSnackBar("This service is still under construction" , "info")} className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
+            <button onClick={() => cool ? null : handelSnack()} className="bg-[#ce7d63] px-4 py-1 rounded text-white hover:bg-[#a8634f] transition rounded-l-none font-bold">
               Send
             </button>
           </div>

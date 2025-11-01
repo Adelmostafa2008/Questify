@@ -12,21 +12,26 @@ import { IoMdPerson } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
-import {useSnack} from "./SnackBarContext.jsx";
+import { useSnack } from "./SnackBarContext.jsx";
 import { useState } from "react";
 
 function About() {
-  const {ShowSnackBar} = useSnack();
+  const { ShowSnackBar } = useSnack();
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  const [cool, setCool] = useState(false);
+
+
   const HandelMessageSend = () => {
-    ShowSnackBar("This service is still under construction" , "info");
+    setCool(true);
+    ShowSnackBar("This service is still under construction", "info");
+    setTimeout(() => { setCool(false); }, 5000);
   }
   return (
     <>
       <Header />
-      
+
       <Card
         title="Transforming Learning Through Challenges"
         comment="Questify is a revolutionary platform that helps professionals develop their skills through real-world scenarios and practical challenges."
@@ -55,7 +60,7 @@ function About() {
           <h4 className="text-lg text-[#b3b3b2] mt-4">The passionate individual behind Questify who are dedicated to revolutionizing professional skill development.</h4>
         </div>
         <div className="flex flex-wrap pl-4 justify-center gap-x-[5%]">
-         
+
           <img src={adel} className="border-[#ce7d73a2] border-2 rounded-xl max-w-[50%]" />
           <div className="text-[#dedede] max-w-[50%] mt-10">
             <h2 className="flex gap-x-2 p-2 text-xl"><IoMdPerson size={33} className="text-[#ce7d63] mt-[-4px]" />  Adel Mostafa Saber Mohamed</h2>
@@ -193,7 +198,7 @@ function About() {
                 ></textarea>
               </div>
               <button
-                onClick={() => HandelMessageSend()}
+                onClick={() => cool ? null :HandelMessageSend()}
                 className="w-full bg-[#ce7d63] text-white font-semibold py-2 rounded-lg hover:bg-[#b86c55] transition duration-300 shadow-[0_4px_20px_rgba(206,125,99,0.4)]"
               >
                 Send Message
