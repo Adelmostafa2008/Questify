@@ -29,7 +29,6 @@ namespace Backend.Controllers
 
             if (!res) return NotFound(false);
 
-
             return Ok(true);
         }
 
