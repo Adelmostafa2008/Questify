@@ -4,14 +4,13 @@ import Card from "./Card.jsx";
 import api from "./AxiosHelper.jsx";
 import { useAuth } from "./AuthContext.jsx";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaLightbulb, FaClock, FaStar, FaPaperPlane } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
-import SnackBar from "./SnackBar.jsx";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 
@@ -20,11 +19,12 @@ export default function SelectedTask() {
     const [loading, setLoading] = useState(false);
     const [deleteState, setDeleteState] = useState("idle");
     const [success, setSuccess] = useState(false);
-    const [snackbar, setSnackbar] = useState({ message: "", type: "info" });
     const navigate = useNavigate();
     const { user } = useAuth();
-    const [isHeartFill, setIsHeartFill] = useState(false);
+    const [isFavourite, setIsFavourite] = useState(false);
+    const [favouriteCooldown, setFavouriteCooldown] = useState(false);
     const [Task, setTask] = useState({});
+    const [cooldown, setCooldown] = useState(3);
     const [submit, setSubmit] = useState({
         Userid: "",
         Taskid: "",
@@ -52,11 +52,10 @@ export default function SelectedTask() {
     const CheckFav = async () => {
         try {
             const checkFav = await api.get("/favourites/CheckExistance", { params: { taskid: Number(taskid), userid: String(user.id) } });
-            console.log(checkFav.data);
             if (checkFav.data) {
-                setIsHeartFill(true);
+                setIsFavourite(true);
             } else {
-                setIsHeartFill(false);
+                setIsFavourite(false);
             }
         } catch (err) {
             console.log(err);
@@ -130,7 +129,6 @@ export default function SelectedTask() {
 
     const HandelFavRequest = async () => {
         try {
-            setIsHeartFill(true);
             await api.post("/favourites/AddToFavourites", find);
         } catch (error) {
             console.log(error);
@@ -138,10 +136,28 @@ export default function SelectedTask() {
         }
     }
 
+    const TheHandelationOfFavHandelFunc = () => {
+        const newval = !isFavourite;
+        setIsFavourite(newval);
+        if (favouriteCooldown == true) return;
+        else {
+            setFavouriteCooldown(true);
+            if (!isFavourite) {
+
+                HandelFavRequest();
+            } else {
+                HandelFavRemoveRequest();
+            }
+
+            setTimeout(() => {
+                setFavouriteCooldown(false);
+            }, 2900)
+        }
+    }
+
 
     const HandelFavRemoveRequest = async () => {
         try {
-            setIsHeartFill(false);
             await api.delete("/favourites/DeleteFav", { params: { taskid: Number(taskid), userid: String(user.id) } });
         } catch (error) {
             console.log(error);
@@ -158,6 +174,29 @@ export default function SelectedTask() {
             .replace(/[^\w\-]+/g, '');
     }
 
+
+    const intervalRef = useRef(null);
+
+    const cool = () => {
+
+        if (intervalRef.current) return;
+
+        intervalRef.current = setInterval(() => {
+            setCooldown(prev => {
+                if (prev > 1) {
+                    return prev - 1;
+                } else {
+                    clearInterval(intervalRef.current);
+                    intervalRef.current = null;
+                    return 3;
+                }
+            });
+        }, 1000);
+    };
+
+
+
+
     return (
         <>
             <Header />
@@ -167,7 +206,7 @@ export default function SelectedTask() {
                 <div className="w-[40%] rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
                     <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
-                    <div className="flex justify-end mt-10 gap-x-4">
+                    <div className="flex justify-end mt-10 gap-x-4 items-stretch">
 
 
 
@@ -194,7 +233,7 @@ export default function SelectedTask() {
                         {/* Edit */}
                         <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
                             <button
-                                className="p-2 rounded-md flex items-center border border-gray-700 
+                                className="p-2 rounded-md flex items-center border h-full border-gray-700 
                         shadow-sm
                         hover:border-gray-400 hover:text-gray-200 
                         hover:shadow-md hover:shadow-gray-400/40 
@@ -205,18 +244,28 @@ export default function SelectedTask() {
                         </Link>
 
                         {/* Like */}
-                        <button
-                            onClick={() => isHeartFill ? HandelFavRemoveRequest() : HandelFavRequest()}
-                            className="p-2 rounded-md flex items-center border border-gray-700 
-                                 shadow-sm
-                                hover:bg-red-500/20  hover:border-red-600 transition duration-200"
-                        >
-                            {isHeartFill ? (
-                                <GoHeartFill size={23} className="text-red-500" />
-                            ) : (
-                                <GoHeart size={23} className="text-white" />
-                            )}
-                        </button>
+                        <div className={`rounded-md z-50 `}>
+
+                            <button
+                                onClick={() => {
+                                    if (!favouriteCooldown) {
+                                        cool();
+                                        TheHandelationOfFavHandelFunc();
+                                    }
+                                }}
+                                className={`p-2 text-white rounded-md flex items-center border border-gray-700 
+                            shadow-sm
+                            hover:bg-red-500/20  hover:border-red-600 transition duration-200 `}>
+                                {favouriteCooldown ? cooldown :
+
+                                    isFavourite ? (
+                                        <GoHeartFill size={23} className="text-red-500" />
+                                    ) : (
+                                        <GoHeart size={23} className="text-white" />
+                                    )
+                                }
+                            </button>
+                        </div>
                     </div>
 
                     <div className="relative z-10">
