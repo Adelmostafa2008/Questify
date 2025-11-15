@@ -105,7 +105,7 @@ function Header() {
                         {user.username}
                       </h2>
                       <div className="group">
-                        <p className="text-xs italic break-words max-w-[150px] relative" onClick={() => navigate("/Pricing")}>
+                        <p className="hover:cursor-pointer text-xs italic break-words max-w-[150px] relative" onClick={() => navigate("/Pricing")}>
                           <span className="relative z-0 text-gray-400 transition-colors duration-500 ease-in-out group-hover:text-transparent">
                             Access more features with our Premium subscription!
                           </span>

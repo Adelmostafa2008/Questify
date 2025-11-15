@@ -13,13 +13,14 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { IoDocumentText } from "react-icons/io5";
 import { useSnack } from "./SnackBarContext.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "./AxiosHelper.jsx";
 
 function About() {
   const { ShowSnackBar } = useSnack();
   const navigate = useNavigate();
   const { user } = useAuth();
-
+  const [infos , setInfos] = useState({});
   const [cool, setCool] = useState(false);
 
 
@@ -28,6 +29,21 @@ function About() {
     ShowSnackBar("This service is still under construction", "info");
     setTimeout(() => { setCool(false); }, 5000);
   }
+
+  const GetInfos = async ()  => {
+    try {
+      var res = await api.get("infos/getAboutInfos");
+      //console.log(res.data);
+      setInfos(res.data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    GetInfos();
+  } , [])
   return (
     <>
       <Header />
@@ -100,9 +116,9 @@ function About() {
           <h4 className="text-lg text-[#b3b3b2] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
         </div>
         <div className="flex gap-6 justify-around flex-wrap">
-          <Card cat="about" type="impact" title="50K+" comment="Active Users" />
-          <Card cat="about" type="impact" title="1000+" comment="Challenges Created" />
-          <Card cat="about" type="impact" title="25+" comment="Industry Categories" />
+          <Card cat="about" type="impact" title={`${infos.totalusers || 0}+`} comment="Active Users" />
+          <Card cat="about" type="impact" title={`${infos.totaltasks || 0}+`} comment="Challenges Created" />
+          <Card cat="about" type="impact" title={`${infos.totaltaskscats || 0}+`} comment="Industry Categories" />
           <Card cat="about" type="impact" title="92%" comment="User Satisfaction" />
         </div>
       </div>
