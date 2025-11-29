@@ -20,7 +20,7 @@ function About() {
   const { ShowSnackBar } = useSnack();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [infos , setInfos] = useState({});
+  const [infos, setInfos] = useState({});
   const [cool, setCool] = useState(false);
 
 
@@ -30,7 +30,7 @@ function About() {
     setTimeout(() => { setCool(false); }, 5000);
   }
 
-  const GetInfos = async ()  => {
+  const GetInfos = async () => {
     try {
       var res = await api.get("infos/getAboutInfos");
       //console.log(res.data);
@@ -43,9 +43,9 @@ function About() {
 
   useEffect(() => {
     GetInfos();
-  } , [])
+  }, [])
   return (
-    <>
+    <div className="bg-[var(--bg)]">
       <Header />
 
       <Card
@@ -58,8 +58,8 @@ function About() {
       />
 
       <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">The Mission</h2>
-        <h4 className="text-xl text-[#b3b3b2] max-w-[60%] mx-auto mt-5">
+        <h2 className="text-5xl font-extrabold text-[var(--text)] bg-clip-text ">The Mission</h2>
+        <h4 className="text-xl text-[var(--subtext)] max-w-[60%] mx-auto mt-5">
           The mission is to transform how professionals learn and develop their skills through practical, real-world challenges.
         </h4>
       </div>
@@ -70,35 +70,94 @@ function About() {
         <Card title="Continuous Improvement" type="mission" cat="about" comment="We're committed to helping professionals continuously improve their skills and advance their careers. Our platform provides personalized feedback and tracks progress over time." mypicture="chart" />
       </div>
 
-      <div className="bg-[#111] w-[80%] mx-auto my-20 rounded-xl pb-16">
-        <div className="text-center text-white py-10">
-          <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Meet The Creator</h2>
-          <h4 className="text-lg text-[#b3b3b2] mt-4">The passionate individual behind Questify who are dedicated to revolutionizing professional skill development.</h4>
-        </div>
-        <div className="flex flex-wrap pl-4 justify-center gap-x-[5%]">
+      <div className="relative w-[80%] mx-auto my-20 border-2 border-[#333333] rounded-3xl">
 
-          <img src={adel} className="border-[#ce7d73a2] border-2 rounded-xl max-w-[50%]" />
-          <div className="text-[#dedede] max-w-[50%] mt-10">
-            <h2 className="flex gap-x-2 p-2 text-xl"><IoMdPerson size={33} className="text-[#ce7d63] mt-[-4px]" />  Adel Mostafa Saber Mohamed</h2>
-            <h2 className="flex gap-x-2 p-2 text-xl"> <MdOutlineAlternateEmail size={33} className="text-[#ce7d63] mt-[-4px]" /> adel.0523035@gmail.com</h2>
-            <h2 className="flex gap-x-2 p-2 text-xl"><FaGithub size={33} className="text-[#ce7d63] mt-[-4px]" /><a href="https://github.com/Adelmostafa2008" target="_blank" className="text-[#ce7d63] text-decoration-line: underline hover:text-[#ce7e63cc]">Github</a></h2>
-            <h2 className="flex gap-x-2 p-2 text-xl"><FaLinkedin size={33} className="text-[#ce7d63] mt-[-4px]" /> <a href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332" target="_blank" className="text-[#ce7d63] text-decoration-line: underline hover:text-[#ce7e63cc]">LinkedIn</a></h2>
-            <div className="flex gap-x-2 p-2">
-              <div>
-                <IoDocumentText size={35} className="text-[#ce7d63] w-[35px] h-[35px]" />
+        {/* Background Glow Orbs */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none z-40 rounded-3xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl z-40"></div>
+
+        {/* Main Container */}
+        <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-12 shadow-[0_0_70px_rgba(0,0,0,0.3)] backdrop-blur-xl">
+
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-[var(--text)] text-6xl font-black tracking-tight drop-shadow-sm">
+              Meet the Creator
+            </h1>
+            <p className="text-[var(--subtext)] text-lg mt-4 max-w-[70%] mx-auto leading-relaxed">
+              The creator behind Questify — building future-ready technology with precision,
+              purpose, and passion.
+            </p>
+          </div>
+
+          {/* Split Layout */}
+          <div className="flex flex-wrap justify-center items-start gap-20">
+
+            {/* Left Side — Big Image Card */}
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+                <img src={adel} className="w-[310px] h-auto object-cover" />
               </div>
-              <h2 className="pt-2 italic max-w-[80%]">'' Passionate Full-Stack Developer
-                eager to build impactful and scalable
-                applications using .NET and React. Skilled in problem solving and driven by a strong passion for coding,
-                I'm committed to continuous learning and delivering high-quality software.  ''</h2>
+
+              {/* Floating Badge */}
+              <div className="absolute -bottom-4.5 left-1/2 w-max -translate-x-1/2 bg-[var(--text)] text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                Full-Stack Developer
+              </div>
+            </div>
+
+            {/* Right Side — Info */}
+            <div className="max-w-[450px] space-y-8">
+
+              {/* Name */}
+              <div>
+                <h2 className="text-3xl font-bold text-[var(--text)] tracking-tight">
+                  Adel Mostafa Saber Mohamed
+                </h2>
+                <p className="text-[var(--subtext)] text-base mt-1">
+                  Building real experiences with clean code.
+                </p>
+              </div>
+
+              {/* Contact Cards */}
+              <div className="space-y-4">
+
+                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition">
+                  <MdOutlineAlternateEmail className="text-[var(--text)]" size={28} />
+                  <span className="text-[var(--subtext)] text-lg">adel.0523035@gmail.com</span>
+                </div>
+
+                <a href="https://github.com/Adelmostafa2008" target="_blank"
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition cursor-pointer">
+                  <FaGithub className="text-[var(--text)]" size={28} />
+                  <span className="text-[var(--text)] text-lg underline">Github</span>
+                </a>
+
+                <a href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332" target="_blank"
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition cursor-pointer">
+                  <FaLinkedin className="text-[var(--text)]" size={28} />
+                  <span className="text-[var(--text)] text-lg underline">LinkedIn</span>
+                </a>
+              </div>
+
+              {/* Short Bio */}
+              <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-white/10 shadow-inner">
+                <div className="flex gap-4">
+                  <IoDocumentText className="text-[var(--text)] h-10" size={93} />
+                  <p className="text-[var(--subtext)] italic leading-relaxed">
+                    “A developer who loves crafting scalable systems with .NET and React.
+                    Clean code, real-world impact, and continuous improvement — that’s the mission.”
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+
       <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Why Choose Questify</h2>
-        <h4 className="text-lg text-[#b3b3b2] mt-4 max-w-[60%] mx-auto">Discover the unique features that make Questify the leading platform for skill development through practical challenges.</h4>
+        <h2 className="text-5xl font-extrabold text-[var(--text)] bg-clip-text ">Why Choose Questify</h2>
+        <h4 className="text-lg text-[var(--subtext)] mt-4 max-w-[60%] mx-auto">Discover the unique features that make Questify the leading platform for skill development through practical challenges.</h4>
       </div>
 
       <div className="grid grid-cols-2 w-[80%] mx-auto gap-y-12 gap-x-10 my-16">
@@ -110,10 +169,12 @@ function About() {
         <Card cat="about" type="why-questify" mypicture="badge" title="Skill Certification" comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms." />
       </div>
 
-      <div className="bg-[#111] w-[80%] mx-auto rounded-xl my-20 pb-14">
-        <div className="text-center text-white py-10">
-          <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Our Impact</h2>
-          <h4 className="text-lg text-[#b3b3b2] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
+      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+        <div className="text-center text-white py-10 mb-5">
+          <h2 className="text-5xl font-extrabold bg-clip-text text-[var(--text)]">Our Impact</h2>
+          <h4 className="text-lg text-[var(--subtext)] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
         </div>
         <div className="flex gap-6 justify-around flex-wrap">
           <Card cat="about" type="impact" title={`${infos.totalusers || 0}+`} comment="Active Users" />
@@ -124,46 +185,46 @@ function About() {
       </div>
 
       <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text text-transparent">Get In Touch</h2>
-        <h4 className="text-lg text-[#b3b3b2] mt-4">Have questions or want to learn more about Questify? We'd love to hear from you!</h4>
+        <h2 className="text-5xl font-extrabold  bg-clip-text text-[var(--text)]">Get In Touch</h2>
+        <h4 className="text-lg text-[var(--subtext)] mt-4">Have questions or want to learn more about Questify? We'd love to hear from you!</h4>
       </div>
 
       <div className="flex w-[80%] gap-20 mx-auto items-stretch mb-20">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-40">
 
 
-          <div className="relative bg-[#1f1f1f] px-8 py-10 rounded-2xl border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none"></div>
             <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
 
-            <h2 className="text-3xl font-extrabold text-white mb-8 flex gap-x-3 justify-center relative z-10">
-              <FaPhone size={30} className="text-[#ce7d63]" /> Contact Information
+            <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
+              <FaPhone size={30} className="text-[var(--text)]" /> Contact Information
             </h2>
 
-            <div className="space-y-6 text-white relative z-10">
+            <div className="space-y-6 text-[var(--tasktext)] relative z-10">
               <div>
-                <h3 className="text-xl font-semibold flex gap-x-2">
-                  <FaLocationDot size={20} className="text-[#ce7d63]" /> Address
+                <h3 className="text-xl font-semibold  flex gap-x-2">
+                  <FaLocationDot size={20} className="text-[var(--text)]" /> Address
                 </h3>
-                <p className="text-[#c5c5c5]">123 Innovation Drive, Tech City, CA 94103, United States</p>
+                <p className="text-[var(--subtext)]">123 Innovation Drive, Tech City, CA 94103, United States</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold flex gap-x-2">
-                  <MdEmail size={20} className="text-[#ce7d63]" /> Email
+                  <MdEmail size={20} className="text-[var(--text)]" /> Email
                 </h3>
-                <p className="text-[#c5c5c5]">info@questify.com</p>
+                <p className="text-[var(--subtext)]">info@questify.com</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold flex gap-x-2">
-                  <FaPhone size={20} className="text-[#ce7d63]" /> Phone
+                  <FaPhone size={20} className="text-[var(--text)]" /> Phone
                 </h3>
-                <p className="text-[#c5c5c5]">+1 (555) 123-4567</p>
+                <p className="text-[var(--subtext)]">+1 (555) 123-4567</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold flex gap-x-2">
-                  <IoIosAlarm size={20} className="text-[#ce7d63]" /> Hours
+                  <IoIosAlarm size={23} className="text-[var(--text)]" /> Hours
                 </h3>
-                <p className="text-[#c5c5c5]">
+                <p className="text-[var(--subtext)]">
                   Monday - Friday: 9am - 6pm<br />
                   Saturday: 10am - 4pm
                 </p>
@@ -172,50 +233,50 @@ function About() {
           </div>
 
 
-          <div className="relative bg-[#1f1f1f] rounded-2xl p-10 border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none"></div>
             <div className="absolute -bottom-10 -right-10 w-[220px] h-[220px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
 
-            <h2 className="text-3xl font-extrabold text-white mb-8 flex gap-x-3 justify-center relative z-10">
-              <IoIosSend size={30} className="text-[#ce7d63]" /> Send Us a Message
+            <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
+              <IoIosSend size={30} className="text-[var(--text)]" /> Send Us a Message
             </h2>
 
             <form className="space-y-5 relative z-10" onSubmit={(e) => e.preventDefault()}>
               <div>
-                <label className="block text-white font-semibold mb-1">Your Name</label>
+                <label className="block text-[var(--tasktext)] font-semibold mb-1">Your Name</label>
                 <input
                   type="text"
                   placeholder="Enter your name..."
-                  className="w-full text-white px-4 py-2 border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
+                  className="w-full text-[var(--tasktext)]  px-4 py-2 border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-white font-semibold mb-1">Email Address</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Email Address</label>
                 <input
                   type="email"
                   placeholder="example@example.com"
-                  className="w-full px-4 py-2 text-white border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 text-[var(--tasktext)]  border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-white font-semibold mb-1">Subject</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Subject</label>
                 <input
                   type="text"
                   placeholder="Enter subject..."
-                  className="w-full px-4 py-2 border text-white border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 border text-white border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
-                <label className="block text-white font-semibold mb-1">Message</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Message</label>
                 <textarea
                   rows="4"
                   placeholder="Enter your message..."
-                  className="w-full px-4 py-2 border resize-none text-white border-[#333333] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[#ce7d63] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 border resize-none text-white border-[#333333] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 ></textarea>
               </div>
               <button
-                onClick={() => cool ? null :HandelMessageSend()}
-                className="w-full bg-[#ce7d63] text-white font-semibold py-2 rounded-lg hover:bg-[#b86c55] transition duration-300 shadow-[0_4px_20px_rgba(206,125,99,0.4)]"
+                onClick={() => cool ? null : HandelMessageSend()}
+                className="w-full bg-[var(--text)] text-white font-semibold py-2 rounded-lg hover:bg-[var(--ce7hover)] transition duration-300 shadow-[0_4px_20px_rgba(206,125,99,0.4)]"
               >
                 Send Message
               </button>
@@ -227,7 +288,7 @@ function About() {
 
 
       <Footer />
-    </>
+    </div>
   );
 }
 export default About;

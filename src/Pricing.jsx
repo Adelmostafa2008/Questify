@@ -5,18 +5,18 @@ import { useNavigate } from 'react-router-dom';
 function Pricing() {
   const navigate = useNavigate();
   return (
-    <>
+    <div className='bg-[var(--bg)]'>
       <Header />
       
 
-      <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+      <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
         <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
         <div className="text-center relative z-10">
-          <h2 className="text-5xl font-extrabold text-[#ce7d63] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]" style={{ fontFamily: "'Pricedown', sans-serif" }}>
+          <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]" style={{ fontFamily: "'Pricedown', sans-serif" }}>
             Select a plan
           </h2>
-          <p className="mt-4 text-gray-400 text-xl italic">
+          <p className="mt-4 text-[var(--subtext)] text-xl italic">
             Whatever it is, it's just 3 dollars a month you poor motherf***er
           </p>
         </div>
@@ -79,20 +79,19 @@ function Pricing() {
         />
       </div>
 
-      <div className="w-[80%] mx-auto my-16 p-10 rounded-2xl bg-[#1a1a1a] border border-[#2a2a2a] shadow-[0_0_30px_rgba(206,125,99,0.15)] relative overflow-hidden">
+      <div className="w-[80%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border border-[#2a2a2a] shadow-[0_0_30px_rgba(206,125,99,0.15)] relative overflow-hidden">
   {/* Softer gradient overlay */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/5 via-transparent to-black/60 pointer-events-none"></div>
+  <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/5 via-transparent to-black/20 pointer-events-none"></div>
   {/* Smaller, lighter glow orb */}
-  <div className="absolute top-10 right-10 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/10 blur-2xl"></div>
-
+ <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/30 blur-3xl"></div>
   <div className="text-center relative z-10 mb-8">
     <h2
-      className="text-4xl md:text-5xl font-extrabold text-[#ce7d63] tracking-[0.08em] uppercase drop-shadow-[0_0_6px_rgba(206,125,99,0.5)]"
+      className="text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.08em] uppercase drop-shadow-[0_0_6px_rgba(206,125,99,0.5)]"
       style={{ fontFamily: "'Pricedown', sans-serif" }}
     >
       Frequently Asked Questions (FAQs)
     </h2>
-    <p className="mt-4 text-gray-400 text-lg italic">
+    <p className="mt-4 text-[var(--subtext)] text-lg italic">
       Read carefully so you don't ask stupid questions again
     </p>
   </div>
@@ -123,7 +122,7 @@ function Pricing() {
 
 
       <Footer />
-    </>
+    </div>
   );
 }
 

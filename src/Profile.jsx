@@ -3,7 +3,7 @@ import Footer from "./Footer.jsx";
 import { useAuth } from "./AuthContext.jsx";
 import { IoPencilSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "./AxiosHelper.jsx";
 import CalendarHeatmap from "react-calendar-heatmap";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 import "react-calendar-heatmap/dist/styles.css";
 import { BatteryFull, BatteryLow, BatteryMedium } from "lucide-react";
 import null_dark from "./assets/null_dark.png"
-import React from "react";
+import null_light from "./assets/null_light.png"
+import {ThemeContext} from "./ThemeContext.jsx"
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 export default function Profile() {
@@ -20,11 +21,12 @@ export default function Profile() {
   const { user, logout } = useAuth();
   const [oldUser, setOldUser] = useState({});
   const [preview, setPreview] = useState("");
+  const {theme} = useContext(ThemeContext)
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [activity, setActivity] = useState([]);
   const [submissions, setSubmissions] = useState([]);
-  const [fav , setFav] = useState([]);
+  const [fav, setFav] = useState([]);
   const visibleCount = 5;
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDeleteModal2, setShowDeleteModal2] = useState(false);
@@ -94,10 +96,10 @@ export default function Profile() {
         console.log(err);
       }
     };
-    if(user?.id) getFav();
+    if (user?.id) getFav();
   },
-  [user]
-)
+    [user]
+  )
 
   function slugify(text) {
     return text
@@ -134,25 +136,25 @@ export default function Profile() {
   };
 
   return (
-    <>
+    <div className="bg-[var(--bg)]">
       <Header />
 
       <div className="flex justify-center items-start my-16">
-        <div className="w-[70%] rounded-xl bg-[#181818] border border-[#2a2a2a] shadow-[0_0_25px_rgba(0,0,0,0.6)] relative overflow-hidden px-7 py-10">
+        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[#2a2a2a] shadow-[0_0_25px_rgba(0,0,0,0.6)] relative overflow-hidden px-7 py-10">
           {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/60 via-transparent to-[#111]/90 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/20 via-transparent to-[#111]/20 pointer-events-none"></div>
           <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
           <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
 
           <div className="mb-5 flex justify-end">
             <button
               onClick={() => navigate("/Profile/Edit")}
-              className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
+              className="relative bg-[var(--cardbg)] border border-[#333333] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           flex
                           justify-center
                           items-center gap-x-2
-                          hover:border-gray-400 hover:text-gray-200
+                          hover:border-gray-400
                           hover:shadow-[0_0_10px_rgba(192,192,192,0.5)]
                           transition-all duration-300"
             >
@@ -169,8 +171,8 @@ export default function Profile() {
               />
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-white">{oldUser.userName}</h3>
-              <p className="text-gray-400 italic mt-2 text-lg">
+              <h3 className="text-2xl font-bold text-[var(--tasktext)]">{oldUser.userName}</h3>
+              <p className="text-[var(--subtext)] italic mt-2 text-lg">
                 "{oldUser.description || "No description yet..."}"
               </p>
             </div>
@@ -178,22 +180,22 @@ export default function Profile() {
 
           {/* Activity Heatmap */}
           <div className="relative z-10 my-12">
-            <h3 className="text-lg font-bold text-gray-200 mb-4">
+            <h3 className="text-lg font-bold text-[var(--subtext)] mb-4">
               Activity Rate
             </h3>
-            <div className="rounded-xl border border-[#333] bg-[#1a1a1a] p-4 shadow-inner">
+            <div className="rounded-xl border border-[#333] bg-[var(--taskpreveiw)] p-4 shadow-inner">
               <CalendarHeatmap
                 startDate={new Date("2025-01-01")}
                 endDate={new Date("2025-12-31")}
                 values={activity}
                 gutterSize={2}
                 classForValue={(value) => {
-                  if (!value) return "fill-[#2b1b17]";
-                  if (value.count < 2) return "fill-[#f8e0d8]";
-                  if (value.count < 4) return "fill-[#f0bca8]";
-                  if (value.count < 6) return "fill-[#e89b84]";
-                  if (value.count < 8) return "fill-[#ce7d63]";
-                  if (value.count < 10) return "fill-[#a95546]";
+                  if (!value) return "fill-[var(--noactive)]";
+                  if (value.count < 2) return "fill-[var(--less2)]";
+                  if (value.count < 4) return "fill-[var(--less4)]";
+                  if (value.count < 6) return "fill-[var(--less6)]";
+                  if (value.count < 8) return "fill-[var(--less8)]";
+                  if (value.count < 10) return "fill-[var(--less10)]";
                   return "fill-[#7d3e34]";
                 }}
                 tooltipDataAttrs={(value) => {
@@ -218,7 +220,7 @@ export default function Profile() {
           <div className="relative z-10 mb-12">
             <div className="flex justify-between items-center mb-3">
 
-              <h3 className="text-lg font-bold text-gray-200">
+              <h3 className="text-lg font-bold text-[var(--tasktext)]">
                 Latest Submissions
               </h3>
               <div className="flex relative z-10 justify-end">
@@ -311,7 +313,7 @@ export default function Profile() {
               )}
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-[#1a1a1a] p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-transparent p-4 shadow-inner">
               {visibleSubs.length > 0 ? (visibleSubs.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -319,19 +321,19 @@ export default function Profile() {
                 >
                   <li
                     key={i}
-                    className="p-4 rounded-lg border border-[#333] bg-[#1a1a1a] hover:bg-[#222] transition shadow-[0_0_10px_rgba(206,125,99,0.15)]"
+                    className="p-4 rounded-lg border border-[#333] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_10px_rgba(206,125,99,0.15)]"
 
                   >
                     <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-white">
+                      <h4 className="text-lg font-semibold text-[var(--tasktext)]">
                         {s.taskname}
                       </h4>
                       <span
                         className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                          ? "bg-[#3a241f] text-[#ce7d63]"
+                          ? "bg-[#ce7d631a] text-[var(--text)]"
                           : s.taskdefficulty === "Medium"
-                            ? "bg-[#4a2e26] text-[#e89b84]"
-                            : "bg-[#5a352c] text-[#f0bca8]"
+                            ? "bg-[#ce7d631a] text-[var(--text)]"
+                            : "bg-[#ce7d631a] text-[var(--text)]"
                           }`}
                       >
                         {s.taskdefficulty === "Easy" ? (
@@ -347,7 +349,7 @@ export default function Profile() {
                       {s.taskdescription}
                     </p>
                     <div className="flex justify-between mt-3 text-sm text-gray-500">
-                      <span className="px-2 py-1 rounded bg-[#222] text-[#ce7d63]">
+                      <span className="px-2 py-1 rounded bg-[#ce7d631a] text-[var(--text)]">
                         {s.taskcategory}
                       </span>
                       <div className="flex gap-x-4">
@@ -361,7 +363,7 @@ export default function Profile() {
                     </div>
                   </li>
                 </Link>
-              ))) : <img src={null_dark} className="w-[200px] h-[167px] mx-auto my-5" />}
+              ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
             </ul>
             {visibleCount < submissions.length ? (
               <button className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
@@ -386,12 +388,12 @@ export default function Profile() {
           <div className="relative z-10 mb-12">
             <div className="flex justify-between items-center mb-3">
 
-              <h3 className="text-lg font-bold text-gray-200">
+              <h3 className="text-lg font-bold text-[var(--tasktext)]">
                 Favourites
               </h3>
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-[#1a1a1a] p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-transparent p-4 shadow-inner">
               {fav.length > 0 ? (fav.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -441,7 +443,7 @@ export default function Profile() {
                     </div>
                   </li>
                 </Link>
-              ))) : <img src={null_dark} className="w-[200px] h-[167px] mx-auto my-5" />}
+              ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
             </ul>
             {visibleCount < submissions.length ? (
               <button className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
@@ -571,6 +573,6 @@ export default function Profile() {
 
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -13,32 +13,34 @@ import TaskEdit from "./TaskEdit.jsx";
 import SolvedTasks from "./SolvedTasks.jsx"
 import SryBro from './StillUnderConstruction.jsx';
 import FavTasks from "./FavTasks.jsx"
+import Sittings from "./Sittings.jsx";
 
 function App() {
-  return(
+  return (
     <>
-  <Router>
+      <Router>
 
-    <Routes>
-      <Route path='/About' element={<About/>}/> 
-      <Route path='/Home' element={<Home/>}/>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/Registration' element = {<Reg/>}/>
-      <Route path = '/Pricing' element = {<Payment/>}/>
-      <Route path = '/Addtask' element = {<Addtask/>}/>
-      <Route path = "/Tasks" element = {<Tasks/>}/>
-      <Route path = "/Profile" element = {<Profile/>}/>
-      <Route path='/SelectedPlan' element = {<SelectedPlan/>}/>
-      <Route path='/Tasks/:taskid/:taskName' element = {<SelectedTask/>}/>
-      <Route path='/Tasks/:taskid/:taskName/Edit' element = {<TaskEdit/>}/>
-      <Route path = "/Profile/Edit" element = {<EditProfile/>}/>
-      <Route path = "/Profile/Solvedtasks"  element = {<SolvedTasks/>}/>
-      <Route path="/Profile/Favourites" element = {<FavTasks/>}/>
+        <Routes>
+          <Route path='/About' element={<About />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/Registration' element={<Reg />} />
+          <Route path='/Pricing' element={<Payment />} />
+          <Route path='/Addtask' element={<Addtask />} />
+          <Route path="/Tasks" element={<Tasks />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path='/SelectedPlan' element={<SelectedPlan />} />
+          <Route path='/Tasks/:taskid/:taskName' element={<SelectedTask />} />
+          <Route path='/Tasks/:taskid/:taskName/Edit' element={<TaskEdit />} />
+          <Route path="/Profile/Edit" element={<EditProfile />} />
+          <Route path="/Profile/Solvedtasks" element={<SolvedTasks />} />
+          <Route path="/Profile/Favourites" element={<FavTasks />} />
+          <Route path="/Sittings" element={<Sittings />} />
 
-      <Route path = "*"  element = {<SryBro/>}/>
-    </Routes>
+          <Route path="*" element={<SryBro />} />
+        </Routes>
 
-    </Router>
+      </Router>
     </>
   );
 }

@@ -105,36 +105,36 @@ export default function TaskEdit() {
     }
 
     return (
-        <>
+        <div className="bg-[var(--bg)]">
             <Header />
 
             {/*all comments in the code are made by me and only me , so hussain i didnot use AI*/}
             <div className="flex justify-center gap-10 items-start my-10">
 
                 {/* Left Panel: Create Task */}
-                <div className="w-[35%] rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+                <div className="w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
                     <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
 
                     <div className="relative z-10">
                         {/*Create task header*/}
                         <div className="pt-5 pb-3.5 border-b-[1px] border-[#333333]">
-                            <h2 className="flex text-white text-xl font-semibold gap-x-2 items-center uppercase tracking-[0.05em]">
-                                <FaEdit size={30} color="#ce7d63" className="mb-1.5" /> Edit Task
+                            <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 items-center uppercase tracking-[0.05em]">
+                                <FaEdit size={30} color="var(--text)" className="mb-1.5" /> Edit Task
                             </h2>
                         </div>
 
                         {/*Basic Information*/}
-                        <h2 className="flex text-white font-semibold gap-x-2 py-3 mt-2"><FaCircleInfo size={17} color="#ce7d63" /> Basic Information</h2>
+                        <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3 mt-2"><FaCircleInfo size={17} color="var(--text)" /> Basic Information</h2>
 
-                        <div className="flex text-white justify-center gap-[3%]">
+                        <div className="flex text-[var(--tasktext)] justify-center gap-[3%]">
                             <div className="flex flex-col w-[50%]">
-                                <label className="text-[#b3b3b2] text-sm mb-2 mt-2">Task Title</label>
-                                <input type="text" defaultValue={task.taskname} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskname: e.target.value }))} placeholder="Enter task title..." className="w-full px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[#ce7d63] focus:shadow-[0_0_4px_#ce7d63aa]" />
+                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Title</label>
+                                <input type="text" defaultValue={task.taskname} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskname: e.target.value }))} placeholder="Enter task title..." className="w-full px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_#ce7d63aa]" />
                             </div>
                             <div className="flex flex-col w-[50%]">
-                                <label className="text-[#b3b3b2] text-sm mb-2 mt-2">Category</label>
-                                <select value={task.taskcategory} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskcategory: e.target.value }))} className="w-full bg-[#1f1f1f] px-4 py-2 border border-[#333333] rounded-md focus:outline-0 focus:border-[#ce7d63] focus:shadow-[0_0_4px_#ce7d63aa]">
+                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Category</label>
+                                <select value={task.taskcategory} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskcategory: e.target.value }))} className="w-full bg-[var(--cardbg)] px-4 py-2.5 border border-[#333333] rounded-md focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_#ce7d63aa]">
                                     <option value="">Select a category</option>
                                     <option value="call-center">Call Center</option>
                                     <option value="marketing">Marketing</option>
@@ -148,27 +148,27 @@ export default function TaskEdit() {
 
                         {/*Difficulty*/}
                         <div className="py-5">
-                            <h2 className="text-[#b3b3b2] text-sm mb-2 mt-2">Difficulty Level</h2>
-                            <div className="flex text-white gap-x-[3.333%]">
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Easy" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Easy" ? "bg-[#3ebf8f1a] border-[#3ebf8f] shadow-[0_0_4px_#3ebf8f88]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"}`}><BatteryLow size={20} color="green" /> Easy</button>
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Medium" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Medium" ? "bg-[#fabb181a] border-[#fabb18] shadow-[0_0_4px_#fabb1888]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"}`}><BatteryMedium size={20} color="yellow" /> Medium</button>
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Hard" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Hard" ? "bg-[#d820421a] border-[#d82042] shadow-[0_0_4px_#d8204288]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[#ce7d63]"}`}><BatteryFull size={20} color="red" /> Hard</button>
+                            <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">Difficulty Level</h2>
+                            <div className="flex text-[var(--tasktext)] gap-x-[3.333%]">
+                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Easy" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Easy" ? "bg-[#3ebf8f1a] border-[#3ebf8f] shadow-[0_0_4px_#3ebf8f88]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[var(--text)]"}`}><BatteryLow size={20} color="green" /> Easy</button>
+                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Medium" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Medium" ? "bg-[#fabb181a] border-[#fabb18] shadow-[0_0_4px_#fabb1888]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[var(--text)]"}`}><BatteryMedium size={20} className="text-yellow-400" /> Medium</button>
+                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Hard" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Hard" ? "bg-[#d820421a] border-[#d82042] shadow-[0_0_4px_#d8204288]" : "border-[#333333] hover:bg-[#ce7d6312] hover:border-[var(--text)]"}`}><BatteryFull size={20} color="red" /> Hard</button>
                             </div>
                         </div>
 
                         {/*Task Description*/}
                         <div className="w-full flex flex-col pb-5">
-                            <h2 className="text-[#b3b3b2] text-sm mb-2 mt-2">Task Description</h2>
-                            <textarea defaultValue={task.taskdescription} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskdescription: e.target.value }))} placeholder="Enter detailed task description..." className="text-white bg-transparent px-4 py-2 border border-[#333333] rounded-md focus:outline-0 focus:border-[#ce7d63] focus:shadow-[0_0_4px_#ce7d63aa] max-h-36 min-h-36" />
+                            <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Description</h2>
+                            <textarea defaultValue={task.taskdescription} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskdescription: e.target.value }))} placeholder="Enter detailed task description..." className="text-[var(--tasktext)] bg-transparent px-4 py-2 border border-[#333333] rounded-md focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_#ce7d63aa] max-h-36 min-h-36" />
                         </div>
 
                         {/* Scenarios*/}
                         <div className="flex flex-col mb-8">
                             <div className="flex justify-between items-center">
-                                <h2 className="flex text-white font-semibold gap-x-2 py-3"><FaLightbulb size={17} color="#ce7d63" /> Scenarios</h2>
-                                <label className={`${cards.length < 5 ? "text-[#b3b3b2]" : "text-red-600"} text-sm`}>{cards.length} / 5</label>
+                                <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3"><FaLightbulb size={17} color="var(--text)" /> Scenarios</h2>
+                                <label className={`${cards.length < 5 ? "text-[var(--subtext)]" : "text-red-600"} text-sm`}>{cards.length} / 5</label>
                             </div>
-                            <h2 className="text-[#b3b3b2] mb-2 mt-1">Add realistic scenarios for users to solve. Each scenario should present a unique challenge.</h2>
+                            <h2 className="text-[var(--subtext)] mb-2 mt-1">Add realistic scenarios for users to solve. Each scenario should present a unique challenge.</h2>
                             {cards && (
                                 <>
                                     {cards.length > 0 ? cards.map((scene, ID) => (
@@ -183,8 +183,8 @@ export default function TaskEdit() {
                                             TDE={scene.TDE}
                                         />
                                     )) :
-                                        <div className={`flex gap-x-1 mt-1 py-10 w-full border border-dashed text-[#ce7d63] border-[#ce7d63] bg-transparent justify-center rounded-md text-sm cursor-pointer`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
-                                            <Plus size={15} color={cards.length < 5 ? "#ce7d63" : "#b3b3b2"} />
+                                        <div className={`flex gap-x-1 mt-1 py-10 w-full border border-dashed text-[var(--text)] border-[var(--text)] bg-transparent justify-center rounded-md text-sm cursor-pointer`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
+                                            <Plus size={15} color={cards.length < 5 ? "var(--text)" : "#b3b3b2"} />
                                             No scenarios added yet, click to add a scenario
                                         </div>}
                                 </>
@@ -192,30 +192,30 @@ export default function TaskEdit() {
                             }
 
                             {cards.length > 0 &&
-                                <button className={`flex gap-x-1 mt-2 py-2 w-full border border-dashed ${cards.length < 5 ? "text-[#ce7d63] border-[#ce7d63] bg-transparent" : "text-[#b3b3b2] border-[#707070] bg-[#333333]"} justify-center rounded-md text-sm`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
-                                    <Plus size={15} color={cards.length < 5 ? "#ce7d63" : "#b3b3b2"} />
+                                <button className={`flex gap-x-1 mt-2 py-2 w-full border border-dashed ${cards.length < 5 ? "text-[var(--text)] border-[var(--text)] bg-transparent" : "text-[#b3b3b2] border-[#707070] bg-[#333333]"} justify-center rounded-md text-sm`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
+                                    <Plus size={15} color={cards.length < 5 ? "var(--text)" : "#b3b3b2"} />
                                     Add Another Scenario
                                 </button>}
                         </div>
 
                         {/*Additional settings*/}
-                        <h2 className="flex text-white font-semibold gap-x-2 py-3"><IoMdSettings size={20} color="#ce7d63" /> Additional Settings</h2>
+                        <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3"><IoMdSettings size={20} color="var(--text)" /> Additional Settings</h2>
 
-                        <div className="flex text-white justify-around pb-10 gap-[3%]">
+                        <div className="flex text-[var(--tasktext)] justify-around pb-10 gap-[3%]">
                             <div className="flex flex-col w-[50%]">
-                                <label className="text-[#b3b3b2] text-sm mb-2 mt-2">Estimated Time (minutes)</label>
-                                <input type="number" defaultValue={task.tasktime} placeholder="e.g., 30" onChange={(e) => SetTask(prevtask => ({ ...prevtask, tasktime: parseInt(e.target.value, 10) }))} max={120} min={30} className="px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[#ce7d63] focus:shadow-[0_0_4px_#ce7d63aa]" />
+                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Estimated Time (minutes)</label>
+                                <input type="number" defaultValue={task.tasktime} placeholder="e.g., 30" onChange={(e) => SetTask(prevtask => ({ ...prevtask, tasktime: parseInt(e.target.value, 10) }))} max={120} min={30} className="px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_#ce7d63aa]" />
                             </div>
                             <div className="flex flex-col w-[50%]">
-                                <label className="text-[#b3b3b2] text-sm mb-2 mt-2">Maximum Points</label>
-                                <input type="number" defaultValue={task.taskpoints} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskpoints: parseInt(e.target.value, 10) }))} placeholder="e.g., 100" max={200} min={20} className="px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[#ce7d63] focus:shadow-[0_0_4px_#ce7d63aa]" />
+                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Maximum Points</label>
+                                <input type="number" defaultValue={task.taskpoints} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskpoints: parseInt(e.target.value, 10) }))} placeholder="e.g., 100" max={200} min={20} className="px-4 py-2 bg-transparent border border-[#333333] rounded-md focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_#ce7d63aa]" />
                             </div>
                         </div>
 
                         {/*Buttons*/}
                         <div className="flex justify-end pb-10 gap-3">
                             <button
-                                className="text-white border border-[#333333] px-4 py-2 text-sm rounded-md  hover:border-gray-400 hover:text-gray-200 
+                                className="text-[var(--tasktext)] border border-[#333333] px-4 py-2 text-sm rounded-md  hover:border-gray-400 hover:text-[var(--subtext)]
                         hover:shadow-md hover:shadow-gray-400/40 
                         transition duration-200"
                                 onClick={() => navigate('/Home')}
@@ -250,13 +250,13 @@ export default function TaskEdit() {
                                 className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
                 ${success
                                         ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                                        : "bg-[#ce7d63] border border-[#ce7d63] text-white shadow-[0_0_4px_#ce7d63aa]"
+                                        : "bg-[var(--text)] border border-[var(--text)] text-white shadow-[0_0_4px_#ce7d63aa]"
                                     }`}
                             >
                                 {loading ? (
                                     <>
                                         <svg
-                                            className="animate-spin h-4 w-4 text-white"
+                                            className="animate-spin h-4 w-4 text-[var(--tasktext)]"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -285,38 +285,38 @@ export default function TaskEdit() {
                 </div>
 
                 {/* Right Panel: Task Preview */}
-                <div className="w-[35%] rounded-2xl bg-[#1f1f1f] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
+                <div className="w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden px-7">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
                     <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
 
                     <div className="relative z-10">
                         <div className="py-5 border-b-[1px] border-[#333333]">
                             {/*Page title*/}
-                            <h2 className="flex text-white text-xl font-semibold gap-x-2 uppercase tracking-[0.05em]">
-                                <FaEye size={25} color="#ce7d63" /> Task Preview
+                            <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 uppercase tracking-[0.05em]">
+                                <FaEye size={25} color="var(--text)" /> Task Preview
                             </h2>
                         </div>
-                        <div className="bg-[#1a1a1a] py-3 px-7 mb-10 mt-20 rounded-md">
+                        <div className="bg-[var(--taskpreveiw)] py-3 px-7 mb-10 mt-20 rounded-md">
                             <div className="flex flex-col">
                                 {/*Task name*/}
                                 <div className="w-[95%] break-words mx-auto my-3">
-                                    <h2 className="text-white text-2xl font-bold text-center">
+                                    <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center">
                                         {task.taskname === "" ? <span className="text-[#464646]">Ex. Task Name</span> : task.taskname}
                                     </h2>
                                 </div>
                                 <div className="flex justify-center gap-x-2 mt-1">
-                                    <div className="bg-[#ce7d631a] text-[#ce7d63] px-3 rounded-xl">
+                                    <div className="bg-[#ce7d631a] text-[var(--text)] px-3 rounded-xl">
                                         {task.taskcategory === "" ? <span>Ex. Call center</span> : task.taskcategory}
                                     </div>
-                                    <div className="bg-[#ce7d631a] text-[#ce7d63] px-3 rounded-xl">
+                                    <div className="bg-[#ce7d631a] text-[var(--text)] px-3 rounded-xl">
                                         {task.taskdefficulty}
                                     </div>
                                 </div>
                                 <div className="flex gap-x-5 my-10">
-                                    <label className="text-[#b3b3b2] text-sm flex min-w-max items-center gap-x-2"><FaClock size={40} fill="#333333" />{task.tasktime === "" ? "Ex. 60" : task.tasktime} Minute(s)</label>
-                                    <label className="text-[#b3b3b2] text-sm flex min-w-max items-center gap-x-2"><FaStar size={40} fill="#333333" />{task.taskpoints === "" ? "Ex. 100" : task.taskpoints} Points(s)</label>
+                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaClock size={40} fill="var(--text)" />{task.tasktime === "" ? "Ex. 60" : task.tasktime} Minute(s)</label>
+                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaStar size={40} fill="var(--text)" />{task.taskpoints === "" ? "Ex. 100" : task.taskpoints} Points(s)</label>
                                 </div>
-                                <div className="text-[#81807e] text-lg text-center w-[95%] mx-auto mb-4 break-words">
+                                <div className="text-[var(--subtext)] text-lg text-center w-[95%] mx-auto mb-4 break-words">
                                     {task.taskdescription === "" ? "Ex. Task Description goes here." : task.taskdescription}
                                 </div>
                                 <div>
@@ -337,6 +337,6 @@ export default function TaskEdit() {
             </div>
 
             <Footer />
-        </>
+        </div>
     );
 }
