@@ -65,7 +65,7 @@ function Footer() {
               placeholder="Tell us what's broken..."
               className="flex-grow px-3 py-1 rounded bg-[var(--cardbg)] text-[var(--subtext)] border border-r-transparent border-gray-600 rounded-r-none focus:border-[var(--text)] focus:outline-none"
             />
-            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--text)] px-4 py-1 rounded text-white hover:bg-[var(--ce7hover)] transition rounded-l-none font-bold">
+            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--buttonbg)] px-4 py-1 rounded text-white hover:bg-[var(--ce7hover)] transition rounded-l-none font-bold">
               Send
             </button>
           </div>

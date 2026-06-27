@@ -9,15 +9,15 @@ function Pricing() {
       <Header />
       
 
-      <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+      <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
         <div className="text-center relative z-10">
-          <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]" style={{ fontFamily: "'Pricedown', sans-serif" }}>
+          <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase drop-shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_80%,transparent)]" style={{ fontFamily: "'Pricedown', sans-serif" }}>
             Select a plan
           </h2>
           <p className="mt-4 text-[var(--subtext)] text-xl italic">
-            Whatever it is, it's just 3 dollars a month you poor motherf***er
+            Whatever it is, it's just 3 dollars a month
           </p>
         </div>
       </div>
@@ -79,20 +79,18 @@ function Pricing() {
         />
       </div>
 
-      <div className="w-[80%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border border-[#2a2a2a] shadow-[0_0_30px_rgba(206,125,99,0.15)] relative overflow-hidden">
-  {/* Softer gradient overlay */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/5 via-transparent to-black/20 pointer-events-none"></div>
-  {/* Smaller, lighter glow orb */}
- <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/30 blur-3xl"></div>
+      <div className="w-[80%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_30px_rgba(206,125,99,0.15)] relative overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
   <div className="text-center relative z-10 mb-8">
     <h2
-      className="text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.08em] uppercase drop-shadow-[0_0_6px_rgba(206,125,99,0.5)]"
+      className="text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.08em] uppercase drop-shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_50%,transparent)]"
       style={{ fontFamily: "'Pricedown', sans-serif" }}
     >
       Frequently Asked Questions (FAQs)
     </h2>
     <p className="mt-4 text-[var(--subtext)] text-lg italic">
-      Read carefully so you don't ask stupid questions again
+      Read carefully so you don't ask them questions again
     </p>
   </div>
 
@@ -100,7 +98,7 @@ function Pricing() {
     <Card
       cat="piano-shii"
       title="Am I gonna get a refund if I didn’t like the service?"
-      comment="Hell no nigga"
+      comment="Hell nah"
     />
     <Card
       cat="piano-shii"
@@ -110,7 +108,7 @@ function Pricing() {
     <Card
       cat="piano-shii"
       title="Do you offer free trial?"
-      comment="Absolutely not nigga"
+      comment="Ofcourse...not"
     />
     <Card
       cat="piano-shii"

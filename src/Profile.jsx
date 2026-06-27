@@ -140,34 +140,34 @@ export default function Profile() {
       <Header />
 
       <div className="flex justify-center items-start my-16">
-        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[#2a2a2a] shadow-[0_0_25px_rgba(0,0,0,0.6)] relative overflow-hidden px-7 py-10">
+        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7 py-10">
           {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/20 via-transparent to-[#111]/20 pointer-events-none"></div>
-          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
-          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
+          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
+          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="mb-5 flex justify-end">
             <button
               onClick={() => navigate("/Profile/Edit")}
-              className="relative bg-[var(--cardbg)] border border-[#333333] text-[var(--subtext)] 
+              className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           flex
                           justify-center
                           items-center gap-x-2
-                          hover:border-gray-400
-                          hover:shadow-[0_0_10px_rgba(192,192,192,0.5)]
+                          hover:border-[var(--text)]/50
+                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           transition-all duration-300"
             >
               <IoPencilSharp size={17} className="mb-1" /> Edit Profile
             </button>
           </div>
 
-          <div className="relative z-10 flex items-center gap-x-8 border-b border-[#2a2a2a] pb-8">
+          <div className="relative z-10 flex items-center gap-x-8 border-b border-[var(--anyborder)] pb-8">
             <div className="flex-shrink-0">
               <img
                 src={preview || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
                 alt="ProfilePic"
-                className="w-64 border-2 border-[#2a2a2a] rounded-full"
+                className="w-64 border-2 border-[var(--anyborder)] rounded-full"
               />
             </div>
             <div className="flex-1">
@@ -183,10 +183,10 @@ export default function Profile() {
             <h3 className="text-lg font-bold text-[var(--subtext)] mb-4">
               Activity Rate
             </h3>
-            <div className="rounded-xl border border-[#333] bg-[var(--taskpreveiw)] p-4 shadow-inner">
+            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-4 shadow-inner">
               <CalendarHeatmap
-                startDate={new Date("2025-01-01")}
-                endDate={new Date("2025-12-31")}
+                startDate={new Date(`${new Date().getFullYear()}-01-01`)}
+                endDate={new Date(`${new Date().getFullYear()}-12-31`)}
                 values={activity}
                 gutterSize={2}
                 classForValue={(value) => {
@@ -244,12 +244,12 @@ export default function Profile() {
 
                   {/* Modal box */}
                   <div
-                    className="relative bg-[#1f1f1f] border border-[#333] p-8 rounded-2xl shadow-lg 
+                    className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] p-8 rounded-2xl shadow-lg 
                  z-10 w-[90%] max-w-md text-center transition-transform duration-200"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <h2 className="text-xl font-bold text-red-500 mb-4">Confirm Record Resettion</h2>
-                    <p className="text-gray-300 mb-4">
+                    <p className="text-[var(--subtext)] mb-4">
                       Are you sure you wanna reset your record
                     </p>
 
@@ -313,7 +313,7 @@ export default function Profile() {
               )}
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-transparent p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4 shadow-inner">
               {visibleSubs.length > 0 ? (visibleSubs.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -321,7 +321,7 @@ export default function Profile() {
                 >
                   <li
                     key={i}
-                    className="p-4 rounded-lg border border-[#333] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_10px_rgba(206,125,99,0.15)]"
+                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
 
                   >
                     <div className="flex justify-between items-start">
@@ -330,10 +330,10 @@ export default function Profile() {
                       </h4>
                       <span
                         className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                          ? "bg-[#ce7d631a] text-[var(--text)]"
+                          ? "bg-[var(--text)]/10 text-[var(--text)]"
                           : s.taskdefficulty === "Medium"
-                            ? "bg-[#ce7d631a] text-[var(--text)]"
-                            : "bg-[#ce7d631a] text-[var(--text)]"
+                            ? "bg-[var(--text)]/10 text-[var(--text)]"
+                            : "bg-[var(--text)]/10 text-[var(--text)]"
                           }`}
                       >
                         {s.taskdefficulty === "Easy" ? (
@@ -345,11 +345,11 @@ export default function Profile() {
                         )}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-gray-400">
+                    <p className="mt-2 text-sm text-[var(--subtext)]">
                       {s.taskdescription}
                     </p>
-                    <div className="flex justify-between mt-3 text-sm text-gray-500">
-                      <span className="px-2 py-1 rounded bg-[#ce7d631a] text-[var(--text)]">
+                    <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
+                      <span className="px-2 py-1 rounded bg-[var(--text)]/10 text-[var(--text)]">
                         {s.taskcategory}
                       </span>
                       <div className="flex gap-x-4">
@@ -366,10 +366,10 @@ export default function Profile() {
               ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
             </ul>
             {visibleCount < submissions.length ? (
-              <button className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
+              <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
-                          hover:border-gray-400 hover:text-gray-200
-                          hover:shadow-[0_0_10px_rgba(192,192,192,0.5)]
+                          hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
+                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           w-full
                           mt-5
                           flex
@@ -393,7 +393,7 @@ export default function Profile() {
               </h3>
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-transparent p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4 shadow-inner">
               {fav.length > 0 ? (fav.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -401,19 +401,19 @@ export default function Profile() {
                 >
                   <li
                     key={i}
-                    className="p-4 rounded-lg border border-[#333] bg-[#1a1a1a] hover:bg-[#222] transition shadow-[0_0_10px_rgba(206,125,99,0.15)]"
+                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
 
                   >
                     <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-white">
+                      <h4 className="text-lg font-semibold text-[var(--tasktext)]">
                         {s.taskname}
                       </h4>
                       <span
                         className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                          ? "bg-[#3a241f] text-[#ce7d63]"
+                          ? "bg-[var(--text)]/10 text-[var(--text)]"
                           : s.taskdefficulty === "Medium"
-                            ? "bg-[#4a2e26] text-[#e89b84]"
-                            : "bg-[#5a352c] text-[#f0bca8]"
+                            ? "bg-[var(--text)]/10 text-[var(--text)]"
+                            : "bg-[var(--text)]/10 text-[var(--text)]"
                           }`}
                       >
                         {s.taskdefficulty === "Easy" ? (
@@ -425,11 +425,11 @@ export default function Profile() {
                         )}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-gray-400">
+                    <p className="mt-2 text-sm text-[var(--subtext)]">
                       {s.taskdescription}
                     </p>
-                    <div className="flex justify-between mt-3 text-sm text-gray-500">
-                      <span className="px-2 py-1 rounded bg-[#222] text-[#ce7d63]">
+                    <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
+                      <span className="px-2 py-1 rounded bg-[var(--taskpreveiw)] text-[var(--text)]">
                         {s.taskcategory}
                       </span>
                       <div className="flex gap-x-4">
@@ -446,10 +446,10 @@ export default function Profile() {
               ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
             </ul>
             {visibleCount < submissions.length ? (
-              <button className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
+              <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
-                          hover:border-gray-400 hover:text-gray-200
-                          hover:shadow-[0_0_10px_rgba(192,192,192,0.5)]
+                          hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
+                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           w-full
                           mt-5
                           flex
@@ -487,12 +487,12 @@ export default function Profile() {
 
               {/* Modal box */}
               <div
-                className="relative bg-[#1f1f1f] border border-[#333] p-8 rounded-2xl shadow-lg 
+                className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] p-8 rounded-2xl shadow-lg 
                  z-10 w-[90%] max-w-md text-center transition-transform duration-200"
                 onClick={(e) => e.stopPropagation()}
               >
                 <h2 className="text-xl font-bold text-red-500 mb-4">Confirm Deletion</h2>
-                <p className="text-gray-300 mb-4">
+                <p className="text-[var(--subtext)] mb-4">
                   To permanently delete your account, please type: <br />
                   <span className="font-bold text-red-400">"{requiredPhrase}"</span>
                 </p>
@@ -501,7 +501,7 @@ export default function Profile() {
                   type="text"
                   value={deleteInput}
                   onChange={(e) => setDeleteInput(e.target.value)}
-                  className="w-full px-3 py-2 mb-4 bg-[#111] border border-[#444] text-white 
+                  className="w-full px-3 py-2 mb-4 bg-[var(--taskpreveiw)] border border-[var(--anyborder)] text-[var(--tasktext)] 
                    rounded-lg focus:outline-none focus:border-red-500"
                   placeholder="Type the phrase here"
                 />

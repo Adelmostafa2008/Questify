@@ -94,31 +94,31 @@ export default function EditProfile() {
     <>
       <Header />
       <div className="flex justify-center items-start my-16">
-        <div className="w-[42%] rounded-xl bg-[#181818] border border-[#2a2a2a] shadow-[0_0_25px_rgba(0,0,0,0.6)] relative overflow-hidden px-7">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/60 via-transparent to-[#111]/90 pointer-events-none"></div>
-          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
-          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
+        <div className="w-[42%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
+          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
+          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="relative z-10">
-            <div className="py-6 border-b border-[#2a2a2a]">
-              <h2 className="text-gray-200 text-xl font-bold tracking-wide uppercase">
+            <div className="py-6 border-b border-[var(--anyborder)]">
+              <h2 className="text-[var(--tasktext)] text-xl font-bold tracking-wide uppercase">
                 Edit Profile
               </h2>
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-[var(--subtext)] text-sm mt-1">
                 Write down your changes, You better not forget.
               </p>
             </div>
 
             <div className="mt-5 mb-3 flex flex-col justify-center gap-y-5">
 
-              <img src={preview ? preview : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} className="rounded-full max-w-[300px] border-2 border-[#2a2a2a] max-h-[300px] mx-auto" alt="profile preview" />
+              <img src={preview ? preview : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} className="rounded-full max-w-[300px] border-2 border-[var(--anyborder)] max-h-[300px] mx-auto" alt="profile preview" />
 
               <button
                 onClick={handleButtonClick}
-                className="relative bg-[#1f1f1f] border border-[#333333] text-gray-300 
+                className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
-                          hover:border-gray-400 hover:text-gray-200
-                          hover:shadow-[0_0_10px_rgba(192,192,192,0.5)]
+                          hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
+                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           transition-all duration-300"
               >
                 Change profile picture
@@ -135,14 +135,14 @@ export default function EditProfile() {
             <form className="flex flex-col gap-y-5 py-6">
               {/* Username */}
               <div className="flex flex-col">
-                <label className="text-gray-400 text-sm mb-2">Username</label>
-                <div className="flex items-center border border-[#2a2a2a] rounded-md focus-within:border-[#ce7d63] focus-within:shadow-[0_0_6px_#ce7d6344] bg-[#111]">
-                  <FaUser className="ml-3 text-[#555]" />
+                <label className="text-[var(--subtext)] text-sm mb-2">Username</label>
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)]">
+                  <FaUser className="ml-3 text-[var(--subtext)]" />
                   <input
                     type="text"
                     placeholder="example123"
                     value={newUser.UserName}
-                    className="w-full px-3 py-2 bg-transparent focus:outline-none text-gray-200"
+                    className="w-full px-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)]"
                     onChange={(e) =>
                       setNewUser((prev) => ({ ...prev, UserName: e.target.value }))
                     }
@@ -152,14 +152,14 @@ export default function EditProfile() {
 
               {/* Email */}
               <div className="flex flex-col">
-                <label className="text-gray-400 text-sm mb-2">E-mail</label>
-                <div className="flex items-center border border-[#2a2a2a] rounded-md focus-within:border-[#ce7d63] focus-within:shadow-[0_0_6px_#ce7d6344] bg-[#111]">
-                  <FaEnvelope className="ml-3 text-[#555]" />
+                <label className="text-[var(--subtext)] text-sm mb-2">E-mail</label>
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)]">
+                  <FaEnvelope className="ml-3 text-[var(--subtext)]" />
                   <input
                     type="email"
                     placeholder="example@gmail.com"
                     value={newUser.Email}
-                    className="w-full px-3 py-2 bg-transparent focus:outline-none text-gray-200"
+                    className="w-full px-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)]"
                     onChange={(e) =>
                       setNewUser((prev) => ({ ...prev, Email: e.target.value }))
                     }
@@ -169,14 +169,14 @@ export default function EditProfile() {
 
               {/* Description */}
               <div className="flex flex-col">
-                <label className="text-gray-400 text-sm mb-2">Description (optional)</label>
-                <div className="flex items-center border border-[#2a2a2a] rounded-md focus-within:border-[#ce7d63] focus-within:shadow-[0_0_6px_#ce7d6344] bg-[#111] relative">
+                <label className="text-[var(--subtext)] text-sm mb-2">Description (optional)</label>
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)] relative">
 
-                  <FaRegEdit className="absolute top-3 left-3 text-gray-400" />
+                  <FaRegEdit className="absolute top-3 left-3 text-[var(--subtext)]" />
                   <textarea
                     placeholder="Ex. I am a 2x boxing heavyweight champion of the world"
                     defaultValue={newUser?.Description}
-                    className="w-full pl-10 pr-3 py-2 bg-transparent focus:outline-none text-gray-200 resize-none h-[200px]  rounded-md"
+                    className="w-full pl-10 pr-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)] resize-none h-[200px]  rounded-md"
                     onChange={(e) =>
                       setNewUser((prev) => ({ ...prev, Description: e.target.value }))
                     }
@@ -195,7 +195,7 @@ export default function EditProfile() {
             {/* Buttons */}
             <div className="flex justify-end gap-3 pb-7">
               <button
-                className="text-gray-300 border border-[#2a2a2a] px-5 py-2 text-sm rounded-md hover:bg-[#222] transition"
+                className="text-[var(--tasktext)] border border-[var(--anyborder)] px-5 py-2 text-sm rounded-md hover:bg-[var(--ce7hover)]/10 hover:shadow-[0_0_12px_color-mix(in_srgb,var(--subtext)_40%,transparent)] transition-all duration-200"
                 onClick={() => navigate("/Profile")}
               >
                 Cancel
@@ -222,7 +222,7 @@ export default function EditProfile() {
                 className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
         ${success
                     ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                    : "bg-[#ce7d63] border border-[#ce7d63] text-white shadow-[0_0_4px_#ce7d63aa]"
+                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
                   }`}
               >
                 {loading ? (

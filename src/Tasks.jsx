@@ -89,7 +89,7 @@ export default function Tasks() {
           <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[80%] mx-auto text-[var(--subtext)] px-5 py-4 rounded-lg justify-center items-center gap-20 mt-6 shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
             <div className="flex items-center gap-3">
               <label className="tracking-wide whitespace-nowrap">Solving rate:</label>
-              <select onChange={(e) => SetQuery(prev => ({ ...prev, SortBySolveRate: e.target.value }))} className="border border-[#333333] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
+              <select onChange={(e) => SetQuery(prev => ({ ...prev, SortBySolveRate: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
                 <option value={""}>Default</option>
                 <option value={"highFirst"}>High first</option>
                 <option value={"lowFirst"}>Low first</option>
@@ -98,7 +98,7 @@ export default function Tasks() {
 
             <div className="flex items-center gap-3">
               <label className="tracking-wide whitespace-nowrap">Difficulty:</label>
-              <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByDifficulty: e.target.value }))} className="border border-[#333333] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
+              <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByDifficulty: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
                 <option value={""}>All</option>
                 <option className="text-green-400" value={"Easy"}>Easy</option>
                 <option className="text-yellow-400" value={"Medium"}>Medium</option>
@@ -119,11 +119,11 @@ export default function Tasks() {
                     SStask();
                   }
                 }}
-                className="border border-[#333333] pl-2 py-[8.09px] border-r-transparent rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-grow md:flex-grow-0"
+                className="border border-[var(--anyborder)] pl-2 py-[8.09px] border-r-transparent rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-grow md:flex-grow-0"
               />
               <button
                 onClick={() => SStask()}
-                className="bg-[var(--text)] px-4 py-[9px] rounded-r-md text-white font-semibold rounded-l-none hover:bg-[#b86c55] transition-all"
+                className="bg-[var(--buttonbg)] px-4 py-[9px] rounded-r-md text-white font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
               >
                 Search
               </button>
@@ -138,13 +138,13 @@ export default function Tasks() {
                 <Link
                   to={`/Tasks/${task.id}/${slugify(task.taskname)}`}
                   key={task.id}
-                  className="bg-[var(--cardbg)] border border-[#333333] rounded-2xl p-6 shadow-[0_0_20px_rgba(206,125,99,0.15)] hover:shadow-[0_0_25px_rgba(206,125,99,0.25)] transition-all duration-300 flex flex-col justify-between"
+                  className="bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-2xl p-6 shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] transition-all duration-300 flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start mb-3">
                     <h2 className="text-[var(--tasktext)] font-semibold text-lg">
                       {task.taskname}
                     </h2>
-                    <span className="px-3 py-1 rounded-full text-xs bg-[#ce7d631a] text-[var(--text)]">
+                    <span className="px-3 py-1 rounded-full text-xs bg-[var(--text)]/10 text-[var(--text)]">
                       {task.taskcategory}
                     </span>
                   </div>
@@ -167,11 +167,11 @@ export default function Tasks() {
                     )}
                   </div>
 
-                  <p className="text-[#b3b3b2] text-sm line-clamp-3 mb-4">
+                  <p className="text-[var(--subtext)] text-sm line-clamp-3 mb-4">
                     {task.taskdescription}
                   </p>
 
-                  <div className="flex justify-between text-[#b3b3b2] text-sm">
+                  <div className="flex justify-between text-[var(--subtext)] text-sm">
                     <span className="flex items-center gap-1">
                       <FaClock size={14} /> {task.tasktime} min
                     </span>
@@ -192,10 +192,10 @@ export default function Tasks() {
           </div>
         </>
       ) : (
-        <div className="w-[80%] mx-auto my-[20%] px-6 py-8 rounded-xl text-center font-semibold text-lg text-gray-300 bg-[#1f1f1f]/60 border border-[#333333] shadow-[0_0_20px_rgba(206,125,99,0.1)] relative overflow-hidden">
+        <div className="w-[80%] mx-auto my-[20%] px-6 py-8 rounded-xl text-center font-semibold text-lg text-[var(--tasktext)] bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)] relative overflow-hidden">
 
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/5 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-6 -left-6 w-[120px] h-[120px] rounded-full bg-[#ce7d63]/10 blur-2xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
+          <div className="absolute -top-6 -left-6 w-[120px] h-[120px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
 
           <p className="relative z-10">
             No tasks available at the moment — check back soon.

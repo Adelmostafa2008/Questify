@@ -70,11 +70,11 @@ function About() {
         <Card title="Continuous Improvement" type="mission" cat="about" comment="We're committed to helping professionals continuously improve their skills and advance their careers. Our platform provides personalized feedback and tracks progress over time." mypicture="chart" />
       </div>
 
-      <div className="relative w-[80%] mx-auto my-20 border-2 border-[#333333] rounded-3xl">
+      <div className="relative w-[80%] mx-auto my-20 border-2 border-[var(--anyborder)] rounded-3xl">
 
         {/* Background Glow Orbs */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none z-40 rounded-3xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl z-40"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-3xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
         {/* Main Container */}
         <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-12 shadow-[0_0_70px_rgba(0,0,0,0.3)] backdrop-blur-xl">
@@ -169,9 +169,9 @@ function About() {
         <Card cat="about" type="why-questify" mypicture="badge" title="Skill Certification" comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms." />
       </div>
 
-      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
         <div className="text-center text-white py-10 mb-5">
           <h2 className="text-5xl font-extrabold bg-clip-text text-[var(--text)]">Our Impact</h2>
           <h4 className="text-lg text-[var(--subtext)] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
@@ -193,9 +193,9 @@ function About() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-40">
 
 
-          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none"></div>
-            <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
             <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
               <FaPhone size={30} className="text-[var(--text)]" /> Contact Information
@@ -233,9 +233,9 @@ function About() {
           </div>
 
 
-          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none"></div>
-            <div className="absolute -bottom-10 -right-10 w-[220px] h-[220px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
             <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
               <IoIosSend size={30} className="text-[var(--text)]" /> Send Us a Message
@@ -247,7 +247,7 @@ function About() {
                 <input
                   type="text"
                   placeholder="Enter your name..."
-                  className="w-full text-[var(--tasktext)]  px-4 py-2 border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
+                  className="w-full text-[var(--tasktext)]  px-4 py-2 border border-[var(--textfieldboarder)] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
@@ -255,7 +255,7 @@ function About() {
                 <input
                   type="email"
                   placeholder="example@example.com"
-                  className="w-full px-4 py-2 text-[var(--tasktext)]  border border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 text-[var(--tasktext)]  border border-[var(--textfieldboarder)] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
@@ -263,7 +263,7 @@ function About() {
                 <input
                   type="text"
                   placeholder="Enter subject..."
-                  className="w-full px-4 py-2 border text-white border-[#333333] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 border text-white border-[var(--textfieldboarder)] rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 />
               </div>
               <div>
@@ -271,12 +271,12 @@ function About() {
                 <textarea
                   rows="4"
                   placeholder="Enter your message..."
-                  className="w-full px-4 py-2 border resize-none text-white border-[#333333] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
+                  className="w-full px-4 py-2 border resize-none text-white border-[var(--textfieldboarder)] max-h-40 min-h-40 rounded-lg bg-transparent focus:outline-none focus:border-[var(--text)] placeholder:text-gray-500"
                 ></textarea>
               </div>
               <button
                 onClick={() => cool ? null : HandelMessageSend()}
-                className="w-full bg-[var(--text)] text-white font-semibold py-2 rounded-lg hover:bg-[var(--ce7hover)] transition duration-300 shadow-[0_4px_20px_rgba(206,125,99,0.4)]"
+                className="w-full bg-[var(--buttonbg)] text-white font-semibold py-2 rounded-lg hover:bg-[var(--ce7hover)] transition duration-200 "
               >
                 Send Message
               </button>

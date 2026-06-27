@@ -45,20 +45,20 @@ export default function FavTasks() {
         <>
             <Header />
             <div className="flex justify-center items-start my-16">
-                <div className="w-[70%] rounded-xl bg-[#181818] border border-[#2a2a2a] shadow-[0_0_25px_rgba(0,0,0,0.6)] relative overflow-hidden px-7 py-10">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/60 via-transparent to-[#111]/90 pointer-events-none"></div>
-                    <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
-                    <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[#ce7d63]/5 blur-3xl"></div>
+                <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7 py-10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
+                    <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
+                    <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
                     <div className="relative z-10 mb-12">
 
-                        <h3 className="text-xl font-bold text-gray-200 mb-4">
+                        <h3 className="text-xl font-bold text-[var(--tasktext)] mb-4">
                             Favourite Tasks
                         </h3>
-                        <div className="bg-[#1f1f1f] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-white px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6 shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+                        <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-white px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6 shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
                             <div className="flex items-center gap-3">
                                 <label className="tracking-wide whitespace-nowrap">Category:</label>
-                                <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByCategory: e.target.value }))} className="border border-[#333333] bg-[#1f1f1f] px-3 py-2 rounded-md focus:border-[#ce7d63] focus:outline-none">
+                                <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByCategory: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
                                     <option value={""}>Mix</option>
                                     <option value={"call-center"}>Call Center</option>
                                     <option value={"marketing"}>Marketing</option>
@@ -71,7 +71,7 @@ export default function FavTasks() {
 
                             <div className="flex items-center gap-3">
                                 <label className="tracking-wide whitespace-nowrap">Difficulty:</label>
-                                <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByDifficulty: e.target.value }))} className="border border-[#333333] bg-[#1f1f1f] px-3 py-2 rounded-md focus:border-[#ce7d63] focus:outline-none">
+                                <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByDifficulty: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
                                     <option value={""}>All</option>
                                     <option className="text-green-400" value={"Easy"}>Easy</option>
                                     <option className="text-yellow-400" value={"Medium"}>Medium</option>
@@ -92,18 +92,18 @@ export default function FavTasks() {
                                             GetAllFavs();
                                         }
                                     }}
-                                    className="border border-[#333333] pl-2 py-2 rounded-l-md bg-[#1f1f1f] rounded-r-none focus:border-[#ce7d63] focus:outline-none flex-grow md:flex-grow-0"
+                                    className="border border-[var(--anyborder)] pl-2 py-2 rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-grow md:flex-grow-0"
                                 />
                                 <button
                                     onClick={() => GetAllFavs()}
-                                    className="bg-[#ce7d63] px-4 py-2 rounded-r-md font-semibold rounded-l-none hover:bg-[#b86c55] transition-all"
+                                    className="bg-[var(--buttonbg)] px-4 py-2 rounded-r-md font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
                                 >
                                     Search
                                 </button>
                             </div>
 
                         </div>
-                        <ul className="flex flex-col gap-y-3 rounded-xl border border-[#333] bg-[#1a1a1a] p-4 shadow-inner relative">
+                        <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-[var(--cardbg)] p-4 shadow-inner relative">
                             {fav.length > 0 ? (fav.map((s, i) => (
                                 <Link
                                     to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -111,19 +111,19 @@ export default function FavTasks() {
                                 >
                                     <li
                                         key={i}
-                                        className="p-4 rounded-lg border border-[#333] bg-[#1a1a1a] hover:bg-[#222] transition shadow-[0_0_10px_rgba(206,125,99,0.15)]"
+                                        className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
 
                                     >
                                         <div className="flex justify-between items-start">
-                                            <h4 className="text-lg font-semibold text-white">
+                                            <h4 className="text-lg font-semibold text-[var(--tasktext)]">
                                                 {s.taskname}
                                             </h4>
                                             <span
                                                 className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                                                        ? "bg-[#3a241f] text-[#ce7d63]"
+                                                        ? "bg-[var(--text)]/10 text-[var(--text)]"
                                                         : s.taskdefficulty === "Medium"
-                                                            ? "bg-[#4a2e26] text-[#e89b84]"
-                                                            : "bg-[#5a352c] text-[#f0bca8]"
+                                                            ? "bg-[var(--text)]/10 text-[var(--text)]"
+                                                            : "bg-[var(--text)]/10 text-[var(--text)]"
                                                     }`}
                                             >
                                                 {s.taskdefficulty === "Easy" ? (
@@ -135,11 +135,11 @@ export default function FavTasks() {
                                                 )}
                                             </span>
                                         </div>
-                                        <p className="mt-2 text-sm text-gray-400">
+                                        <p className="mt-2 text-sm text-[var(--subtext)]">
                                             {s.taskdescription}
                                         </p>
-                                        <div className="flex justify-between mt-3 text-sm text-gray-500">
-                                            <span className="px-2 py-1 rounded bg-[#222] text-[#ce7d63]">
+                                        <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
+                                            <span className="px-2 py-1 rounded bg-[var(--taskpreveiw)] text-[var(--text)]">
                                                 {s.taskcategory}
                                             </span>
                                             <div className="flex gap-x-4">

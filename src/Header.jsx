@@ -64,7 +64,7 @@ function Header() {
             </button>
 
             <button
-              className="text-white bg-[#ce7d63] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
+              className="text-white bg-[var(--buttonbg)] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
                   hover:bg-transparent hover:border-[var(--text)] hover:py-0  hover:text-[var(--text)]  transition-all hover:cursor-pointer"
               onClick={() => navigate('/Registration', { state: { regtype: "sign-up" } })}
             >
@@ -75,25 +75,25 @@ function Header() {
             <img
               src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
               alt="profile"
-              className="w-[45px] h-[45px] rounded-full cursor-pointer border-2 border-[var(--text)] shadow-[0_0_15px_rgba(206,125,99,0.6)] hover:scale-105 transition-transform duration-200"
+              className="w-[45px] h-[45px] rounded-full cursor-pointer border-2 border-[var(--text)] shadow-[0_0_15px_color-mix(in_srgb,var(--homeshadow)_60%,transparent)] hover:scale-105 transition-transform duration-200"
               onClick={() => setOpen((prev) => !prev)}
             />
 
             {open && (
               <div>
-                <ul className="absolute right-0 min-w-max mt-3 bg-[var(--headerbg)] border border-[#333] rounded-2xl shadow-[0_0_30px_rgba(206,125,99,0.25)] overflow-hidden z-20">
+                <ul className="absolute right-0 min-w-max mt-3 bg-[var(--headerbg)] border border-[var(--anyborder)] rounded-2xl shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] overflow-hidden z-20">
 
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/40 pointer-events-none"></div>
-                  <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/20 blur-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
+                  <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
 
-                  <div className="flex items-center gap-x-3 px-4 py-3 relative z-10 border-b border-[#333]">
+                  <div className="flex items-center gap-x-3 px-4 py-3 relative z-10 border-b border-[var(--anyborder)]">
                     <img
                       src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
-                      className="w-[60px] h-[60px] rounded-full border-2 border-[var(--text)] shadow-[0_0_10px_rgba(206,125,99,0.6)]"
+                      className="w-[60px] h-[60px] rounded-full border-2 border-[var(--text)] shadow-[0_0_10px_color-mix(in_srgb,var(--homeshadow)_60%,transparent)]"
                     />
                     <div className="flex flex-col">
                       <h2
-                        className="truncate w-[150px] text-lg font-extrabold text-[var(--text)] tracking-wide drop-shadow-[0_0_8px_rgba(206,125,99,0.8)]"
+                        className="truncate w-[150px] text-lg font-extrabold text-[var(--text)] tracking-wide drop-shadow-[0_0_8px_color-mix(in_srgb,var(--homeshadow)_80%,transparent)]"
                         style={{ fontFamily: "'Pricedown', sans-serif" }}
                       >
                         {user.username}

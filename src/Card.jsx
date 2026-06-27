@@ -70,16 +70,16 @@ function Card(props) {
   switch (type) {
     case "welcomeback":
       return (
-        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[var(--cardbg)] border-2 border-[#2b2b2b] shadow-[0_0_30px_rgba(194,122,96,0.12)] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/6 via-transparent to-black/40 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#c27a60]/12 blur-3xl"></div>
+        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_30px_rgba(194,122,96,0.12)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="flex justify-between items-center relative z-10">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-[var(--tasktext)]">{title}</h2>
               <h4 className="text-[var(--subtext)] mt-1">{comment}</h4>
             </div>
-            <button className="bg-[var(--text)] hover:bg-[var(--ce7hover)] transition px-4 py-2 rounded-lg text-white font-medium shadow-md hover:cursor-pointer" onClick={props.GoTo}>
+            <button className="bg-[var(--buttonbg)] hover:bg-[var(--ce7hover)] transition px-4 py-2 rounded-lg text-white font-medium shadow-md hover:cursor-pointer" onClick={props.GoTo}>
               {btnContent}
             </button>
           </div>
@@ -88,15 +88,15 @@ function Card(props) {
 
     case "primeSub":
       return (
-        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[var(--text)] shadow-[0_0_35px_rgba(194,122,96,0.2)] overflow-hidden text-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/10 via-transparent to-black/30 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[250px] h-[250px] rounded-full bg-[#c27a60]/15 blur-3xl"></div>
+        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[var(--cardbg)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_20%,transparent)] overflow-hidden text-center">
+           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
-          <h2 className="text-3xl font-extrabold text-gray-100 tracking-wide relative z-10">{title}</h2>
-          <h4 className="max-w-[80%] mx-auto text-gray-200 mt-3 mb-6 relative z-10">{comment}</h4>
+          <h2 className="text-3xl font-extrabold text-[var(--text)] tracking-wide relative z-10">{title}</h2>
+          <h4 className="max-w-[80%] mx-auto text-[var(--subtext)] mt-3 mb-6 relative z-10">{comment}</h4>
 
           <button
-            className="relative z-10 flex hover:cursor-pointer justify-center items-center mx-auto text-[var(--text)] bg-white rounded-lg px-5 py-2 font-semibold shadow-md hover:shadow-[#c27a60]/20 transition"
+            className="relative z-10 flex hover:cursor-pointer justify-center items-center mx-auto text-[var(--subtext)] bg-white rounded-lg px-5 py-2 font-semibold shadow-md hover:shadow-[var(--subtext)]/20 transition"
             onClick={() => navigate(`/${page}`)}
           >
             <svg className="fill-[var(--text)] w-[25px] mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -107,8 +107,8 @@ function Card(props) {
 
           <ul className="flex gap-6 mx-auto my-5 flex-wrap justify-center relative z-10">
             {features != null ? features.map((x, i) => (
-              <li key={i} className="flex items-center gap-2 text-gray-100 text-lg">
-                <svg className="checkedCircle" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white">
+              <li key={i} className="flex items-center gap-2 text-[var(--subtext)] text-lg">
+                <svg className="checkedCircle  fill-[var(--subtext)]" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white">
                   <path d="M0 0h24v24H0z" fill="none" />
                   <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
                 </svg>
@@ -121,9 +121,9 @@ function Card(props) {
 
     case "task":
       return (
-        <div className="relative bg-[var(--cardbg)] p-8 rounded-2xl border-2 border-[#2b2b2b] shadow-[0_0_25px_rgba(194,122,96,0.12)] flex flex-col h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#c27a60]/6 via-transparent to-black/40 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[#c27a60]/12 blur-3xl"></div>
+        <div className="relative bg-[var(--cardbg)] p-8 rounded-2xl border-2 border-[var(--anyborder)] shadow-[0_0_25px_rgba(194,122,96,0.12)] flex flex-col h-full overflow-hidden">
+           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="relative z-10">
             <div className="self-end mb-3">{getIcon(pic)}</div>
@@ -132,7 +132,7 @@ function Card(props) {
           </div>
 
           <button
-            className="relative z-10 mt-auto hover:cursor-pointer text-gray-100 bg-[var(--buttonbg)] hover:bg-[#3a3a3a] transition px-5 py-2 rounded-lg shadow-md"
+            className="relative z-10 mt-auto hover:cursor-pointer text-gray-100 bg-[var(--buttonbg)] hover:bg-[var(--ce7hover)] transition px-5 py-2 rounded-lg shadow-md"
             onClick={props.GoTo}
           >
             {btnContent}
@@ -150,9 +150,9 @@ function Card(props) {
   switch (type) {
     case "what-is-questify":
       return (
-        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)]  shadow-[0_2px_12px_rgba(157,78,221,0.4)] overflow-hidden">
+           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10 text-center">
             <h2 className="text-6xl font-extrabold bg-gradient-to-r text-[var(--text)] bg-clip-text tracking-wide leading-tight">
               {title}
@@ -162,7 +162,7 @@ function Card(props) {
             </h4>
             <button
               onClick={props.GoTo}
-              className="mt-10 bg-[var(--text)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-all duration-300 rounded-lg font-semibold text-lg px-6 py-3 shadow-[0_2px_12px_rgba(206,125,99,0.4)] hover:shadow-[0_4px_20px_rgba(206,125,99,0.6)]"
+              className="mt-10 bg-[var(--buttonbg)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-all duration-150 rounded-lg font-semibold text-lg px-6 py-3 "
             >
               {btnContent}
             </button>
@@ -172,9 +172,9 @@ function Card(props) {
 
     case "mission":
       return (
-        <div className="relative flex flex-col items-center text-center bg-[var(--cardbg)] p-8 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/15 blur-3xl"></div>
+        <div className="relative flex flex-col items-center text-center bg-[var(--cardbg)] p-8 rounded-2xl  shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_20%,transparent)] transition-all duration-300 hover:shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10">
             <div className="w-[70px] h-[70px] mx-auto my-4 bg-[rgba(206,125,99,0.15)] rounded-full flex items-center justify-center">
               {getIcon(pic)}
@@ -189,9 +189,9 @@ function Card(props) {
 
     case "why-questify":
       return (
-        <div className="relative flex items-start gap-4 p-5 rounded-xl bg-[var(--cardbg)] border border-[#333333] hover:border-[#ce7d63]/40 transition-colors duration-300 shadow-[0_0_20px_rgba(206,125,99,0.1)] hover:shadow-[0_0_30px_rgba(206,125,99,0.2)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/8 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
-          <div className="absolute -top-8 -left-8 w-[150px] h-[150px] rounded-full bg-[#ce7d63]/15 blur-3xl"></div>
+        <div className="relative flex items-start gap-4 p-5 rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] hover:border-[var(--anyborder)]/40 transition-colors duration-300 shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_20%,transparent)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="bg-[rgba(206,125,99,0.15)] p-3 rounded-lg flex items-center justify-center">
             {getIcon(pic)}
           </div>
@@ -206,8 +206,8 @@ function Card(props) {
 
     case "impact":
       return (
-        <div className="relative w-[21%] bg-[var(--cardbg)] flex flex-col text-center p-6 rounded-2xl border-2 border-[#333333] shadow-[0_0_30px_rgba(206,125,99,0.15)] hover:shadow-[0_0_40px_rgba(206,125,99,0.25)] transition-all duration-300 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/10 pointer-events-none"></div>
+        <div className="relative w-[21%] bg-[var(--cardbg)] flex flex-col text-center p-6 rounded-2xl border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] transition-all duration-300 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/10 via-transparent to-black/10 pointer-events-none"></div>
           <h2 className="text-[var(--text)] text-5xl font-extrabold relative z-10">{title}</h2>
           <h4 className="text-[var(--subtext)] text-lg font-medium relative z-10">{comment}</h4>
         </div>
@@ -224,8 +224,8 @@ function Card(props) {
   case "pricing-best":
     return (
       <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl px-6 py-8 overflow-hidden transition-all duration-300
-        border-2 border-[var(--text)] bg-[var(--cardbg)] shadow-[0_0_45px_rgba(206,125,99,0.35)] scale-105">
-        <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[var(--text)] flex text-white font-bold text-xs px-12 py-1 shadow-[0_0_12px_rgba(194,122,96,0.4)]">
+        border-2 border-[var(--text)] bg-[var(--cardbg)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_35%,transparent)] scale-105">
+        <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[var(--text)] flex text-white font-bold text-xs px-12 py-1 shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_20%,transparent)]">
           <h2>BEST CHOICE</h2>   
         </div>
         <h2 className="text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
@@ -233,7 +233,7 @@ function Card(props) {
           <span className="text-xl align-top text-[var(--tasktext)]">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-[var(--subtext)] mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[var(--text)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
+        <button onClick={props.GoTo} className="bg-[var(--buttonbg)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 ">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">
@@ -264,16 +264,16 @@ function Card(props) {
 
   case "pricing-normal":
     return (
-      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl border-2 border-[#333333] bg-[var(--cardbg)]
-        shadow-[0_0_25px_rgba(206,125,99,0.15)] px-6 py-8 overflow-hidden
-        hover:border-[var(--text)] hover:shadow-[0_0_35px_rgba(194,122,96,0.25)]
+      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl border-2 border-[var(--anyborder)] bg-[var(--cardbg)]
+        shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_15%,transparent)] px-6 py-8 overflow-hidden
+        hover:border-[var(--text)] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)]
         transition-all duration-300">
         <h2 className="text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
         <h1 className="text-6xl font-black text-[var(--tasktext)] mb-2">
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-[var(--subtext)] mb-6">{comment}</h4>
-        <button onClick={props.GoTo} className="bg-[var(--text)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 shadow-[0_0_8px_rgba(194,122,96,0.35)] hover:shadow-[0_0_12px_rgba(194,122,96,0.45)]">
+        <button onClick={props.GoTo} className="bg-[var(--buttonbg)] hover:cursor-pointer text-white hover:bg-[var(--ce7hover)] transition-colors border-none rounded-md font-semibold text-md px-6 py-2 mb-6 ">
           {btnContent}
         </button>
         <div className="flex items-center justify-center w-full my-4">
@@ -310,7 +310,7 @@ function Card(props) {
 
    case "piano-shii":
   return (
-    <div className="relative w-full mx-auto my-3 rounded-2xl border-2 border-[#333333] shadow-[0_0_20px_rgba(206,125,99,0.15)] hover:shadow-[0_0_30px_rgba(206,125,99,0.25)] overflow-hidden transition-all duration-300">
+    <div className="relative w-full mx-auto my-3 rounded-2xl border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_8%,transparent)] overflow-hidden transition-all duration-300">
       <button
         className="w-full flex items-center hover:cursor-pointer justify-between  p-4 bg-[var(--cardbg)] text-white text-left rounded-t-2xl"
         onClick={() => setIsOpen(!isOpen)}
@@ -319,7 +319,7 @@ function Card(props) {
         {isOpen ? <FaMinus size={28} className="text-[var(--tasktext)]"/> : <FaPlus size={28}  className="text-[var(--tasktext)]"/>}
       </button>
       <div
-        className={`px-5 py-4 text-white bg-[var(--text)] font-medium overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`px-5 py-4 text-[var(--subtext)] bg-[var(--headerbg)] font-medium overflow-hidden transition-all duration-500 ease-in-out ${
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -339,12 +339,12 @@ function Card(props) {
             <div className=" w-[100%] flex flex-col  pb-10">
  
 
-              <h2 className="text-[#F9F6EE] text-sm mb-2 mt-2">Task Title</h2>
-              <input type="text" placeholder="Enter task title..." defaultValue={props.TTE} onChange={(e) => newT(e, snNum)} className="text-white placeholder:text-[#888888] bg-[#1a1a1a] w-[100%] px-4.5 py-2 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[var(--text)]" />
+              <h2 className="text-[var(--TT)] text-sm mb-2 mt-2">Task Title</h2>
+              <input type="text" placeholder="Enter task title..." defaultValue={props.TTE} onChange={(e) => newT(e, snNum)} className="text-white placeholder:text-[#888888] bg-[#1a1a1a] w-[100%] px-4.5 py-2 border-[1px] border-[var(--anyborder)] rounded-sm focus:outline-0 focus:border-[var(--text)]" />
 
 
-              <h2 className="text-[#F9F6EE] text-sm mb-2 mt-2">Task Description</h2>
-              <textarea placeholder="Enter detailed task description..." defaultValue={props.TDE} onChange={(e) => newD(e, snNum)} className="text-white bg-[#1a1a1a] px-4.5 py-2.5 border-[1px] border-[#333333] rounded-sm focus:outline-0 focus:border-[var(--text)] max-h-30 min-h-30" />
+              <h2 className="text-[var(--TD)] text-sm mb-2 mt-2">Task Description</h2>
+              <textarea placeholder="Enter detailed task description..." defaultValue={props.TDE} onChange={(e) => newD(e, snNum)} className="text-white bg-[#1a1a1a] px-4.5 py-2.5 border-[1px] border-[var(--anyborder)] rounded-sm focus:outline-0 focus:border-[var(--text)] max-h-30 min-h-30" />
             </div>
           </div>
         </>
@@ -354,22 +354,22 @@ function Card(props) {
         <>
           <div className="bg-[var(--scenepreveiwbg)] pr-5 pl-4 py-2 rounded-md border-l-[3px] border-[var(--text)] my-2">
             <div>
-              <h2 className="text-[#F9F6EE] font-semibold text-center break-words py-3">{taskPreviewTitle == "" ? "Ex. wanna hear a dark joke?" : taskPreviewTitle}</h2>
+              <h2 className="text-[var(--TT)] font-semibold text-center break-words py-3">{taskPreviewTitle == "" ? "Ex. wanna hear a dark joke?" : taskPreviewTitle}</h2>
             </div>
-            <div className="w-[100%] flex flex-col text-center break-words pb-5 text-[#F9F6EE] mt-2.5">{taskPreviewDescription == "" ? "Ex. what you call a yellow submarine full of kids... a school bus 😂😂😂" :taskPreviewDescription}</div>
+            <div className="w-[100%] flex flex-col text-center break-words pb-5 text-[var(--TD)] mt-2.5">{taskPreviewDescription == "" ? "Ex. what you call a yellow submarine full of kids... a school bus 😂😂😂" :taskPreviewDescription}</div>
           </div>
         </>
       );
  
     case "taskCard":
   return (
-    <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[#333333] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
+    <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_40px_rgba(206,125,99,0.25)] relative overflow-hidden">
 
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ce7d63]/10 via-transparent to-black/20 pointer-events-none"></div>
-      <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[#ce7d63]/20 blur-3xl"></div>
+       <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
       <div className="text-center relative z-10 flex flex-col gap-y-2">
-        <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase drop-shadow-[0_0_10px_rgba(206,125,99,0.8)]"
+        <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase drop-shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_80%,transparent)]"
             style={{ fontFamily: "'Pricedown', sans-serif" }}>
             "Sharpen your skills. Complete tasks. Build your legacy."
         </h2>
