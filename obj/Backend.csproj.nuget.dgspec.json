@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj": {}
+    "E:\\Adel\\Pro project\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj": {
+    "E:\\Adel\\Pro project\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj",
+        "projectUniqueName": "E:\\Adel\\Pro project\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "E:\\Adel\\WebApi\\Pro project\\Backend\\Backend.csproj",
+        "projectPath": "E:\\Adel\\Pro project\\Backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\KimoStore\\.nuget\\packages\\",
-        "outputPath": "E:\\Adel\\WebApi\\Pro project\\Backend\\obj\\",
+        "outputPath": "E:\\Adel\\Pro project\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\KimoStore\\AppData\\Roaming\\NuGet\\NuGet.Config"

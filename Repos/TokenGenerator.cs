@@ -24,7 +24,7 @@ namespace Backend.Repos
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.GivenName,user.UserName),
+                new Claim(JwtRegisteredClaimNames.GivenName , user.UserName),
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
             };
 
