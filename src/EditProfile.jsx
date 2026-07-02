@@ -94,10 +94,8 @@ export default function EditProfile() {
     <>
       <Header />
       <div className="flex justify-center items-start my-16">
-        <div className="w-[42%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7">
+        <div className="w-[42%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
-          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
-          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="relative z-10">
             <div className="py-6 border-b border-[var(--anyborder)]">
@@ -118,7 +116,6 @@ export default function EditProfile() {
                 className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
-                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           transition-all duration-300"
               >
                 Change profile picture
@@ -136,7 +133,7 @@ export default function EditProfile() {
               {/* Username */}
               <div className="flex flex-col">
                 <label className="text-[var(--subtext)] text-sm mb-2">Username</label>
-                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)]">
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)]">
                   <FaUser className="ml-3 text-[var(--subtext)]" />
                   <input
                     type="text"
@@ -153,7 +150,7 @@ export default function EditProfile() {
               {/* Email */}
               <div className="flex flex-col">
                 <label className="text-[var(--subtext)] text-sm mb-2">E-mail</label>
-                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)]">
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)]">
                   <FaEnvelope className="ml-3 text-[var(--subtext)]" />
                   <input
                     type="email"
@@ -170,7 +167,7 @@ export default function EditProfile() {
               {/* Description */}
               <div className="flex flex-col">
                 <label className="text-[var(--subtext)] text-sm mb-2">Description (optional)</label>
-                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] focus-within:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_27%,transparent)] bg-[var(--taskpreveiw)] relative">
+                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)] relative">
 
                   <FaRegEdit className="absolute top-3 left-3 text-[var(--subtext)]" />
                   <textarea
@@ -195,7 +192,7 @@ export default function EditProfile() {
             {/* Buttons */}
             <div className="flex justify-end gap-3 pb-7">
               <button
-                className="text-[var(--tasktext)] border border-[var(--anyborder)] px-5 py-2 text-sm rounded-md hover:bg-[var(--ce7hover)]/10 hover:shadow-[0_0_12px_color-mix(in_srgb,var(--subtext)_40%,transparent)] transition-all duration-200"
+                className="text-[var(--tasktext)] border border-[var(--anyborder)] px-5 py-2 text-sm rounded-md hover:bg-[var(--ce7hover)]/10 transition-all duration-200"
                 onClick={() => navigate("/Profile")}
               >
                 Cancel
@@ -221,8 +218,8 @@ export default function EditProfile() {
                 disabled={loading || success}
                 className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
         ${success
-                    ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                    ? "bg-green-600 text-white"
+                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
                   }`}
               >
                 {loading ? (

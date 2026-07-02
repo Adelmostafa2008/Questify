@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import "tailwindcss";
 
 
@@ -12,7 +12,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Lato", sans-serif;
   background-color: var(--bg);
   color: var(--subtext);
 }
@@ -56,72 +56,76 @@ ul li {
 
 :root {
   /* ===== Backgrounds ===== */
-  --bg: #F6F9FC;             /* Page background */
-  --cardbg: #FFFFFF;          /* Card & surface background */
-  --headerbg: #FAFBFD;        /* Header & footer background */
-  --taskpreveiw: #EEF4F8;     /* Task preview area background */
-  --scenepreveiwbg: #516170;  /* Scene/step preview background */
-  --headermenuhover: #E8EFF5; /* Dropdown menu item hover background */
+  --bg: #f4f4f4;             /* Page background */
+  --cardbg: #F0F1F2;          /* Card & surface background */
+  --headerbg: #F0F1F2;        /* Header & footer background */
+  --taskpreveiw: #DDDEE1;     /* Task preview area background */
+  --scenepreveiwbg: #7D818A;  /* Scene/step preview background */
+  --headermenuhover: #DDDEE1; /* Dropdown menu item hover background */
 
   /* ===== Text Colors ===== */
-  --text: #355C7D;            /* Primary accent — headings, icons, highlights */
-  --subtext: #5E6472;         /* Secondary / muted text */
-  --tasktext: #2F4858;        /* Body text inside task & card components */
+  --text: #1E1F21;            /* Primary accent — headings, icons, highlights */
+  --subtext: #292A2E;         /* Secondary / muted text */
+  --tasktext: #1E1F21;        /* Body text inside task & card components */
   --TT: white;      /* [alias] Task creation page — title color */
   --TD: white;       /* [alias] Task creation page — description color */
 
   /* ===== Interactive Elements ===== */
-  --buttonbg: #2d506a;        /* Primary button background */
-  --ce7hover: #4A7399;        /* Hover state background for buttons & elements */
+  --buttonbg: #3d4042;        /* Primary button background */
+  --ce7hover: #53575a;        /* Hover state background for buttons & elements */
 
   /* ===== Borders ===== */
-  --anyborder: #d1d8e0;       /* Default border — cards, panels, dividers */
-  --textfieldboarder: var(--anyborder); /* Input & textarea default border */
+  --anyborder: #c1c3c5;       /* Default border — cards, panels, dividers */
+  --textfieldboarder: #8C8F97; /* Input & textarea default border */
 
   /* ===== Shadows & Glows ===== */
   --homeshadow: var(--text);  /* Base tint for color-mix() shadows & glows */
 
   /* ===== Heatmap (react-calendar-heatmap) ===== */
-  --noactive: #E6EDF3;        /* Inactive / no-activity cell */
-  --less2: #CFE0EC;           /* Activity level 1–2 */
-  --less4: #AFC8DB;           /* Activity level 3–4 */
-  --less6: #7EA6C2;           /* Activity level 5–6 */
-  --less8: #5B87A8;           /* Activity level 7–8 */
-  --less10: #355C7D;          /* Activity level 9–10+ */
+  --noactive: #868686;
+  --less2: #0eff00;
+  --less4: 	#1fc600;
+  --less6: #089000;
+  --less8: #0a5d00;
+  --less10: #063b00;        /* Activity level 9–10+ */
+
+  --paymentmethods:#1E1F21;
 }
 
 .dark {
   /* ===== Backgrounds ===== */
-  --bg: #10002B;
-  --cardbg: #3C096C;
-  --headerbg: #240046;
-  --taskpreveiw: #3C096C;
-  --scenepreveiwbg: #240046;
-  --headermenuhover: #3C096C;
+  --bg: #010107;
+  --cardbg: #1f1f20;
+  --headerbg: #1f1f20;
+  --taskpreveiw: #1f1f20;
+  --scenepreveiwbg: #999999;
+  --headermenuhover: #373839;
 
   /* ===== Text Colors ===== */
-  --text: #E0AAFF;
-  --subtext: #C77DFF;
-  --tasktext: #C77DFF;
-  --TT: var(--tasktext);
-  --TD: var(--subtext);
+  --text: #dbdbdb;
+  --subtext: #999999;
+  --tasktext: #999999;
+  --TT: white;
+  --TD: white;
 
   /* ===== Interactive Elements ===== */
-  --buttonbg: #5A189A;
-  --ce7hover: #430b7c;
+  --buttonbg: #373839;
+  --ce7hover: #5f6062;
 
   /* ===== Borders ===== */
-  --anyborder: #4a2a72;
-  --textfieldboarder: var(--anyborder);
+  --anyborder: #464648;
+  --textfieldboarder: #5f6062;
 
   /* ===== Shadows & Glows ===== */
   --homeshadow: var(--text);
 
   /* ===== Heatmap (react-calendar-heatmap) ===== */
-  --noactive: #391e1e;
-  --less2: #02dc39;
-  --less4: #E85D04;
-  --less6: #F48C06;
-  --less8: #FAA307;
-  --less10: #FFBA08;
+  --noactive: #2a313a;
+  --less2: #0eff00;
+  --less4: 	#1fc600;
+  --less6: #089000;
+  --less8: #0a5d00;
+  --less10: #063b00;
+
+  --paymentmethods:#1E1F21;
 }

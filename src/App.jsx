@@ -14,6 +14,7 @@ import SolvedTasks from "./SolvedTasks.jsx"
 import SryBro from './StillUnderConstruction.jsx';
 import FavTasks from "./FavTasks.jsx"
 import Sittings from "./Sittings.jsx";
+import LandingPage from './LandingPage.jsx';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Router>
 
         <Routes>
+          <Route path='/l' element = {<LandingPage/>}/>
           <Route path='/About' element={<About />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/' element={<Home />} />

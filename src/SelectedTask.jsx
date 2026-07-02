@@ -203,9 +203,8 @@ export default function SelectedTask() {
             <div className="flex gap-x-20  my-20 justify-center ">
 
                 {/* LEFT: Task Preview */}
-                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7">
+                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-                    <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
                     <div className="flex justify-end mt-10 gap-x-4 items-stretch">
 
 
@@ -217,7 +216,7 @@ export default function SelectedTask() {
                         <button
                             onClick={handleDelete}
                             disabled={deleteState === "loading"}
-                            className="p-2 rounded-md flex items-center gap-2border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
+                            className="p-2 rounded-md flex items-center gap-2border border-[var(--anyborder)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
                         >
                             {(deleteState !== "loading" && deleteState !== "done") && (
                                 <FaTrashCan size={20} className="text-[var(--tasktext)]" />
@@ -232,9 +231,7 @@ export default function SelectedTask() {
                         <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
                             <button
                                 className="p-2 rounded-md flex items-center border h-full border-[var(--anyborder)] 
-                        shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)]
                         hover:border-[var(--text)]/50 
-                        hover:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] 
                         transition duration-200"
                             >
                                 <FaEdit size={20} className="text-[var(--tasktext)]" />
@@ -252,7 +249,6 @@ export default function SelectedTask() {
                                     }
                                 }}
                                 className={`p-2 text-[var(--tasktext)] rounded-md flex items-center border border-[var(--anyborder)] 
-                            shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)]
                             hover:bg-red-500/20 hover:border-red-600 transition duration-200 `}>
                                 {favouriteCooldown ? cooldown :
 
@@ -318,9 +314,8 @@ export default function SelectedTask() {
                 </div>
 
                 {/* RIGHT: Answer Section */}
-                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
+                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-                    <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
 
                     <div className="relative z-10 flex flex-col h-full">
                         <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center mb-6">
@@ -358,8 +353,8 @@ export default function SelectedTask() {
                             disabled={loading || success}
                             className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
                         ${success
-                                    ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                    ? "bg-green-600 text-white"
+                                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
                                 }`}
                         >
                             {loading ? (

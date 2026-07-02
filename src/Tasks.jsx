@@ -86,7 +86,7 @@ export default function Tasks() {
             comment={`" ${Tcomment}"`}
           />
 
-          <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[80%] mx-auto text-[var(--subtext)] px-5 py-4 rounded-lg justify-center items-center gap-20 mt-6 shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+          <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[80%] mx-auto text-[var(--subtext)] px-5 py-4 rounded-lg justify-center items-center gap-20 mt-6">
             <div className="flex items-center gap-3">
               <label className="tracking-wide whitespace-nowrap">Solving rate:</label>
               <select onChange={(e) => SetQuery(prev => ({ ...prev, SortBySolveRate: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
@@ -138,7 +138,7 @@ export default function Tasks() {
                 <Link
                   to={`/Tasks/${task.id}/${slugify(task.taskname)}`}
                   key={task.id}
-                  className="bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-2xl p-6 shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)] hover:shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] transition-all duration-300 flex flex-col justify-between"
+                  className="bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start mb-3">
                     <h2 className="text-[var(--tasktext)] font-semibold text-lg">
@@ -192,10 +192,9 @@ export default function Tasks() {
           </div>
         </>
       ) : (
-        <div className="w-[80%] mx-auto my-[20%] px-6 py-8 rounded-xl text-center font-semibold text-lg text-[var(--tasktext)] bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_10%,transparent)] relative overflow-hidden">
+        <div className="w-[80%] mx-auto my-[20%] px-6 py-8 rounded-xl text-center font-semibold text-lg text-[var(--tasktext)] bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden">
 
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-6 -left-6 w-[120px] h-[120px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
 
           <p className="relative z-10">
             No tasks available at the moment — check back soon.

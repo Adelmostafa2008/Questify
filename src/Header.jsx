@@ -4,9 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
-
+import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext.jsx";
 
 function Header() {
+  const {theme} = useContext(ThemeContext);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
@@ -26,17 +28,17 @@ function Header() {
 
 
   return (
-    <div className="bg-[var(--headerbg)] flex items-center p-5 w-full rounded-br-md rounded-bl-md shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+    <div className="bg-[var(--headerbg)] flex items-center p-5 w-full rounded-br-md rounded-bl-md">
       <h1
         onClick={() => navigate('/Home')}
         className="w-1/3 cursor-pointer font-extrabold 
                          text-[var(--subtext)] max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl"
       >
-        Quest<span className="text-[var(--text)]">ify</span>
+        Quest<span className={`${theme == "dark" ? "text-[var(--text)]" : "text-[#7D818A]"}`}>ify</span>
       </h1>
 
       <div className="flex items-center justify-center gap-6 max-xs:hidden w-1/3 min-w-max ">
-        {["Home", "About", "Pricing", "Addtask"].map((link) => (
+        {["Home", "About", "Pricing", "Addtask" , "l"].map((link) => (
           <NavLink
             key={link}
             to={`/${link}`}
@@ -57,7 +59,7 @@ function Header() {
           <>
             <button
               className="px-3 py-2 bg-transparent text-[var(--text)] border-2 border-[var(--text)] 
-                rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:text-white hover:cursor-pointer transition-all"
+                rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:text-white hover:border-transparent hover:cursor-pointer transition-all"
               onClick={() => navigate('/Registration', { state: { regtype: "login" } })}
             >
               Login
@@ -75,25 +77,24 @@ function Header() {
             <img
               src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
               alt="profile"
-              className="w-[45px] h-[45px] rounded-full cursor-pointer border-2 border-[var(--text)] shadow-[0_0_15px_color-mix(in_srgb,var(--homeshadow)_60%,transparent)] hover:scale-105 transition-transform duration-200"
+              className="w-[45px] h-[45px] rounded-full cursor-pointer border-2 border-[var(--text)] hover:scale-105 transition-transform duration-200"
               onClick={() => setOpen((prev) => !prev)}
             />
 
             {open && (
               <div>
-                <ul className="absolute right-0 min-w-max mt-3 bg-[var(--headerbg)] border border-[var(--anyborder)] rounded-2xl shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] overflow-hidden z-20">
+                <ul className="absolute right-0 min-w-max mt-3 bg-[var(--headerbg)] border border-[var(--anyborder)] rounded-2xl overflow-hidden z-20">
 
                   <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                  <div className="absolute -top-10 -left-10 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
 
                   <div className="flex items-center gap-x-3 px-4 py-3 relative z-10 border-b border-[var(--anyborder)]">
                     <img
                       src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
-                      className="w-[60px] h-[60px] rounded-full border-2 border-[var(--text)] shadow-[0_0_10px_color-mix(in_srgb,var(--homeshadow)_60%,transparent)]"
+                      className="w-[60px] h-[60px] rounded-full border-2 border-[var(--text)]"
                     />
                     <div className="flex flex-col">
                       <h2
-                        className="truncate w-[150px] text-lg font-extrabold text-[var(--text)] tracking-wide drop-shadow-[0_0_8px_color-mix(in_srgb,var(--homeshadow)_80%,transparent)]"
+                        className="truncate w-[150px] text-lg font-extrabold text-[var(--text)] tracking-wide"
                         style={{ fontFamily: "'Pricedown', sans-serif" }}
                       >
                         {user.username}
@@ -107,7 +108,7 @@ function Header() {
                           <span className="absolute inset-0 z-10 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 
                                         bg-clip-text text-transparent opacity-0 
                                         transition-opacity duration-500 ease-in-out 
-                                        group-hover:opacity-100 drop-shadow-[0_0_8px_rgba(255,215,0,0.9)]">
+                                        group-hover:opacity-100">
                             Access more features with our Premium subscription!
                           </span>
                         </p>
@@ -127,7 +128,7 @@ function Header() {
                     </li>
                     <li
                       className="px-4 py-2 hover:bg-[var(--headermenuhover)] cursor-pointer flex gap-x-2 items-center text-red-500 transition-colors duration-200"
-                      onClick={() => { logout(), navigate("/Home") }}
+                      onClick={() => { logout(), navigate("/") }}
                     >
                       <MdOutlineLogout size={20} /> Logout
                     </li>

@@ -140,23 +140,20 @@ export default function Profile() {
       <Header />
 
       <div className="flex justify-center items-start my-16">
-        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7 py-10">
+        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7 py-10">
           {/* Background glow */}
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
-          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="mb-5 flex justify-end">
             <button
               onClick={() => navigate("/Profile/Edit")}
-              className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
+              className="relative bg-[var(--cardbg)] border text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           flex
                           justify-center
                           items-center gap-x-2
-                          hover:border-[var(--text)]/50
-                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
-                          transition-all duration-300"
+                          border-[var(--text)]/50
+                          transition-all duration-300 hover:shadow-[0_0_3px_rgb(365,365,365)]"
             >
               <IoPencilSharp size={17} className="mb-1" /> Edit Profile
             </button>
@@ -183,7 +180,7 @@ export default function Profile() {
             <h3 className="text-lg font-bold text-[var(--subtext)] mb-4">
               Activity Rate
             </h3>
-            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-4 shadow-inner">
+            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-4">
               <CalendarHeatmap
                 startDate={new Date(`${new Date().getFullYear()}-01-01`)}
                 endDate={new Date(`${new Date().getFullYear()}-12-31`)}
@@ -227,7 +224,7 @@ export default function Profile() {
                 <button
                   onClick={() => { submissions.length > 0 ? setShowDeleteModal2(true) : null }}
                   className={`py-2 px-4  rounded-lg  font-bold
-              ${submissions.length == 0 ? "text-red-900/50 border-2 border-red-900/50 invalidCursor  " : "text-red-700 font-bold border-2 border-red-700  hover:bg-red-700 hover:text-white transition-colors duration-200shadow-[0_0_12px_rgba(255,0,0,0.3)]"} `}
+              ${submissions.length == 0 ? "text-red-900/50 border-2 border-red-900/50 invalidCursor  " : "text-red-700 font-bold border-2 border-red-700  hover:bg-red-700 hover:text-white transition-colors duration-200"} `}
                 >
                   Reset Record
                 </button>
@@ -244,7 +241,7 @@ export default function Profile() {
 
                   {/* Modal box */}
                   <div
-                    className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] p-8 rounded-2xl shadow-lg 
+                    className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] p-8 rounded-2xl 
                  z-10 w-[90%] max-w-md text-center transition-transform duration-200"
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -313,7 +310,7 @@ export default function Profile() {
               )}
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4">
               {visibleSubs.length > 0 ? (visibleSubs.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -321,7 +318,7 @@ export default function Profile() {
                 >
                   <li
                     key={i}
-                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
+                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
 
                   >
                     <div className="flex justify-between items-start">
@@ -369,7 +366,6 @@ export default function Profile() {
               <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
-                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           w-full
                           mt-5
                           flex
@@ -393,7 +389,7 @@ export default function Profile() {
               </h3>
 
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4 shadow-inner">
+            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4">
               {fav.length > 0 ? (fav.map((s, i) => (
                 <Link
                   to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -401,7 +397,7 @@ export default function Profile() {
                 >
                   <li
                     key={i}
-                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
+                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
 
                   >
                     <div className="flex justify-between items-start">
@@ -449,7 +445,6 @@ export default function Profile() {
               <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
-                          hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_50%,transparent)]
                           w-full
                           mt-5
                           flex
@@ -470,7 +465,7 @@ export default function Profile() {
               onClick={() => setShowDeleteModal(true)}
               className="py-2 px-4 text-red-700 font-bold border-2 border-red-700 rounded-lg 
                hover:bg-red-700 hover:text-white transition-colors duration-200
-               shadow-[0_0_12px_rgba(255,0,0,0.3)]"
+               "
             >
               Delete Account
             </button>

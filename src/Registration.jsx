@@ -80,12 +80,10 @@ function Reg(props) {
                     </h1>
 
                     {/* GTA Styled Login Card */}
-                    <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden">
+                    <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
 
                         {/* Background Layers */}
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
-                        <div className="absolute bottom-0 right-0 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
 
                         <div className="relative z-10 px-7">
                             {/* Header */}
@@ -96,11 +94,11 @@ function Reg(props) {
 
                             {/* Social Login */}
                             <div className="flex justify-center mt-6 gap-x-4">
-                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] hover:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition">
+                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                                     <svg className="w-5 h-5 fill-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" /></svg>
                                     Google
                                 </button>
-                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] hover:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition">
+                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                                     <svg className="w-5 h-5 fill-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" /></svg>
                                     Facebook
                                 </button>
@@ -126,7 +124,7 @@ function Reg(props) {
                                                 placeholder="Enter your username"
                                                 value={username}
                                                 onChange={(e) => setUsername(e.target.value)}
-                                                className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] pl-10 pr-3 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] pl-10 pr-3 py-2 focus:border-[var(--text)] outline-none transition"
                                             />
                                         </div>
                                     </div>
@@ -142,14 +140,14 @@ function Reg(props) {
                                                 placeholder="Enter your password"
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
-                                                className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] pl-10 pr-10 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] pl-10 pr-10 py-2 focus:border-[var(--text)] outline-none transition"
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowPassword(!showPassword)}
-                                                className="absolute right-3 top-1/2 -translate-y-1/3 text-[var(--subtext)] hover:text-[var(--tasktext)]"
+                                                className="absolute right-3 top-1/2 -translate-y-1/3  "
                                             >
-                                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                                {showPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
                                             </button>
                                         </div>
                                     </div>
@@ -200,10 +198,10 @@ function Reg(props) {
                                         }
                                     }}
                                     disabled={loading || success}
-                                    className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
+                                    className={`flex items-center justify-center gap-2 px-4 hover:bg-[var(--ce7hover)] py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
                         ${success
-                                            ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
-                                            : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            ? "bg-green-600 text-white"
+                                            : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
                                         }`}
                                 >
                                     {loading ? (
@@ -259,11 +257,10 @@ function Reg(props) {
                     </h1>
 
                     {/* Panel */}
-                    <div className="relative flex flex-col justify-center w-[28%] max-lg:w-[50%] max-sm:w-[90%] my-7 mx-auto bg-[var(--cardbg)] rounded-2xl border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] overflow-hidden">
+                    <div className="relative flex flex-col justify-center w-[28%] max-lg:w-[50%] max-sm:w-[90%] my-7 mx-auto bg-[var(--cardbg)] rounded-2xl border border-[var(--anyborder)] overflow-hidden">
 
                         {/* Gradient overlays */}
                         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
 
                         {/* Header */}
                         <div className="py-6 border-b border-[var(--anyborder)] text-center">
@@ -273,11 +270,11 @@ function Reg(props) {
 
                         {/* Social Login */}
                         <div className="relative z-10 flex justify-center mt-5 gap-x-3">
-                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] hover:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all">
+                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] transition-all">
                                 <svg className="max-w-5 max-h-5 fill-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" /></svg>
                                 Google
                             </button>
-                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] hover:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all">
+                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] transition-all">
                                 <svg className="max-w-5 max-h-5 fill-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" /></svg>
                                 Facebook
                             </button>
@@ -304,7 +301,7 @@ function Reg(props) {
                                             onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
                                             required
                                             placeholder="Enter your username"
-                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-3 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all"
+                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-3 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] transition-all"
                                         />
                                     </div>
                                 </div>
@@ -320,7 +317,7 @@ function Reg(props) {
                                             onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                                             required
                                             placeholder="Enter your e-mail"
-                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-3 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all"
+                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-3 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] transition-all"
                                         />
                                     </div>
                                 </div>
@@ -336,14 +333,14 @@ function Reg(props) {
                                             onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                                             required
                                             placeholder="Enter your password"
-                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-12 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all"
+                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-12 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] transition-all"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowMainPassword(!showMainPassword)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[var(--subtext)] hover:text-[var(--tasktext)]"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sm "
                                         >
-                                            {showMainPassword ? <FaEyeSlash /> : <FaEye />}
+                                            {showMainPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
                                         </button>
                                     </div>
                                 </div>
@@ -358,14 +355,14 @@ function Reg(props) {
                                             required
                                             placeholder="Confirm your password"
                                             onChange={(e) => setConfirmPass(e.target.value)}
-                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-12 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition-all"
+                                            className="border border-[var(--textfieldboarder)] mt-1 rounded-md text-[var(--tasktext)] pl-10 pr-12 py-2 w-full bg-transparent focus:outline-0 focus:border-[var(--text)] transition-all"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[var(--subtext)] hover:text-[var(--tasktext)]"
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-sm "
                                         >
-                                            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                                            {showConfirmPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
                                         </button>
                                     </div>
                                 </div>
@@ -418,11 +415,11 @@ function Reg(props) {
                                 } : null}
                                 disabled={loadingSign || successSign}
                                 className={` ${isChecked
-                                    ? "bg-[var(--buttonbg)] text-white hover:shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                    ? "bg-[var(--buttonbg)] text-white hover:bg-[var(--ce7hover)]"
                                     : "bg-transparent text-gray-500 border border-gray-600 invalidCursor"
                                     } flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
                         ${successSign
-                                        ? "bg-green-600 text-white shadow-[0_0_4px_#16A34A] "
+                                        ? "bg-green-600 text-white"
                                         : ""
                                     }`}
                             >
@@ -476,12 +473,11 @@ function Reg(props) {
                             </h1>
 
                             {/* GTA Styled Forgot Password Card */}
-                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden">
+                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
 
                                 {/* Background Layers */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                                <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
-                                <div className="absolute bottom-0 right-0 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
+
 
                                 <div className="relative z-10 px-7">
                                     {/* Header */}
@@ -496,7 +492,7 @@ function Reg(props) {
                                     <div className="flex items-center justify-center my-6">
                                         <button
                                             onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "1" } })}
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_8px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             1
                                         </button>
@@ -537,13 +533,13 @@ function Reg(props) {
                                                     type="email"
                                                     required
                                                     placeholder="Enter your e-mail"
-                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] outline-none transition"
                                                 />
                                             </div>
 
                                             <button
                                                 onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "2" } })}
-                                                className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition"
+                                                className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
                                                 Send Verification Code
                                             </button>
@@ -577,12 +573,11 @@ function Reg(props) {
                             </h1>
 
                             {/* GTA Styled Verification Code Card */}
-                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden">
+                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
 
                                 {/* Background Layers */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                                <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
-                                <div className="absolute bottom-0 right-0 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
+
 
                                 <div className="relative z-10 px-7">
                                     {/* Header */}
@@ -597,7 +592,7 @@ function Reg(props) {
                                     <div className="flex items-center justify-center my-6">
                                         <button
                                             onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "1" } })}
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_8px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             1
                                         </button>
@@ -606,7 +601,7 @@ function Reg(props) {
 
                                         <button
                                             onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "2" } })}
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_8px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             2
                                         </button>
@@ -622,7 +617,7 @@ function Reg(props) {
                                     </div>
 
                                     {/* Success Icon */}
-                                    <div className="w-28 h-28 rounded-full text-[#3ebf8f] flex items-center justify-center bg-[#3ebf8f1a] mx-auto my-5 shadow-[0_0_20px_#3ebf8faa]">
+                                    <div                                        className="w-28 h-28 rounded-full text-[#3ebf8f] flex items-center justify-center bg-[#3ebf8f1a] mx-auto my-5">
                                         <Check size={50} />
                                     </div>
 
@@ -646,13 +641,13 @@ function Reg(props) {
                                                     type="text"
                                                     required
                                                     placeholder="Enter the verification code"
-                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] outline-none transition"
                                                 />
                                             </div>
 
                                             <button
                                                 onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "3" } })}
-                                                className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition"
+                                                className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
                                                 Check
                                             </button>
@@ -686,11 +681,10 @@ function Reg(props) {
                             </h1>
 
                             {/* GTA Styled Card */}
-                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden">
+                            <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
                                 {/* Background Layers */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-                                <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl"></div>
-                                <div className="absolute bottom-0 right-0 w-[150px] h-[150px] rounded-full bg-[var(--subtext)]/12 blur-2xl"></div>
+
 
                                 {/* Card Content */}
                                 <div className="relative z-10 px-7">
@@ -710,7 +704,7 @@ function Reg(props) {
                                                     state: { regtype: "forgetPass", page: "1" },
                                                 })
                                             }
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             1
                                         </button>
@@ -721,7 +715,7 @@ function Reg(props) {
                                                     state: { regtype: "forgetPass", page: "2" },
                                                 })
                                             }
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             2
                                         </button>
@@ -732,7 +726,7 @@ function Reg(props) {
                                                     state: { regtype: "forgetPass", page: "3" },
                                                 })
                                             }
-                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)]"
+                                            className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             3
                                         </button>
@@ -749,7 +743,7 @@ function Reg(props) {
                                                     type="password"
                                                     required
                                                     placeholder="Create a password"
-                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] outline-none transition"
                                                 />
                                             </div>
 
@@ -761,7 +755,7 @@ function Reg(props) {
                                                     type="password"
                                                     required
                                                     placeholder="Confirm your password"
-                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] focus:shadow-[0_0_4px_color-mix(in_srgb,var(--subtext)_67%,transparent)] outline-none transition"
+                                                    className="mt-2 w-full rounded-md border border-[var(--textfieldboarder)] bg-transparent text-[var(--tasktext)] px-3 py-2 focus:border-[var(--text)] outline-none transition"
                                                 />
                                             </div>
 
@@ -771,7 +765,7 @@ function Reg(props) {
                                                         state: { regtype: "login" },
                                                     })
                                                 }
-                                                className="mt-6 w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md shadow-[0_0_6px_color-mix(in_srgb,var(--subtext)_67%,transparent)] hover:shadow-[0_0_10px_color-mix(in_srgb,var(--subtext)_67%,transparent)] transition"
+                                                className="mt-6 w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
                                                 Done!
                                             </button>

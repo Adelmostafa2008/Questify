@@ -74,14 +74,11 @@ function About() {
 
         {/* Background Glow Orbs */}
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-3xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
-
         {/* Main Container */}
-        <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-12 shadow-[0_0_70px_rgba(0,0,0,0.3)] backdrop-blur-xl">
+        <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-12 backdrop-blur-xl">
 
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-[var(--text)] text-6xl font-black tracking-tight drop-shadow-sm">
+          <div className="text-center mb-16">              <h1 className="text-[var(--text)] text-6xl font-black tracking-tight">
               Meet the Creator
             </h1>
             <p className="text-[var(--subtext)] text-lg mt-4 max-w-[70%] mx-auto leading-relaxed">
@@ -95,12 +92,12 @@ function About() {
 
             {/* Left Side — Big Image Card */}
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+              <div className="rounded-3xl overflow-hidden border border-white/10">
                 <img src={adel} className="w-[310px] h-auto object-cover" />
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-4.5 left-1/2 w-max -translate-x-1/2 bg-[var(--text)] text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+              <div className="absolute -bottom-4.5 left-1/2 w-max -translate-x-1/2 bg-[var(--text)] text-white px-6 py-2 rounded-full text-sm font-semibold">
                 Full-Stack Developer
               </div>
             </div>
@@ -121,26 +118,26 @@ function About() {
               {/* Contact Cards */}
               <div className="space-y-4">
 
-                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition">
+                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition">
                   <MdOutlineAlternateEmail className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--subtext)] text-lg">adel.0523035@gmail.com</span>
                 </div>
 
                 <a href="https://github.com/Adelmostafa2008" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition cursor-pointer">
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition cursor-pointer">
                   <FaGithub className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--text)] text-lg underline">Github</span>
                 </a>
 
                 <a href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-sm hover:bg-white/10 transition cursor-pointer">
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition cursor-pointer">
                   <FaLinkedin className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--text)] text-lg underline">LinkedIn</span>
                 </a>
               </div>
 
               {/* Short Bio */}
-              <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-white/10 shadow-inner">
+              <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-white/10">
                 <div className="flex gap-4">
                   <IoDocumentText className="text-[var(--text)] h-10" size={93} />
                   <p className="text-[var(--subtext)] italic leading-relaxed">
@@ -169,9 +166,8 @@ function About() {
         <Card cat="about" type="why-questify" mypicture="badge" title="Skill Certification" comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms." />
       </div>
 
-      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
         <div className="text-center text-white py-10 mb-5">
           <h2 className="text-5xl font-extrabold bg-clip-text text-[var(--text)]">Our Impact</h2>
           <h4 className="text-lg text-[var(--subtext)] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
@@ -193,9 +189,8 @@ function About() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-40">
 
 
-          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[var(--anyborder)] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
             <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
               <FaPhone size={30} className="text-[var(--text)]" /> Contact Information
@@ -233,9 +228,8 @@ function About() {
           </div>
 
 
-          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_25%,transparent)] overflow-hidden">
+          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[var(--anyborder)] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
             <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
               <IoIosSend size={30} className="text-[var(--text)]" /> Send Us a Message

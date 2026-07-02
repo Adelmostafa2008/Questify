@@ -65,7 +65,7 @@ export default function SelectedPlan() {
 
       case "VodafoneCash":
         return (
-          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[#444] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)]">
+          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[#444]">
             <p className="font-semibold mb-2 text-[var(--tasktext)]">Transfer to this number:</p>
             <p className="text-xl text-[var(--text)] font-bold">+20 10 xxxx xxxx</p>
             <p className="text-[var(--subtext)] mt-3 text-sm">
@@ -78,7 +78,7 @@ export default function SelectedPlan() {
             />
             <button
               onClick={() => cool ? null : handelSnack()}
-              className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] w-[100%] my-3 text-white font-bold py-3 rounded-lg shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)] transition-all duration-300"
+              className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] w-[100%] my-3 text-white font-bold py-3 rounded-lg transition-all duration-300"
             >
               Send Now
             </button>
@@ -87,11 +87,11 @@ export default function SelectedPlan() {
 
       case "PayPal":
         return (
-          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)]">
+          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[var(--anyborder)]">
             <p className="mb-4 text-[var(--subtext)]">
               You will be redirected to PayPal to complete your payment.
             </p>
-            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] text-white font-bold py-3 rounded-lg w-full shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)] transition-all duration-300">
+            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] text-white font-bold py-3 rounded-lg w-full transition-all duration-300">
               Pay with PayPal
             </button>
           </div>
@@ -99,11 +99,11 @@ export default function SelectedPlan() {
 
       case "ApplePay":
         return (
-          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)]">
+          <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[var(--anyborder)]">
             <p className="mb-4 text-[var(--subtext)]">
               Use Apple Pay on your device to complete payment.
             </p>
-            <button onClick={() => cool ? null : handelSnack()} className="bg-black hover:cursor-pointer text-white font-bold py-3 rounded-lg w-full flex items-center justify-center gap-2 shadow-lg hover:scale-105 transition-transform duration-300">
+            <button onClick={() => cool ? null : handelSnack()} className="bg-black hover:cursor-pointer text-white font-bold py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300">
               <FaApplePay size={30} /> Pay with Apple Pay
             </button>
           </div>
@@ -124,14 +124,13 @@ export default function SelectedPlan() {
 
       <div className="text-white w-[85%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden flex justify-between gap-10">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-        <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/24 blur-3xl "></div>
 
         {/* Plan Preview */}
-        <div className="w-[40%] relative z-10 p-8 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_10%,transparent)] flex flex-col items-center text-center">
+        <div className="w-[40%] relative z-10 p-8 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] flex flex-col items-center text-center">
           
 
           <h2
-            className="text-6xl font-extrabold text-[var(--text)] drop-shadow-[0_0_35px_color-mix(in_srgb,var(--anyshadow)_20%,transparent)] tracking-wider uppercase"
+            className="text-6xl font-extrabold text-[var(--text)] tracking-wider uppercase"
             style={{ fontFamily: "'Pricedown', sans-serif" }}
           >
             {Pname} Plan
@@ -181,14 +180,14 @@ export default function SelectedPlan() {
                 key={method}
                 onClick={() => SetPaymentMethod(method)}
                 className={`border rounded-lg hover:cursor-pointer px-6 w-1/4 py-3 flex justify-center items-center transition-all duration-300 ${paymentMethod === method
-                  ? "bg-[var(--text)] border-[var(--text)] shadow-[0_0_8px_var(--text)]"
+                  ? "bg-[var(--text)] border-[var(--text)]"
                   : "border-[var(--anyborder)] hover:bg-[#ce7d630d] hover:border-[var(--text)]"
                   }`}
               >
-                {method === "Visa" && <RiVisaLine size={50} className={`${paymentMethod === "Visa" ? "text-white":"text-[var(--text)]"}`}/>}
-                {method === "ApplePay" && <FaApplePay size={50} className={`${paymentMethod === "ApplePay" ? "text-white":"text-[var(--text)]"}`}/>}
-                {method === "PayPal" && <FaPaypal size={40} className={`${paymentMethod === "PayPal" ? "text-white":"text-[var(--text)]"}`}/>}
-                {method === "VodafoneCash" && <SiVodafone size={40} className={`${paymentMethod === "VodafoneCash" ? "text-white":"text-[var(--text)]"}`}/>}
+                {method === "Visa" && <RiVisaLine size={50} className={`${paymentMethod === "Visa" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
+                {method === "ApplePay" && <FaApplePay size={50} className={`${paymentMethod === "ApplePay" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
+                {method === "PayPal" && <FaPaypal size={40} className={`${paymentMethod === "PayPal" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
+                {method === "VodafoneCash" && <SiVodafone size={40} className={`${paymentMethod === "VodafoneCash" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
               </button>
             ))}
           </div>

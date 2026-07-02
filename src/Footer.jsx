@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter, FaSquareFacebook } from "react-icons/fa6";
 
-function Footer() {
+function Footer(props) {
   const navigate = useNavigate();
   const { ShowSnackBar } = useSnack()
   const [cool, setCool] = useState(false);
-
+  const isLanding = props.islanding || false;
   const handelSnack = () => {
     setCool(true);
     ShowSnackBar("This service is still under construction", "info");
@@ -16,7 +16,7 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-[var(--headerbg)] text-white py-10 mt-10 rounded-t-md shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+    <footer className={`bg-[var(--headerbg)] text-white py-10 ${isLanding ? "mt-0" : "mt-10"} rounded-t-md`}>
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <h1

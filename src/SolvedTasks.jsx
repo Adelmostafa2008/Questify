@@ -44,17 +44,15 @@ export default function SolvedTasks(){
         <>
         <Header/>
          <div className="flex justify-center items-start my-16">
-        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_25%,transparent)] relative overflow-hidden px-7 py-10">
+        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7 py-10">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
-          <div className="absolute -top-16 -left-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
-          <div className="absolute -bottom-16 -right-16 w-[250px] h-[250px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
           <div className="relative z-10 mb-12">
 
         <h3 className="text-xl font-bold text-[var(--tasktext)] mb-4">
               All The Submissions
             </h3>
-            <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-white px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6 shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
+            <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-white px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6">
               <div className="flex items-center gap-3">
                 <label className="tracking-wide whitespace-nowrap">Category:</label>
                 <select onChange={(e) => SetQuery(prev => ({...prev , SortByCategory : e.target.value}))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
@@ -102,7 +100,7 @@ export default function SolvedTasks(){
           </div>
 
             </div>
-        <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-[var(--cardbg)] p-4 shadow-inner relative">
+        <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-[var(--cardbg)] p-4 relative">
               {submissions.length > 0 ? ( submissions.map((s, i) => (
                   <Link
                 to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
@@ -110,7 +108,7 @@ export default function SolvedTasks(){
                 >
                 <li
                   key={i}
-                  className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition shadow-[0_0_35px_color-mix(in_srgb,var(--homeshadow)_15%,transparent)]"
+                  className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
                   
                 >
                   <div className="flex justify-between items-start">
