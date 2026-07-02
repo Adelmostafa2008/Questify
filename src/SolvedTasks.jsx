@@ -52,7 +52,7 @@ export default function SolvedTasks(){
         <h3 className="text-xl font-bold text-[var(--tasktext)] mb-4">
               All The Submissions
             </h3>
-            <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-white px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6">
+            <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-[var(--text)] px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6">
               <div className="flex items-center gap-3">
                 <label className="tracking-wide whitespace-nowrap">Category:</label>
                 <select onChange={(e) => SetQuery(prev => ({...prev , SortByCategory : e.target.value}))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
@@ -93,7 +93,7 @@ export default function SolvedTasks(){
             />
             <button
               onClick={() => fetchlatestsubsQuery()}
-              className="bg-[var(--buttonbg)] px-4 py-2 rounded-r-md font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
+              className="bg-[var(--buttonbg)] px-4 py-2 rounded-r-md text-gray-100 font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
             >
               Search
             </button>
@@ -112,7 +112,7 @@ export default function SolvedTasks(){
                   
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="text-lg font-semibold text-[var(--tasktext)]">
+                    <h4 className="text-lg font-semibold text-[var(--tasktext)] truncate">
                       {s.taskname}
                     </h4>
                     <span
@@ -133,7 +133,7 @@ export default function SolvedTasks(){
                       )}
                     </span>
                   </div>
-                  <p className="mt-2 text-sm text-[var(--subtext)]">
+                  <p className="mt-2 text-sm text-[var(--subtext)] truncate">
                     {s.taskdescription}
                   </p>
                   <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">

@@ -153,7 +153,7 @@ export default function Profile() {
                           justify-center
                           items-center gap-x-2
                           border-[var(--text)]/50
-                          transition-all duration-300 hover:shadow-[0_0_3px_rgb(365,365,365)]"
+                          transition-all duration-300 hover:bg-[var(--ce7hover)] hover:text-gray-100"
             >
               <IoPencilSharp size={17} className="mb-1" /> Edit Profile
             </button>
@@ -322,7 +322,7 @@ export default function Profile() {
 
                   >
                     <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-[var(--tasktext)]">
+                      <h4 className="text-lg font-semibold text-[var(--tasktext)] truncate">
                         {s.taskname}
                       </h4>
                       <span
@@ -342,7 +342,7 @@ export default function Profile() {
                         )}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-[var(--subtext)]">
+                    <p className="mt-2 text-sm text-[var(--subtext)] truncate">
                       {s.taskdescription}
                     </p>
                     <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
@@ -401,7 +401,7 @@ export default function Profile() {
 
                   >
                     <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-[var(--tasktext)]">
+                      <h4 className="text-lg font-semibold text-[var(--tasktext)] truncate">
                         {s.taskname}
                       </h4>
                       <span
@@ -421,7 +421,7 @@ export default function Profile() {
                         )}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-[var(--subtext)]">
+                    <p className="mt-2 text-sm text-[var(--subtext)] truncate">
                       {s.taskdescription}
                     </p>
                     <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
@@ -441,7 +441,7 @@ export default function Profile() {
                 </Link>
               ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
             </ul>
-            {visibleCount < submissions.length ? (
+            {visibleCount < fav.length ? (
               <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
                           font-semibold px-6 py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]

@@ -108,7 +108,7 @@ export default function Addtask(props){
                 <div className="flex text-[var(--tasktext)] justify-center gap-[3%] ">
                     <div className="flex flex-col w-[50%]">
                         <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Title</label>
-                        <input type="text" onChange={(e) => SetTask(prevtask => ({...prevtask , taskname : e.target.value}))} placeholder="Enter task title..." className="w-full px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
+                        <input type="text" maxLength={60} onChange={(e) => SetTask(prevtask => ({...prevtask , taskname : e.target.value}))} placeholder="Enter task title..." className="w-full px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
                     </div>
                     <div className="flex flex-col w-[50%]">
                         <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Category</label>
@@ -137,7 +137,7 @@ export default function Addtask(props){
                 {/*Task Description*/}
                 <div className="w-full flex flex-col pb-5">
                     <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Description</h2>
-                    <textarea onChange={(e) => SetTask(prevtask => ({...prevtask , taskdescription : e.target.value}))} placeholder="Enter detailed task description..." className="text-[var(--tasktext)] bg-transparent px-4 py-2 border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)] max-h-36 min-h-36"/>
+                    <textarea onChange={(e) => SetTask(prevtask => ({...prevtask , taskdescription : e.target.value}))} placeholder="Enter detailed task description..." maxLength={300} className="text-[var(--tasktext)] bg-transparent px-4 py-2 border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)] max-h-36 min-h-36"/>
                 </div>
 
                 {/*Scenarios*/}
@@ -178,11 +178,11 @@ export default function Addtask(props){
                 <div className="flex text-white justify-around pb-10 gap-[3%]">
                     <div className="flex flex-col w-[50%]">
                         <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Estimated Time (minutes)</label>
-                        <input type="number" placeholder="e.g., 30" onChange={(e) => SetTask(prevtask => ({...prevtask , tasktime : parseInt(e.target.value , 10)}))} max={120} min={30} className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
+                        <input type="number" placeholder="Max 120 min" onChange={(e) => SetTask(prevtask => ({...prevtask , tasktime : parseInt(e.target.value , 10)}))} max={120} min={1} className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
                     </div>
                     <div className="flex flex-col w-[50%]">
-                        <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Maximum Points</label>
-                        <input type="number" onChange={(e) => SetTask(prevtask => ({...prevtask ,taskpoints : parseInt(e.target.value , 10)}))} placeholder="e.g., 100" max={200} min={20} className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
+                        <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Points</label>
+                        <input type="number" onChange={(e) => SetTask(prevtask => ({...prevtask ,taskpoints : parseInt(e.target.value , 10)}))} placeholder="Max 3000 pts" max={3000} min={1} className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"/>
                     </div>
                 </div>
 
@@ -282,8 +282,8 @@ export default function Addtask(props){
                             </div>
                         </div>
                         <div className="flex gap-x-5 my-10">
-                            <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaClock size={40} fill="var(--text)"/>{task.tasktime === "" ? "Ex. 60" : task.tasktime } Minute(s)</label>
-                            <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaStar size={40} fill="var(--text)"/>{task.taskpoints === "" ? "Ex. 100" : task.taskpoints} Points(s)</label>
+                            <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaClock size={40} fill="var(--text)"/>{task.tasktime === "" ? "Ex. 60" : task.tasktime } Minutes</label>
+                            <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaStar size={40} fill="var(--text)"/>{task.taskpoints === "" ? "Ex. 100" : task.taskpoints} Points</label>
                         </div>
                         <div className="text-[var(--subtext)] text-lg text-center w-[95%] mx-auto mb-4 break-words">
                             {task.taskdescription === "" ? "Ex. Task Description goes here." : task.taskdescription}

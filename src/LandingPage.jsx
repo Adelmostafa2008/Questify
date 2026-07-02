@@ -13,6 +13,8 @@ import { useState } from "react";
 import pwlight from "./assets/pwLight.png";
 import pwdark from "./assets/pwDark.png";
 import Card from './Card.jsx';
+import howQworksLight from "./assets/sec2landinglight2.png"
+import howQworksDark from "./assets/sec2landingdark.png"
 
 export default function LandingPage(){
 
@@ -72,6 +74,11 @@ export default function LandingPage(){
         <img src={theme === "dark" ? Darkhero : Lighthero} alt="Questify hero illustration" className="rounded-4xl [mask-image:radial-gradient(circle,white_50%,transparent_100%)]"/>
     </div>
 
+    </div>
+
+
+    <div className="w-full my-10">
+      <img src={theme == "dark" ? howQworksDark: howQworksLight} alt="How Questify Works" className="scale-85 rounded-4xl"/>
     </div>
 
         {/* FAQs*/}

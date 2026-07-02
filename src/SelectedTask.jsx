@@ -216,7 +216,7 @@ export default function SelectedTask() {
                         <button
                             onClick={handleDelete}
                             disabled={deleteState === "loading"}
-                            className="p-2 rounded-md flex items-center gap-2border border-[var(--anyborder)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
+                            className="p-2 rounded-md flex items-center gap-2 border border-[var(--anyborder)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
                         >
                             {(deleteState !== "loading" && deleteState !== "done") && (
                                 <FaTrashCan size={20} className="text-[var(--tasktext)]" />

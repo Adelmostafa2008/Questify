@@ -450,9 +450,9 @@ function Reg(props) {
 
                         {/* Footer */}
                         <div className="border-t border-[var(--anyborder)] py-6 mt-6 text-center">
-                            <h4 className="text-[var(--tasktext)] text-center font-semibold">
+                            <h4 className="text-[var(--tasktext)] text-sm">
                                 Already have an account?{" "}
-                                <a onClick={() => navigate('/Registration', { state: { regtype: "login" } })} className="text-[var(--text)] hover:underline cursor-pointer">
+                                <a onClick={() => navigate('/Registration', { state: { regtype: "login" } })} className="text-[var(--text)] hover:underline font-semibold cursor-pointer">
                                     Login
                                 </a>
                             </h4>

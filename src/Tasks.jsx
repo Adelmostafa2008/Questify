@@ -141,10 +141,10 @@ export default function Tasks() {
                   className="bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <h2 className="text-[var(--tasktext)] font-semibold text-lg">
+                    <h2 className="text-[var(--tasktext)] font-semibold text-lg truncate">
                       {task.taskname}
                     </h2>
-                    <span className="px-3 py-1 rounded-full text-xs bg-[var(--text)]/10 text-[var(--text)]">
+                    <span className="px-3 py-1 rounded-full text-xs bg-[var(--text)]/10 text-[var(--text)] min-w-max">
                       {task.taskcategory}
                     </span>
                   </div>
@@ -167,7 +167,7 @@ export default function Tasks() {
                     )}
                   </div>
 
-                  <p className="text-[var(--subtext)] text-sm line-clamp-3 mb-4">
+                  <p className="text-[var(--subtext)] text-sm line-clamp-3 mb-4 truncate">
                     {task.taskdescription}
                   </p>
 
