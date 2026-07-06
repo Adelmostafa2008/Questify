@@ -5,10 +5,12 @@ import { useAuth } from "./AuthContext.jsx"; // adjust path if needed
 import api from "./AxiosHelper.jsx";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSnack } from "./SnackBarContext.jsx";
+import { useSearchParams } from "react-router-dom";
 
 function Reg(props) {
+    const [searchParams] = useSearchParams();
+    const type = searchParams.get("regtype");
     const location = useLocation();
-    const regtype = location.state?.regtype;
     const page = location.state?.page || null;
     const navigate = useNavigate();
     const [confirmPass, setConfirmPass] = useState();
@@ -34,10 +36,11 @@ function Reg(props) {
                 password: password
             });
 
-            localStorage.setItem("user", JSON.stringify(res.data));
-
+            console.log(res.data);
+            // localStorage.setItem("user", JSON.stringify(res.data));
             // save user + token to context
             login(res.data);
+
 
         } catch (err) {
             ShowSnackBar(err.response.data, "error");
@@ -70,7 +73,7 @@ function Reg(props) {
     };
 
 
-    switch (regtype) {
+    switch (type) {
         case "login":
             return (
                 <>
@@ -147,7 +150,7 @@ function Reg(props) {
                                                 onClick={() => setShowPassword(!showPassword)}
                                                 className="absolute right-3 top-1/2 -translate-y-1/3  "
                                             >
-                                                {showPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
+                                                {showPassword ? <FaEyeSlash className="text-[var(--subtext)]" /> : <FaEye className="text-[var(--text)]" />}
                                             </button>
                                         </div>
                                     </div>
@@ -169,7 +172,7 @@ function Reg(props) {
                                         </div>
                                         <a
                                             onClick={() =>
-                                                navigate("/Registration", { state: { regtype: "forgetPass", page: "1" } })
+                                                navigate("/Registration?regtype=forgetPass", { state: { page: "1" } })
                                             }
                                             className="float-right text-[var(--text)] text-sm font-semibold hover:underline cursor-pointer"
                                         >
@@ -234,7 +237,7 @@ function Reg(props) {
                                 <h4 className="text-[var(--tasktext)] text-sm">
                                     Don’t have an account?{" "}
                                     <a
-                                        onClick={() => navigate('/Registration', { state: { regtype: "sign-up" } })}
+                                        onClick={() => navigate('/Registration?regtype=sign-up')}
                                         className="text-[var(--text)] font-semibold hover:underline cursor-pointer"
                                     >
                                         Sign Up
@@ -340,7 +343,7 @@ function Reg(props) {
                                             onClick={() => setShowMainPassword(!showMainPassword)}
                                             className="absolute right-3 top-1/2 -translate-y-1/2 text-sm "
                                         >
-                                            {showMainPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
+                                            {showMainPassword ? <FaEyeSlash className="text-[var(--subtext)]" /> : <FaEye className="text-[var(--text)]" />}
                                         </button>
                                     </div>
                                 </div>
@@ -362,7 +365,7 @@ function Reg(props) {
                                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                             className="absolute right-3 top-1/2 -translate-y-1/2 text-sm "
                                         >
-                                            {showConfirmPassword ? <FaEyeSlash className="text-[var(--subtext)]"/> : <FaEye className="text-[var(--text)]"/>}
+                                            {showConfirmPassword ? <FaEyeSlash className="text-[var(--subtext)]" /> : <FaEye className="text-[var(--text)]" />}
                                         </button>
                                     </div>
                                 </div>
@@ -406,7 +409,7 @@ function Reg(props) {
                                     try {
                                         await handleSignup();
                                         setSuccessSign(true);
-                                        setTimeout(() => navigate('/Registration', { state: { regtype: "login" } }), 500); // Redirect after 1.5s
+                                        setTimeout(() => navigate('/Registration?regtype=login'), 500); // Redirect after 1.5s
                                     } catch (err) {
                                         console.error(err);
                                     } finally {
@@ -452,7 +455,7 @@ function Reg(props) {
                         <div className="border-t border-[var(--anyborder)] py-6 mt-6 text-center">
                             <h4 className="text-[var(--tasktext)] text-sm">
                                 Already have an account?{" "}
-                                <a onClick={() => navigate('/Registration', { state: { regtype: "login" } })} className="text-[var(--text)] hover:underline font-semibold cursor-pointer">
+                                <a onClick={() => navigate('/Registration?regtype=login')} className="text-[var(--text)] hover:underline font-semibold cursor-pointer">
                                     Login
                                 </a>
                             </h4>
@@ -491,7 +494,7 @@ function Reg(props) {
                                     {/* Steps */}
                                     <div className="flex items-center justify-center my-6">
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "1" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "1" } })}
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             1
@@ -500,7 +503,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
 
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "2" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "2" } })}
                                             className="w-12 h-12 rounded-full border-2 border-[var(--anyborder)] text-[var(--subtext)] text-sm flex items-center justify-center hover:border-[var(--text)] hover:text-[var(--text)] transition"
                                         >
                                             2
@@ -509,7 +512,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
 
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "3" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "3" } })}
                                             className="w-12 h-12 rounded-full border-2 border-[var(--anyborder)] text-[var(--subtext)] text-sm flex items-center justify-center hover:border-[var(--text)] hover:text-[var(--text)] transition"
                                         >
                                             3
@@ -538,7 +541,7 @@ function Reg(props) {
                                             </div>
 
                                             <button
-                                                onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "2" } })}
+                                                onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "2" } })}
                                                 className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
                                                 Send Verification Code
@@ -551,7 +554,7 @@ function Reg(props) {
                                         <h4 className="text-[var(--tasktext)] text-sm">
                                             Remember your password?{" "}
                                             <a
-                                                onClick={() => navigate('/Registration', { state: { regtype: "login" } })}
+                                                onClick={() => navigate('/Registration?regtype=login')}
                                                 className="text-[var(--text)] font-semibold hover:underline cursor-pointer"
                                             >
                                                 Back to Login
@@ -591,7 +594,7 @@ function Reg(props) {
                                     {/* Steps */}
                                     <div className="flex items-center justify-center my-6">
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "1" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "1" } })}
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             1
@@ -600,7 +603,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
 
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "2" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "2" } })}
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
                                             2
@@ -609,7 +612,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
 
                                         <button
-                                            onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "3" } })}
+                                            onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "3" } })}
                                             className="w-12 h-12 rounded-full border-2 border-[var(--anyborder)] text-[var(--subtext)] text-sm flex items-center justify-center hover:border-[var(--text)] hover:text-[var(--text)] transition"
                                         >
                                             3
@@ -617,7 +620,7 @@ function Reg(props) {
                                     </div>
 
                                     {/* Success Icon */}
-                                    <div                                        className="w-28 h-28 rounded-full text-[#3ebf8f] flex items-center justify-center bg-[#3ebf8f1a] mx-auto my-5">
+                                    <div className="w-28 h-28 rounded-full text-[#3ebf8f] flex items-center justify-center bg-[#3ebf8f1a] mx-auto my-5">
                                         <Check size={50} />
                                     </div>
 
@@ -646,7 +649,7 @@ function Reg(props) {
                                             </div>
 
                                             <button
-                                                onClick={() => navigate('/Registration', { state: { regtype: "forgetPass", page: "3" } })}
+                                                onClick={() => navigate('/Registration?regtype=forgetPass', { state: { page: "3" } })}
                                                 className="w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
                                                 Check
@@ -659,7 +662,7 @@ function Reg(props) {
                                         <h4 className="text-[var(--tasktext)] text-sm">
                                             Remember your password?{" "}
                                             <a
-                                                onClick={() => navigate('/Registration', { state: { regtype: "login" } })}
+                                                onClick={() => navigate('/Registration?regtype=login')}
                                                 className="text-[var(--text)] font-semibold hover:underline cursor-pointer"
                                             >
                                                 Back to Login
@@ -700,9 +703,7 @@ function Reg(props) {
                                     <div className="flex items-center justify-center my-6 ">
                                         <button
                                             onClick={() =>
-                                                navigate("/Registration", {
-                                                    state: { regtype: "forgetPass", page: "1" },
-                                                })
+                                                navigate('/Registration?regtype=forgetPass', { state: { page: "1" } })
                                             }
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
@@ -711,9 +712,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
                                         <button
                                             onClick={() =>
-                                                navigate("/Registration", {
-                                                    state: { regtype: "forgetPass", page: "2" },
-                                                })
+                                                navigate('/Registration?regtype=forgetPass', { state: { page: "2" } })
                                             }
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
@@ -722,9 +721,7 @@ function Reg(props) {
                                         <div className="w-[20%] h-px bg-[var(--anyborder)]"></div>
                                         <button
                                             onClick={() =>
-                                                navigate("/Registration", {
-                                                    state: { regtype: "forgetPass", page: "3" },
-                                                })
+                                                navigate('/Registration?regtype=forgetPass', { state: { page: "3" } })
                                             }
                                             className="w-12 h-12 rounded-full bg-[var(--buttonbg)] text-white text-sm flex items-center justify-center"
                                         >
@@ -761,9 +758,7 @@ function Reg(props) {
 
                                             <button
                                                 onClick={() =>
-                                                    navigate("/Registration", {
-                                                        state: { regtype: "login" },
-                                                    })
+                                                    navigate('/Registration?regtype=login')
                                                 }
                                                 className="mt-6 w-full py-2 bg-[var(--buttonbg)] text-white text-lg font-semibold rounded-md transition"
                                             >
@@ -778,7 +773,7 @@ function Reg(props) {
                                             Remember your password?{" "}
                                             <a
                                                 onClick={() =>
-                                                    navigate("/Registration", { state: { regtype: "login" } })
+                                                    navigate('/Registration?regtype=login')
                                                 }
                                                 className="text-[var(--text)] font-semibold hover:underline cursor-pointer"
                                             >

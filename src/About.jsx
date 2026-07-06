@@ -54,7 +54,7 @@ function About() {
         btnContent={`${user ? "Start Making Your Legacy" : "Join Questify Today"}`}
         cat="about"
         type="what-is-questify"
-        GoTo={user ? () => navigate("/Home") : () => navigate("/Registration", { state: { regtype: "login" } })}
+        GoTo={user ? () => navigate("/Home") : () => navigate('/Registration?regtype=login')}
       />
 
       <div className="text-center text-white my-20">
@@ -118,26 +118,26 @@ function About() {
               {/* Contact Cards */}
               <div className="space-y-4">
 
-                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition">
+                <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition">
                   <MdOutlineAlternateEmail className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--subtext)] text-lg">adel.0523035@gmail.com</span>
                 </div>
 
                 <a href="https://github.com/Adelmostafa2008" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition cursor-pointer">
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer">
                   <FaGithub className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--text)] text-lg underline">Github</span>
                 </a>
 
                 <a href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 hover:bg-white/10 transition cursor-pointer">
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer">
                   <FaLinkedin className="text-[var(--text)]" size={28} />
                   <span className="text-[var(--text)] text-lg underline">LinkedIn</span>
                 </a>
               </div>
 
               {/* Short Bio */}
-              <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-white/10">
+              <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-[var(--anyborder)]">
                 <div className="flex gap-4">
                   <IoDocumentText className="text-[var(--text)] h-10" size={93} />
                   <p className="text-[var(--subtext)] italic leading-relaxed">

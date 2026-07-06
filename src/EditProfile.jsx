@@ -171,6 +171,7 @@ export default function EditProfile() {
 
                   <FaRegEdit className="absolute top-3 left-3 text-[var(--subtext)]" />
                   <textarea
+                  maxLength={200}
                     placeholder="Ex. I am a 2x boxing heavyweight champion of the world"
                     defaultValue={newUser?.Description}
                     className="w-full pl-10 pr-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)] resize-none h-[200px]  rounded-md"

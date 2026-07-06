@@ -7,6 +7,7 @@ import { FaGear } from "react-icons/fa6";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeContext.jsx";
 
+
 function Header() {
   const {theme} = useContext(ThemeContext);
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Header() {
       </h1>
 
       <div className="flex items-center justify-center gap-6 max-xs:hidden w-1/3 min-w-max ">
-        {["Home", "About", "Pricing", "Addtask" , "l"].map((link) => (
+        {["Home", "About", "Pricing", "Addtask"].map((link) => (
           <NavLink
             key={link}
             to={`/${link}`}
@@ -60,7 +61,7 @@ function Header() {
             <button
               className="px-3 py-2 bg-transparent text-[var(--text)] border-2 border-[var(--text)] 
                 rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:text-white hover:border-transparent hover:cursor-pointer transition-all"
-              onClick={() => navigate('/Registration', { state: { regtype: "login" } })}
+              onClick={() => navigate('/Registration?regtype=login')}
             >
               Login
             </button>
@@ -68,7 +69,7 @@ function Header() {
             <button
               className="text-white bg-[var(--buttonbg)] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
                   hover:bg-transparent hover:border-[var(--text)] hover:py-0  hover:text-[var(--text)]  transition-all hover:cursor-pointer"
-              onClick={() => navigate('/Registration', { state: { regtype: "sign-up" } })}
+              onClick={() => navigate('/Registration?regtype=sign-up')}
             >
               Sign-up
             </button>

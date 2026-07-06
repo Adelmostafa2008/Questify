@@ -159,7 +159,7 @@ export default function Profile() {
             </button>
           </div>
 
-          <div className="relative z-10 flex items-center gap-x-8 border-b border-[var(--anyborder)] pb-8">
+          <div className="relative z-10 flex items-center gap-x-8 border-b border-[var(--anyborder)] pb-8 w-[100%]">
             <div className="flex-shrink-0">
               <img
                 src={preview || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
@@ -169,7 +169,7 @@ export default function Profile() {
             </div>
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-[var(--tasktext)]">{oldUser.userName}</h3>
-              <p className="text-[var(--subtext)] italic mt-2 text-lg">
+              <p className="text-[var(--subtext)] italic mt-2 text-lg w-[60%] break-words overflow-hidden">
                 "{oldUser.description || "No description yet..."}"
               </p>
             </div>

@@ -52,10 +52,10 @@ export default function LandingPage(){
         <div className="flex gap-4 w-full">
 
         <button  className="px-3 py-2 w-[20%] bg-transparent text-[var(--text)] border-2 border-[var(--text)] rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:border-transparent hover:text-white hover:cursor-pointer transition-all" 
-        onClick={() => navigate('/Registration', { state: { regtype: "login" } })}>Login</button>
+        onClick={() => navigate('/Registration?regtype=login')}>Login</button>
         <button  className="text-white w-[20%] bg-[var(--buttonbg)] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
                   hover:bg-transparent hover:border-[var(--text)] hover:py-0  hover:text-[var(--text)]  transition-all hover:cursor-pointer"
-              onClick={() => navigate('/Registration', { state: { regtype: "sign-up" } })}>Get started</button>
+              onClick={() => navigate('/Registration?regtype=sign-up')}>Get started</button>
         </div>
         :
         <div className="w-full">
@@ -75,11 +75,26 @@ export default function LandingPage(){
     </div>
 
     </div>
-
-
-    <div className="w-full my-10">
+        {/*section 2 */}
+    <div className="w-full my-10 flex justify-center">
       <img src={theme == "dark" ? howQworksDark: howQworksLight} alt="How Questify Works" className="scale-85 rounded-4xl"/>
     </div>
+
+
+
+
+    {/*section 3 */}
+<div className="flex flex-col ">
+        <h1 className="text-[4rem] text-[var(--text)] text-center font-extrabold ">Why Choose Questify</h1>
+    <div className="max-w-[80%] grid grid-cols-3 gap-5 mt-10 mb-10 mx-auto items-stretch">
+      <Card title="Real-World Challenges" type="sec3" cat="landing" comment="Practice tasks based on actual job scenarios." mypicture="bag"/>
+      <Card title="Instant Feedback" type="sec3" cat="landing" comment="Learn faster with detailed explanations after every challenge." mypicture="bolt"/>
+      <Card title="Track Your Progress" type="sec3" cat="landing" comment="Monitor your growth and stay motivated." mypicture="chart"/>
+      <Card title="Career-Focused Learning" type="sec3" cat="landing" comment="Every challenge is designed around practical job skills." mypicture="target"/>
+      <Card title="Learn Anytime" type="sec3" cat="landing" comment="Practice at your own pace from anywhere." mypicture="globe"/>
+      <Card title="Affordable Alternative" type="sec3" cat="landing" comment="Gain practical experience without spending hundreds on courses." mypicture="money"/>
+    </div>
+</div>
 
         {/* FAQs*/}
 

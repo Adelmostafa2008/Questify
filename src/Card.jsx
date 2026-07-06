@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaLightbulb, FaUserGroup, FaChartLine, FaListCheck, FaGraduationCap, FaHeadset, FaPaintbrush, FaPlus, FaMinus, FaMessage, FaTrashCan } from "react-icons/fa6";
+import { FaLightbulb, FaUserGroup, FaListCheck, FaChartLine ,FaGraduationCap,FaMoneyBillWave , FaHeadset, FaPaintbrush, FaPlus, FaMinus, FaMessage, FaTrashCan ,FaBolt } from "react-icons/fa6";
 import { IoChatbubbles } from "react-icons/io5";
-import { RiMedalFill } from "react-icons/ri";
+import { RiMedalFill  } from "react-icons/ri";
 import { MdWork } from "react-icons/md";
 import { TbCertificate } from "react-icons/tb";
 import { BsFillMegaphoneFill } from "react-icons/bs";
-import { FaClipboardList, FaCode } from "react-icons/fa";
+import { FaClipboardList, FaCode , FaGlobeAfrica } from "react-icons/fa";
+import { LuChartNoAxesCombined } from "react-icons/lu";
+import { TbTargetArrow } from "react-icons/tb";
 
 function Card(props) {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ function Card(props) {
       case "bulb":
         return <FaLightbulb size={40} className="text-[var(--text)]" />;
       case "chart":
-        return <FaChartLine size={40} className="text-[var(--text)]" />;
+        return <LuChartNoAxesCombined size={40} className="text-[var(--text)]" />;
       case "community":
         return <FaUserGroup size={40} className="text-[var(--text)]" />;
       case "chat":
@@ -60,6 +62,14 @@ function Card(props) {
         return <FaCode size={50} className="text-[var(--text)]" />;
       case "design":
         return <FaPaintbrush size={50} className="text-[var(--text)]" />;
+      case "bolt":
+        return <FaBolt size={40} className="text-[var(--text)]"/>
+      case "target":
+        return <TbTargetArrow size={40} className="text-[var(--text)]"/>
+      case "globe":
+        return <FaGlobeAfrica size={40} className="text-[var(--text)]"/>
+      case "money":
+        return <FaMoneyBillWave size={40} className="text-[var(--text)]"/>
       default:
         return null;
     }
@@ -149,7 +159,7 @@ function Card(props) {
   switch (type) {
     case "what-is-questify":
       return (
-        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] overflow-hidden">
+        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] overflow-hidden border border-[var(--anyborder)]">
            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10 text-center">
@@ -171,7 +181,7 @@ function Card(props) {
 
     case "mission":
       return (
-        <div className="relative flex flex-col items-center text-center bg-[var(--cardbg)] p-8 rounded-2xl transition-all duration-300 overflow-hidden">
+        <div className="relative flex flex-col items-center border border-[var(--anyborder)] text-center bg-[var(--cardbg)] p-8 rounded-2xl transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10">
@@ -377,6 +387,25 @@ function Card(props) {
       </div>
     </div>
   );  
+
+  case "landing":
+    switch (type){
+      case "sec3":
+        return(
+          <div className="relative flex flex-col items-center border border-dashed border-[var(--text)] text-center  p-8 rounded-2xl transition-all duration-300 overflow-hidden">
+          <div className="relative z-10">
+            <div className="w-[70px] h-[70px] mx-auto my-4 bg-[var(--text)]/15 rounded-full flex items-center justify-center">
+              {getIcon(pic)}
+            </div>
+            <h2 className="text-2xl font-bold text-[var(--tasktext)]">{title}</h2>
+            <h4 className="max-w-[80%] mx-auto my-5 text-md text-[var(--subtext)] font-medium">
+              {comment}
+            </h4>
+          </div>
+        </div>
+        );
+        
+    }
     case "default":
       return (<h2>empty card</h2>);
   }
