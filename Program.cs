@@ -26,6 +26,7 @@ builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IUTsubmissionsRepo, UTsubmissionsRepo>();
 builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 builder.Services.AddScoped<IUTfavouritesRepo , UTfavouritesRepo>();
+builder.Services.AddScoped<IUserRepo , UserRepo>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

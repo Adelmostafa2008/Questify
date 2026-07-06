@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Backend.DTOs;
 using Backend.Interfaces;
 using Backend.Models;
+using Backend.Repos.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Backend.Controllers
 {
@@ -19,8 +22,10 @@ namespace Backend.Controllers
         private readonly ITokenGenerator _token;
         private readonly IUTsubmissionsRepo _sub;
         private readonly SignInManager<Users> _signInManager;
-        public RegController(UserManager<Users> user, ITokenGenerator token, SignInManager<Users> sign, IUTsubmissionsRepo sup)
+        private readonly IUserRepo _ur;
+        public RegController(UserManager<Users> user,IUserRepo db ,  ITokenGenerator token, SignInManager<Users> sign, IUTsubmissionsRepo sup)
         {
+            _ur = db;
             _token = token;
             _user = user;
             _signInManager = sign;
@@ -59,9 +64,9 @@ namespace Backend.Controllers
                         return Ok(
                             new ReadUserDTO
                             {
+                                
                                 UserName = newUser.UserName,
-                                Email = newUser.Email,
-                                Token = _token.CreateToken(newUser)
+                                Email = newUser.Email
                             }
                         );
                     }
@@ -72,7 +77,7 @@ namespace Backend.Controllers
                 }
                 else
                 {
-                    return BadRequest("Password validation(s) didnot get specified");
+                    return BadRequest("Password validation(s) didnot get satisfied");
                 }
             }
             catch (Exception e)
@@ -100,9 +105,26 @@ namespace Backend.Controllers
 
             var token = _token.CreateToken(user);
 
-            return Ok(new
+            var refreshtoken = GenerateRefreshToken();
+            user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(7);
+            user.RefreshToken = refreshtoken;
+
+            await _ur.Save();
+
+            var opts = new CookieOptions
+            {
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                HttpOnly = true,
+                Expires = DateTimeOffset.UtcNow.AddDays(7)
+            };
+
+            Response.Cookies.Append("RefreshToken" , refreshtoken , opts) ;
+            
+            return Ok( new
             {
                 Id = user.Id,
+                Role = await _user.GetRolesAsync(user),
                 Username = user.UserName,
                 Email = user.Email,
                 Token = token,
@@ -221,6 +243,57 @@ namespace Backend.Controllers
 
             return Ok(new { message = "User Deleted Successfully" });
 
+        }
+
+        [HttpPost("Refresh")]
+        public async Task<IActionResult> RefreshTheRefreshToken()
+        {
+            
+            var refreshtoken = Request.Cookies["RefreshToken"];
+
+            if(refreshtoken == null)
+            {
+                return Unauthorized();
+            }
+             
+             //Console.WriteLine($"Refresh Token : ${refreshtoken}");
+            var user = await _ur.GetUserByRefreshToken(refreshtoken);
+
+            if (user.RefreshTokenExpiryDate <= DateTime.UtcNow) return Unauthorized();
+
+            var newtoekn = _token.CreateToken(user);
+            var newRefreshtoken =  GenerateRefreshToken();
+            user.RefreshToken = newRefreshtoken;
+            user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(7);
+
+            await _ur.Save();
+
+            var opts = new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(7),
+                HttpOnly = true,
+                SameSite = SameSiteMode.Lax,
+                Secure = false
+            };
+
+            Response.Cookies.Append("RefreshToken" , newRefreshtoken , opts);
+
+            return Ok(new
+            {
+                token = newtoekn
+            });
+
+        }
+        private string GenerateRefreshToken()
+        {
+            var randombytes = new byte[64];
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randombytes);
+            }
+
+            return Convert.ToBase64String(randombytes);
         }
 
 
