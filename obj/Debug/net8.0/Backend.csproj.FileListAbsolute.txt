@@ -344,3 +344,8 @@ E:\Adel\WebApi\Pro project\Backend\obj\Debug\net8.0\staticwebassets.build.endpoi
 E:\Adel\WebApi\Pro project\Backend\obj\Debug\net8.0\Backend.csproj.Up2Date
 E:\Adel\WebApi\Pro project\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 E:\Adel\WebApi\Pro project\Backend\obj\Debug\net8.0\ref\Backend.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\Google.Apis.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\Google.Apis.Auth.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\Google.Apis.Core.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\System.Management.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll

@@ -25,6 +25,11 @@ namespace Backend.DTOs
         [Required]
         public string Password { get; set; }
     }
+    public class GoogleDTO
+    {
+        [Required]
+        public string Credintial {get;set;}    
+    }
     public class EditUserDTO
     {
         public string? UserName { get; set; }

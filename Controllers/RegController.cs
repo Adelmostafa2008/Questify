@@ -8,6 +8,7 @@ using Backend.DTOs;
 using Backend.Interfaces;
 using Backend.Models;
 using Backend.Repos.Interfaces;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -22,9 +23,11 @@ namespace Backend.Controllers
         private readonly ITokenGenerator _token;
         private readonly IUTsubmissionsRepo _sub;
         private readonly SignInManager<Users> _signInManager;
+        private readonly IConfiguration _config;
         private readonly IUserRepo _ur;
-        public RegController(UserManager<Users> user,IUserRepo db ,  ITokenGenerator token, SignInManager<Users> sign, IUTsubmissionsRepo sup)
+        public RegController(UserManager<Users> user,IUserRepo db ,IConfiguration config,  ITokenGenerator token, SignInManager<Users> sign, IUTsubmissionsRepo sup)
         {
+            _config = config;
             _ur = db;
             _token = token;
             _user = user;
@@ -89,48 +92,100 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO login)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var user = await _user.FindByNameAsync(login.UserName);
-            if (user == null)
-                return Unauthorized("Invalid Username or Password.");
 
+            if (user == null) return BadRequest("Invalid Username or Password.");
+
+            if(user.PasswordHash == null) return BadRequest(new {error = "google_account"});
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
-            if (!result.Succeeded)
-                return Unauthorized("Invalid Username or Password.");
+
+            if (!result.Succeeded) return BadRequest("Invalid Username or Password.");
 
 
-            var token = _token.CreateToken(user);
+            var token = await TokenGeneration(user);
+            return Ok(await LoginResponseAsync(user , token));
 
-            var refreshtoken = GenerateRefreshToken();
-            user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(7);
-            user.RefreshToken = refreshtoken;
 
-            await _ur.Save();
+        }
+        // Note : handel the null pasword hash in the signup and normal login 
+        [HttpPost("google")]
+        public async Task<IActionResult> ContinueWithGoogle([FromBody] GoogleDTO data)
+        {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
 
-            var opts = new CookieOptions
+            try
             {
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
-                HttpOnly = true,
-                Expires = DateTimeOffset.UtcNow.AddDays(7)
-            };
 
-            Response.Cookies.Append("RefreshToken" , refreshtoken , opts) ;
+            var payload = await GoogleJsonWebSignature.ValidateAsync(data.Credintial 
+            ,
+            new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new[]
+                {
+                    _config["GoogleAuth:ClientId"],
+                }
+            }
+            );
+
+            var usersub = await _ur.GetUserByGoogleSub(payload.Subject);
+            if(usersub == null)
+            {
+                
+            var user = await _user.FindByEmailAsync(payload.Email);
+
+            if(user == null)
+            {
+                var newUser = new Users
+                {
+                    GoogleSub = payload.Subject,
+                    UserName = payload.Name,
+                    Email = payload.Email,
+                    ProfilePic = payload.Picture,
+                    PasswordHash = null
+                };
+
+                var createdUser = await _user.CreateAsync(newUser);
+                if (createdUser.Succeeded)
+                {
+                    var Role = await _user.AddToRoleAsync(newUser, "User");
+                    if (Role.Succeeded)
+                    {
+                        var token = await TokenGeneration(newUser);
+                        return Ok(await LoginResponseAsync(newUser , token));
+                    }
+                    else
+                    {
+                        return BadRequest(Role.Errors);
+                    }
+                }
+                else
+                {
+                    return BadRequest("user creation error");
+                }
+            }
+             else
+                {
+                    user.GoogleSub = payload.Subject;
+                    user.ProfilePic ??= payload.Picture;
+                    var token = await TokenGeneration(user);
+                        return Ok(await LoginResponseAsync(user , token));
+
+                }
+            }
+            else
+            {
+                    var token = await TokenGeneration(usersub);
+                        return Ok(await LoginResponseAsync(usersub , token));
+            }
+            }
+                catch (InvalidJwtException)
+                {
+                    return BadRequest("Invalid Google token.");
+                }
             
-            return Ok( new
-            {
-                Id = user.Id,
-                Role = await _user.GetRolesAsync(user),
-                Username = user.UserName,
-                Email = user.Email,
-                Token = token,
-                ProfilePic = user.ProfilePic,
-                message = "Logged in Successfully",
-            });
         }
 
         [HttpPut("{id}")]
@@ -152,18 +207,10 @@ namespace Backend.Controllers
                 user.UserName = model.UserName;
             }
 
-            // Update email
-            if (!string.IsNullOrEmpty(model.Email) && model.Email != user.Email)
-            {
-                var existingEmail = await _user.FindByEmailAsync(model.Email);
-                if (existingEmail != null && existingEmail.Id != id)
-                    return BadRequest("Email Already Exists.");
-                user.Email = model.Email;
-            }
 
             //update description
 
-            if (model.Description != user.Description)
+            if (model.Description != user.Description) 
             {
                 user.Description = model.Description;
             }
@@ -185,7 +232,7 @@ namespace Backend.Controllers
                     await model.ProfilePicFile.CopyToAsync(stream);
                 }
 
-                user.ProfilePic = $"images/{fileName}";
+                user.ProfilePic = $"http://localhost:5226/images/{fileName}";
             }
 
             // Save changes
@@ -294,6 +341,42 @@ namespace Backend.Controllers
             }
 
             return Convert.ToBase64String(randombytes);
+        }
+
+
+        private async Task<string> TokenGeneration(Users user)
+        {
+                        var token = _token.CreateToken(user);
+                        var refreshtoken = GenerateRefreshToken();
+                        user.RefreshToken = refreshtoken;
+                        user.RefreshTokenExpiryDate = DateTime.UtcNow.AddDays(7);
+                        await _ur.Save();
+
+                        var opts = new CookieOptions
+                        {
+                            HttpOnly = true,
+                            SameSite = SameSiteMode.Lax,
+                            Secure = false,
+                            Expires = DateTime.UtcNow.AddDays(7)
+                        };
+
+                        Response.Cookies.Append("RefreshToken" , refreshtoken , opts);   
+
+                        return token;
+        }
+
+        private async Task<object> LoginResponseAsync(Users user , string token)
+        {
+            return new
+                            {
+                                Id = user.Id,
+                                Role = await _user.GetRolesAsync(user),
+                                Username = user.UserName,
+                                Email = user.Email,
+                                Token = token,
+                                ProfilePic = user.ProfilePic,
+                                message = "Logged in Successfully",
+                            };
         }
 
 

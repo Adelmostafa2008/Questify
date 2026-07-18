@@ -29,7 +29,7 @@ namespace Backend.Repos
             if (checkSub != null)
             {
                 checkSub.SubmittedData = submitteddata;
-                checkSub.SubmissionDate = DateTime.UtcNow;
+                //checkSub.SubmissionDate = DateTime.UtcNow;
                 await _db.SaveChangesAsync();
                 return;
             }
