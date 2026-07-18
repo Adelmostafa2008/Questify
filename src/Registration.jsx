@@ -1,11 +1,13 @@
 import { Check } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, data } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "./AuthContext.jsx"; // adjust path if needed
 import api from "./AxiosHelper.jsx";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSnack } from "./SnackBarContext.jsx";
 import { useSearchParams } from "react-router-dom";
+import { GoogleLogin  } from "@react-oauth/google";
+
 
 function Reg(props) {
     const [searchParams] = useSearchParams();
@@ -17,6 +19,7 @@ function Reg(props) {
     const { login } = useAuth();
     const [username, setUsername] = useState("");
     const [isChecked, SetIsChecked] = useState(false);
+    const [cool, setCool] = useState(false);
     const [password, setPassword] = useState("");
     const [newUser, setNewUser] = useState({ username: "", email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
@@ -36,19 +39,44 @@ function Reg(props) {
                 password: password
             });
 
-            console.log(res.data);
+            //console.log(res.data);
             // localStorage.setItem("user", JSON.stringify(res.data));
             // save user + token to context
             login(res.data);
 
 
         } catch (err) {
-            ShowSnackBar(err.response.data, "error");
+           // console.log(res.data);
+           //console.log(err.response.data["error"]);
+            if(err.response.data["error"] != null && err.response.data["error"] == "google_account"){
+                {cool ? null : 
 
+                    handelSnack(
+                        "This account uses Google Sign-In.\n Please continue with Google.",
+                        "warn"
+                    );
+                }
+            }
+            else {
+                console.log(err)
+                   {cool ? null : 
+                    
+                    handelSnack(err.response.data, "error");
+                }
+            }
             throw err;
         }
     };
 
+    const handelGoogleLogin = async (creds) => {
+        try {
+            const res = await api.post("/regesteration/google" , {Credintial : creds})
+            login(res.data);
+            navigate("/Home");
+        } catch (error) {
+            throw error;
+        }
+    }
 
     const handleSignup = async () => {
 
@@ -63,15 +91,25 @@ function Reg(props) {
         } catch (err) {
             //console.log(err.response.data.errors.email.length);
             if (err.response?.data?.errors?.email?.length > 0) {
-                ShowSnackBar("Email address is not vaild", "error");
+                   {cool ? null : 
+                    
+                    handelSnack("Email address is not vaild", "error");
+                }
             } else {
-
-                ShowSnackBar(err.response.data, "error");
+                   {cool ? null : 
+                    
+                    handelSnack(err.response.data, "error");
+                }
             }
             throw err;
         }
     };
 
+  const handelSnack = (msg , ty) => {
+    setCool(true);
+    ShowSnackBar(msg, ty);
+    setTimeout(() => { setCool(false); }, 5000);
+  };
 
     switch (type) {
         case "login":
@@ -96,15 +134,19 @@ function Reg(props) {
                             </div>
 
                             {/* Social Login */}
-                            <div className="flex justify-center mt-6 gap-x-4">
-                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
+                            <div className="flex justify-center mt-6 gap-x-4 relative">
+                                 <div className="absolute inset-0 opacity-0">
+        <GoogleLogin
+            onSuccess={(cred) => handelGoogleLogin(cred.credential)}
+            onError={() => handelSnack("Google Login Failed" , "error")}
+        />
+    </div>
+                                 <button  className="flex items-center justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                                     <svg className="w-5 h-5 fill-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" /></svg>
-                                    Google
+                                    Countinue With Google
                                 </button>
-                                <button className="flex items-center justify-center gap-2 w-[45%] text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
-                                    <svg className="w-5 h-5 fill-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" /></svg>
-                                    Facebook
-                                </button>
+                                
+                              
                             </div>
 
                             {/* Divider */}
@@ -186,7 +228,10 @@ function Reg(props) {
                                     onClick={async () => {
                                         if (loading || success) return;
                                         if (!username.trim() || !password.trim()) {
-                                            ShowSnackBar("Please enter both username and password.", "info");
+                                               {cool ? null : 
+                    
+                                                handelSnack("Please enter both username and password.", "info");
+                                            }
                                             return;
                                         }
                                         setLoading(true);
@@ -272,16 +317,20 @@ function Reg(props) {
                         </div>
 
                         {/* Social Login */}
-                        <div className="relative z-10 flex justify-center mt-5 gap-x-3">
-                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] transition-all">
-                                <svg className="max-w-5 max-h-5 fill-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" /></svg>
-                                Google
-                            </button>
-                            <button className="flex w-[40%] text-[var(--tasktext)] border rounded-lg border-[var(--anyborder)] justify-center py-3 font-semibold hover:border-[var(--text)] transition-all">
-                                <svg className="max-w-5 max-h-5 fill-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" /></svg>
-                                Facebook
-                            </button>
-                        </div>
+                  <div className="flex justify-center mt-6 gap-x-4 relative">
+                                 <div className="absolute inset-0 opacity-0">
+        <GoogleLogin
+            onSuccess={(cred) => handelGoogleLogin(cred.credential)}
+            onError={() => handelSnack("Google Login Failed" , "error")}
+        />
+    </div>
+                                 <button  className="flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
+                                    <svg className="w-5 h-5 fill-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" /></svg>
+                                    Countinue With Google
+                                </button>
+                                
+                              
+                            </div>
 
                         {/* Divider */}
                         <div className="relative z-10 flex items-center justify-center text-[var(--subtext)] text-sm my-4 px-6">
@@ -398,11 +447,17 @@ function Reg(props) {
                                 onClick={isChecked ? async () => {
                                     if (loadingSign || successSign) return;
                                     if (!newUser.username.trim() || !newUser.email.trim() || !newUser.password.trim() || !isChecked) {
-                                        ShowSnackBar("Please fill all fields and accept Terms of Service.", "info");
+                                           {cool ? null : 
+                    
+                                            handelSnack("Please fill all fields and accept Terms of Service.", "info");
+                                        }
                                         return;
                                     }
                                     if (confirmPass !== newUser.password) {
-                                        ShowSnackBar("Password and Confirm password are not equal", "error");
+                                           {cool ? null : 
+                    
+                                            handelSnack("Password and Confirm password are not equal", "error");
+                                        }
                                         return;
                                     }
                                     setLoadingSign(true);

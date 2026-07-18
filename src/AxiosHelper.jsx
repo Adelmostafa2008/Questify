@@ -46,7 +46,7 @@ api.interceptors.response.use(
         
         const res = await api.post("/regesteration/Refresh" , {withCredentials : true});
         
-        console.log(res.data["token"]);
+       // console.log(res.data["token"]);
         
         const user = JSON.parse(localStorage.getItem("user"));
         

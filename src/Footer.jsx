@@ -9,9 +9,9 @@ function Footer(props) {
   const { ShowSnackBar } = useSnack()
   const [cool, setCool] = useState(false);
   const isLanding = props.islanding || false;
-  const handelSnack = () => {
+  const handelSnack = (msg , ty) => {
     setCool(true);
-    ShowSnackBar("This service is still under construction", "info");
+    ShowSnackBar(msg, ty);
     setTimeout(() => { setCool(false); }, 5000);
   };
 
@@ -20,7 +20,7 @@ function Footer(props) {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <h1
-            onClick={() => navigate('/Home')}
+            onClick={() => navigate('/')}
             className="text-4xl font-extrabold cursor-pointer text-[var(--subtext)]  hover:scale-105 transition-transform duration-200"
           >
             Quest<span className="text-[var(--text)]">ify</span>
@@ -65,7 +65,7 @@ function Footer(props) {
               placeholder="Tell us what's broken..."
               className="flex-grow px-3 py-1 rounded bg-[var(--cardbg)] text-[var(--subtext)] border border-r-transparent border-gray-600 rounded-r-none focus:border-[var(--text)] focus:outline-none"
             />
-            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--buttonbg)] px-4 py-1 rounded text-white hover:bg-[var(--ce7hover)] transition rounded-l-none font-bold">
+            <button onClick={() => cool ? null : handelSnack("This service is still under construction" , "info")} className="bg-[var(--buttonbg)] px-4 py-1 rounded text-white hover:bg-[var(--ce7hover)] transition rounded-l-none font-bold">
               Send
             </button>
           </div>

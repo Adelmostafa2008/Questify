@@ -26,12 +26,13 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  //console.log(user)
 
 
   return (
     <div className="bg-[var(--headerbg)] flex items-center p-5 w-full rounded-br-md rounded-bl-md">
       <h1
-        onClick={() => navigate('/Home')}
+        onClick={() => navigate('/')}
         className="w-1/3 cursor-pointer font-extrabold 
                          text-[var(--subtext)] max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl"
       >
@@ -76,7 +77,7 @@ function Header() {
           </>
           : <div className="relative text-[var(--tasktext)]" ref={menuRef}>
             <img
-              src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
+              src={user?.profilePic ? `${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
               alt="profile"
               className="w-[45px] h-[45px] rounded-full cursor-pointer border-2 border-[var(--text)] hover:scale-105 transition-transform duration-200"
               onClick={() => setOpen((prev) => !prev)}
@@ -90,7 +91,7 @@ function Header() {
 
                   <div className="flex items-center gap-x-3 px-4 py-3 relative z-10 border-b border-[var(--anyborder)]">
                     <img
-                      src={user?.profilePic ? `http://localhost:5226/${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
+                      src={user?.profilePic ? `${user.profilePic}` : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
                       className="w-[60px] h-[60px] rounded-full border-2 border-[var(--text)]"
                     />
                     <div className="flex flex-col">

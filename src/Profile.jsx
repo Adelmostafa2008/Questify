@@ -40,7 +40,7 @@ export default function Profile() {
       setOldUser(res.data);
       setPreview(
         res.data.profilePic
-          ? `http://localhost:5226/${res.data.profilePic}`
+          ? `${res.data.profilePic}`
           : null
       );
     } catch (err) {

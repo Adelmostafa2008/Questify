@@ -53,7 +53,7 @@ export default function LandingPage(){
 
         <button  className="px-3 py-2 w-[20%] bg-transparent text-[var(--text)] border-2 border-[var(--text)] rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:border-transparent hover:text-white hover:cursor-pointer transition-all" 
         onClick={() => navigate('/Registration?regtype=login')}>Login</button>
-        <button  className="text-white w-[20%] bg-[var(--buttonbg)] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
+        <button  className="text-white w-[20%] min-w-max bg-[var(--buttonbg)] px-3 py-2 border-2 border-transparent rounded-md font-bold tracking-wide 
                   hover:bg-transparent hover:border-[var(--text)] hover:py-0  hover:text-[var(--text)]  transition-all hover:cursor-pointer"
               onClick={() => navigate('/Registration?regtype=sign-up')}>Get started</button>
         </div>

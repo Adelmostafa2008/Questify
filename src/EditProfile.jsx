@@ -36,7 +36,7 @@ export default function EditProfile() {
         Email: res.data.email,
         Description: res.data.description,
       });
-      setPreview(res.data.profilePic ? `http://localhost:5226/${res.data.profilePic}` : null);
+      setPreview(res.data.profilePic ? `${res.data.profilePic}` : null);
     } catch (err) {
       console.error("Error fetching user:", err);
     }
@@ -147,22 +147,7 @@ export default function EditProfile() {
                 </div>
               </div>
 
-              {/* Email */}
-              <div className="flex flex-col">
-                <label className="text-[var(--subtext)] text-sm mb-2">E-mail</label>
-                <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)]">
-                  <FaEnvelope className="ml-3 text-[var(--subtext)]" />
-                  <input
-                    type="email"
-                    placeholder="example@gmail.com"
-                    value={newUser.Email}
-                    className="w-full px-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)]"
-                    onChange={(e) =>
-                      setNewUser((prev) => ({ ...prev, Email: e.target.value }))
-                    }
-                  />
-                </div>
-              </div>
+              
 
               {/* Description */}
               <div className="flex flex-col">
