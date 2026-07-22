@@ -1,4 +1,4 @@
-import construction from "./assets/construction.PNG";
+import construction from "./assets/construction.png";
 export default function SryBro(){
     return (
         <>
