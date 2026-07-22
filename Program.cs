@@ -11,10 +11,13 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDb>(option =>
+builder.Services.AddDbContext<AppDb>(options =>
 {
-    option.UseMySql(builder.Configuration.GetConnectionString("connStr"),
-        new MySqlServerVersion(new Version(8, 0, 43)));
+    var connStr = builder.Configuration.GetConnectionString("connStr");
+
+    options.UseMySql(
+        connStr,
+        ServerVersion.AutoDetect(connStr));
 });
 
 builder.Services.AddEndpointsApiExplorer();
