@@ -79,7 +79,7 @@ export default function Addtask(props){
 
         }catch(err){
             ShowSnackBar("One or more validation errors occurred" , "error");
-            console.log(err);
+            //console.log(err);
             throw err;
         }
     }
@@ -201,7 +201,7 @@ export default function Addtask(props){
             if (loading || success) return; 
             if(!task.taskcategory.trim() || !task.taskdefficulty.trim() || !task.taskdescription.trim() || !task.taskname.trim() || isNaN(task.taskpoints) || isNaN(task.tasktime) ){
                 ShowSnackBar("All fields should be filled" , "warn");
-                console.log(task.taskpoints);
+                //console.log(task.taskpoints);
                 return;
             }
             if(cards.length == 0){

@@ -68,7 +68,7 @@ export default function Profile() {
         }));
         setActivity(formatted);
       } catch (error) {
-        console.log(error);
+        throw error
       }
     };
     if (user?.id) fetchData();
@@ -80,7 +80,7 @@ export default function Profile() {
         const res = await api.get(`/submission/latest/${user.id}`);
         setSubmissions(res.data);
       } catch (error) {
-        console.log(error);
+        throw error
       }
     };
     if (user?.id) fetchlatestsubs();
@@ -93,7 +93,7 @@ export default function Profile() {
         const res = await api.get(`/favourites/GetAllFav/${user.id}`);
         setFav(res.data);
       } catch (err) {
-        console.log(err);
+        throw err
       }
     };
     if (user?.id) getFav();

@@ -21,7 +21,7 @@ export default function SolvedTasks(){
             const res = await api.get(`/submission/latest/${user.id}` , {params : query});
             setSubmissions(res.data ?? []);
           } catch (error) {
-            console.log(error);
+            throw error;
             setSubmissions([]);
           }
         };

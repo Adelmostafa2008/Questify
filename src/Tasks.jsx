@@ -26,7 +26,7 @@ export default function Tasks() {
       SetArr(res.data);
     } catch (error) {
       SetArr([]);
-      console.log(error);
+      throw error;
     }
   }
 
@@ -37,7 +37,7 @@ export default function Tasks() {
         SetArr(res.data);
         SetIsTask(res.data.length > 0);
       } catch (error) {
-        console.log(error);
+        throw error;
       }
     };
     checkTask();

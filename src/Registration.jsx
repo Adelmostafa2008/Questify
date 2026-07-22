@@ -58,7 +58,7 @@ function Reg(props) {
                 }
             }
             else {
-                console.log(err)
+                throw err;
                    {cool ? null : 
                     
                     handelSnack(err.response.data, "error");

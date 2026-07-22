@@ -45,7 +45,7 @@ export default function SelectedTask() {
             const res = await api.get(`/tasks/${taskid}`);
             setTask(res.data);
         } catch (err) {
-            console.log(err);
+            throw err;
         }
     };
 
@@ -58,7 +58,7 @@ export default function SelectedTask() {
                 setIsFavourite(false);
             }
         } catch (err) {
-            console.log(err);
+            throw err ;
         }
     }
 
@@ -96,7 +96,6 @@ export default function SelectedTask() {
         try {
             const res = await api.post("/submission", submit);
         } catch (error) {
-            console.log(error);
             throw error;
         }
     };
@@ -109,21 +108,19 @@ export default function SelectedTask() {
             setDeleteState("done");
             setTimeout(() => navigate("/Tasks", { state: { Tcategory: Tcategorry } }), 500)
         } catch (error) {
-            console.log(error);
             setDeleteState("idle");
             throw error;
         }
     };
 
 
-    //console.log(submit);
     const getsub = async (find) => {
         try {
             const res = await api.get("/submission/existing", { params: find });
             setExistingsub(res.data);
             setSubmit(prev => ({ ...prev, SubmittedData: res.data.submittedData }));
         } catch (err) {
-            console.log(err);
+            throw err ;
         }
     };
 
@@ -131,7 +128,6 @@ export default function SelectedTask() {
         try {
             await api.post("/favourites/AddToFavourites", find);
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }
@@ -160,7 +156,6 @@ export default function SelectedTask() {
         try {
             await api.delete("/favourites/DeleteFav", { params: { taskid: Number(taskid), userid: String(user.id) } });
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }

@@ -36,7 +36,7 @@ function About() {
       //console.log(res.data);
       setInfos(res.data);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       throw error;
     }
   }

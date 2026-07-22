@@ -22,8 +22,8 @@ export default function FavTasks() {
             const res = await api.get(`/favourites/GetAllFav/${user.id}`, { params: query });
             setFav(res.data ?? []);
         } catch (error) {
-            console.log(error);
             setFav([]);
+            throw error;
         }
     };
 
