@@ -31,6 +31,13 @@ function Reg(props) {
     const [successSign, setSuccessSign] = useState(false);
     // const [snackbar, setSnackbar] = useState({ message: "", type: "" });
     const { ShowSnackBar } = useSnack();
+    
+    const handelSnack = (msg , ty) => {
+      setCool(true);
+      ShowSnackBar(msg, ty);
+      setTimeout(() => { setCool(false); }, 5000);
+    };
+
 
     const handleLogin = async () => {
         try {
@@ -58,8 +65,7 @@ function Reg(props) {
                 }
             }
             else {
-                throw err;
-                   {cool ? null : 
+                {cool ? null : 
                     
                     handelSnack(err.response.data, "error");
                 }
@@ -105,11 +111,6 @@ function Reg(props) {
         }
     };
 
-  const handelSnack = (msg , ty) => {
-    setCool(true);
-    ShowSnackBar(msg, ty);
-    setTimeout(() => { setCool(false); }, 5000);
-  };
 
     switch (type) {
         case "login":
