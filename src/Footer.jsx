@@ -50,7 +50,7 @@ function Footer(props) {
             <ul className="flex gap-4 mt-3">
               <li onClick={() => navigate("/Facebook")}><FaSquareFacebook className="text-[var(--text)] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
               <li onClick={() => navigate("/X")}><FaSquareXTwitter className="text-[var(--text)] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
-              <li onClick={() => navigate("/LinkedIn")}><FaLinkedin className="text-[var(--text)] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
+              <li onClick={() => navigate("/LinkedIn")}><FaLinkedin className="text-red-600 w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
               <li onClick={() => navigate("/GitHub")}><FaGithub className="text-[var(--text)] w-6 h-6 opacity-80 hover:opacity-100 transition" /></li>
             </ul>
           </div>
