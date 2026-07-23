@@ -116,7 +116,7 @@ function Reg(props) {
             return (
                 <>
                     {/* Logo */}
-                    <h1 className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
+                    <h1 onClick={() => navigate("/")} className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
                         Quest<span className="text-[var(--text)]">ify</span>
                     </h1>
 
@@ -300,7 +300,7 @@ function Reg(props) {
             return (
                 <>
                     {/* Title */}
-                    <h1 className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
+                    <h1 onClick={() => navigate("/")} className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
                         Quest<span className="text-[var(--text)]">ify</span>
                     </h1>
 
@@ -526,7 +526,7 @@ function Reg(props) {
                     return (
                         <>
                             {/* Logo */}
-                            <h1 className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
+                            <h1 onClick={() => navigate("/")} className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
                                 Quest<span className="text-[var(--text)]">ify</span>
                             </h1>
 
@@ -626,7 +626,7 @@ function Reg(props) {
                     return (
                         <>
                             {/* Logo */}
-                            <h1 className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
+                            <h1 onClick={() => navigate("/")} className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
                                 Quest<span className="text-[var(--text)]">ify</span>
                             </h1>
 
@@ -734,7 +734,7 @@ function Reg(props) {
                     return (
                         <>
                             {/* Logo */}
-                            <h1 className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
+                            <h1 onClick={() => navigate("/")} className="text-gray-300 font-bold m-0 max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-center w-full mt-5">
                                 Quest<span className="text-[var(--text)]">ify</span>
                             </h1>
 
