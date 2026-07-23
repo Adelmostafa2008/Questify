@@ -93,7 +93,7 @@ export default function SolvedTasks(){
             />
             <button
               onClick={() => fetchlatestsubsQuery()}
-              className="bg-[var(--buttonbg)] px-4 py-2 rounded-r-md text-gray-100 font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
+              className="bg-[var(--buttonbg)] px-4 py-[9px] rounded-r-md text-gray-100 font-semibold rounded-l-none hover:bg-[var(--ce7hover)] transition-all"
             >
               Search
             </button>
@@ -137,7 +137,7 @@ export default function SolvedTasks(){
                     {s.taskdescription}
                   </p>
                   <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
-                    <span className="px-2 py-1 rounded bg-[var(--taskpreveiw)] text-[var(--text)]">
+                    <span className="px-2 py-1 rounded bg-[var(--text)]/10 text-[var(--text)]">
                       {s.taskcategory}
                     </span>
                     <div className="flex gap-x-4">

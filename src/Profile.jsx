@@ -425,7 +425,7 @@ export default function Profile() {
                       {s.taskdescription}
                     </p>
                     <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
-                      <span className="px-2 py-1 rounded bg-[var(--taskpreveiw)] text-[var(--text)]">
+                      <span className="px-2 py-1 rounded bg-[var(--text)]/10 text-[var(--text)]">
                         {s.taskcategory}
                       </span>
                       <div className="flex gap-x-4">

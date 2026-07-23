@@ -97,7 +97,7 @@ function About() {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-4.5 left-1/2 w-max -translate-x-1/2 bg-[var(--text)] text-white px-6 py-2 rounded-full text-sm font-semibold">
+              <div className="absolute -bottom-4.5 left-1/2 w-max -translate-x-1/2 bg-[var(--text)] text-[var(--cardbg)] px-6 py-2 rounded-full text-sm font-semibold">
                 Full-Stack Developer
               </div>
             </div>

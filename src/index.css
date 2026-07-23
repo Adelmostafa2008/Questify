@@ -89,7 +89,7 @@ ul li {
   --less8: #0a5d00;
   --less10: #063b00;        /* Activity level 9–10+ */
 
-  --paymentmethods:#1E1F21;
+  --paymentmethods:#e2eaf7;
 }
 
 .dark {
@@ -97,7 +97,7 @@ ul li {
   --bg: #010107;
   --cardbg: #1f1f20;
   --headerbg: #1f1f20;
-  --taskpreveiw: #1f1f20;
+  --taskpreveiw: #262627;
   --scenepreveiwbg: #999999;
   --headermenuhover: #373839;
 
