@@ -1,12 +1,12 @@
 import { Check } from "lucide-react";
 import { useNavigate, useLocation, data } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "./AuthContext.jsx"; // adjust path if needed
 import api from "./AxiosHelper.jsx";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSnack } from "./SnackBarContext.jsx";
 import { useSearchParams } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Reg(props) {
   const [searchParams] = useSearchParams();
@@ -34,15 +34,6 @@ function Reg(props) {
   const [successSign, setSuccessSign] = useState(false);
   // const [snackbar, setSnackbar] = useState({ message: "", type: "" });
   const { ShowSnackBar } = useSnack();
-
-  const googlelogin = useGoogleLogin({
-    onSuccess: async (res) => {
-      await handelGoogleLogin(res.credential);
-    },
-    onError: () => {
-      handelSnack("Google Login Failed", "error");
-    },
-  });
 
   const handelSnack = (msg, ty) => {
     setCool(true);
@@ -121,8 +112,6 @@ function Reg(props) {
     }
   };
 
-  //                <div className="absolute inset-0 opacity-0">
-
   switch (type) {
     case "login":
       return (
@@ -153,10 +142,13 @@ function Reg(props) {
 
               {/* Social Login */}
               <div className="flex justify-center mt-6 gap-x-4 relative">
-                <button
-                  onClick={async () => await googlelogin()}
-                  className="flex items-center cursor-pointer justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition"
-                >
+                <div className="w-full ">
+                  <GoogleLogin
+                    onSuccess={(cred) => handelGoogleLogin(cred.credential)}
+                    onError={() => handelSnack("Google Login Failed", "error")}
+                  />
+                </div>
+                {/* <button className="flex items-center justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                   <svg
                     className="w-5 h-5 fill-red-500"
                     xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +157,7 @@ function Reg(props) {
                     <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
                   </svg>
                   Countinue With Google
-                </button>
+                </button> */}
               </div>
 
               {/* Divider */}
@@ -362,10 +354,13 @@ function Reg(props) {
 
             {/* Social Login */}
             <div className="flex justify-center mt-6 gap-x-4 relative">
-              <button
-                onClick={async () => await googlelogin()}
-                className="cursor-pointer flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition"
-              >
+              <div className="w-full ">
+                  <GoogleLogin
+                    onSuccess={(cred) => handelGoogleLogin(cred.credential)}
+                    onError={() => handelSnack("Google Login Failed", "error")}
+                  />
+                </div>
+              {/* <button className="flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                 <svg
                   className="w-5 h-5 fill-red-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +369,7 @@ function Reg(props) {
                   <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
                 </svg>
                 Countinue With Google
-              </button>
+              </button> */}
             </div>
 
             {/* Divider */}
