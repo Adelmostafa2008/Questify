@@ -1,12 +1,12 @@
 import { Check } from "lucide-react";
 import { useNavigate, useLocation, data } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "./AuthContext.jsx"; // adjust path if needed
 import api from "./AxiosHelper.jsx";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSnack } from "./SnackBarContext.jsx";
 import { useSearchParams } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function Reg(props) {
   const [searchParams] = useSearchParams();
@@ -34,6 +34,15 @@ function Reg(props) {
   const [successSign, setSuccessSign] = useState(false);
   // const [snackbar, setSnackbar] = useState({ message: "", type: "" });
   const { ShowSnackBar } = useSnack();
+
+  const googlelogin = useGoogleLogin({
+    onSuccess: async (res) => {
+      await handelGoogleLogin(res.credential);
+    },
+    onError: () => {
+      handelSnack("Google Login Failed", "error");
+    },
+  });
 
   const handelSnack = (msg, ty) => {
     setCool(true);
@@ -144,13 +153,10 @@ function Reg(props) {
 
               {/* Social Login */}
               <div className="flex justify-center mt-6 gap-x-4 relative">
-                <div className="absolute inset-0 opacity-0">
-                  <GoogleLogin
-                    onSuccess={(cred) => handelGoogleLogin(cred.credential)}
-                    onError={() => handelSnack("Google Login Failed", "error")}
-                  />
-                </div>
-                <button className="flex items-center cursor-pointer justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
+                <button
+                  onClick={async () => await googlelogin()}
+                  className="flex items-center cursor-pointer justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition"
+                >
                   <svg
                     className="w-5 h-5 fill-red-500"
                     xmlns="http://www.w3.org/2000/svg"
@@ -356,13 +362,10 @@ function Reg(props) {
 
             {/* Social Login */}
             <div className="flex justify-center mt-6 gap-x-4 relative">
-              <div className="absolute inset-0 opacity-0">
-                <GoogleLogin
-                  onSuccess={(cred) => handelGoogleLogin(cred.credential)}
-                  onError={() => handelSnack("Google Login Failed", "error")}
-                />
-              </div>
-              <button className="flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
+              <button
+                onClick={async () => await googlelogin()}
+                className="cursor-pointer flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition"
+              >
                 <svg
                   className="w-5 h-5 fill-red-500"
                   xmlns="http://www.w3.org/2000/svg"
