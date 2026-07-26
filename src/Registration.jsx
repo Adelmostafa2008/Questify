@@ -144,7 +144,7 @@ function Reg(props) {
 
               {/* Social Login */}
               <div className="flex justify-center mt-6 gap-x-4 relative">
-                <div className="absolute inset-0 ">
+                <div className="absolute inset-0 opacity-0">
                   <GoogleLogin
                     onSuccess={(cred) => handelGoogleLogin(cred.credential)}
                     onError={() => handelSnack("Google Login Failed", "error")}
