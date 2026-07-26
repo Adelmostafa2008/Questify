@@ -44,8 +44,8 @@ export default function FavTasks() {
     return (
         <>
             <Header />
-            <div className="flex justify-center items-start my-16">
-                <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7 py-10">
+            <div className="flex justify-center items-start my-12 md:my-16 px-4">
+                <div className="w-full md:w-[80%] lg:w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-5 md:px-7 py-8 md:py-10">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
 
                     <div className="relative z-10 mb-12">
@@ -53,7 +53,7 @@ export default function FavTasks() {
                         <h3 className="text-xl font-bold text-[var(--tasktext)] mb-4">
                             Favourite Tasks
                         </h3>
-                        <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[100%] mx-auto text-[var(--text)] px-5 py-4 rounded-lg justify-center items-center gap-x-10 my-6">
+                        <div className="bg-[var(--cardbg)] flex flex-col sm:flex-row flex-wrap md:flex-nowrap w-full mx-auto text-[var(--text)] px-3 sm:px-5 py-4 rounded-lg justify-center items-center gap-3 md:gap-x-10 my-6">
                             <div className="flex items-center gap-3">
                                 <label className="tracking-wide whitespace-nowrap">Category:</label>
                                 <select onChange={(e) => SetQuery(prev => ({ ...prev, SortByCategory: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
@@ -77,7 +77,7 @@ export default function FavTasks() {
                                 </select>
                             </div>
 
-                            <div className="flex items-center w-full md:w-auto">
+                            <div className="flex items-center w-full sm:w-auto">
                                 <label className="tracking-wide whitespace-nowrap mr-2">Search:</label>
                                 <input
                                     type="text"
@@ -90,7 +90,7 @@ export default function FavTasks() {
                                             GetAllFavs();
                                         }
                                     }}
-                                    className="border border-[var(--anyborder)] pl-2 py-2 rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-grow md:flex-grow-0"
+                                    className="border border-[var(--anyborder)] pl-2 py-2 rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-1 sm:flex-grow-0"
                                 />
                                 <button
                                     onClick={() => GetAllFavs()}

@@ -80,15 +80,15 @@ function Card(props) {
   switch (type) {
     case "welcomeback":
       return (
-        <div className="relative w-[80%] mx-auto my-8 p-6 sm:p-8 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden">
+        <div className="relative w-[90%] md:w-[80%] mx-auto my-8 p-5 sm:p-8 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
-          <div className="flex justify-between items-center relative z-10">
-            <div>
-              <h2 className="text-xl sm:text-2xl font-semibold text-[var(--tasktext)]">{title}</h2>
-              <h4 className="text-[var(--subtext)] mt-1">{comment}</h4>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 relative z-10">
+            <div className="text-center sm:text-left">
+              <h2 className="text-lg sm:text-2xl font-semibold text-[var(--tasktext)] break-words">{title}</h2>
+              <h4 className="text-[var(--subtext)] mt-1 text-sm sm:text-base break-words">{comment}</h4>
             </div>
-            <button className="bg-[var(--buttonbg)] hover:bg-[var(--ce7hover)] transition px-4 py-2 rounded-lg text-white font-medium hover:cursor-pointer" onClick={props.GoTo}>
+            <button className="bg-[var(--buttonbg)] hover:bg-[var(--ce7hover)] transition px-4 py-2 rounded-lg text-white font-medium hover:cursor-pointer whitespace-nowrap" onClick={props.GoTo}>
               {btnContent}
             </button>
           </div>
@@ -97,12 +97,12 @@ function Card(props) {
 
     case "primeSub":
       return (
-        <div className="relative max-w-[80%] mx-auto my-10 p-8 rounded-2xl bg-[var(--cardbg)] overflow-hidden text-center shadow-[3px_3px_0px_rgb(218,165,32),3px_3px_8px_rgba(218,165,32,0.7),3px_3px_16px_rgba(218,165,32,0.4)]">
+        <div className="relative w-[90%] md:max-w-[80%] mx-auto my-10 p-6 sm:p-8 rounded-2xl bg-[var(--cardbg)] overflow-hidden text-center shadow-[3px_3px_0px_rgb(218,165,32),3px_3px_8px_rgba(218,165,32,0.7),3px_3px_16px_rgba(218,165,32,0.4)]">
            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
-          <h2 className="text-3xl font-extrabold text-[var(--text)] tracking-wide relative z-10">{title}</h2>
-          <h4 className="max-w-[80%] mx-auto text-[var(--subtext)] mt-3 mb-6 relative z-10">{comment}</h4>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-wide relative z-10 break-words">{title}</h2>
+          <h4 className="w-full text-[var(--subtext)] mt-3 mb-6 relative z-10 leading-relaxed break-words">{comment}</h4>
 
           <button
             className="relative z-10 flex hover:cursor-pointer justify-center items-center mx-auto text-[rgb(218,165,32)] bg-white rounded-lg px-5 py-2 font-semibold transition hover:shadow-[3px_3px_8px_rgba(218,165,32,0.7)] duration-300"
@@ -130,7 +130,7 @@ function Card(props) {
 
     case "task":
       return (
-        <div className="relative bg-[var(--cardbg)] p-8 rounded-2xl border-2 border-[var(--anyborder)] flex flex-col h-full overflow-hidden">
+        <div className="relative bg-[var(--cardbg)] p-5 sm:p-8 rounded-2xl border-2 border-[var(--anyborder)] flex flex-col h-full overflow-hidden">
            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
@@ -159,14 +159,14 @@ function Card(props) {
   switch (type) {
     case "what-is-questify":
       return (
-        <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] overflow-hidden border border-[var(--anyborder)]">
+        <div className="relative w-[90%] md:w-[80%] mx-auto my-12 p-6 sm:p-8 md:p-10 rounded-2xl bg-[var(--cardbg)] overflow-hidden border border-[var(--anyborder)]">
            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10 text-center">
-            <h2 className="text-6xl font-extrabold bg-gradient-to-r text-[var(--text)] bg-clip-text tracking-wide leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r text-[var(--text)] bg-clip-text tracking-wide leading-tight">
               {title}
             </h2>
-            <h4 className="text-xl max-w-[70%] mx-auto mt-6 text-[var(--subtext)] font-medium">
+            <h4 className="text-lg sm:text-xl w-full mt-6 text-[var(--subtext)] font-medium leading-relaxed">
               {comment}
             </h4>
             <button
@@ -181,15 +181,15 @@ function Card(props) {
 
     case "mission":
       return (
-        <div className="relative flex flex-col items-center border border-[var(--anyborder)] text-center bg-[var(--cardbg)] p-8 rounded-2xl transition-all duration-300 overflow-hidden">
+        <div className="relative flex flex-col items-center border border-[var(--anyborder)] text-center bg-[var(--cardbg)] p-5 sm:p-8 rounded-2xl transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
           <div className="relative z-10">
             <div className="w-[70px] h-[70px] mx-auto my-4 bg-[rgba(206,125,99,0.15)] rounded-full flex items-center justify-center">
               {getIcon(pic)}
             </div>
-            <h2 className="text-2xl font-bold text-[var(--tasktext)]">{title}</h2>
-            <h4 className="max-w-[80%] mx-auto my-5 text-md text-[var(--subtext)] font-medium">
+            <h2 className="text-xl sm:text-2xl font-bold text-[var(--tasktext)]">{title}</h2>
+            <h4 className="w-full my-5 text-md text-[var(--subtext)] font-medium leading-relaxed">
               {comment}
             </h4>
           </div>
@@ -198,14 +198,14 @@ function Card(props) {
 
     case "why-questify":
       return (
-        <div className="relative flex items-start gap-4 p-5 rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] hover:border-[var(--anyborder)]/40 transition-colors duration-300">
+        <div className="relative flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] hover:border-[var(--anyborder)]/40 transition-colors duration-300">
         
-          <div className="bg-[rgba(206,125,99,0.15)] p-3 rounded-lg flex items-center justify-center">
+          <div className="bg-[rgba(206,125,99,0.15)] p-3 rounded-lg flex items-center justify-center shrink-0">
             {getIcon(pic)}
           </div>
           <div className="flex flex-col text-[var(--text)]">
-            <h2 className="text-lg font-bold">{title}</h2>
-            <h4 className="text-[var(--subtext)] text-md font-medium mt-1 w-[80%]">
+            <h2 className="text-base sm:text-lg font-bold">{title}</h2>
+            <h4 className="text-[var(--subtext)] text-sm sm:text-md font-medium mt-1 w-full leading-relaxed pr-0 sm:pr-2">
               {comment}
             </h4>
           </div>
@@ -214,9 +214,9 @@ function Card(props) {
 
     case "impact":
       return (
-        <div className="relative w-[21%] bg-[var(--cardbg)] flex flex-col text-center p-6 rounded-2xl border-2 border-[var(--anyborder)] transition-all duration-300 overflow-hidden">
+        <div className="relative w-full sm:w-[45%] md:w-[21%] bg-[var(--cardbg)] flex flex-col text-center p-4 sm:p-6 rounded-2xl border-2 border-[var(--anyborder)] transition-all duration-300 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/10 via-transparent to-black/10 pointer-events-none"></div>
-          <h2 className="text-[var(--text)] text-5xl font-extrabold relative z-10">{title}</h2>
+          <h2 className="text-[var(--text)] text-3xl sm:text-4xl md:text-5xl font-extrabold relative z-10">{title}</h2>
           <h4 className="text-[var(--subtext)] text-lg font-medium relative z-10">{comment}</h4>
         </div>
       );
@@ -231,13 +231,13 @@ function Card(props) {
   switch (type) {
   case "pricing-best":
     return (
-      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl px-6 py-8 overflow-hidden transition-all duration-300
-        border-2 border-[var(--text)] bg-[var(--cardbg)] scale-105">
+      <div className="relative flex flex-col items-center text-center w-full sm:w-[45%] lg:w-[30%] xl:w-[23%] rounded-2xl px-4 sm:px-6 py-6 sm:py-8 overflow-hidden transition-all duration-300
+        border-2 border-[var(--text)] bg-[var(--cardbg)] sm:scale-105">
         <div className="absolute top-4 left-[-40px] rotate-[-33deg] bg-[var(--text)] flex text-white font-bold text-xs px-12 py-1">
           <h2>BEST CHOICE</h2>   
         </div>
-        <h2 className="text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
-        <h1 className="text-6xl font-black text-[var(--tasktext)] mb-2">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[var(--tasktext)] mb-2">
           <span className="text-xl align-top text-[var(--tasktext)]">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-[var(--subtext)] mb-6">{comment}</h4>
@@ -272,12 +272,12 @@ function Card(props) {
 
   case "pricing-normal":
     return (
-      <div className="relative flex flex-col items-center text-center w-[23%] min-w-[250px] rounded-2xl border-2 border-[var(--anyborder)] bg-[var(--cardbg)]
-        px-6 py-8 overflow-hidden
+      <div className="relative flex flex-col items-center text-center w-full sm:w-[45%] lg:w-[30%] xl:w-[23%] rounded-2xl border-2 border-[var(--anyborder)] bg-[var(--cardbg)]
+        px-4 sm:px-6 py-6 sm:py-8 overflow-hidden
         hover:border-[var(--text)]
         transition-all duration-300">
-        <h2 className="text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
-        <h1 className="text-6xl font-black text-[var(--tasktext)] mb-2">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--tasktext)] tracking-wider mb-2">{title}</h2>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[var(--tasktext)] mb-2">
           <span className="text-xl align-top">$</span>{price}
         </h1>
         <h4 className="text-lg font-medium text-[var(--subtext)] mb-6">{comment}</h4>
@@ -371,13 +371,13 @@ function Card(props) {
  
     case "taskCard":
   return (
-    <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
+    <div className="w-[90%] md:w-[80%] mx-auto my-10 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
 
        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
           <div className="absolute -top-10 -left-10 w-[200px] h-[200px] rounded-full bg-[var(--subtext)]/12 blur-3xl"></div>
 
       <div className="text-center relative z-10 flex flex-col gap-y-2">
-        <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase"
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[var(--text)] tracking-[0.06em] md:tracking-[0.1em] uppercase"
             style={{ fontFamily: "'Pricedown', sans-serif" }}>
             "Sharpen your skills. Complete tasks. Build your legacy."
         </h2>
@@ -392,13 +392,13 @@ function Card(props) {
     switch (type){
       case "sec3":
         return(
-          <div className="relative flex flex-col items-center border border-dashed border-[var(--text)] text-center  p-8 rounded-2xl transition-all duration-300 overflow-hidden">
+          <div className="relative flex flex-col items-center border border-dashed border-[var(--text)] text-center p-5 sm:p-8 rounded-2xl transition-all duration-300 overflow-hidden">
           <div className="relative z-10">
             <div className="w-[70px] h-[70px] mx-auto my-4 bg-[var(--text)]/15 rounded-full flex items-center justify-center">
               {getIcon(pic)}
             </div>
-            <h2 className="text-2xl font-bold text-[var(--tasktext)]">{title}</h2>
-            <h4 className="max-w-[80%] mx-auto my-5 text-md text-[var(--subtext)] font-medium">
+            <h2 className="text-xl sm:text-2xl font-bold text-[var(--tasktext)]">{title}</h2>
+            <h4 className="w-full my-5 text-md text-[var(--subtext)] font-medium leading-relaxed">
               {comment}
             </h4>
           </div>

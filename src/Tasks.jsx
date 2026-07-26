@@ -86,7 +86,7 @@ export default function Tasks() {
             comment={`" ${Tcomment}"`}
           />
 
-          <div className="bg-[var(--cardbg)] flex flex-wrap md:flex-nowrap w-[80%] mx-auto text-[var(--subtext)] px-5 py-4 rounded-lg justify-center items-center gap-20 mt-6">
+          <div className="bg-[var(--cardbg)] flex flex-col sm:flex-row flex-wrap md:flex-nowrap w-[90%] md:w-[80%] mx-auto text-[var(--subtext)] px-3 sm:px-5 py-4 rounded-lg justify-center items-center gap-3 md:gap-20 mt-6">
             <div className="flex items-center gap-3">
               <label className="tracking-wide whitespace-nowrap">Solving rate:</label>
               <select onChange={(e) => SetQuery(prev => ({ ...prev, SortBySolveRate: e.target.value }))} className="border border-[var(--anyborder)] bg-[var(--cardbg)] px-3 py-2 rounded-md focus:border-[var(--text)] focus:outline-none">
@@ -106,7 +106,7 @@ export default function Tasks() {
               </select>
             </div>
 
-            <div className="flex items-center w-full md:w-auto">
+            <div className="flex items-center w-full sm:w-auto">
               <label className="tracking-wide whitespace-nowrap mr-2">Search:</label>
               <input
                 type="text"
@@ -119,7 +119,7 @@ export default function Tasks() {
                     SStask();
                   }
                 }}
-                className="border border-[var(--anyborder)] pl-2 py-[8.09px] border-r-transparent rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-grow md:flex-grow-0"
+                className="border border-[var(--anyborder)] pl-2 py-[8.09px] border-r-transparent rounded-l-md bg-[var(--cardbg)] rounded-r-none focus:border-[var(--text)] focus:outline-none flex-1 sm:flex-grow-0"
               />
               <button
                 onClick={() => SStask()}
@@ -132,7 +132,7 @@ export default function Tasks() {
           </div>
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[80%] mx-auto mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[90%] md:w-[80%] mx-auto mt-10">
             {arr.length > 0 ? (
               arr.map((task) => (
                 <Link
@@ -192,7 +192,7 @@ export default function Tasks() {
           </div>
         </>
       ) : (
-        <div className="w-[80%] mx-auto my-[20%] px-6 py-8 rounded-xl text-center font-semibold text-lg text-[var(--tasktext)] bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden">
+        <div className="w-[90%] md:w-[80%] mx-auto my-[20%] px-4 sm:px-6 py-8 rounded-xl text-center font-semibold text-base sm:text-lg text-[var(--tasktext)] bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden">
 
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
 

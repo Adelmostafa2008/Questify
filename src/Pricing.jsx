@@ -9,20 +9,20 @@ function Pricing() {
       <Header />
       
 
-      <div className="w-[80%] mx-auto my-10 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
+      <div className="w-[90%] md:w-[80%] mx-auto my-10 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
         <div className="text-center relative z-10">
-          <h2 className="text-5xl font-extrabold text-[var(--text)] tracking-[0.1em] uppercase" style={{ fontFamily: "'Pricedown', sans-serif" }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.06em] md:tracking-[0.1em] uppercase" style={{ fontFamily: "'Pricedown', sans-serif" }}>
             Select a plan
           </h2>
-          <p className="mt-4 text-[var(--subtext)] text-xl italic">
+          <p className="mt-4 text-[var(--subtext)] text-lg md:text-xl italic">
             Whatever it is, it's just 3 dollars a month
           </p>
         </div>
       </div>
 
 
-      <div className="w-[85%] mx-auto flex justify-center gap-8 items-stretch my-20">
+      <div className="w-[90%] md:w-[85%] mx-auto flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8 items-stretch my-12 md:my-20">
         <Card
           cat="pricing"
           title="Basic"
@@ -78,21 +78,21 @@ function Pricing() {
         />
       </div>
 
-      <div className="w-[80%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden">
+      <div className="w-[90%] md:w-[80%] mx-auto my-12 md:my-16 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden">
   <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-  <div className="text-center relative z-10 mb-8">
+  <div className="text-center relative z-10 mb-6 md:mb-8">
     <h2
-      className="text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.08em] uppercase"
+      className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] tracking-[0.04em] xs:tracking-[0.06em] md:tracking-[0.08em] uppercase leading-tight"
       style={{ fontFamily: "'Pricedown', sans-serif" }}
     >
       Frequently Asked Questions (FAQs)
     </h2>
-    <p className="mt-4 text-[var(--subtext)] text-lg italic">
+    <p className="mt-3 md:mt-4 text-[var(--subtext)] text-base sm:text-lg italic">
       Read carefully so you don't ask them questions again
     </p>
   </div>
 
-  <div className="w-[70%] mx-auto space-y-4 relative z-10">
+  <div className="w-full md:w-[70%] mx-auto space-y-4 relative z-10">
     <Card
       cat="piano-shii"
       title="Which plan is right for me?"

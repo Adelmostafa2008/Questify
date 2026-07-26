@@ -107,10 +107,10 @@ export default function TaskEdit() {
             <Header />
 
             {/*all comments in the code are made by me and only me , so hussain i didnot use AI*/}
-            <div className="flex justify-center gap-10 items-start my-10">
+            <div className="flex flex-col lg:flex-row justify-center gap-6 lg:gap-10 items-start my-10 px-4">
 
                 {/* Left Panel: Create Task */}
-                <div className="w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+                <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
                     <div className="relative z-10">
@@ -280,7 +280,7 @@ export default function TaskEdit() {
                 </div>
 
                 {/* Right Panel: Task Preview */}
-                <div className="w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+                <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
                     <div className="relative z-10">

@@ -195,12 +195,12 @@ export default function SelectedTask() {
     return (
         <div className="bg-[var(--bg)]">
             <Header />
-            <div className="flex gap-x-20  my-20 justify-center ">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-x-20 my-10 lg:my-20 justify-center px-4">
 
                 {/* LEFT: Task Preview */}
-                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+                <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-                    <div className="flex justify-end mt-10 gap-x-4 items-stretch">
+                    <div className="flex justify-end mt-6 sm:mt-10 gap-x-2 sm:gap-x-4 items-stretch">
 
 
 
@@ -258,10 +258,10 @@ export default function SelectedTask() {
                     </div>
 
                     <div className="relative z-10">
-                        <div className="bg-[var(--taskpreveiw)] py-3 px-7 mb-10 mt-5 rounded-md">
+                        <div className="bg-[var(--taskpreveiw)] py-3 px-4 sm:px-7 mb-10 mt-5 rounded-md">
                             <div className="flex flex-col">
-                                <div className="w-[95%] break-words mx-auto my-3">
-                                    <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center">
+                                <div className="w-full break-words mx-auto my-3 px-1">
+                                    <h2 className="text-[var(--tasktext)] text-xl sm:text-2xl font-bold text-center">
                                         {Task.taskname}
                                     </h2>
                                 </div>
@@ -273,7 +273,7 @@ export default function SelectedTask() {
                                         {Task.taskdefficulty}
                                     </div>
                                 </div>
-                                <div className="flex gap-x-5 my-10 justify-center">
+                                <div className="flex gap-x-3 sm:gap-x-5 my-6 sm:my-10 justify-center flex-wrap">
                                     <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
                                         <FaClock size={20} color="var(--text)" /> {Task.tasktime || "0"} min
                                     </label>
@@ -281,7 +281,7 @@ export default function SelectedTask() {
                                         <FaStar size={20} color="var(--text)" /> {Task.taskpoints || "0"} pts
                                     </label>
                                 </div>
-                                <div className="text-[var(--subtext)] text-md text-center w-[95%] mx-auto mb-6 break-words">
+                                <div className="text-[var(--subtext)] text-sm sm:text-md text-center w-full mx-auto mb-6 break-words px-1">
                                     {Task.taskdescription}
                                 </div>
                                 <div className="flex justify-between items-center mb-3">
@@ -309,7 +309,7 @@ export default function SelectedTask() {
                 </div>
 
                 {/* RIGHT: Answer Section */}
-                <div className="w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
+                <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
                     <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -322,7 +322,7 @@ export default function SelectedTask() {
                             </div> : null)
                             : null}
                         <textarea
-                            className="w-full h-[80%] bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-xl text-[var(--tasktext)] p-4 focus:outline-none focus:border-[var(--text)] resize-none"
+                            className="w-full min-h-[200px] sm:h-[80%] bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-xl text-[var(--tasktext)] p-4 focus:outline-none focus:border-[var(--text)] resize-none"
                             placeholder="Type your solution here..."
                             defaultValue={submit.SubmittedData}
                             onChange={(e) => setSubmit(prev => ({ ...prev, SubmittedData: e.target.value }))}

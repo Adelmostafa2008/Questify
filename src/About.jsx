@@ -1,7 +1,7 @@
 import Header from "./Header.jsx";
-import Footer from './Footer.jsx';
-import Card from './Card.jsx';
-import adel from './assets/team members/adel.png';
+import Footer from "./Footer.jsx";
+import Card from "./Card.jsx";
+import adel from "./assets/team members/adel.png";
 import { FaPhone, FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { IoIosAlarm, IoIosSend } from "react-icons/io";
@@ -23,12 +23,13 @@ function About() {
   const [infos, setInfos] = useState({});
   const [cool, setCool] = useState(false);
 
-
   const HandelMessageSend = () => {
     setCool(true);
     ShowSnackBar("This service is still under construction", "info");
-    setTimeout(() => { setCool(false); }, 5000);
-  }
+    setTimeout(() => {
+      setCool(false);
+    }, 5000);
+  };
 
   const GetInfos = async () => {
     try {
@@ -39,61 +40,87 @@ function About() {
       //console.log(error);
       throw error;
     }
-  }
+  };
 
   useEffect(() => {
     GetInfos();
-  }, [])
+  }, []);
   return (
-    <div className="bg-[var(--bg)]">
+    <>
       <Header />
 
-      <Card
-        title="Transforming Learning Through Challenges"
-        comment="Questify is a revolutionary platform that helps professionals develop their skills through real-world scenarios and practical challenges."
-        btnContent={`${user ? "Start Making Your Legacy" : "Join Questify Today"}`}
-        cat="about"
-        type="what-is-questify"
-        GoTo={user ? () => navigate("/Home") : () => navigate('/Registration?regtype=login')}
-      />
-
-      <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold text-[var(--text)] bg-clip-text ">The Mission</h2>
-        <h4 className="text-xl text-[var(--subtext)] max-w-[60%] mx-auto mt-5">
-          The mission is to transform how professionals learn and develop their skills through practical, real-world challenges.
+      <div>
+        <Card
+          title="Transforming Learning Through Challenges"
+          comment="Questify is a revolutionary platform that helps professionals develop their skills through real-world scenarios and practical challenges."
+          btnContent={`${user ? "Start Making Your Legacy" : "Join Questify Today"}`}
+          cat="about"
+          type="what-is-questify"
+          GoTo={
+            user
+              ? () => navigate("/Home")
+              : () => navigate("/Registration?regtype=login")
+          }
+        />
+      </div><div className="text-center text-white my-20"
+      >
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] bg-clip-text px-4">
+          The Mission
+        </h2>
+        <h4 className="text-lg sm:text-xl text-[var(--subtext)] w-[90%] md:max-w-[60%] mx-auto mt-5">
+          The mission is to transform how professionals learn and develop their
+          skills through practical, real-world challenges.
         </h4>
-      </div>
-
-      <div className="flex w-[80%] mx-auto gap-[5%] justify-center my-20">
-        <Card title="Practical Learning" type="mission" cat="about" comment="We believe that the best way to learn is by doing. Our platform provides hands-on challenges that simulate real-world scenarios, allowing users to apply their knowledge in practical situations." mypicture="bulb" />
-        <Card title="Community Growth" type="mission" cat="about" comment="We foster a supportive community where professionals can learn from each other, share insights, and grow together. Collaboration and peer feedback are essential parts of the learning process." mypicture="community" />
-        <Card title="Continuous Improvement" type="mission" cat="about" comment="We're committed to helping professionals continuously improve their skills and advance their careers. Our platform provides personalized feedback and tracks progress over time." mypicture="chart" />
-      </div>
-
-      <div className="relative w-[80%] mx-auto my-20 border-2 border-[var(--anyborder)] rounded-3xl">
-
+      </div><div className="w-[90%] md:w-[80%] mx-auto flex flex-col md:flex-row gap-6 md:gap-[5%] justify-center my-12 md:my-20"
+      >
+        <Card
+          title="Practical Learning"
+          type="mission"
+          cat="about"
+          comment="We believe that the best way to learn is by doing. Our platform provides hands-on challenges that simulate real-world scenarios, allowing users to apply their knowledge in practical situations."
+          mypicture="bulb"
+        />
+        <Card
+          title="Community Growth"
+          type="mission"
+          cat="about"
+          comment="We foster a supportive community where professionals can learn from each other, share insights, and grow together. Collaboration and peer feedback are essential parts of the learning process."
+          mypicture="community"
+        />
+        <Card
+          title="Continuous Improvement"
+          type="mission"
+          cat="about"
+          comment="We're committed to helping professionals continuously improve their skills and advance their careers. Our platform provides personalized feedback and tracks progress over time."
+          mypicture="chart"
+        />
+      </div><div className="relative w-[90%] md:w-[80%] mx-auto my-12 md:my-20 border-2 border-[var(--anyborder)] rounded-3xl"
+      >
         {/* Background Glow Orbs */}
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-3xl"></div>
         {/* Main Container */}
-        <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-12 backdrop-blur-xl">
-
+        <div className="relative bg-[var(--cardbg)] border border-white/10 rounded-3xl p-6 md:p-12 backdrop-blur-xl">
           {/* Header */}
-          <div className="text-center mb-16">              <h1 className="text-[var(--text)] text-6xl font-black tracking-tight">
+          <div className="text-center mb-16">
+            {" "}
+            <h1 className="text-[var(--text)] text-3xl sm:text-4xl md:text-6xl font-black tracking-tight">
               Meet the Creator
             </h1>
-            <p className="text-[var(--subtext)] text-lg mt-4 max-w-[70%] mx-auto leading-relaxed">
-              The creator behind Questify — building future-ready technology with precision,
-              purpose, and passion.
+            <p className="text-[var(--subtext)] text-base sm:text-lg mt-4 w-[90%] md:max-w-[70%] mx-auto leading-relaxed">
+              The creator behind Questify — building future-ready technology
+              with precision, purpose, and passion.
             </p>
           </div>
 
           {/* Split Layout */}
-          <div className="flex flex-wrap justify-center items-start gap-20">
-
+          <div className="flex flex-wrap justify-center items-start gap-10 md:gap-20">
             {/* Left Side — Big Image Card */}
             <div className="relative">
               <div className="rounded-3xl overflow-hidden border border-white/10">
-                <img src={adel} className="w-[310px] h-auto object-cover" />
+                <img
+                  src={adel}
+                  className="w-[250px] sm:w-[280px] md:w-[310px] h-auto object-cover"
+                />
               </div>
 
               {/* Floating Badge */}
@@ -103,11 +130,10 @@ function About() {
             </div>
 
             {/* Right Side — Info */}
-            <div className="max-w-[450px] space-y-8">
-
+            <div className="w-full max-w-[450px] space-y-6 md:space-y-8 px-4">
               {/* Name */}
               <div>
-                <h2 className="text-3xl font-bold text-[var(--text)] tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text)] tracking-tight">
                   Adel Mostafa Saber Mohamed
                 </h2>
                 <p className="text-[var(--subtext)] text-base mt-1">
@@ -117,91 +143,176 @@ function About() {
 
               {/* Contact Cards */}
               <div className="space-y-4">
-
                 <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition">
-                  <MdOutlineAlternateEmail className="text-[var(--text)]" size={28} />
-                  <span className="text-[var(--subtext)] text-lg">adel.0523035@gmail.com</span>
+                  <MdOutlineAlternateEmail
+                    className="text-[var(--text)]"
+                    size={28}
+                  />
+                  <span className="text-[var(--subtext)] text-lg">
+                    adel.0523035@gmail.com
+                  </span>
                 </div>
 
-                <a href="https://github.com/Adelmostafa2008" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer">
+                <a
+                  href="https://github.com/Adelmostafa2008"
+                  target="_blank"
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer"
+                >
                   <FaGithub className="text-[var(--text)]" size={28} />
-                  <span className="text-[var(--text)] text-lg underline">Github</span>
+                  <span className="text-[var(--text)] text-lg underline">
+                    Github
+                  </span>
                 </a>
 
-                <a href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332" target="_blank"
-                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer">
+                <a
+                  href="https://linkedin.com/in/adel-moatafa-saber-mohamed-7a2705332"
+                  target="_blank"
+                  className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer"
+                >
                   <FaLinkedin className="text-[var(--text)]" size={28} />
-                  <span className="text-[var(--text)] text-lg underline">LinkedIn</span>
+                  <span className="text-[var(--text)] text-lg underline">
+                    LinkedIn
+                  </span>
                 </a>
               </div>
 
               {/* Short Bio */}
               <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-[var(--anyborder)]">
                 <div className="flex gap-4">
-                  <IoDocumentText className="text-[var(--text)] h-10" size={93} />
+                  <IoDocumentText
+                    className="text-[var(--text)] h-10"
+                    size={93}
+                  />
                   <p className="text-[var(--subtext)] italic leading-relaxed">
-                    “A developer who loves crafting scalable systems with .NET and React.
-                    Clean code, real-world impact, and continuous improvement — that’s the mission.”
+                    “A developer who loves crafting scalable systems with .NET
+                    and React. Clean code, real-world impact, and continuous
+                    improvement — that’s the mission.”
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-
-      <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold text-[var(--text)] bg-clip-text ">Why Choose Questify</h2>
-        <h4 className="text-lg text-[var(--subtext)] mt-4 max-w-[60%] mx-auto">Discover the unique features that make Questify the leading platform for skill development through practical challenges.</h4>
-      </div>
-
-      <div className="grid grid-cols-2 w-[80%] mx-auto gap-y-12 gap-x-10 my-16">
-        <Card cat="about" type="why-questify" mypicture="features" title="Real-World Scenarios" comment="Our challenges are based on real-world scenarios that professionals encounter in their daily work, providing practical experience that can be immediately applied." />
-        <Card cat="about" type="why-questify" mypicture="chat" title="Expert Feedback" comment="Receive detailed feedback on your solutions from industry experts and peers, helping you identify areas for improvement and refine your skills." />
-        <Card cat="about" type="why-questify" mypicture="medal" title="Achievement System" comment="Track your progress and earn badges as you complete challenges, providing motivation and recognition for your skill development." />
-        <Card cat="about" type="why-questify" mypicture="graduate" title="Personalized Learning Path" comment="Our platform adapts to your skill level and interests, recommending challenges that will help you grow in the areas that matter most to you." />
-        <Card cat="about" type="why-questify" mypicture="bag" title="Industry Relevance" comment="Our challenges are designed in collaboration with industry leaders to ensure they reflect current best practices and emerging trends." />
-        <Card cat="about" type="why-questify" mypicture="badge" title="Skill Certification" comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms." />
-      </div>
-
-      <div className="relative w-[80%] mx-auto my-12 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+      </div><div className="text-center text-white my-20"
+      >
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] bg-clip-text px-4">
+          Why Choose Questify
+        </h2>
+        <h4 className="text-base sm:text-lg text-[var(--subtext)] mt-4 w-[90%] md:max-w-[60%] mx-auto">
+          Discover the unique features that make Questify the leading platform
+          for skill development through practical challenges.
+        </h4>
+      </div><div className="grid grid-cols-1 md:grid-cols-2 w-[90%] md:w-[80%] mx-auto gap-y-8 md:gap-y-12 gap-x-10 my-12 md:my-16"
+      >
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="features"
+          title="Real-World Scenarios"
+          comment="Our challenges are based on real-world scenarios that professionals encounter in their daily work, providing practical experience that can be immediately applied."
+        />
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="chat"
+          title="Expert Feedback"
+          comment="Receive detailed feedback on your solutions from industry experts and peers, helping you identify areas for improvement and refine your skills."
+        />
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="medal"
+          title="Achievement System"
+          comment="Track your progress and earn badges as you complete challenges, providing motivation and recognition for your skill development."
+        />
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="graduate"
+          title="Personalized Learning Path"
+          comment="Our platform adapts to your skill level and interests, recommending challenges that will help you grow in the areas that matter most to you."
+        />
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="bag"
+          title="Industry Relevance"
+          comment="Our challenges are designed in collaboration with industry leaders to ensure they reflect current best practices and emerging trends."
+        />
+        <Card
+          cat="about"
+          type="why-questify"
+          mypicture="badge"
+          title="Skill Certification"
+          comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms."
+        />
+      </div><div className="relative w-[90%] md:w-[80%] mx-auto my-12 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>{" "}
         <div className="text-center text-white py-10 mb-5">
-          <h2 className="text-5xl font-extrabold bg-clip-text text-[var(--text)]">Our Impact</h2>
-          <h4 className="text-lg text-[var(--subtext)] mt-4">See how Questify is making a difference in professional skill development around the world.</h4>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-clip-text text-[var(--text)]">
+            Our Impact
+          </h2>
+          <h4 className="text-base sm:text-lg text-[var(--subtext)] mt-4 px-4">
+            See how Questify is making a difference in professional skill
+            development around the world.
+          </h4>
         </div>
         <div className="flex gap-6 justify-around flex-wrap">
-          <Card cat="about" type="impact" title={`${infos.totalusers || 0}+`} comment="Active Users" />
-          <Card cat="about" type="impact" title={`${infos.totaltasks || 0}+`} comment="Challenges Created" />
-          <Card cat="about" type="impact" title={`${infos.totaltaskscats || 0}+`} comment="Industry Categories" />
-          <Card cat="about" type="impact" title="92%" comment="User Satisfaction" />
+          <Card
+            cat="about"
+            type="impact"
+            title={`${infos.totalusers || 0}+`}
+            comment="Active Users"
+          />
+          <Card
+            cat="about"
+            type="impact"
+            title={`${infos.totaltasks || 0}+`}
+            comment="Challenges Created"
+          />
+          <Card
+            cat="about"
+            type="impact"
+            title={`${infos.totaltaskscats || 0}+`}
+            comment="Industry Categories"
+          />
+          <Card
+            cat="about"
+            type="impact"
+            title="92%"
+            comment="User Satisfaction"
+          />
         </div>
-      </div>
-
-      <div className="text-center text-white my-20">
-        <h2 className="text-5xl font-extrabold  bg-clip-text text-[var(--text)]">Get In Touch</h2>
-        <h4 className="text-lg text-[var(--subtext)] mt-4">Have questions or want to learn more about Questify? We'd love to hear from you!</h4>
-      </div>
-
-      <div className="flex w-[80%] gap-20 mx-auto items-stretch mb-20">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-40">
-
-
-          <div className="relative bg-[var(--cardbg)] px-8 py-10 rounded-2xl border-2 border-[var(--anyborder)] overflow-hidden">
+      </div><div className="text-center text-white my-12 md:my-20"
+      >
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold  bg-clip-text text-[var(--text)]">
+          Get In Touch
+        </h2>
+        <h4 className="text-base sm:text-lg text-[var(--subtext)] mt-4 px-4">
+          Have questions or want to learn more about Questify? We'd love to hear
+          from you!
+        </h4>
+      </div><div className="w-[90%] md:w-[80%] gap-6 md:gap-20 mx-auto items-stretch mb-20"
+      >
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40">
+          <div className="relative bg-[var(--cardbg)] px-5 md:px-8 py-6 md:py-10 rounded-2xl border-2 border-[var(--anyborder)] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
-            <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
-              <FaPhone size={30} className="text-[var(--text)]" /> Contact Information
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
+              <FaPhone size={24} className="text-[var(--text)]" /> Contact
+              Information
             </h2>
 
             <div className="space-y-6 text-[var(--tasktext)] relative z-10">
               <div>
                 <h3 className="text-xl font-semibold  flex gap-x-2">
-                  <FaLocationDot size={20} className="text-[var(--text)]" /> Address
+                  <FaLocationDot size={20} className="text-[var(--text)]" />{" "}
+                  Address
                 </h3>
-                <p className="text-[var(--subtext)]">123 Innovation Drive, Tech City, CA 94103, United States</p>
+                <p className="text-[var(--subtext)]">
+                  123 Innovation Drive, Tech City, CA 94103, United States
+                </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold flex gap-x-2">
@@ -220,24 +331,27 @@ function About() {
                   <IoIosAlarm size={23} className="text-[var(--text)]" /> Hours
                 </h3>
                 <p className="text-[var(--subtext)]">
-                  Monday - Friday: 9am - 6pm<br />
+                  Monday - Friday: 9am - 6pm
+                  <br />
                   Saturday: 10am - 4pm
                 </p>
               </div>
             </div>
           </div>
 
-
-          <div className="relative bg-[var(--cardbg)] rounded-2xl p-10 border-2 border-[var(--anyborder)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-
-            <h2 className="text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
-              <IoIosSend size={30} className="text-[var(--text)]" /> Send Us a Message
+          <div className="relative bg-[var(--cardbg)] rounded-2xl p-6 md:p-10 border-2 border-[var(--anyborder)] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
+              <IoIosSend size={28} className="text-[var(--text)]" /> Send Us a Message
             </h2>
 
-            <form className="space-y-5 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="space-y-5 relative z-10"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <div>
-                <label className="block text-[var(--tasktext)] font-semibold mb-1">Your Name</label>
+                <label className="block text-[var(--tasktext)] font-semibold mb-1">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   placeholder="Enter your name..."
@@ -245,7 +359,9 @@ function About() {
                 />
               </div>
               <div>
-                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Email Address</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   placeholder="example@example.com"
@@ -253,7 +369,9 @@ function About() {
                 />
               </div>
               <div>
-                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Subject</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">
+                  Subject
+                </label>
                 <input
                   type="text"
                   placeholder="Enter subject..."
@@ -261,7 +379,9 @@ function About() {
                 />
               </div>
               <div>
-                <label className="block text-[var(--tasktext)]  font-semibold mb-1">Message</label>
+                <label className="block text-[var(--tasktext)]  font-semibold mb-1">
+                  Message
+                </label>
                 <textarea
                   rows="4"
                   placeholder="Enter your message..."
@@ -269,20 +389,18 @@ function About() {
                 ></textarea>
               </div>
               <button
-                onClick={() => cool ? null : HandelMessageSend()}
+                onClick={() => (cool ? null : HandelMessageSend())}
                 className="w-full bg-[var(--buttonbg)] text-white font-semibold py-2 rounded-lg hover:bg-[var(--ce7hover)] transition duration-200 "
               >
                 Send Message
               </button>
             </form>
           </div>
-
         </div>
       </div>
 
-
       <Footer />
-    </div>
+    </>
   );
 }
 export default About;

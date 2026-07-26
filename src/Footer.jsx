@@ -21,7 +21,7 @@ function Footer(props) {
         <div>
           <h1
             onClick={() => navigate('/')}
-            className="text-4xl font-extrabold cursor-pointer text-[var(--subtext)]  hover:scale-105 transition-transform duration-200"
+            className="text-3xl sm:text-4xl font-extrabold cursor-pointer text-[var(--subtext)]  hover:scale-105 transition-transform duration-200"
           >
             Quest<span className="text-[var(--text)]">ify</span>
           </h1>

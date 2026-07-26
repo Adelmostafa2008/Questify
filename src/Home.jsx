@@ -20,9 +20,9 @@ function Home() {
       : null}
 
 
-    <div className="text-center my-20">
-      <h2 className="text-[50px] font-extrabold text-[var(--text)] bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text ">Choose a Category</h2>
-      <h4 className="text-xl text-[var(--subtext)] max-w-[60%] mx-auto mt-2">
+    <div className="text-center my-12 md:my-20">
+      <h2 className="text-3xl sm:text-4xl md:text-[50px] font-extrabold text-[var(--text)] bg-[linear-gradient(135deg,_#ce7d63,_#ffa07a)] bg-clip-text px-4">Choose a Category</h2>
+      <h4 className="text-lg sm:text-xl text-[var(--subtext)] w-[90%] md:max-w-[60%] mx-auto mt-2">
         Select a category to explore tasks and challenges designed to test and improve your skills.
       </h4>
     </div>
@@ -42,7 +42,7 @@ function Home() {
     />
 
 
-    <div className='max-w-[80%] grid grid-cols-3 gap-5 mt-10 mb-50 mx-auto items-stretch max-xs:grid-cols-1'>
+    <div className='w-[90%] md:max-w-[80%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 mb-20 md:mb-50 mx-auto items-stretch'>
 
 
       <Card title="Call Center" comment=" Customer service scenarios and problem-solving tasks "

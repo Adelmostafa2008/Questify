@@ -168,7 +168,7 @@ function Reg(props) {
               </div>
 
               {/* Form */}
-              <div className="w-[85%] mx-auto">
+              <div className="w-full sm:w-[85%] mx-auto">
                 <form>
                   <div className="mb-5">
                     <label className="text-sm font-semibold text-[var(--subtext)]">
@@ -380,7 +380,7 @@ function Reg(props) {
             </div>
 
             {/* Form */}
-            <div className="relative z-10 w-[80%] mx-auto">
+            <div className="relative z-10 w-full sm:w-[85%] mx-auto px-2 sm:px-0">
               <form>
                 {/* Username */}
                 <div className="my-5">
@@ -686,7 +686,7 @@ function Reg(props) {
                   </div>
 
                   {/* Info Box */}
-                  <div className="flex w-[85%] mx-auto bg-[var(--text)]/10 border-l-4 border-[var(--text)] rounded-lg text-sm text-[var(--subtext)] py-3 px-4 mb-6">
+                  <div className="flex w-full sm:w-[85%] mx-auto bg-[var(--text)]/10 border-l-4 border-[var(--text)] rounded-lg text-sm text-[var(--subtext)] py-3 px-4 mb-6">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="w-6 h-6 mt-1 mr-3 fill-[var(--subtext)]"
@@ -701,7 +701,7 @@ function Reg(props) {
                   </div>
 
                   {/* Form */}
-                  <div className="w-[85%] mx-auto">
+                  <div className="w-full sm:w-[85%] mx-auto">
                     <form>
                       <div className="mb-5">
                         <label className="text-sm font-semibold text-[var(--subtext)]">
@@ -819,7 +819,7 @@ function Reg(props) {
                   </div>
 
                   {/* Info */}
-                  <div className="text-center text-md font-semibold text-[var(--tasktext)] flex flex-col gap-y-5 mt-3 w-[85%] mx-auto">
+                  <div className="text-center text-md font-semibold text-[var(--tasktext)] flex flex-col gap-y-5 mt-3 w-full sm:w-[85%] mx-auto">
                     <p>We've sent a verification code to your email address.</p>
                     <p className="text-sm">
                       Didn’t receive any code?{" "}
@@ -830,7 +830,7 @@ function Reg(props) {
                   </div>
 
                   {/* Form */}
-                  <div className="w-[85%] mx-auto mt-7">
+                  <div className="w-full sm:w-[85%] mx-auto mt-7">
                     <form>
                       <div className="mb-5">
                         <label className="text-sm font-semibold text-[var(--subtext)]">
@@ -940,7 +940,7 @@ function Reg(props) {
                   </div>
 
                   {/* Form */}
-                  <div className="w-[85%] mx-auto mt-5">
+                  <div className="w-full sm:w-[85%] mx-auto mt-5">
                     <form>
                       <div className="mb-5">
                         <label className="text-sm font-semibold text-[var(--subtext)]">

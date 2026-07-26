@@ -41,16 +41,16 @@ export default function SelectedPlan() {
               placeholder="Cardholder Name"
               className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 text-[var(--tasktext)] focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none"
             />
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="text"
                 placeholder="MM/YY"
-                className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 text-[var(--tasktext)] flex-1 focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none"
+                className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 text-[var(--tasktext)] flex-1 focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none w-full"
               />
               <input
                 type="password"
                 placeholder="CVV"
-                className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 text-[var(--tasktext)] flex-1 focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none"
+                className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 text-[var(--tasktext)] flex-1 focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none w-full"
               />
             </div>
             <button
@@ -122,20 +122,20 @@ export default function SelectedPlan() {
     <div className="bg-[var(--bg)]">
       <Header />
 
-      <div className="text-white w-[85%] mx-auto my-16 p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden flex justify-between gap-10">
+      <div className="text-white w-[90%] lg:w-[85%] mx-auto my-12 lg:my-16 p-6 lg:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden flex flex-col lg:flex-row justify-between gap-8 lg:gap-10">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
         {/* Plan Preview */}
-        <div className="w-[40%] relative z-10 p-8 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] flex flex-col items-center text-center">
+        <div className="w-full lg:w-[45%] xl:w-[40%] relative z-10 p-5 sm:p-6 lg:p-8 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] flex flex-col items-center text-center">
           
 
           <h2
-            className="text-6xl font-extrabold text-[var(--text)] tracking-wider uppercase"
+            className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[var(--text)] tracking-wider uppercase"
             style={{ fontFamily: "'Pricedown', sans-serif" }}
           >
             {Pname} Plan
           </h2>
-          <h3 className="mt-4 font-bold text-3xl text-[var(--tasktext)]">
+          <h3 className="mt-4 font-bold text-xl sm:text-2xl md:text-3xl text-[var(--tasktext)]">
             ${Pprice}.00 / Month
           </h3>
           <div className="flex items-center justify-center w-full my-6">
@@ -170,16 +170,16 @@ export default function SelectedPlan() {
         </div>
 
         {/* Payment Section */}
-        <div className="flex flex-col w-[40%] relative z-10">
+        <div className="flex flex-col w-full lg:w-[45%] xl:w-[40%] relative z-10">
           <h2 className="mx-auto mb-6 text-2xl text-[var(--tasktext)] font-bold tracking-wide">
             Select a Payment Method
           </h2>
-          <div className="flex gap-x-5 items-stretch mb-6">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 items-stretch mb-6">
             {["Visa", "ApplePay", "PayPal", "VodafoneCash"].map(method => (
               <button
                 key={method}
                 onClick={() => SetPaymentMethod(method)}
-                className={`border rounded-lg hover:cursor-pointer px-6 w-1/4 py-3 flex justify-center items-center transition-all duration-300 ${paymentMethod === method
+                className={`border rounded-lg hover:cursor-pointer px-2 sm:px-6 flex-1 min-w-[70px] sm:min-w-[80px] py-3 flex justify-center items-center transition-all duration-300 ${paymentMethod === method
                   ? "bg-[var(--text)] border-[var(--text)]"
                   : "border-[var(--anyborder)] hover:bg-[#ce7d630d] hover:border-[var(--text)]"
                   }`}

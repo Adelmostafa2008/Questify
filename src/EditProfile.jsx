@@ -93,8 +93,8 @@ export default function EditProfile() {
   return (
     <>
       <Header />
-      <div className="flex justify-center items-start my-16">
-        <div className="w-[42%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7">
+      <div className="flex justify-center items-start my-12 md:my-16 px-4">
+        <div className="w-full sm:w-[90%] md:w-[60%] lg:w-[42%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-4 sm:px-5 md:px-7">
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-xl"></div>
 
           <div className="relative z-10">
@@ -109,7 +109,7 @@ export default function EditProfile() {
 
             <div className="mt-5 mb-3 flex flex-col justify-center gap-y-5">
 
-              <img src={preview ? preview : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} className="rounded-full max-w-[300px] border-2 border-[var(--anyborder)] max-h-[300px] mx-auto" alt="profile preview" />
+              <img src={preview ? preview : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} className="rounded-full w-[200px] sm:w-[250px] md:max-w-[300px] border-2 border-[var(--anyborder)] h-[200px] sm:h-[250px] md:max-h-[300px] mx-auto object-cover" alt="profile preview" />
 
               <button
                 onClick={handleButtonClick}

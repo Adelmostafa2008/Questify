@@ -9,13 +9,13 @@ export default function Sittings(props) {
       <Header />
 
       <div
-        className={`bg-[var(--taskpreveiw)] rounded-md p-10 flex justify-between items-center mx-auto w-[80%] mt-20 mb-100`}
+        className={`bg-[var(--taskpreveiw)] rounded-md p-6 md:p-10 flex flex-col md:flex-row justify-between items-center mx-auto w-[90%] md:w-[80%] mt-12 md:mt-20 mb-20 md:mb-100 gap-4`}
       >
         <h3 className=" text-xl font-semibold text-[var(--tasktext)]">Theme</h3>
         <select
           value={theme}
           onChange={(e) => toggletheme(e.target.value)}
-          className="bg-[var(--cardbg)] w-[20%] p-2 rounded-md border border-[var(--text)] text-[var(--tasktext)]"
+          className="bg-[var(--cardbg)] w-full md:w-[20%] p-2 rounded-md border border-[var(--text)] text-[var(--tasktext)]"
         >
           <option value="dark">Dark</option>
           <option value="light">Light</option>

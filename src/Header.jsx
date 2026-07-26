@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
+import { IoMenu, IoClose } from "react-icons/io5";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeContext.jsx";
 
@@ -13,12 +14,17 @@ function Header() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const menuRef = useRef(null);
+  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setOpen(false);
+      }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
+        setMobileOpen(false);
       }
     }
 
@@ -26,28 +32,36 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Close mobile menu on route change / link click
+  const handleNavClick = (path) => {
+    navigate(path);
+    setMobileOpen(false);
+  };
+
+  const pageLinks = ["Home", "About", "Pricing", "Addtask"];
+
   //console.log(user)
 
 
   return (
-    <div className="bg-[var(--headerbg)] flex items-center p-5 w-full rounded-br-md rounded-bl-md">
+    <div className="bg-[var(--headerbg)] w-full rounded-br-md rounded-bl-md">
+      <div className="flex items-center p-5">
       <h1
         onClick={() => navigate('/')}
-        className="w-1/3 cursor-pointer font-extrabold 
-                         text-[var(--subtext)] max-sm:text-2xl sm:text-3xl md:text-3xl lg:text-4xl"
+        className="cursor-pointer font-extrabold text-[var(--subtext)] text-2xl sm:text-3xl md:text-3xl lg:text-4xl shrink-0"
       >
         Quest<span className={`${theme == "dark" ? "text-[var(--text)]" : "text-[#7D818A]"}`}>ify</span>
       </h1>
 
-      <div className="flex items-center justify-center gap-6 max-xs:hidden w-1/3 min-w-max ">
-        {["Home", "About", "Pricing", "Addtask"].map((link) => (
+      {/* Desktop Nav */}
+      <div className="hidden md:flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 mx-auto">
+        {pageLinks.map((link) => (
           <NavLink
             key={link}
             to={`/${link}`}
             className={({ isActive }) => `
-                        font-semibold uppercase tracking-wide
+                        font-semibold uppercase tracking-wide text-xs sm:text-sm lg:text-base whitespace-nowrap
                         transition-all duration-200 ease-in-out
-                        
                         ${isActive ? 'text-[var(--text)]' : 'text-[var(--tasktext)] hover:text-[var(--text)]'}
                       `}
           >
@@ -56,7 +70,20 @@ function Header() {
         ))}
       </div>
 
-      <div className="flex gap-3 justify-end w-1/3 max-xs:w-1/2">
+      {/* Hamburger button - mobile only */}
+      <button
+        onClick={() => setMobileOpen(!mobileOpen)}
+        className="md:hidden flex items-center justify-center p-2 hover:bg-[var(--headermenuhover)] rounded-lg transition-colors duration-200"
+        aria-label={mobileOpen ? "Close menu" : "Open menu"}
+      >
+        {mobileOpen ? (
+          <IoClose size={28} className="text-[var(--text)]" />
+        ) : (
+          <IoMenu size={28} className="text-[var(--text)]" />
+        )}
+      </button>
+
+      <div className="flex gap-3 justify-end shrink-0 ml-auto md:ml-0">
         {!user ?
           <>
             <button
@@ -140,6 +167,79 @@ function Header() {
             )}
           </div>
         }
+      </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-[450px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-5 pb-5 pt-2 border-t border-[var(--anyborder)] bg-[var(--headerbg)]">
+          <nav className="flex flex-col gap-1">
+            {pageLinks.map((link) => (
+              <NavLink
+                key={link}
+                to={`/${link}`}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) => `
+                  block w-full text-left px-4 py-3 rounded-lg font-semibold uppercase tracking-wide text-sm
+                  transition-all duration-200
+                  ${isActive
+                    ? 'text-[var(--text)] bg-[var(--headermenuhover)]'
+                    : 'text-[var(--tasktext)] hover:bg-[var(--headermenuhover)] hover:text-[var(--text)]'
+                  }
+                `}
+              >
+                {link}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Mobile auth buttons */}
+          {!user && (
+            <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-[var(--anyborder)]">
+              <button
+                onClick={() => handleNavClick('/Registration?regtype=login')}
+                className="w-full px-4 py-3 text-center bg-transparent text-[var(--text)] border-2 border-[var(--text)] rounded-md font-bold tracking-wide hover:bg-[var(--ce7hover)] hover:text-white hover:border-transparent transition-all"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => handleNavClick('/Registration?regtype=sign-up')}
+                className="w-full px-4 py-3 text-center text-white bg-[var(--buttonbg)] border-2 border-transparent rounded-md font-bold tracking-wide hover:bg-transparent hover:border-[var(--text)] hover:text-[var(--text)] transition-all"
+              >
+                Sign-up
+              </button>
+            </div>
+          )}
+
+          {/* Mobile user menu */}
+          {user && (
+            <div className="flex flex-col gap-1 mt-3 pt-3 border-t border-[var(--anyborder)]">
+              <button
+                onClick={() => handleNavClick('/Profile')}
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-[var(--tasktext)] hover:bg-[var(--headermenuhover)] transition-all duration-200"
+              >
+                <CgProfile size={20} className="text-[var(--text)]" /> Profile
+              </button>
+              <button
+                onClick={() => handleNavClick('/Sittings')}
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-[var(--tasktext)] hover:bg-[var(--headermenuhover)] transition-all duration-200"
+              >
+                <FaGear size={20} className="text-[var(--text)]" /> Settings
+              </button>
+              <button
+                onClick={() => { logout(); navigate("/"); setMobileOpen(false); }}
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-red-500 hover:bg-[var(--headermenuhover)] transition-all duration-200"
+              >
+                <MdOutlineLogout size={20} /> Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

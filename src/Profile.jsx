@@ -139,8 +139,8 @@ export default function Profile() {
     <div className="bg-[var(--bg)]">
       <Header />
 
-      <div className="flex justify-center items-start my-16">
-        <div className="w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-7 py-10">
+      <div className="flex justify-center items-start my-8 md:my-16 px-3 sm:px-4">
+        <div className="w-full lg:w-[80%] xl:w-[70%] rounded-xl bg-[var(--cardbg)] border border-[var(--anyborder)] relative overflow-hidden px-4 sm:px-5 md:px-7 py-6 md:py-10">
           {/* Background glow */}
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
 
@@ -159,17 +159,17 @@ export default function Profile() {
             </button>
           </div>
 
-          <div className="relative z-10 flex items-center gap-x-8 border-b border-[var(--anyborder)] pb-8 w-[100%]">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-x-8 border-b border-[var(--anyborder)] pb-8 w-full">
             <div className="flex-shrink-0">
               <img
                 src={preview || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
                 alt="ProfilePic"
-                className="w-64 border-2 border-[var(--anyborder)] rounded-full"
+                className="w-28 sm:w-40 md:w-64 border-2 border-[var(--anyborder)] rounded-full"
               />
             </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-[var(--tasktext)]">{oldUser.userName}</h3>
-              <p className="text-[var(--subtext)] italic mt-2 text-lg w-[60%] break-words overflow-hidden">
+            <div className="flex-1 text-center md:text-left w-full">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--tasktext)] break-words">{oldUser.userName}</h3>
+              <p className="text-[var(--subtext)] italic mt-2 text-sm sm:text-base md:text-lg w-full md:w-[60%] break-words">
                 "{oldUser.description || "No description yet..."}"
               </p>
             </div>
@@ -180,7 +180,7 @@ export default function Profile() {
             <h3 className="text-lg font-bold text-[var(--subtext)] mb-4">
               Activity Rate
             </h3>
-            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-4">
+            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-2 sm:p-4 overflow-x-auto">
               <CalendarHeatmap
                 startDate={new Date(`${new Date().getFullYear()}-01-01`)}
                 endDate={new Date(`${new Date().getFullYear()}-12-31`)}
