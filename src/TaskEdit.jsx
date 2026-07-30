@@ -1,336 +1,538 @@
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
-import { BatteryFull, BatteryLow, BatteryMedium, Plus } from "lucide-react"
-import { FaCircleInfo, FaLightbulb, FaEye, FaClock, FaStar } from "react-icons/fa6";
+import { BatteryFull, BatteryLow, BatteryMedium, Plus } from "lucide-react";
+import {
+  FaCircleInfo,
+  FaLightbulb,
+  FaEye,
+  FaClock,
+  FaStar,
+} from "react-icons/fa6";
 import { IoMdSettings } from "react-icons/io";
-import Card from "./Card.jsx"
+import Card from "./Card.jsx";
 import { useParams } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "./AxiosHelper.jsx"
+import api from "./AxiosHelper.jsx";
 import { useSnack } from "./SnackBarContext.jsx";
 
 export default function TaskEdit() {
-    const { ShowSnackBar } = useSnack();
-    const navigate = useNavigate();
-    const { taskid } = useParams();
-    const [task, SetTask] = useState({});
-    const [cards, setCards] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [idCounter, setIdCounter] = useState(0);
+  const { ShowSnackBar } = useSnack();
+  const navigate = useNavigate();
+  const { taskid } = useParams();
+  const [task, SetTask] = useState({});
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [idCounter, setIdCounter] = useState(0);
+  const [cool, setCool] = useState(false);
+  const handelSnack = (msg, ty) => {
+    setCool(true);
+    ShowSnackBar(msg, ty);
+    setTimeout(() => {
+      setCool(false);
+    }, 5000);
+  };
 
-    const getTask = async () => {
-        try {
-            const res = await api.get(`tasks/${taskid}`);
-            SetTask(res.data);
+  const getTask = async () => {
+    try {
+      const res = await api.get(`tasks/${taskid}`);
+      SetTask(res.data);
 
-            // normalize scenarios with unique ids
-            const scenariosWithId = res.data.scene.map((scene, index) => ({
-                id: index + Date.now(), // guaranteed unique
-                TTE: scene.scenariotitle,
-                TDE: scene.scenariodescription
-            }));
+      // normalize scenarios with unique ids
+      const scenariosWithId = res.data.scene.map((scene, index) => ({
+        id: index + Date.now(), // guaranteed unique
+        TTE: scene.scenariotitle,
+        TDE: scene.scenariodescription,
+      }));
 
-            setCards(scenariosWithId);
+      setCards(scenariosWithId);
 
-            // update idCounter so future cards don't clash
-            setIdCounter(scenariosWithId.length);
-        } catch (err) {
-            throw err;
-        }
-    };
-
-    useEffect(() => {
-        getTask();
-    }, []);
-
-
-
-    function addsncard() {
-        const newCard = { id: idCounter, TTE: "", TDE: "" };
-
-        setCards(prev => [...prev, newCard]);
-        setIdCounter(prev => prev + 1);
-
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: [...prevTask.scene, { scenariotitle: "", scenariodescription: "" }]
-        }));
+      // update idCounter so future cards don't clash
+      setIdCounter(scenariosWithId.length);
+    } catch (err) {
+      throw err;
     }
+  };
 
-    function removeCard(idToRemove) {
-        const filtered = cards.filter(card => card.id !== idToRemove);
-        setCards(filtered);
+  useEffect(() => {
+    getTask();
+  }, []);
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: filtered.map(card => ({
-                scenariotitle: card.TTE,
-                scenariodescription: card.TDE
-            }))
-        }));
+  function addsncard() {
+    const newCard = { id: idCounter, TTE: "", TDE: "" };
+
+    setCards((prev) => [...prev, newCard]);
+    setIdCounter((prev) => prev + 1);
+
+    SetTask((prevTask) => ({
+      ...prevTask,
+      scene: [
+        ...prevTask.scene,
+        { scenariotitle: "", scenariodescription: "" },
+      ],
+    }));
+  }
+
+  function removeCard(idToRemove) {
+    const filtered = cards.filter((card) => card.id !== idToRemove);
+    setCards(filtered);
+
+    SetTask((prevTask) => ({
+      ...prevTask,
+      scene: filtered.map((card) => ({
+        scenariotitle: card.TTE,
+        scenariodescription: card.TDE,
+      })),
+    }));
+  }
+
+  function updateCard(id, field, value) {
+    const updatedCards = cards.map((card) =>
+      card.id === id ? { ...card, [field]: value } : card,
+    );
+
+    setCards(updatedCards);
+
+    SetTask((prevTask) => ({
+      ...prevTask,
+      scene: updatedCards.map((card) => ({
+        scenariotitle: card.TTE,
+        scenariodescription: card.TDE,
+      })),
+    }));
+  }
+
+  const UpdateTask = async () => {
+    try {
+      var res = await api.put(`/tasks/${taskid}`, task);
+    } catch (error) {
+      cool
+        ? null
+        : handelSnack("One or more validation errors occurred", "error");
+      throw error;
     }
+  };
 
-    function updateCard(id, field, value) {
-        const updatedCards = cards.map(card =>
-            card.id === id ? { ...card, [field]: value } : card
-        );
+  return (
+    <div className="bg-[var(--bg)]">
+      <Header />
 
-        setCards(updatedCards);
+      {/*all comments in the code are made by me and only me , so hussain i didnot use AI*/}
+      <div className="flex flex-col lg:flex-row justify-center gap-6 lg:gap-10 items-start my-10 px-4">
+        {/* Left Panel: Create Task */}
+        <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
-        SetTask(prevTask => ({
-            ...prevTask,
-            scene: updatedCards.map(card => ({
-                scenariotitle: card.TTE,
-                scenariodescription: card.TDE
-            }))
-        }));
-    }
-
-    const UpdateTask = async () => {
-        try {
-
-            var res = await api.put(`/tasks/${taskid}`, task);
-
-        }
-        catch (error) {
-            ShowSnackBar("One or more validation errors occurred", "error");
-            throw error;
-        }
-
-    }
-
-    return (
-        <div className="bg-[var(--bg)]">
-            <Header />
-
-            {/*all comments in the code are made by me and only me , so hussain i didnot use AI*/}
-            <div className="flex flex-col lg:flex-row justify-center gap-6 lg:gap-10 items-start my-10 px-4">
-
-                {/* Left Panel: Create Task */}
-                <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-
-                    <div className="relative z-10">
-                        {/*Create task header*/}
-                        <div className="pt-5 pb-3.5 border-b-[1px] border-[var(--anyborder)]">
-                            <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 items-center uppercase tracking-[0.05em]">
-                                <FaEdit size={30} color="var(--text)" className="mb-1.5" /> Edit Task
-                            </h2>
-                        </div>
-
-                        {/*Basic Information*/}
-                        <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3 mt-2"><FaCircleInfo size={17} color="var(--text)" /> Basic Information</h2>
-
-                        <div className="flex text-[var(--tasktext)] justify-center gap-[3%]">
-                            <div className="flex flex-col w-[50%]">
-                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Title</label>
-                                <input type="text" defaultValue={task.taskname} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskname: e.target.value }))} placeholder="Enter task title..." className="w-full px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]" />
-                            </div>
-                            <div className="flex flex-col w-[50%]">
-                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Category</label>
-                                <select value={task.taskcategory} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskcategory: e.target.value }))} className="w-full bg-[var(--cardbg)] px-4 py-2.5 border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]">
-                                    <option value="">Select a category</option>
-                                    <option value="call-center">Call Center</option>
-                                    <option value="marketing">Marketing</option>
-                                    <option value="data-analysis">Data Analysis</option>
-                                    <option value="project-management">Project Management</option>
-                                    <option value="software-development">Software Development</option>
-                                    <option value="design">Design</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        {/*Difficulty*/}
-                        <div className="py-5">
-                            <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">Difficulty Level</h2>
-                            <div className="flex text-[var(--tasktext)] gap-x-[3.333%]">
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Easy" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Easy" ? "bg-[#3ebf8f1a] border-[#3ebf8f]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}><BatteryLow size={20} color="green" /> Easy</button>
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Medium" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Medium" ? "bg-[#fabb181a] border-[#fabb18]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}><BatteryMedium size={20} className="text-yellow-400" /> Medium</button>
-                                <button onClick={() => SetTask(prevtask => ({ ...prevtask, taskdefficulty: "Hard" }))} className={`w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Hard" ? "bg-[#d820421a] border-[#d82042]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}><BatteryFull size={20} color="red" /> Hard</button>
-                            </div>
-                        </div>
-
-                        {/*Task Description*/}
-                        <div className="w-full flex flex-col pb-5">
-                            <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">Task Description</h2>
-                            <textarea defaultValue={task.taskdescription} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskdescription: e.target.value }))} placeholder="Enter detailed task description..." className="text-[var(--tasktext)] bg-transparent px-4 py-2 border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)] max-h-36 min-h-36" />
-                        </div>
-
-                        {/* Scenarios*/}
-                        <div className="flex flex-col mb-8">
-                            <div className="flex justify-between items-center">
-                                <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3"><FaLightbulb size={17} color="var(--text)" /> Scenarios</h2>
-                                <label className={`${cards.length < 5 ? "text-[var(--subtext)]" : "text-red-600"} text-sm`}>{cards.length} / 5</label>
-                            </div>
-                            <h2 className="text-[var(--subtext)] mb-2 mt-1">Add realistic scenarios for users to solve. Each scenario should present a unique challenge.</h2>
-                            {cards && (
-                                <>
-                                    {cards.length > 0 ? cards.map((scene, ID) => (
-                                        <Card
-                                            key={scene.id}
-                                            snNum={ID + 1}
-                                            cat="createTask"
-                                            onRemove={() => removeCard(scene.id)}
-                                            newT={(e) => updateCard(scene.id, "TTE", e.target.value)}
-                                            newD={(e) => updateCard(scene.id, "TDE", e.target.value)}
-                                            TTE={scene.TTE}
-                                            TDE={scene.TDE}
-                                        />
-                                    )) :
-                                        <div className={`flex gap-x-1 mt-1 py-10 w-full border border-dashed text-[var(--text)] border-[var(--text)] bg-transparent justify-center rounded-md text-sm cursor-pointer`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
-                                            <Plus size={15} color={cards.length < 5 ? "var(--text)" : "#b3b3b2"} />
-                                            No scenarios added yet, click to add a scenario
-                                        </div>}
-                                </>
-                            )
-                            }
-
-                            {cards.length > 0 &&
-                                <button className={`flex gap-x-1 mt-2 py-2 w-full border border-dashed ${cards.length < 5 ? "text-[var(--text)] border-[var(--text)] bg-transparent" : "text-gray-500 border-gray-600 bg-[var(--anyborder)]"} justify-center rounded-md text-sm`} onClick={() => { cards.length < 5 ? addsncard() : null }}>
-                                    <Plus size={15} color={cards.length < 5 ? "var(--text)" : "#b3b3b2"} />
-                                    Add Another Scenario
-                                </button>}
-                        </div>
-
-                        {/*Additional settings*/}
-                        <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3"><IoMdSettings size={20} color="var(--text)" /> Additional Settings</h2>
-
-                        <div className="flex text-[var(--tasktext)] justify-around pb-10 gap-[3%]">
-                            <div className="flex flex-col w-[50%]">
-                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Estimated Time (minutes)</label>
-                                <input type="number" defaultValue={task.tasktime} placeholder="e.g., 30" onChange={(e) => SetTask(prevtask => ({ ...prevtask, tasktime: parseInt(e.target.value, 10) }))} max={120} min={30} className="px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]" />
-                            </div>
-                            <div className="flex flex-col w-[50%]">
-                                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">Maximum Points</label>
-                                <input type="number" defaultValue={task.taskpoints} onChange={(e) => SetTask(prevtask => ({ ...prevtask, taskpoints: parseInt(e.target.value, 10) }))} placeholder="e.g., 100" max={200} min={20} className="px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]" />
-                            </div>
-                        </div>
-
-                        {/*Buttons*/}
-                        <div className="flex justify-end pb-10 gap-3">
-                            <button
-                                className="text-[var(--tasktext)] border border-[var(--anyborder)] px-4 py-2 text-sm rounded-md hover:border-[var(--text)]/50 hover:text-[var(--subtext)]
-                        transition duration-200"
-                                onClick={() => navigate('/Home')}
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                onClick={async () => {
-                                    if (loading || success) return;
-                                    if (!task.taskcategory.trim() || !task.taskdefficulty.trim() || !task.taskdescription.trim() || !task.taskname.trim() || isNaN(task.taskpoints) || isNaN(task.tasktime)) {
-                                        ShowSnackBar("All fields should be filled", "warn");
-                                        return;
-                                    }
-                                    if (cards.length == 0) {
-                                        ShowSnackBar("You must atleast add one scenario", "warn");
-                                        return;
-                                    }
-                                    setLoading(true);
-                                    try {
-                                        await UpdateTask();
-                                        setSuccess(true);
-                                        setTimeout(() => navigate('/Home'), 1000); // Redirect after 1.5s
-                                    } catch (err) {
-                                        console.error(err);
-                                    } finally {
-                                        setLoading(false);
-                                    }
-                                }}
-                                disabled={loading || success}
-                                className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
-                ${success
-                                        ? "bg-green-600 text-white"
-                                        : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
-                                    }`}
-                            >
-                                {loading ? (
-                                    <>
-                                        <svg
-                                            className="animate-spin h-4 w-4 text-[var(--tasktext)]"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                            <path
-                                                className="opacity-75"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
-                                            />
-                                        </svg>
-                                        Applying...
-                                    </>
-                                ) : success ? (
-                                    "Done!"
-                                ) : (
-                                    "Apply Changes"
-                                )}
-                            </button>
-
-
-
-                        </div>
-
-                    </div>
-                </div>
-
-                {/* Right Panel: Task Preview */}
-                <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-
-                    <div className="relative z-10">
-                        <div className="py-5 border-b-[1px] border-[var(--anyborder)]">
-                            {/*Page title*/}
-                            <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 uppercase tracking-[0.05em]">
-                                <FaEye size={25} color="var(--text)" /> Task Preview
-                            </h2>
-                        </div>
-                        <div className="bg-[var(--taskpreveiw)] py-3 px-7 mb-10 mt-20 rounded-md">
-                            <div className="flex flex-col">
-                                {/*Task name*/}
-                                <div className="w-[95%] break-words mx-auto my-3">
-                                    <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center">
-                                        {task.taskname === "" ? <span className="text-[var(--subtext)]">Ex. Task Name</span> : task.taskname}
-                                    </h2>
-                                </div>
-                                <div className="flex justify-center gap-x-2 mt-1">
-                                    <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl">
-                                        {task.taskcategory === "" ? <span>Ex. Call center</span> : task.taskcategory}
-                                    </div>
-                                    <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl">
-                                        {task.taskdefficulty}
-                                    </div>
-                                </div>
-                                <div className="flex gap-x-5 my-10">
-                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaClock size={40} fill="var(--text)" />{task.tasktime === "" ? "Ex. 60" : task.tasktime} Minute(s)</label>
-                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2"><FaStar size={40} fill="var(--text)" />{task.taskpoints === "" ? "Ex. 100" : task.taskpoints} Points(s)</label>
-                                </div>
-                                <div className="text-[var(--subtext)] text-lg text-center w-[95%] mx-auto mb-4 break-words">
-                                    {task.taskdescription === "" ? "Ex. Task Description goes here." : task.taskdescription}
-                                </div>
-                                <div>
-                                    {cards.length > 0 && cards.map(({ id, TTE, TDE }) =>
-                                        <Card
-                                            cat="taskPreview"
-                                            key={id}
-                                            TPT={TTE}
-                                            TPD={TDE}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+          <div className="relative z-10">
+            {/*Create task header*/}
+            <div className="pt-5 pb-3.5 border-b-[1px] border-[var(--anyborder)]">
+              <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 items-center uppercase tracking-[0.05em]">
+                <FaEdit size={30} color="var(--text)" className="mb-1.5" /> Edit
+                Task
+              </h2>
             </div>
 
-            <Footer />
+            {/*Basic Information*/}
+            <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3 mt-2">
+              <FaCircleInfo size={17} color="var(--text)" /> Basic Information
+            </h2>
+
+            <div className="flex text-[var(--tasktext)] justify-center gap-[3%]">
+              <div className="flex flex-col w-[50%]">
+                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                  Task Title
+                </label>
+                <input
+                  type="text"
+                  maxLength={60}
+                  defaultValue={task.taskname}
+                  onChange={(e) =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskname: e.target.value,
+                    }))
+                  }
+                  placeholder="Enter task title..."
+                  className="w-full px-4 py-[0.53rem] bg-transparent truncate border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"
+                />
+              </div>
+              <div className="flex flex-col w-[50%]">
+                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                  Category
+                </label>
+                <select
+                  value={task.taskcategory}
+                  onChange={(e) =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskcategory: e.target.value,
+                    }))
+                  }
+                  className="cursor-pointer w-full bg-[var(--cardbg)] px-4 py-2.5 border border-[var(--textfieldboarder)] rounded-md truncate focus:outline-0 focus:border-[var(--text)]"
+                >
+                  <option value="">Select a category</option>
+                  <option value="call-center">Call Center</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="data-analysis">Data Analysis</option>
+                  <option value="project-management">Project Management</option>
+                  <option value="software-development">
+                    Software Development
+                  </option>
+                  <option value="design">Design</option>
+                </select>
+              </div>
+            </div>
+
+            {/*Difficulty*/}
+            <div className="py-5">
+              <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                Difficulty Level
+              </h2>
+              <div className="flex text-[var(--tasktext)] gap-x-[3.333%]">
+                <button
+                  onClick={() =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskdefficulty: "Easy",
+                    }))
+                  }
+                  className={`cursor-pointer w-[31.025%] py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Easy" ? "bg-[#3ebf8f1a] border-[#3ebf8f]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}
+                >
+                  <BatteryLow size={20} color="green" /> Easy
+                </button>
+                <button
+                  onClick={() =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskdefficulty: "Medium",
+                    }))
+                  }
+                  className={`w-[31.025%] cursor-pointer py-3 flex flex-col items-center justify-center border rounded-md ${task.taskdefficulty === "Medium" ? "bg-[#fabb181a] border-[#fabb18]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}
+                >
+                  <BatteryMedium size={20} className="text-yellow-400" /> Medium
+                </button>
+                <button
+                  onClick={() =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskdefficulty: "Hard",
+                    }))
+                  }
+                  className={`w-[31.025%] py-3 flex flex-col cursor-pointer items-center justify-center border rounded-md ${task.taskdefficulty === "Hard" ? "bg-[#d820421a] border-[#d82042]" : "border-[var(--anyborder)] hover:bg-[var(--ce7hover)]/10 hover:border-[var(--text)]"}`}
+                >
+                  <BatteryFull size={20} color="red" /> Hard
+                </button>
+              </div>
+            </div>
+
+            {/*Task Description*/}
+            <div className="w-full flex flex-col pb-5">
+              <h2 className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                Task Description
+              </h2>
+              <textarea
+                defaultValue={task.taskdescription}
+                onChange={(e) =>
+                  SetTask((prevtask) => ({
+                    ...prevtask,
+                    taskdescription: e.target.value,
+                  }))
+                }
+                placeholder="Enter detailed task description..."
+                maxLength={300}
+                className="text-[var(--tasktext)] bg-transparent px-4 py-2 border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)] max-h-36 min-h-36"
+              />
+            </div>
+
+            {/* Scenarios*/}
+            <div className="flex flex-col mb-8">
+              <div className="flex justify-between items-center">
+                <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3">
+                  <FaLightbulb size={17} color="var(--text)" /> Scenarios
+                </h2>
+                <label
+                  className={`${cards.length < 5 ? "text-[var(--subtext)]" : "text-red-600"} text-sm`}
+                >
+                  {cards.length} / 5
+                </label>
+              </div>
+              <h2 className="text-[var(--subtext)] mb-2 mt-1">
+                Add realistic scenarios for users to solve. Each scenario should
+                present a unique challenge.
+              </h2>
+              {cards && (
+                <>
+                  {cards.length > 0 ? (
+                    cards.map((scene, ID) => (
+                      <Card
+                        key={scene.id}
+                        snNum={ID + 1}
+                        cat="createTask"
+                        onRemove={() => removeCard(scene.id)}
+                        newT={(e) =>
+                          updateCard(scene.id, "TTE", e.target.value)
+                        }
+                        newD={(e) =>
+                          updateCard(scene.id, "TDE", e.target.value)
+                        }
+                        TTE={scene.TTE}
+                        TDE={scene.TDE}
+                      />
+                    ))
+                  ) : (
+                    <div
+                      className={`flex gap-x-1 mt-1 py-10 w-full border border-dashed text-[var(--text)] border-[var(--text)] xs bg-transparent justify-center rounded-md text-sm cursor-pointer`}
+                      onClick={() => {
+                        cards.length < 5 ? addsncard() : null;
+                      }}
+                    >
+                      <Plus
+                        size={15}
+                        color={cards.length < 5 ? "var(--text)" : "#b3b3b2"}
+                      />
+                      No scenarios added yet, click to add a scenario
+                    </div>
+                  )}
+                </>
+              )}
+
+              {cards.length > 0 && (
+                <button
+                  className={`flex gap-x-1 mt-2 py-2 w-full border border-dashed ${cards.length < 5 ? "text-[var(--text)] border-[var(--text)] bg-transparent hover:cursor-pointer" : "text-gray-500 border-gray-600 bg-[var(--buttonbg)] hover:cursor-not-allowed"} justify-center rounded-md text-sm`}
+                  onClick={() => {
+                    cards.length < 5 ? addsncard() : null;
+                  }}
+                >
+                  <Plus
+                    size={15}
+                    color={cards.length < 5 ? "var(--text)" : "#b3b3b2"}
+                  />
+                  Add Another Scenario
+                </button>
+              )}
+            </div>
+
+            {/*Additional settings*/}
+            <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-2 py-3">
+              <IoMdSettings size={20} color="var(--text)" /> Additional Settings
+            </h2>
+
+            <div className="flex text-[var(--tasktext)] justify-around pb-10 gap-[3%]">
+              <div className="flex flex-col w-[50%]">
+                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                  Time (mins)
+                </label>
+                <input
+                  type="number"
+                  defaultValue={task.tasktime}
+                  placeholder="Max 120 min"
+                  onInput={(e) => {
+                    if (e.target.value.length > 3)
+                      e.target.value = e.target.value.slice(0, 3);
+                  }}
+                  onChange={(e) =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      tasktime:
+                        e.target.value === ""
+                          ? ""
+                          : parseInt(e.target.value, 10),
+                    }))
+                  }
+                  max={120}
+                  min={1}
+                  className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"
+                />
+              </div>
+              <div className="flex flex-col w-[50%]">
+                <label className="text-[var(--subtext)] text-sm mb-2 mt-2">
+                  Points
+                </label>
+                <input
+                  type="number"
+                  defaultValue={task.taskpoints}
+                  onInput={(e) => {
+                    if (e.target.value.length > 4)
+                      e.target.value = e.target.value.slice(0, 4);
+                  }}
+                  onChange={(e) =>
+                    SetTask((prevtask) => ({
+                      ...prevtask,
+                      taskpoints:
+                        e.target.value === ""
+                          ? ""
+                          : parseInt(e.target.value, 10),
+                    }))
+                  }
+                  placeholder="Max 3000 pts"
+                  min={1}
+                  max={3000}
+                  className="text-[var(--tasktext)] px-4 py-2 bg-transparent border border-[var(--textfieldboarder)] rounded-md focus:outline-0 focus:border-[var(--text)]"
+                />
+              </div>
+            </div>
+
+            {/*Buttons*/}
+            <div className="flex justify-end pb-10 gap-3">
+              <button
+                className="text-[var(--tasktext)] border border-[var(--anyborder)] px-4 py-2 text-sm rounded-md hover:border-[var(--text)]/50 hover:text-[var(--subtext)]
+                        transition duration-200"
+                onClick={() => navigate("/Home")}
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={async () => {
+                  if (loading || success) return;
+                  if (
+                    !task.taskcategory.trim() ||
+                    !task.taskdefficulty.trim() ||
+                    !task.taskdescription.trim() ||
+                    !task.taskname.trim() ||
+                    task.taskpoints === "" ||
+                    task.tasktime === ""
+                  ) {
+                    cool
+                      ? null
+                      : handelSnack("All fields should be filled", "warn");
+                    return;
+                  }
+                  if (cards.length == 0) {
+                    cool
+                      ? null
+                      : handelSnack(
+                          "You must atleast add one scenario",
+                          "warn",
+                        );
+                    return;
+                  }
+                  setLoading(true);
+                  try {
+                    await UpdateTask();
+                    setSuccess(true);
+                    setTimeout(() => navigate("/Home"), 1000); // Redirect after 1.5s
+                  } catch (err) {
+                    console.error(err);
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                disabled={loading || success}
+                className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
+                ${
+                  success
+                    ? "bg-green-600 text-white"
+                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
+                }`}
+              >
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-4 w-4 text-[var(--tasktext)]"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                      />
+                    </svg>
+                    Applying...
+                  </>
+                ) : success ? (
+                  "Done!"
+                ) : (
+                  "Apply Changes"
+                )}
+              </button>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* Right Panel: Task Preview */}
+        <div className="w-full lg:w-[45%] xl:w-[35%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+
+          <div className="relative z-10">
+            <div className="py-5 border-b-[1px] border-[var(--anyborder)]">
+              {/*Page title*/}
+              <h2 className="flex text-[var(--tasktext)] text-xl font-semibold gap-x-2 uppercase tracking-[0.05em]">
+                <FaEye size={25} color="var(--text)" /> Task Preview
+              </h2>
+            </div>
+            <div className="bg-[var(--taskpreveiw)] py-3 px-7 mb-10 mt-20 rounded-md">
+              <div className="flex flex-col">
+                {/*Task name*/}
+                <div className="w-[95%] break-words mx-auto my-3">
+                  <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center">
+                    {task.taskname === "" ? (
+                      <span className="text-[var(--subtext)]">
+                        Ex. Task Name
+                      </span>
+                    ) : (
+                      task.taskname
+                    )}
+                  </h2>
+                </div>
+                <div className="flex justify-center gap-x-2 mt-1">
+                  <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl truncate py-1 flex items-center justify-center">
+                    {task.taskcategory === "" ? (
+                      <span>Ex. Call center</span>
+                    ) : (
+                      task.taskcategory
+                    )}
+                  </div>
+                  <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl flex items-center justify-center">
+                    {task.taskdefficulty}
+                  </div>
+                </div>
+                <div className="flex gap-x-5 my-10 justify-center">
+                  <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
+                    <FaClock size={20} fill="var(--text)" />
+                    {task.tasktime === "" || isNaN(task.tasktime)
+                      ? "Ex. 60"
+                      : task.tasktime}{" "}
+                    Minutes
+                  </label>
+                  <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
+                    <FaStar size={20} fill="var(--text)" />
+                    {task.taskpoints === "" || isNaN(task.taskpoints)
+                      ? "Ex. 100"
+                      : task.taskpoints}{" "}
+                    Points
+                  </label>
+                </div>
+                <div className="text-[var(--subtext)] text-lg text-center w-[95%] mx-auto mb-4 break-words">
+                  {task.taskdescription === ""
+                    ? "Ex. Task Description goes here."
+                    : task.taskdescription}
+                </div>
+                <div>
+                  {cards.length > 0 &&
+                    cards.map(({ id, TTE, TDE }) => (
+                      <Card cat="taskPreview" key={id} TPT={TTE} TPD={TDE} />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
 }

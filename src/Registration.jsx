@@ -125,7 +125,7 @@ function Reg(props) {
           </h1>
 
           {/* GTA Styled Login Card */}
-          <div className="w-[28%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
+          <div className="w-[30%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden">
             {/* Background Layers */}
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
 
@@ -145,7 +145,9 @@ function Reg(props) {
                 <div className="w-full mx-auto flex justify-center">
                   <GoogleLogin
                     onSuccess={(cred) => handelGoogleLogin(cred.credential)}
-                    onError={() => handelSnack("Google Login Failed", "error")}
+                    onError={() =>
+                      cool ? null : handelSnack("Google Login Failed", "error")
+                    }
                   />
                 </div>
                 {/* <button className="flex items-center justify-center gap-2 w-full text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
@@ -338,7 +340,7 @@ function Reg(props) {
           </h1>
 
           {/* Panel */}
-          <div className="relative flex flex-col justify-center w-[28%] max-lg:w-[50%] max-sm:w-[90%] my-7 mx-auto bg-[var(--cardbg)] rounded-2xl border border-[var(--anyborder)] overflow-hidden">
+          <div className="relative flex flex-col justify-center w-[30%] max-lg:w-[40%] max-md:w-[60%] max-sm:w-[85%] my-7 mx-auto bg-[var(--cardbg)] rounded-2xl border border-[var(--anyborder)] overflow-hidden">
             {/* Gradient overlays */}
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none"></div>
 
@@ -355,11 +357,13 @@ function Reg(props) {
             {/* Social Login */}
             <div className="flex justify-center mt-6 gap-x-4 relative">
               <div className="w-full mx-auto  flex justify-center">
-                  <GoogleLogin
-                    onSuccess={(cred) => handelGoogleLogin(cred.credential)}
-                    onError={() => handelSnack("Google Login Failed", "error")}
-                  />
-                </div>
+                <GoogleLogin
+                  onSuccess={(cred) => handelGoogleLogin(cred.credential)}
+                  onError={() =>
+                    cool ? null : handelSnack("Google Login Failed", "error")
+                  }
+                />
+              </div>
               {/* <button className="flex items-center justify-center gap-2 w-full mx-5 text-[var(--tasktext)] border border-[var(--anyborder)] rounded-md py-3 font-semibold hover:border-[var(--text)] transition">
                 <svg
                   className="w-5 h-5 fill-red-500"

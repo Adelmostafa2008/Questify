@@ -12,6 +12,14 @@ export default function EditProfile() {
   const { user, updateUser } = useAuth();
   const navigate = useNavigate();
   const { ShowSnackBar } = useSnack();
+  const [cool, setCool] = useState(false);
+  const handelSnack = (msg, ty) => {
+    setCool(true);
+    ShowSnackBar(msg, ty);
+    setTimeout(() => {
+      setCool(false);
+    }, 5000);
+  };
   const [oldUser, setOldUser] = useState({});
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,7 +31,7 @@ export default function EditProfile() {
   const [newUser, setNewUser] = useState({
     UserName: "",
     Email: "",
-    Description: ""
+    Description: "",
   });
 
   // Fetch user data
@@ -67,28 +75,24 @@ export default function EditProfile() {
       formData.append("Email", newUser.Email);
       if (newUser.Description == null || newUser.Description.trim() === "") {
         formData.append("Description", " ");
-      }else{
+      } else {
         formData.append("Description", newUser.Description);
       }
 
       if (selectedFile) {
         formData.append("ProfilePicFile", selectedFile);
-
       }
 
       const res = await api.put(`/regesteration/${user.id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-
       updateUser(res.data);
-
     } catch (error) {
-      ShowSnackBar(error.response?.data || error.message, "error");
-      throw error
+      cool ? null : handelSnack(error.response?.data || error.message, "error");
+      throw error;
     }
   };
-
 
   return (
     <>
@@ -108,8 +112,15 @@ export default function EditProfile() {
             </div>
 
             <div className="mt-5 mb-3 flex flex-col justify-center gap-y-5">
-
-              <img src={preview ? preview : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} className="rounded-full w-[200px] sm:w-[250px] md:max-w-[300px] border-2 border-[var(--anyborder)] h-[200px] sm:h-[250px] md:max-h-[300px] mx-auto object-cover" alt="profile preview" />
+              <img
+                src={
+                  preview
+                    ? preview
+                    : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                }
+                className="rounded-full w-[200px] sm:w-[250px] md:max-w-[300px] border-2 border-[var(--anyborder)] h-[200px] sm:h-[250px] md:max-h-[300px] mx-auto object-cover"
+                alt="profile preview"
+              />
 
               <button
                 onClick={handleButtonClick}
@@ -132,7 +143,9 @@ export default function EditProfile() {
             <form className="flex flex-col gap-y-5 py-6">
               {/* Username */}
               <div className="flex flex-col">
-                <label className="text-[var(--subtext)] text-sm mb-2">Username</label>
+                <label className="text-[var(--subtext)] text-sm mb-2">
+                  Username
+                </label>
                 <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)]">
                   <FaUser className="ml-3 text-[var(--subtext)]" />
                   <input
@@ -141,38 +154,40 @@ export default function EditProfile() {
                     value={newUser.UserName}
                     className="w-full px-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)]"
                     onChange={(e) =>
-                      setNewUser((prev) => ({ ...prev, UserName: e.target.value }))
+                      setNewUser((prev) => ({
+                        ...prev,
+                        UserName: e.target.value,
+                      }))
                     }
                   />
                 </div>
               </div>
 
-              
-
               {/* Description */}
               <div className="flex flex-col">
-                <label className="text-[var(--subtext)] text-sm mb-2">Description (optional)</label>
+                <label className="text-[var(--subtext)] text-sm mb-2">
+                  Description (optional)
+                </label>
                 <div className="flex items-center border border-[var(--textfieldboarder)] rounded-md focus-within:border-[var(--text)] bg-[var(--taskpreveiw)] relative">
-
                   <FaRegEdit className="absolute top-3 left-3 text-[var(--subtext)]" />
                   <textarea
-                  maxLength={200}
+                    maxLength={200}
                     placeholder="Ex. I am a 2x boxing heavyweight champion of the world"
                     defaultValue={newUser?.Description}
                     className="w-full pl-10 pr-3 py-2 bg-transparent focus:outline-none text-[var(--tasktext)] resize-none h-[200px]  rounded-md"
                     onChange={(e) =>
-                      setNewUser((prev) => ({ ...prev, Description: e.target.value }))
+                      setNewUser((prev) => ({
+                        ...prev,
+                        Description: e.target.value,
+                      }))
                     }
                   />
                   <button
                     type="button"
                     onClick={() => setShowOldPassword(!showOldPassword)}
-                  >
-
-                  </button>
+                  ></button>
                 </div>
               </div>
-
             </form>
 
             {/* Buttons */}
@@ -187,14 +202,16 @@ export default function EditProfile() {
                 onClick={async () => {
                   if (loading || success) return;
                   if (!newUser.UserName.trim() || !newUser.Email.trim()) {
-                    ShowSnackBar("All fields should be filled", "warn");
+                    cool
+                      ? null
+                      : handelSnack("All fields should be filled", "warn");
                     return;
                   }
                   setLoading(true);
                   try {
                     await UpdateUser();
                     setSuccess(true);
-                    setTimeout(() => navigate('/Profile'), 1000); // Redirect after 1.5s
+                    setTimeout(() => navigate("/Profile"), 1000); // Redirect after 1.5s
                   } catch (err) {
                     console.error(err);
                   } finally {
@@ -203,10 +220,11 @@ export default function EditProfile() {
                 }}
                 disabled={loading || success}
                 className={`flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-md font-medium transition-colors duration-300
-        ${success
-                    ? "bg-green-600 text-white"
-                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
-                  }`}
+        ${
+          success
+            ? "bg-green-600 text-white"
+            : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
+        }`}
               >
                 {loading ? (
                   <>
@@ -216,7 +234,14 @@ export default function EditProfile() {
                       fill="none"
                       viewBox="0 0 24 24"
                     >
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
                       <path
                         className="opacity-75"
                         fill="currentColor"

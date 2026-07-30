@@ -11,9 +11,9 @@ import { FaClock, FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import "react-calendar-heatmap/dist/styles.css";
 import { BatteryFull, BatteryLow, BatteryMedium } from "lucide-react";
-import null_dark from "./assets/null_dark.png"
-import null_light from "./assets/null_light.png"
-import {ThemeContext} from "./ThemeContext.jsx"
+import null_dark from "./assets/null_dark.png";
+import null_light from "./assets/null_light.png";
+import { ThemeContext } from "./ThemeContext.jsx";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 export default function Profile() {
@@ -21,7 +21,7 @@ export default function Profile() {
   const { user, logout } = useAuth();
   const [oldUser, setOldUser] = useState({});
   const [preview, setPreview] = useState("");
-  const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [activity, setActivity] = useState([]);
@@ -38,11 +38,7 @@ export default function Profile() {
     try {
       const res = await api.get(`/regesteration/${user.id}`);
       setOldUser(res.data);
-      setPreview(
-        res.data.profilePic
-          ? `${res.data.profilePic}`
-          : null
-      );
+      setPreview(res.data.profilePic ? `${res.data.profilePic}` : null);
     } catch (err) {
       console.error("Error fetching user:", err);
     }
@@ -68,7 +64,7 @@ export default function Profile() {
         }));
         setActivity(formatted);
       } catch (error) {
-        throw error
+        throw error;
       }
     };
     if (user?.id) fetchData();
@@ -80,12 +76,11 @@ export default function Profile() {
         const res = await api.get(`/submission/latest/${user.id}`);
         setSubmissions(res.data);
       } catch (error) {
-        throw error
+        throw error;
       }
     };
     if (user?.id) fetchlatestsubs();
   }, [user]);
-
 
   useEffect(() => {
     const getFav = async () => {
@@ -93,26 +88,25 @@ export default function Profile() {
         const res = await api.get(`/favourites/GetAllFav/${user.id}`);
         setFav(res.data);
       } catch (err) {
-        throw err
+        throw err;
       }
     };
     if (user?.id) getFav();
-  },
-    [user]
-  )
+  }, [user]);
 
   function slugify(text) {
     return text
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '');
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\-]+/g, "");
   }
-
 
   const handleDelete = async () => {
     if (deleteInput.trim() !== requiredPhrase) {
-      alert("The phrase does not match. Please type exactly: " + requiredPhrase);
+      alert(
+        "The phrase does not match. Please type exactly: " + requiredPhrase,
+      );
       return;
     }
 
@@ -122,7 +116,6 @@ export default function Profile() {
       console.error("Error deleting account:", err);
       alert("Something went wrong. Try again later.");
     }
-
   };
 
   const handleReset = async () => {
@@ -132,7 +125,6 @@ export default function Profile() {
       console.error("Error Resetting Record:", err);
       alert("Something went wrong. Try again later.");
     }
-
   };
 
   return (
@@ -159,72 +151,80 @@ export default function Profile() {
             </button>
           </div>
 
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-x-8 border-b border-[var(--anyborder)] pb-8 w-full">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-5 md:gap-x-8 border-b border-[var(--anyborder)] pb-6 md:pb-8 w-full">
             <div className="flex-shrink-0">
               <img
-                src={preview || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
+                src={
+                  preview ||
+                  "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                }
                 alt="ProfilePic"
-                className="w-28 sm:w-40 md:w-64 border-2 border-[var(--anyborder)] rounded-full"
+                className="w-24 sm:w-36 md:w-48 lg:w-48 xl:w-60 border-2 border-[var(--anyborder)] rounded-full"
               />
             </div>
             <div className="flex-1 text-center md:text-left w-full">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[var(--tasktext)] break-words">{oldUser.userName}</h3>
-              <p className="text-[var(--subtext)] italic mt-2 text-sm sm:text-base md:text-lg w-full md:w-[60%] break-words">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-[var(--tasktext)] break-words">
+                {oldUser.userName}
+              </h3>
+              <p className="text-[var(--subtext)] italic mt-1.5 md:mt-2 text-xs sm:text-sm md:text-base lg:text-lg w-full md:w-[70%] lg:w-[60%] break-words">
                 "{oldUser.description || "No description yet..."}"
               </p>
             </div>
           </div>
 
           {/* Activity Heatmap */}
-          <div className="relative z-10 my-12">
-            <h3 className="text-lg font-bold text-[var(--subtext)] mb-4">
+          <div className="relative z-10 my-8 md:my-12">
+            <h3 className="text-base md:text-lg font-bold text-[var(--subtext)] mb-3 md:mb-4">
               Activity Rate
             </h3>
-            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-2 sm:p-4 overflow-x-auto">
-              <CalendarHeatmap
-                startDate={new Date(`${new Date().getFullYear()}-01-01`)}
-                endDate={new Date(`${new Date().getFullYear()}-12-31`)}
-                values={activity}
-                gutterSize={2}
-                classForValue={(value) => {
-                  if (!value) return "fill-[var(--noactive)]";
-                  if (value.count < 2) return "fill-[var(--less2)]";
-                  if (value.count < 4) return "fill-[var(--less4)]";
-                  if (value.count < 6) return "fill-[var(--less6)]";
-                  if (value.count < 8) return "fill-[var(--less8)]";
-                  if (value.count < 10) return "fill-[var(--less10)]";
-                  return "fill-[#7d3e34]";
-                }}
-                tooltipDataAttrs={(value) => {
-                  if (!value || !value.date) return null;
-                  const d = new Date(value.date);
-                  const formatted = d
-                    .toISOString()
-                    .split("T")[0]
-                    .replace(/-/g, "/")
-                    .slice(2);
-                  return {
-                    "data-tooltip-id": "heatmap-tooltip",
-                    "data-tooltip-content": `${value.count} submissions on ${formatted}`,
-                  };
-                }}
-              />
+            <div className="rounded-xl border border-[var(--anyborder)] bg-[var(--taskpreveiw)] p-3 sm:p-3 md:p-4 overflow-x-auto">
+              <div className="min-w-[650px] sm:min-w-[750px]">
+                <CalendarHeatmap
+                  startDate={new Date(`${new Date().getFullYear()}-01-01`)}
+                  endDate={new Date(`${new Date().getFullYear()}-12-31`)}
+                  values={activity}
+                  gutterSize={3}
+                  classForValue={(value) => {
+                    if (!value) return "fill-[var(--noactive)]";
+                    if (value.count < 2) return "fill-[var(--less2)]";
+                    if (value.count < 4) return "fill-[var(--less4)]";
+                    if (value.count < 6) return "fill-[var(--less6)]";
+                    if (value.count < 8) return "fill-[var(--less8)]";
+                    if (value.count < 10) return "fill-[var(--less10)]";
+                    return "fill-[#7d3e34]";
+                  }}
+                  tooltipDataAttrs={(value) => {
+                    if (!value || !value.date) return null;
+                    const d = new Date(value.date);
+                    const formatted = d
+                      .toISOString()
+                      .split("T")[0]
+                      .replace(/-/g, "/")
+                      .slice(2);
+                    return {
+                      "data-tooltip-id": "heatmap-tooltip",
+                      "data-tooltip-content": `${value.count} submissions on ${formatted}`,
+                    };
+                  }}
+                />
+              </div>
               <ReactTooltip id="heatmap-tooltip" place="top" />
             </div>
           </div>
 
           {/* Latest Submissions */}
-          <div className="relative z-10 mb-12">
-            <div className="flex justify-between items-center mb-3">
-
-              <h3 className="text-lg font-bold text-[var(--tasktext)]">
+          <div className="relative z-10 mb-8 md:mb-12">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 mb-3">
+              <h3 className="text-base md:text-lg font-bold text-[var(--tasktext)]">
                 Latest Submissions
               </h3>
               <div className="flex relative z-10 justify-end">
                 <button
-                  onClick={() => { submissions.length > 0 ? setShowDeleteModal2(true) : null }}
-                  className={`py-2 px-4  rounded-lg  font-bold
-              ${submissions.length == 0 ? "text-red-900/50 border-2 border-red-900/50 invalidCursor  " : "text-red-700 font-bold border-2 border-red-700  hover:bg-red-700 hover:text-white transition-colors duration-200"} `}
+                  onClick={() => {
+                    submissions.length > 0 ? setShowDeleteModal2(true) : null;
+                  }}
+                  className={`py-1.5 px-3 md:py-2 md:px-4 rounded-lg font-bold text-xs sm:text-sm
+              ${submissions.length == 0 ? "text-red-900/50 border-2 border-red-900/50 invalidCursor" : "text-red-700 font-bold border-2 border-red-700 hover:bg-red-700 hover:text-white transition-colors duration-200"} `}
                 >
                   Reset Record
                 </button>
@@ -245,7 +245,9 @@ export default function Profile() {
                  z-10 w-[90%] max-w-md text-center transition-transform duration-200"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <h2 className="text-xl font-bold text-red-500 mb-4">Confirm Record Resettion</h2>
+                    <h2 className="text-xl font-bold text-red-500 mb-4">
+                      Confirm Record Resettion
+                    </h2>
                     <p className="text-[var(--subtext)] mb-4">
                       Are you sure you wanna reset your record
                     </p>
@@ -256,7 +258,7 @@ export default function Profile() {
                           if (loading || success) return;
                           setLoading(true);
                           try {
-                            await handleReset()
+                            await handleReset();
                             setSuccess(true);
                             setShowDeleteModal2(false);
                             window.location.reload();
@@ -269,10 +271,11 @@ export default function Profile() {
                         disabled={loading || success}
                         className={`flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-md w-full
                       transition-colors duration-200
-                      ${success
-                            ? "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
-                            : "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
-                          }`}
+                      ${
+                        success
+                          ? "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
+                          : "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
+                      }`}
                       >
                         {loading ? (
                           <>
@@ -308,163 +311,157 @@ export default function Profile() {
                   </div>
                 </div>
               )}
-
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4">
-              {visibleSubs.length > 0 ? (visibleSubs.map((s, i) => (
-                <Link
-                  to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
-                  key={s.id}
-                >
-                  <li
-                    key={i}
-                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
-
-                  >
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-[var(--tasktext)] truncate">
-                        {s.taskname}
-                      </h4>
-                      <span
-                        className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                          ? "bg-[var(--text)]/10 text-[var(--text)]"
-                          : s.taskdefficulty === "Medium"
-                            ? "bg-[var(--text)]/10 text-[var(--text)]"
-                            : "bg-[var(--text)]/10 text-[var(--text)]"
-                          }`}
-                      >
-                        {s.taskdefficulty === "Easy" ? (
-                          <BatteryFull />
-                        ) : s.taskdefficulty === "Medium" ? (
-                          <BatteryMedium />
-                        ) : (
-                          <BatteryLow />
-                        )}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm text-[var(--subtext)] truncate">
-                      {s.taskdescription}
-                    </p>
-                    <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
-                      <span className="px-2 py-1 rounded bg-[var(--text)]/10 text-[var(--text)]">
-                        {s.taskcategory}
-                      </span>
-                      <div className="flex gap-x-4">
-                        <span className="flex items-center gap-x-1">
-                          <FaClock /> {s.tasktime} min
-                        </span>
-                        <span className="flex items-center gap-x-1">
-                          <FaStar /> {s.taskpoints} pts
+            <ul className="flex flex-col gap-y-2 md:gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-3 md:p-4">
+              {visibleSubs.length > 0 ? (
+                visibleSubs.map((s, i) => (
+                  <Link to={`/Tasks/${s.id}/${slugify(s.taskname)}`} key={s.id}>
+                    <li
+                      key={i}
+                      className="p-3 md:p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
+                    >
+                      <div className="flex justify-between items-start gap-2">
+                        <h4 className="text-sm md:text-base font-semibold text-[var(--tasktext)] truncate">
+                          {s.taskname}
+                        </h4>
+                        <span className="px-1.5 py-1 text-xs rounded-full flex items-center bg-[var(--text)]/10 text-[var(--text)] shrink-0">
+                          {s.taskdefficulty === "Easy" ? (
+                            <BatteryFull size={14} />
+                          ) : s.taskdefficulty === "Medium" ? (
+                            <BatteryMedium size={14} />
+                          ) : (
+                            <BatteryLow size={14} />
+                          )}
                         </span>
                       </div>
-                    </div>
-                  </li>
-                </Link>
-              ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
+                      <p className="mt-1.5 md:mt-2 text-xs md:text-sm text-[var(--subtext)] truncate">
+                        {s.taskdescription}
+                      </p>
+                      <div className="flex flex-wrap items-center justify-between mt-2 md:mt-3 gap-2 text-xs md:text-sm text-[var(--subtext)]">
+                        <span className="px-2 py-0.5 rounded bg-[var(--text)]/10 text-[var(--text)] truncate text-xs">
+                          {s.taskcategory}
+                        </span>
+                        <div className="flex gap-x-3 md:gap-x-4">
+                          <span className="flex items-center gap-x-1 whitespace-nowrap">
+                            <FaClock size={12} /> {s.tasktime} min
+                          </span>
+                          <span className="flex items-center gap-x-1 whitespace-nowrap">
+                            <FaStar size={12} /> {s.taskpoints} pts
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </Link>
+                ))
+              ) : (
+                <img
+                  src={theme == "dark" ? null_dark : null_light}
+                  className="w-[140px] sm:w-[180px] h-auto mx-auto my-6"
+                  alt="No submissions"
+                />
+              )}
             </ul>
             {visibleCount < submissions.length ? (
-              <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
-                          font-semibold px-6 py-2 rounded-lg 
+              <button
+                className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
+                          font-semibold px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
                           w-full
-                          mt-5
+                          mt-4 md:mt-5
+                          text-sm md:text-base
                           flex
                           justify-center
                           items-center gap-x-2
                           transition-all duration-300"
                 onClick={() => navigate("/Profile/Solvedtasks")}
               >
-                Show All <MdKeyboardDoubleArrowRight size={17} />
+                Show All <MdKeyboardDoubleArrowRight size={15} className="md:w-[17px]" />
               </button>
             ) : null}
           </div>
 
-
           {/*  Favourite Tasks */}
-          <div className="relative z-10 mb-12">
+          <div className="relative z-10 mb-8 md:mb-12">
             <div className="flex justify-between items-center mb-3">
-
-              <h3 className="text-lg font-bold text-[var(--tasktext)]">
+              <h3 className="text-base md:text-lg font-bold text-[var(--tasktext)]">
                 Favourites
               </h3>
-
             </div>
-            <ul className="flex flex-col gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-4">
-              {fav.length > 0 ? (fav.map((s, i) => (
-                <Link
-                  to={`/Tasks/${s.id}/${slugify(s.taskname)}`}
-                  key={s.id}
-                >
-                  <li
-                    key={i}
-                    className="p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
-
-                  >
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-lg font-semibold text-[var(--tasktext)] truncate">
-                        {s.taskname}
-                      </h4>
-                      <span
-                        className={`px-2 py-1 text-xs rounded-full flex items-center ${s.taskdefficulty === "Easy"
-                          ? "bg-[var(--text)]/10 text-[var(--text)]"
-                          : s.taskdefficulty === "Medium"
-                            ? "bg-[var(--text)]/10 text-[var(--text)]"
-                            : "bg-[var(--text)]/10 text-[var(--text)]"
-                          }`}
-                      >
-                        {s.taskdefficulty === "Easy" ? (
-                          <BatteryFull />
-                        ) : s.taskdefficulty === "Medium" ? (
-                          <BatteryMedium />
-                        ) : (
-                          <BatteryLow />
-                        )}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm text-[var(--subtext)] truncate">
-                      {s.taskdescription}
-                    </p>
-                    <div className="flex justify-between mt-3 text-sm text-[var(--subtext)]">
-                      <span className="px-2 py-1 rounded bg-[var(--text)]/10 text-[var(--text)]">
-                        {s.taskcategory}
-                      </span>
-                      <div className="flex gap-x-4">
-                        <span className="flex items-center gap-x-1">
-                          <FaClock /> {s.tasktime} min
-                        </span>
-                        <span className="flex items-center gap-x-1">
-                          <FaStar /> {s.taskpoints} pts
+            <ul className="flex flex-col gap-y-2 md:gap-y-3 rounded-xl border border-[var(--anyborder)] bg-transparent p-3 md:p-4">
+              {fav.length > 0 ? (
+                fav.map((s, i) => (
+                  <Link to={`/Tasks/${s.id}/${slugify(s.taskname)}`} key={s.id}>
+                    <li
+                      key={i}
+                      className="p-3 md:p-4 rounded-lg border border-[var(--anyborder)] bg-[var(--cardbg)] hover:bg-[var(--taskpreveiw)] transition"
+                    >
+                      <div className="flex justify-between items-start gap-2">
+                        <h4 className="text-sm md:text-base font-semibold text-[var(--tasktext)] truncate">
+                          {s.taskname}
+                        </h4>
+                        <span className="px-1.5 py-1 text-xs rounded-full flex items-center bg-[var(--text)]/10 text-[var(--text)] shrink-0">
+                          {s.taskdefficulty === "Easy" ? (
+                            <BatteryFull size={14} />
+                          ) : s.taskdefficulty === "Medium" ? (
+                            <BatteryMedium size={14} />
+                          ) : (
+                            <BatteryLow size={14} />
+                          )}
                         </span>
                       </div>
-                    </div>
-                  </li>
-                </Link>
-              ))) : <img src={theme == "dark" ? null_dark : null_light} className="w-[200px] h-[167px] mx-auto my-5" />}
+                      <p className="mt-1.5 md:mt-2 text-xs md:text-sm text-[var(--subtext)] truncate">
+                        {s.taskdescription}
+                      </p>
+                      <div className="flex flex-wrap items-center justify-between mt-2 md:mt-3 gap-2 text-xs md:text-sm text-[var(--subtext)]">
+                        <span className="px-2 py-0.5 rounded bg-[var(--text)]/10 text-[var(--text)] truncate text-xs">
+                          {s.taskcategory}
+                        </span>
+                        <div className="flex gap-x-3 md:gap-x-4">
+                          <span className="flex items-center gap-x-1 whitespace-nowrap">
+                            <FaClock size={12} /> {s.tasktime} min
+                          </span>
+                          <span className="flex items-center gap-x-1 whitespace-nowrap">
+                            <FaStar size={12} /> {s.taskpoints} pts
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </Link>
+                ))
+              ) : (
+                <img
+                  src={theme == "dark" ? null_dark : null_light}
+                  className="w-[140px] sm:w-[180px] h-auto mx-auto my-6"
+                  alt="No favourites"
+                />
+              )}
             </ul>
             {visibleCount < fav.length ? (
-              <button className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
-                          font-semibold px-6 py-2 rounded-lg 
+              <button
+                className="relative bg-[var(--cardbg)] border border-[var(--anyborder)] text-[var(--subtext)] 
+                          font-semibold px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg 
                           hover:border-[var(--text)]/50 hover:text-[var(--tasktext)]
                           w-full
-                          mt-5
+                          mt-4 md:mt-5
+                          text-sm md:text-base
                           flex
                           justify-center
                           items-center gap-x-2
                           transition-all duration-300"
                 onClick={() => navigate("/Profile/Favourites")}
               >
-                Show All <MdKeyboardDoubleArrowRight size={17} />
+                Show All <MdKeyboardDoubleArrowRight size={15} className="md:w-[17px]" />
               </button>
             ) : null}
           </div>
-
 
           {/* Delete button */}
           <div className="flex relative z-10 justify-end">
             <button
               onClick={() => setShowDeleteModal(true)}
-              className="py-2 px-4 text-red-700 font-bold border-2 border-red-700 rounded-lg 
+              className="py-1.5 px-3 md:py-2 md:px-4 text-red-700 font-bold border-2 border-red-700 rounded-lg 
                hover:bg-red-700 hover:text-white transition-colors duration-200
+               text-xs sm:text-sm md:text-base
                "
             >
               Delete Account
@@ -486,10 +483,14 @@ export default function Profile() {
                  z-10 w-[90%] max-w-md text-center transition-transform duration-200"
                 onClick={(e) => e.stopPropagation()}
               >
-                <h2 className="text-xl font-bold text-red-500 mb-4">Confirm Deletion</h2>
+                <h2 className="text-xl font-bold text-red-500 mb-4">
+                  Confirm Deletion
+                </h2>
                 <p className="text-[var(--subtext)] mb-4">
                   To permanently delete your account, please type: <br />
-                  <span className="font-bold text-red-400">"{requiredPhrase}"</span>
+                  <span className="font-bold text-red-400">
+                    "{requiredPhrase}"
+                  </span>
                 </p>
 
                 <input
@@ -518,14 +519,19 @@ export default function Profile() {
                         setLoading(false);
                       }
                     }}
-                    disabled={deleteInput.trim() !== requiredPhrase || loading || success}
+                    disabled={
+                      deleteInput.trim() !== requiredPhrase ||
+                      loading ||
+                      success
+                    }
                     className={`flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-md w-full
                       transition-colors duration-200
-                      ${deleteInput.trim() !== requiredPhrase
-                        ? "text-red-900/50 border-2 border-red-900/50 invalidCursor"
-                        : success
-                          ? "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
-                          : "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
+                      ${
+                        deleteInput.trim() !== requiredPhrase
+                          ? "text-red-900/50 border-2 border-red-900/50 invalidCursor"
+                          : success
+                            ? "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
+                            : "text-red-700 border-2 border-red-700 hover:bg-red-700 hover:text-white"
                       }`}
                   >
                     {loading ? (
@@ -562,10 +568,8 @@ export default function Profile() {
               </div>
             </div>
           )}
-
         </div>
       </div>
-
 
       <Footer />
     </div>

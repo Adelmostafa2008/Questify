@@ -17,10 +17,12 @@ export default function SelectedPlan() {
 
   const [cool, setCool] = useState(false);
   const { ShowSnackBar } = useSnack();
-  const handelSnack = () => {
+  const handelSnack = (msg, ty) => {
     setCool(true);
-    ShowSnackBar("This service is still under construction", "info");
-    setTimeout(() => { setCool(false); }, 5000);
+    ShowSnackBar(msg, ty);
+    setTimeout(() => {
+      setCool(false);
+    }, 5000);
   };
 
   const PaymentUI = () => {
@@ -54,8 +56,14 @@ export default function SelectedPlan() {
               />
             </div>
             <button
-              onClick={() => cool ? null : handelSnack()}
-
+              onClick={() =>
+                cool
+                  ? null
+                  : handelSnack(
+                      "This service is still under construction",
+                      "info",
+                    )
+              }
               className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] text-white font-bold py-3 rounded-lg  transition-all duration-300"
             >
               Pay Now
@@ -66,8 +74,12 @@ export default function SelectedPlan() {
       case "VodafoneCash":
         return (
           <div className="mt-6 p-5 bg-[var(--cardbg)] rounded-lg border border-[#444]">
-            <p className="font-semibold mb-2 text-[var(--tasktext)]">Transfer to this number:</p>
-            <p className="text-xl text-[var(--text)] font-bold">+20 10 xxxx xxxx</p>
+            <p className="font-semibold mb-2 text-[var(--tasktext)]">
+              Transfer to this number:
+            </p>
+            <p className="text-xl text-[var(--text)] font-bold">
+              +20 10 xxxx xxxx
+            </p>
             <p className="text-[var(--subtext)] mt-3 text-sm">
               After sending the money, enter the transaction ID:
             </p>
@@ -77,7 +89,14 @@ export default function SelectedPlan() {
               className="bg-[var(--cardbg)] border border-[var(--textfieldboarder)] rounded-lg p-3 w-full text-[var(--tasktext)] mt-4 focus:ring-2 focus:ring-[var(--ce7hover)]/50 outline-none"
             />
             <button
-              onClick={() => cool ? null : handelSnack()}
+              onClick={() =>
+                cool
+                  ? null
+                  : handelSnack(
+                      "This service is still under construction",
+                      "info",
+                    )
+              }
               className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] w-[100%] my-3 text-white font-bold py-3 rounded-lg transition-all duration-300"
             >
               Send Now
@@ -91,7 +110,17 @@ export default function SelectedPlan() {
             <p className="mb-4 text-[var(--subtext)]">
               You will be redirected to PayPal to complete your payment.
             </p>
-            <button onClick={() => cool ? null : handelSnack()} className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] text-white font-bold py-3 rounded-lg w-full transition-all duration-300">
+            <button
+              onClick={() =>
+                cool
+                  ? null
+                  : handelSnack(
+                      "This service is still under construction",
+                      "info",
+                    )
+              }
+              className="bg-[var(--buttonbg)] hover:cursor-pointer hover:bg-[var(--ce7hover)] text-white font-bold py-3 rounded-lg w-full transition-all duration-300"
+            >
               Pay with PayPal
             </button>
           </div>
@@ -103,7 +132,17 @@ export default function SelectedPlan() {
             <p className="mb-4 text-[var(--subtext)]">
               Use Apple Pay on your device to complete payment.
             </p>
-            <button onClick={() => cool ? null : handelSnack()} className="bg-black hover:cursor-pointer text-white font-bold py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300">
+            <button
+              onClick={() =>
+                cool
+                  ? null
+                  : handelSnack(
+                      "This service is still under construction",
+                      "info",
+                    )
+              }
+              className="bg-black hover:cursor-pointer text-white font-bold py-3 rounded-lg w-full flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300"
+            >
               <FaApplePay size={30} /> Pay with Apple Pay
             </button>
           </div>
@@ -127,8 +166,6 @@ export default function SelectedPlan() {
 
         {/* Plan Preview */}
         <div className="w-full lg:w-[45%] xl:w-[40%] relative z-10 p-5 sm:p-6 lg:p-8 rounded-2xl bg-[var(--cardbg)] border border-[var(--anyborder)] flex flex-col items-center text-center">
-          
-
           <h2
             className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-[var(--text)] tracking-wider uppercase"
             style={{ fontFamily: "'Pricedown', sans-serif" }}
@@ -175,26 +212,45 @@ export default function SelectedPlan() {
             Select a Payment Method
           </h2>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 items-stretch mb-6">
-            {["Visa", "ApplePay", "PayPal", "VodafoneCash"].map(method => (
+            {["Visa", "ApplePay", "PayPal", "VodafoneCash"].map((method) => (
               <button
                 key={method}
                 onClick={() => SetPaymentMethod(method)}
-                className={`border rounded-lg hover:cursor-pointer px-2 sm:px-6 flex-1 min-w-[70px] sm:min-w-[80px] py-3 flex justify-center items-center transition-all duration-300 ${paymentMethod === method
-                  ? "bg-[var(--text)] border-[var(--text)]"
-                  : "border-[var(--anyborder)] hover:bg-[#ce7d630d] hover:border-[var(--text)]"
-                  }`}
+                className={`border rounded-lg hover:cursor-pointer px-2 sm:px-6 flex-1 min-w-[70px] sm:min-w-[80px] py-3 flex justify-center items-center transition-all duration-300 ${
+                  paymentMethod === method
+                    ? "bg-[var(--text)] border-[var(--text)]"
+                    : "border-[var(--anyborder)] hover:bg-[#ce7d630d] hover:border-[var(--text)]"
+                }`}
               >
-                {method === "Visa" && <RiVisaLine size={50} className={`${paymentMethod === "Visa" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
-                {method === "ApplePay" && <FaApplePay size={50} className={`${paymentMethod === "ApplePay" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
-                {method === "PayPal" && <FaPaypal size={40} className={`${paymentMethod === "PayPal" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
-                {method === "VodafoneCash" && <SiVodafone size={40} className={`${paymentMethod === "VodafoneCash" ? "text-[var(--paymentmethods)]":"text-[var(--text)]"}`}/>}
+                {method === "Visa" && (
+                  <RiVisaLine
+                    size={50}
+                    className={`${paymentMethod === "Visa" ? "text-[var(--paymentmethods)]" : "text-[var(--text)]"}`}
+                  />
+                )}
+                {method === "ApplePay" && (
+                  <FaApplePay
+                    size={50}
+                    className={`${paymentMethod === "ApplePay" ? "text-[var(--paymentmethods)]" : "text-[var(--text)]"}`}
+                  />
+                )}
+                {method === "PayPal" && (
+                  <FaPaypal
+                    size={40}
+                    className={`${paymentMethod === "PayPal" ? "text-[var(--paymentmethods)]" : "text-[var(--text)]"}`}
+                  />
+                )}
+                {method === "VodafoneCash" && (
+                  <SiVodafone
+                    size={40}
+                    className={`${paymentMethod === "VodafoneCash" ? "text-[var(--paymentmethods)]" : "text-[var(--text)]"}`}
+                  />
+                )}
               </button>
             ))}
           </div>
 
-
           {PaymentUI()}
-
         </div>
       </div>
 

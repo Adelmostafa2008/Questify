@@ -42,7 +42,7 @@ export default function SnackBar({ message, type }) {
 
   return (
     <div
-      className={`flex gap-x-1.5 items-center ${color[type]} overflow-hidden pr-20 py-4 pl-5 text-left rounded-lg text-white fixed bottom-5 left-5 z-[100]
+      className={`flex gap-x-1.5 items-center ${color[type]} overflow-hidden mr-6 pr-20 py-4 pl-5 text-left rounded-lg text-white fixed bottom-5 left-5 z-[100]
       transform transition-all duration-500 ease-in-out
       ${visible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"}`}
     >

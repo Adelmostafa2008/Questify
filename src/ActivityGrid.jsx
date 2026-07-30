@@ -39,7 +39,7 @@ const ActivityGrid = ({ data }) => {
 
   // Group days into weeks
   const weeks = Array.from({ length: Math.ceil(days.length / 7) }).map(
-    (_, weekIndex) => days.slice(weekIndex * 7, (weekIndex + 1) * 7)
+    (_, weekIndex) => days.slice(weekIndex * 7, (weekIndex + 1) * 7),
   );
 
   return (

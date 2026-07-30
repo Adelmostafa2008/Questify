@@ -15,373 +15,418 @@ import { GoHeart, GoHeartFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 export default function SelectedTask() {
-    const { taskid } = useParams();
-    const [loading, setLoading] = useState(false);
-    const [deleteState, setDeleteState] = useState("idle");
-    const [success, setSuccess] = useState(false);
-    const navigate = useNavigate();
-    const { user } = useAuth();
-    const [isFavourite, setIsFavourite] = useState(false);
-    const [favouriteCooldown, setFavouriteCooldown] = useState(false);
-    const [Task, setTask] = useState({});
-    const [cooldown, setCooldown] = useState(3);
-    const [submit, setSubmit] = useState({
-        Userid: "",
-        Taskid: "",
-        SubmittedData: ""
-    });
-    const [find, setFind] = useState({
-        userid: "",
-        taskid: ""
-    });
-    const [existingsub, setExistingsub] = useState({
-        userId: "",
-        taskId: "",
-        submittedData: ""
-    });
+  const { taskid } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [deleteState, setDeleteState] = useState("idle");
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [favouriteCooldown, setFavouriteCooldown] = useState(false);
+  const [Task, setTask] = useState({});
+  const [cooldown, setCooldown] = useState(3);
+  const [submit, setSubmit] = useState({
+    Userid: "",
+    Taskid: "",
+    SubmittedData: "",
+  });
+  const [find, setFind] = useState({
+    userid: "",
+    taskid: "",
+  });
+  const [existingsub, setExistingsub] = useState({
+    userId: "",
+    taskId: "",
+    submittedData: "",
+  });
 
-    const getTask = async () => {
-        try {
-            const res = await api.get(`/tasks/${taskid}`);
-            setTask(res.data);
-        } catch (err) {
-            throw err;
-        }
+  const getTask = async () => {
+    try {
+      const res = await api.get(`/tasks/${taskid}`);
+      setTask(res.data);
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const CheckFav = async () => {
+    try {
+      const checkFav = await api.get("/favourites/CheckExistance", {
+        params: { taskid: Number(taskid), userid: String(user.id) },
+      });
+      if (checkFav.data) {
+        setIsFavourite(true);
+      } else {
+        setIsFavourite(false);
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    if (user?.id) CheckFav();
+  }, [user]);
+  useEffect(() => {
+    if (user?.id) setsubmits();
+  }, [user]);
+
+  useEffect(() => {
+    getTask();
+  }, []);
+
+  const setsubmits = () => {
+    const newFind = {
+      userid: user.id,
+      taskid: Number(taskid),
     };
 
-    const CheckFav = async () => {
-        try {
-            const checkFav = await api.get("/favourites/CheckExistance", { params: { taskid: Number(taskid), userid: String(user.id) } });
-            if (checkFav.data) {
-                setIsFavourite(true);
-            } else {
-                setIsFavourite(false);
-            }
-        } catch (err) {
-            throw err ;
-        }
+    setSubmit((prev) => ({
+      ...prev,
+      Userid: user.id,
+      Taskid: Number(taskid),
+    }));
+
+    setFind(newFind);
+    getsub(newFind);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const res = await api.post("/submission", submit);
+    } catch (error) {
+      throw error;
     }
+  };
 
-    useEffect(() => {
-        if (user?.id) CheckFav();
-    }, [user]);
-    useEffect(() => {
-        if (user?.id) setsubmits();
-    }, [user]);
-
-
-    useEffect(() => {
-        getTask();
-    }, []);
-
-
-    const setsubmits = () => {
-        const newFind = {
-            userid: user.id,
-            taskid: Number(taskid),
-        };
-
-        setSubmit(prev => ({
-            ...prev,
-            Userid: user.id,
-            Taskid: Number(taskid),
-        }));
-
-        setFind(newFind);
-        getsub(newFind);
+  const handleDelete = async () => {
+    try {
+      setDeleteState("loading");
+      const Tcategorry = Task.taskcategory;
+      const res = await api.delete(`/tasks/${taskid}`);
+      setDeleteState("done");
+      setTimeout(
+        () => navigate("/Tasks", { state: { Tcategory: Tcategorry } }),
+        500,
+      );
+    } catch (error) {
+      setDeleteState("idle");
+      throw error;
     }
+  };
 
-
-    const handleSubmit = async () => {
-        try {
-            const res = await api.post("/submission", submit);
-        } catch (error) {
-            throw error;
-        }
-    };
-
-    const handleDelete = async () => {
-        try {
-            setDeleteState("loading");
-            const Tcategorry = Task.taskcategory;
-            const res = await api.delete(`/tasks/${taskid}`);
-            setDeleteState("done");
-            setTimeout(() => navigate("/Tasks", { state: { Tcategory: Tcategorry } }), 500)
-        } catch (error) {
-            setDeleteState("idle");
-            throw error;
-        }
-    };
-
-
-    const getsub = async (find) => {
-        try {
-            const res = await api.get("/submission/existing", { params: find });
-            setExistingsub(res.data);
-            setSubmit(prev => ({ ...prev, SubmittedData: res.data.submittedData }));
-        } catch (err) {
-            throw err ;
-        }
-    };
-
-    const HandelFavRequest = async () => {
-        try {
-            await api.post("/favourites/AddToFavourites", find);
-        } catch (error) {
-            throw error;
-        }
+  const getsub = async (find) => {
+    try {
+      const res = await api.get("/submission/existing", { params: find });
+      setExistingsub(res.data);
+      setSubmit((prev) => ({ ...prev, SubmittedData: res.data.submittedData }));
+    } catch (err) {
+      throw err;
     }
+  };
 
-    const TheHandelationOfFavHandelFunc = () => {
-        const newval = !isFavourite;
-        setIsFavourite(newval);
-        if (favouriteCooldown == true) return;
-        else {
-            setFavouriteCooldown(true);
-            if (!isFavourite) {
+  const HandelFavRequest = async () => {
+    try {
+      await api.post("/favourites/AddToFavourites", find);
+    } catch (error) {
+      throw error;
+    }
+  };
 
-                HandelFavRequest();
-            } else {
-                HandelFavRemoveRequest();
-            }
+  const TheHandelationOfFavHandelFunc = () => {
+    const newval = !isFavourite;
+    setIsFavourite(newval);
+    if (favouriteCooldown == true) return;
+    else {
+      setFavouriteCooldown(true);
+      if (!isFavourite) {
+        HandelFavRequest();
+      } else {
+        HandelFavRemoveRequest();
+      }
 
-            setTimeout(() => {
-                setFavouriteCooldown(false);
-            }, 2900)
+      setTimeout(() => {
+        setFavouriteCooldown(false);
+      }, 2900);
+    }
+  };
+
+  const HandelFavRemoveRequest = async () => {
+    try {
+      await api.delete("/favourites/DeleteFav", {
+        params: { taskid: Number(taskid), userid: String(user.id) },
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  function slugify(text) {
+    if (!text) return "";
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\-]+/g, "");
+  }
+
+  const intervalRef = useRef(null);
+
+  const cool = () => {
+    if (intervalRef.current) return;
+
+    intervalRef.current = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev > 1) {
+          return prev - 1;
+        } else {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          return 3;
         }
-    }
+      });
+    }, 1000);
+  };
 
+  return (
+    <div className="bg-[var(--bg)]">
+      <Header />
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-x-20 my-10 lg:my-20 justify-center px-4">
+        {/* LEFT: Task Preview */}
+        <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+          <div className="flex justify-end mt-6 sm:mt-10 gap-x-2 sm:gap-x-4 items-stretch">
+            {/* Delete */}
+            <button
+              onClick={handleDelete}
+              disabled={deleteState === "loading"}
+              className="p-2 rounded-md flex items-center gap-2 border border-[var(--anyborder)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
+            >
+              {deleteState !== "loading" && deleteState !== "done" && (
+                <FaTrashCan size={20} className="text-[var(--tasktext)]" />
+              )}
+              {deleteState === "loading" && (
+                <div className="w-4 h-4 border-2 border-[var(--tasktext)] border-t-transparent rounded-full animate-spin"></div>
+              )}
+              {deleteState === "done" && (
+                <span className="text-[var(--tasktext)]">
+                  <BiSolidLike className="text-[var(--tasktext)]" size={20} />
+                </span>
+              )}
+            </button>
 
-    const HandelFavRemoveRequest = async () => {
-        try {
-            await api.delete("/favourites/DeleteFav", { params: { taskid: Number(taskid), userid: String(user.id) } });
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    function slugify(text) {
-        if (!text) return "";
-        return text
-            .toLowerCase()
-            .trim()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w\-]+/g, '');
-    }
-
-
-    const intervalRef = useRef(null);
-
-    const cool = () => {
-
-        if (intervalRef.current) return;
-
-        intervalRef.current = setInterval(() => {
-            setCooldown(prev => {
-                if (prev > 1) {
-                    return prev - 1;
-                } else {
-                    clearInterval(intervalRef.current);
-                    intervalRef.current = null;
-                    return 3;
-                }
-            });
-        }, 1000);
-    };
-
-
-
-
-    return (
-        <div className="bg-[var(--bg)]">
-            <Header />
-            <div className="flex flex-col lg:flex-row gap-8 lg:gap-x-20 my-10 lg:my-20 justify-center px-4">
-
-                {/* LEFT: Task Preview */}
-                <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-                    <div className="flex justify-end mt-6 sm:mt-10 gap-x-2 sm:gap-x-4 items-stretch">
-
-
-
-
-
-
-                        {/* Delete */}
-                        <button
-                            onClick={handleDelete}
-                            disabled={deleteState === "loading"}
-                            className="p-2 rounded-md flex items-center gap-2 border border-[var(--anyborder)] hover:bg-red-600 hover:border-red-600 transition duration-200 disabled:opacity-50"
-                        >
-                            {(deleteState !== "loading" && deleteState !== "done") && (
-                                <FaTrashCan size={20} className="text-[var(--tasktext)]" />
-                            )}
-                            {deleteState === "loading" && (
-                                <div className="w-4 h-4 border-2 border-[var(--tasktext)] border-t-transparent rounded-full animate-spin"></div>
-                            )}
-                            {deleteState === "done" && <span className="text-[var(--tasktext)]"><BiSolidLike className="text-[var(--tasktext)]" size={20} /></span>}
-                        </button>
-
-                        {/* Edit */}
-                        <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
-                            <button
-                                className="p-2 rounded-md flex items-center border h-full border-[var(--anyborder)] 
+            {/* Edit */}
+            <Link to={`/Tasks/${taskid}/${slugify(Task.taskname)}/Edit`}>
+              <button
+                className="p-2 rounded-md flex items-center border h-full border-[var(--anyborder)] 
                         hover:border-[var(--text)]/50 
                         transition duration-200"
-                            >
-                                <FaEdit size={20} className="text-[var(--tasktext)]" />
-                            </button>
-                        </Link>
+              >
+                <FaEdit size={20} className="text-[var(--tasktext)]" />
+              </button>
+            </Link>
 
-                        {/* Like */}
-                        <div className={`rounded-md z-50 `}>
-
-                            <button
-                                onClick={() => {
-                                    if (!favouriteCooldown) {
-                                        cool();
-                                        TheHandelationOfFavHandelFunc();
-                                    }
-                                }}
-                                className={`p-2 text-[var(--tasktext)] rounded-md flex items-center border border-[var(--anyborder)] 
-                            hover:bg-red-500/20 hover:border-red-600 transition duration-200 `}>
-                                {favouriteCooldown ? cooldown :
-
-                                    isFavourite ? (
-                                        <GoHeartFill size={23} className="text-red-500" />
-                                    ) : (
-                                        <GoHeart size={23} className="text-[var(--tasktext)]" />
-                                    )
-                                }
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="relative z-10">
-                        <div className="bg-[var(--taskpreveiw)] py-3 px-4 sm:px-7 mb-10 mt-5 rounded-md">
-                            <div className="flex flex-col">
-                                <div className="w-full break-words mx-auto my-3 px-1">
-                                    <h2 className="text-[var(--tasktext)] text-xl sm:text-2xl font-bold text-center">
-                                        {Task.taskname}
-                                    </h2>
-                                </div>
-                                <div className="flex justify-center gap-x-2 mt-1">
-                                    <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl">
-                                        {Task.taskcategory}
-                                    </div>
-                                    <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl">
-                                        {Task.taskdefficulty}
-                                    </div>
-                                </div>
-                                <div className="flex gap-x-3 sm:gap-x-5 my-6 sm:my-10 justify-center flex-wrap">
-                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
-                                        <FaClock size={20} color="var(--text)" /> {Task.tasktime || "0"} min
-                                    </label>
-                                    <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
-                                        <FaStar size={20} color="var(--text)" /> {Task.taskpoints || "0"} pts
-                                    </label>
-                                </div>
-                                <div className="text-[var(--subtext)] text-sm sm:text-md text-center w-full mx-auto mb-6 break-words px-1">
-                                    {Task.taskdescription}
-                                </div>
-                                <div className="flex justify-between items-center mb-3">
-                                    <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-1">
-                                        <FaLightbulb size={17} color="var(--text)" className="mt-[2px]" /> Scenarios
-                                    </h2>
-                                </div>
-                                <div>
-                                    {Task.scene?.length > 0 ? (
-                                        Task.scene.map((scenario) => (
-                                            <Card
-                                                cat="taskPreview"
-                                                key={scenario.id}
-                                                TPT={scenario.scenariotitle}
-                                                TPD={scenario.scenariodescription}
-                                            />
-                                        ))
-                                    ) : (
-                                        <p className="text-[#81807e] text-center">No scenarios available.</p>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* RIGHT: Answer Section */}
-                <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
-
-                    <div className="relative z-10 flex flex-col h-full">
-                        <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center mb-6">
-                            Submit Your Answer
-                        </h2>
-                        {existingsub.submittedData ? (existingsub.submittedData !== "" ?
-                            <div className="p-3 w-full rounded-xl border bg-[#fabb181a] mb-3 border-[#fabb18] text-[#fabb18] flex gap-x-2 ">
-                                <FaInfoCircle className="mt-1" /> You 've submitted this task already , submitting it again will overwrite your old submission
-                            </div> : null)
-                            : null}
-                        <textarea
-                            className="w-full min-h-[200px] sm:h-[80%] bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-xl text-[var(--tasktext)] p-4 focus:outline-none focus:border-[var(--text)] resize-none"
-                            placeholder="Type your solution here..."
-                            defaultValue={submit.SubmittedData}
-                            onChange={(e) => setSubmit(prev => ({ ...prev, SubmittedData: e.target.value }))}
-                        />
-                        <button
-                            onClick={async () => {
-                                if (loading || success) return;
-                                if (!submit.SubmittedData.trim()) {
-                                    alert("answer field can't be empty");
-                                    return;
-                                }
-                                setLoading(true);
-                                try {
-                                    await handleSubmit();
-                                    setSuccess(true);
-                                    setTimeout(() => navigate('/Tasks', { state: { Tcategory: Task.taskcategory } }), 500); // Redirect after 1.5s
-                                } catch (err) {
-                                    console.error(err);
-                                } finally {
-                                    setLoading(false);
-                                }
-                            }}
-                            disabled={loading || success}
-                            className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
-                        ${success
-                                    ? "bg-green-600 text-white"
-                                    : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
-                                }`}
-                        >
-                            {loading ? (
-                                <>
-                                    <svg
-                                        className="animate-spin h-4 w-4 text-white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                        <path
-                                            className="opacity-75"
-                                            fill="currentColor"
-                                            d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
-                                        />
-                                    </svg>
-                                    {existingsub.submittedData ? existingsub.submittedData === "" ? (<>Submitting...</>) : (<>Resubmitting...</>) : (<>Submitting...</>)}
-
-                                </>
-                            ) : success ? (
-                                "Done!"
-                            ) : (
-                                <>
-                                    {existingsub.submittedData ? existingsub.submittedData === "" ? (<><FaPaperPlane /> Submit Answer</>) : (<><FaPaperPlane /> Resubmit Answer</>) : (<><FaPaperPlane /> Submit Answer</>)}
-                                </>
-                            )}
-                        </button>
-                    </div>
-                </div>
+            {/* Like */}
+            <div className={`rounded-md z-50 `}>
+              <button
+                onClick={() => {
+                  if (!favouriteCooldown) {
+                    cool();
+                    TheHandelationOfFavHandelFunc();
+                  }
+                }}
+                className={`p-2 text-[var(--tasktext)] rounded-md flex items-center border border-[var(--anyborder)] 
+                            hover:bg-red-500/20 hover:border-red-600 transition duration-200 `}
+              >
+                {favouriteCooldown ? (
+                  cooldown
+                ) : isFavourite ? (
+                  <GoHeartFill size={23} className="text-red-500" />
+                ) : (
+                  <GoHeart size={23} className="text-[var(--tasktext)]" />
+                )}
+              </button>
             </div>
-            <Footer />
+          </div>
+
+          <div className="relative z-10">
+            <div className="bg-[var(--taskpreveiw)] py-3 px-4 sm:px-7 mb-10 mt-5 rounded-md">
+              <div className="flex flex-col">
+                <div className="w-full break-words mx-auto my-3 px-1">
+                  <h2 className="text-[var(--tasktext)] text-xl sm:text-2xl font-bold text-center">
+                    {Task.taskname}
+                  </h2>
+                </div>
+                <div className="flex justify-center gap-x-2 mt-1">
+                  <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl flex justify-center items-center truncate py-1">
+                    {Task.taskcategory}
+                  </div>
+                  <div className="bg-[var(--text)]/10 text-[var(--text)] px-3 rounded-xl flex justify-center items-center ">
+                    {Task.taskdefficulty}
+                  </div>
+                </div>
+                <div className="flex gap-x-3 sm:gap-x-5 my-6 sm:my-10 justify-center flex-wrap">
+                  <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
+                    <FaClock size={20} color="var(--text)" />{" "}
+                    {Task.tasktime || "0"} min
+                  </label>
+                  <label className="text-[var(--subtext)] text-sm flex min-w-max items-center gap-x-2">
+                    <FaStar size={20} color="var(--text)" />{" "}
+                    {Task.taskpoints || "0"} pts
+                  </label>
+                </div>
+                <div className="text-[var(--subtext)] text-sm sm:text-md text-center w-full mx-auto mb-6 break-words px-1">
+                  {Task.taskdescription}
+                </div>
+                <div className="flex justify-between items-center mb-3">
+                  <h2 className="flex text-[var(--tasktext)] font-semibold gap-x-1">
+                    <FaLightbulb
+                      size={17}
+                      color="var(--text)"
+                      className="mt-[2px]"
+                    />{" "}
+                    Scenarios
+                  </h2>
+                </div>
+                <div>
+                  {Task.scene?.length > 0 ? (
+                    Task.scene.map((scenario) => (
+                      <Card
+                        cat="taskPreview"
+                        key={scenario.id}
+                        TPT={scenario.scenariotitle}
+                        TPD={scenario.scenariodescription}
+                      />
+                    ))
+                  ) : (
+                    <p className="text-[#81807e] text-center">
+                      No scenarios available.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* RIGHT: Answer Section */}
+        <div className="w-full lg:w-[45%] xl:w-[40%] rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] relative overflow-hidden px-7 py-10 flex flex-col justify-between">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
+
+          <div className="relative z-10 flex flex-col h-full">
+            <h2 className="text-[var(--tasktext)] text-2xl font-bold text-center mb-6">
+              Submit Your Answer
+            </h2>
+            {existingsub.submittedData ? (
+              existingsub.submittedData !== "" ? (
+                <div className="p-3 w-full rounded-xl border bg-[#fabb181a] mb-3 border-[#fabb18] text-[#fabb18] flex gap-x-2 ">
+                  <FaInfoCircle className="mt-1 min-w-max" /> You 've submitted this task
+                  already , submitting it again will overwrite your old
+                  submission
+                </div>
+              ) : null
+            ) : null}
+            <textarea
+              className="w-full min-h-[200px] sm:h-[80%] bg-[var(--cardbg)] border border-[var(--anyborder)] rounded-xl text-[var(--tasktext)] p-4 focus:outline-none focus:border-[var(--text)] resize-none"
+              placeholder="Type your solution here..."
+              defaultValue={submit.SubmittedData}
+              onChange={(e) =>
+                setSubmit((prev) => ({
+                  ...prev,
+                  SubmittedData: e.target.value,
+                }))
+              }
+            />
+            <button
+              onClick={async () => {
+                if (loading || success) return;
+                if (!submit.SubmittedData.trim()) {
+                  alert("answer field can't be empty");
+                  return;
+                }
+                setLoading(true);
+                try {
+                  await handleSubmit();
+                  setSuccess(true);
+                  setTimeout(
+                    () =>
+                      navigate("/Tasks", {
+                        state: { Tcategory: Task.taskcategory },
+                      }),
+                    500,
+                  ); // Redirect after 1.5s
+                } catch (err) {
+                  console.error(err);
+                } finally {
+                  setLoading(false);
+                }
+              }}
+              disabled={loading || success}
+              className={`flex items-center justify-center gap-2 px-4 py-2 text-sm w-[100%] mt-5 font-semibold rounded-md  transition-colors duration-300
+                        ${
+                          success
+                            ? "bg-green-600 text-white"
+                            : "bg-[var(--buttonbg)] border border-[var(--buttonbg)] text-white"
+                        }`}
+            >
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                    />
+                  </svg>
+                  {existingsub.submittedData ? (
+                    existingsub.submittedData === "" ? (
+                      <>Submitting...</>
+                    ) : (
+                      <>Resubmitting...</>
+                    )
+                  ) : (
+                    <>Submitting...</>
+                  )}
+                </>
+              ) : success ? (
+                "Done!"
+              ) : (
+                <>
+                  {existingsub.submittedData ? (
+                    existingsub.submittedData === "" ? (
+                      <>
+                        <FaPaperPlane /> Submit Answer
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane /> Resubmit Answer
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <FaPaperPlane /> Submit Answer
+                    </>
+                  )}
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 }

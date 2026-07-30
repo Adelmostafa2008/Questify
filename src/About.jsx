@@ -23,9 +23,9 @@ function About() {
   const [infos, setInfos] = useState({});
   const [cool, setCool] = useState(false);
 
-  const HandelMessageSend = () => {
+  const handelSnack = (msg, ty) => {
     setCool(true);
-    ShowSnackBar("This service is still under construction", "info");
+    ShowSnackBar(msg, ty);
     setTimeout(() => {
       setCool(false);
     }, 5000);
@@ -62,8 +62,8 @@ function About() {
               : () => navigate("/Registration?regtype=login")
           }
         />
-      </div><div className="text-center text-white my-20"
-      >
+      </div>
+      <div className="text-center text-white my-20">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] bg-clip-text px-4">
           The Mission
         </h2>
@@ -71,8 +71,8 @@ function About() {
           The mission is to transform how professionals learn and develop their
           skills through practical, real-world challenges.
         </h4>
-      </div><div className="w-[90%] md:w-[80%] mx-auto flex flex-col md:flex-row gap-6 md:gap-[5%] justify-center my-12 md:my-20"
-      >
+      </div>
+      <div className="w-[90%] md:w-[80%] mx-auto flex flex-col md:flex-row gap-6 md:gap-[5%] justify-center my-12 md:my-20">
         <Card
           title="Practical Learning"
           type="mission"
@@ -94,8 +94,8 @@ function About() {
           comment="We're committed to helping professionals continuously improve their skills and advance their careers. Our platform provides personalized feedback and tracks progress over time."
           mypicture="chart"
         />
-      </div><div className="relative w-[90%] md:w-[80%] mx-auto my-12 md:my-20 border-2 border-[var(--anyborder)] rounded-3xl"
-      >
+      </div>
+      <div className="relative w-[90%] md:w-[80%] mx-auto my-12 md:my-20 border-2 border-[var(--anyborder)] rounded-3xl">
         {/* Background Glow Orbs */}
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-3xl"></div>
         {/* Main Container */}
@@ -145,10 +145,10 @@ function About() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition">
                   <MdOutlineAlternateEmail
-                    className="text-[var(--text)]"
-                    size={28}
+                    className="text-[var(--text)] min-w-max"
+                    size={25}
                   />
-                  <span className="text-[var(--subtext)] text-lg">
+                  <span className="text-[var(--subtext)] text-lg truncate">
                     adel.0523035@gmail.com
                   </span>
                 </div>
@@ -158,7 +158,7 @@ function About() {
                   target="_blank"
                   className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer"
                 >
-                  <FaGithub className="text-[var(--text)]" size={28} />
+                  <FaGithub className="text-[var(--text)]" size={25} />
                   <span className="text-[var(--text)] text-lg underline">
                     Github
                   </span>
@@ -169,7 +169,7 @@ function About() {
                   target="_blank"
                   className="flex items-center gap-3 p-4 bg-white/5 backdrop-blur-xl rounded-xl border border-[var(--anyborder)] hover:bg-white/10 transition cursor-pointer"
                 >
-                  <FaLinkedin className="text-[var(--text)]" size={28} />
+                  <FaLinkedin className="text-[var(--text)]" size={25} />
                   <span className="text-[var(--text)] text-lg underline">
                     LinkedIn
                   </span>
@@ -180,8 +180,8 @@ function About() {
               <div className="bg-white/5 backdrop-blur-xl px-3 py-5 rounded-2xl border border-[var(--anyborder)]">
                 <div className="flex gap-4">
                   <IoDocumentText
-                    className="text-[var(--text)] h-10"
-                    size={93}
+                    className="text-[var(--text)] h-10 min-w-max"
+                    size={20}
                   />
                   <p className="text-[var(--subtext)] italic leading-relaxed">
                     “A developer who loves crafting scalable systems with .NET
@@ -193,8 +193,8 @@ function About() {
             </div>
           </div>
         </div>
-      </div><div className="text-center text-white my-20"
-      >
+      </div>
+      <div className="text-center text-white my-20">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text)] bg-clip-text px-4">
           Why Choose Questify
         </h2>
@@ -202,8 +202,8 @@ function About() {
           Discover the unique features that make Questify the leading platform
           for skill development through practical challenges.
         </h4>
-      </div><div className="grid grid-cols-1 md:grid-cols-2 w-[90%] md:w-[80%] mx-auto gap-y-8 md:gap-y-12 gap-x-10 my-12 md:my-16"
-      >
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 w-[90%] md:w-[80%] mx-auto gap-y-8 md:gap-y-12 gap-x-10 my-12 md:my-16">
         <Card
           cat="about"
           type="why-questify"
@@ -246,8 +246,8 @@ function About() {
           title="Skill Certification"
           comment="Earn certificates that validate your skills and can be shared with employers or on professional networking platforms."
         />
-      </div><div className="relative w-[90%] md:w-[80%] mx-auto my-12 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden"
-      >
+      </div>
+      <div className="relative w-[90%] md:w-[80%] mx-auto my-12 p-6 md:p-10 rounded-2xl bg-[var(--cardbg)] border-2 border-[var(--anyborder)] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>{" "}
         <div className="text-center text-white py-10 mb-5">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-clip-text text-[var(--text)]">
@@ -258,7 +258,8 @@ function About() {
             development around the world.
           </h4>
         </div>
-        <div className="flex gap-6 justify-around flex-wrap">
+        <div className="flex gap-y-5 justify-around flex-wrap">
+          
           <Card
             cat="about"
             type="impact"
@@ -284,8 +285,8 @@ function About() {
             comment="User Satisfaction"
           />
         </div>
-      </div><div className="text-center text-white my-12 md:my-20"
-      >
+      </div>
+      <div className="text-center text-white my-12 md:my-20">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold  bg-clip-text text-[var(--text)]">
           Get In Touch
         </h2>
@@ -293,14 +294,14 @@ function About() {
           Have questions or want to learn more about Questify? We'd love to hear
           from you!
         </h4>
-      </div><div className="w-[90%] md:w-[80%] gap-6 md:gap-20 mx-auto items-stretch mb-20"
-      >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-40">
+      </div>
+      <div className="w-[90%] md:w-[80%] gap-6 md:gap-20 mx-auto items-stretch mb-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
           <div className="relative bg-[var(--cardbg)] px-5 md:px-8 py-6 md:py-10 rounded-2xl border-2 border-[var(--anyborder)] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>
 
             <h2 className="text-2xl md:text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
-              <FaPhone size={24} className="text-[var(--text)]" /> Contact
+              <FaPhone size={24} className="text-[var(--text)] min-w-max" /> Contact
               Information
             </h2>
 
@@ -340,10 +341,11 @@ function About() {
           </div>
 
           <div className="relative bg-[var(--cardbg)] rounded-2xl p-6 md:p-10 border-2 border-[var(--anyborder)] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
-              <IoIosSend size={28} className="text-[var(--text)]" /> Send Us a Message
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--subtext)]/12 via-transparent to-black/20 pointer-events-none rounded-2xl"></div>{" "}
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--tasktext)] mb-8 flex gap-x-3 justify-center relative z-10">
+              <IoIosSend size={28} className="text-[var(--text)] min-w-max" /> Send Us a
+              Message
             </h2>
-
             <form
               className="space-y-5 relative z-10"
               onSubmit={(e) => e.preventDefault()}
@@ -389,7 +391,14 @@ function About() {
                 ></textarea>
               </div>
               <button
-                onClick={() => (cool ? null : HandelMessageSend())}
+                onClick={() =>
+                  cool
+                    ? null
+                    : handelSnack(
+                        "This service is still under construction",
+                        "info",
+                      )
+                }
                 className="w-full bg-[var(--buttonbg)] text-white font-semibold py-2 rounded-lg hover:bg-[var(--ce7hover)] transition duration-200 "
               >
                 Send Message
