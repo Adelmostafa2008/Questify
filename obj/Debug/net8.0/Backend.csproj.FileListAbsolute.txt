@@ -349,3 +349,9 @@ E:\Adel\Pro project\Backend\bin\Debug\net8.0\Google.Apis.Auth.dll
 E:\Adel\Pro project\Backend\bin\Debug\net8.0\Google.Apis.Core.dll
 E:\Adel\Pro project\Backend\bin\Debug\net8.0\System.Management.dll
 E:\Adel\Pro project\Backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\web.config
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\appsettings.Development.json
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\appsettings.json
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\Backend.deps.json
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\Backend.runtimeconfig.json
+E:\Adel\Pro project\Backend\bin\Debug\net8.0\publish\Backend.staticwebassets.endpoints.json

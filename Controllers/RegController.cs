@@ -231,8 +231,8 @@ namespace Backend.Controllers
                 {
                     await model.ProfilePicFile.CopyToAsync(stream);
                 }
-
-                user.ProfilePic = $"http://localhost:5226/images/{fileName}";
+                //"http://localhost:5226"
+                user.ProfilePic = $"https://questifyapi.runasp.net/images/{fileName}";
             }
 
             // Save changes
@@ -319,8 +319,8 @@ namespace Backend.Controllers
             {
                 Expires = DateTimeOffset.UtcNow.AddDays(7),
                 HttpOnly = true,
-                SameSite = SameSiteMode.Lax,
-                Secure = false
+                SameSite = SameSiteMode.None,
+                Secure = true
             };
 
             Response.Cookies.Append("RefreshToken" , newRefreshtoken , opts);

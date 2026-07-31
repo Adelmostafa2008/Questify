@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Backend.DTOs;
 using Backend.Interfaces;
 using Backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [Route("scene")]
     [ApiController] 
+    [Authorize]
     public class SceneController : ControllerBase
     {
         private readonly IScenarioRepo _sr;

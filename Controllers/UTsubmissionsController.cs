@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Sorters;
 using Backend.Searchers;
 using Backend.DTOs;
- 
+using Microsoft.AspNetCore.Authorization;
+
 namespace Backend.Controllers
 {
     [Route("submission")]
     [ApiController]
+    [Authorize]
     public class UTsubmissionsController : ControllerBase
     {
         private readonly IUTsubmissionsRepo _sub;

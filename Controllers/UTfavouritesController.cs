@@ -7,12 +7,14 @@ using Backend.Models;
 using Backend.Repos.Interfaces;
 using Backend.Searchers;
 using Backend.Sorters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [Route("favourites")]
     [ApiController]
+    [Authorize]
     public class UTfavouritesController : ControllerBase
     {
         private readonly IUTfavouritesRepo _fr;
